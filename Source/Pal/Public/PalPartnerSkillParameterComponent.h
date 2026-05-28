@@ -309,7 +309,7 @@ public:
     UFUNCTION()
     float GetWazaPowerRate(EPalWazaID Waza) const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalWazaID GetWazaID() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

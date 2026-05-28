@@ -27,7 +27,7 @@ protected:
 public:
     UPalStaticConsumeItemData();
 
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalWazaID GetWazaID() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

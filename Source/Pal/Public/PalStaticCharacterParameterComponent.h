@@ -103,16 +103,16 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bFadeSleepOnSide;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
     TMap<EPalWazaID, TSoftClassPtr<UPalActionBase>> WazaActionDeclarationMap;
-    
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<EPalWazaID, TSubclassOf<UPalActionBase>> WazaActionInstancedMap;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
     TMap<EPalWazaID, FFloatInterval> OverrideWazaRangeMap;
-    
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, EPalWazaID> NameToWazaIDConvertMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -368,7 +368,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetSpawnedCharacterType(EPalSpawnedCharacterType SpawnedType);
     
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable)
     void LoadWazaActionClass(EPalWazaID WazaID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
