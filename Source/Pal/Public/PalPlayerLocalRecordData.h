@@ -13,13 +13,13 @@ UCLASS(Blueprintable)
 class PAL_API UPalPlayerLocalRecordData : public UObject {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta = (AllowPrivateAccess = true))
     TMap<EPalTribeID, int32> Local_ActivateOtomoCount;
-    
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta = (AllowPrivateAccess = true))
     TMap<EPalTribeID, bool> Local_PalEncountFlag;
-    
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<EPalTribeID, bool> Local_PalDexNewFlag;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

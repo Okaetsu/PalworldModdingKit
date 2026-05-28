@@ -1032,7 +1032,7 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_SetPalCaptureNumRecordAll(const int32 CaptureNum);
     
-    UFUNCTION(Reliable, Server)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_SetPalCaptureNumRecord(const EPalTribeID TribeId, const int32 CaptureNum);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)

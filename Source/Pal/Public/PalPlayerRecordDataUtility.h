@@ -42,10 +42,10 @@ public:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetRecordData_ArenaSoloClearCount_ForServer(const UObject* WorldContextObject, FPalPlayerRecordDataRepInfoArrayThreadSafe_IntVal& RecordData, const EPalArenaRank Rank, const int32 Value);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool GetRecordData_TribeIdFlag(const FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal& RecordData, const EPalTribeID Key);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetRecordData_TribeIdCount(const FPalPlayerRecordDataRepInfoArrayThreadSafe_IntVal& RecordData, const EPalTribeID Key);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -66,7 +66,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetRecordData_ArenaSoloClearCount(const FPalPlayerRecordDataRepInfoArrayThreadSafe_IntVal& RecordData, const EPalArenaRank Rank);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool ContainsRecordData_TribeIdCount(const FPalPlayerRecordDataRepInfoArrayThreadSafe_IntVal& RecordData, const EPalTribeID Key);
     
 };

@@ -5,9 +5,8 @@
 #include "EPalWorkType.h"
 #include "PalDataTableRowName_ItemData.h"
 #include "PalDataTableRowName_MapObjectData.h"
-#include "PalPassiveOtherOtomoConditionParameter.h"
+#include "PalDataTableRowName_PalMonsterData.h"
 #include "PalPassivePartnerSkillItemParameter.h"
-#include "PalPassivePartnerSkillTriggerParameter.h"
 #include "PalPassiveRegeneParameter.h"
 #include "PalPassivePartnerSkillParameters.generated.h"
 
@@ -19,10 +18,10 @@ public:
     float DelayTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    EPalWorkType WorkType;
+    int32 TriggerTypeFlags;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bAssignPassiveIgnoreCurrentWorkType;
+    EPalWorkType WorkType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalDataTableRowName_MapObjectData> MapObjectId;
@@ -36,26 +35,20 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalElementType TargetElementType;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_PalMonsterData> PalIds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<EPalTribeID> PalTribeIds;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bNotAssignSelf;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FPalPassivePartnerSkillTriggerParameter TriggerParam;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalPassivePartnerSkillItemParameter ItemParam;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalPassiveRegeneParameter RegeneParam;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FPalPassiveOtherOtomoConditionParameter OtherOtomoConditionParam;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float FloatValue1;
     
     PAL_API FPalPassivePartnerSkillParameters();
 };
