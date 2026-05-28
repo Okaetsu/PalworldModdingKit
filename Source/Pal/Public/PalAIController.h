@@ -176,7 +176,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsExistPathForLocation_ForBP(const FVector Location, const float AcceptanceRadius) const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsActiveSkillCooldownFinished(const EPalWazaID WazaID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

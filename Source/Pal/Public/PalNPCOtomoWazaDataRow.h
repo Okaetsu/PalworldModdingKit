@@ -12,13 +12,13 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalDataTableRowName_PalMonsterData PalName;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
     EPalWazaID Waza1;
-    
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
     EPalWazaID Waza2;
-    
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalWazaID Waza3;
     
     PAL_API FPalNPCOtomoWazaDataRow();

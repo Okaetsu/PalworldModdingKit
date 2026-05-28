@@ -2,7 +2,7 @@
 #include "CoreMinimal.h"
 #include "EPalWazaID.generated.h"
 
-UENUM()
+UENUM(BlueprintType)
 enum class EPalWazaID : uint16 {
     None,
     Human_Punch,
