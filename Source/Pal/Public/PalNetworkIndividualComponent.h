@@ -65,7 +65,7 @@ private:
     void OmCreateIndividualID_ServerInternal(FPalIndividualCharacterSaveParameter InitParameter, FPalInstanceID ID, FGuid Guid);
     
 public:
-    UFUNCTION(NetMulticast, Reliable)
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void NotifyAddedMasteredWaza_ToAll(const FPalInstanceID& ID, EPalWazaID WazaID);
     
 private:

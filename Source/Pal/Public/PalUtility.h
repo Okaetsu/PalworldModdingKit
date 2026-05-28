@@ -455,7 +455,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FFixedPoint64 NextPointCalculate(FFixedPoint64 CurrentPoint, FFixedPoint64 CurrentMax, FFixedPoint64 NextMax);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static FPalDamageInfo MakeDamageInfoByWazaType(AActor* Attacker, AActor* Defencer, const USceneComponent* AttackerHitComponent, const USceneComponent* DefenderHitComponent, const FVector& HitLocation, TArray<int32> FoliageIndex, EPalWazaID WazaType, EPalBlowVelocityOwner BlowOwner, FVector NativeBlowVelocity, int32 referenceIndex, float DamageRatePerCollision);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -776,7 +776,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsAIAttackAbleByPlayerCamera(const AActor* SelfActor, const AActor* TargetActor);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool InWazaMaxRange(APalCharacter* Attacker, EPalWazaID Waza, FVector TargetLocation, float TargetRadius);
     
     UFUNCTION(BlueprintCallable)

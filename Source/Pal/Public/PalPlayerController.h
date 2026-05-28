@@ -514,10 +514,10 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestAddDimensionStorageData_ToServer(const TArray<int32>& OriginalPalStorageDataIndexArray, int32 RootPageIndex);
     
-    UFUNCTION(Reliable, Server)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void ReplaceEquipWaza_ToServer(const FPalInstanceID& InstanceId, const EPalWazaID OldWaza, const EPalWazaID NewWaza);
-    
-    UFUNCTION(Reliable, Server)
+
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RemoveEquipWaza_ToServer(const FPalInstanceID& InstanceId, const EPalWazaID TargetWaza);
     
 private:
@@ -1006,7 +1006,7 @@ public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void AddHardcorePlayerDeathLog_Client(const FPalKillLogDisplayData& DeathLogData);
     
-    UFUNCTION(Reliable, Server)
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void AddEquipWaza_ToServer(const FPalInstanceID& InstanceId, const EPalWazaID NewWaza);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)

@@ -120,10 +120,10 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetWorkerComment(const UObject* WorldContextObject, UPalIndividualCharacterHandle* targetHandle, FText& outName);
     
-    UFUNCTION(BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta = (WorldContext = "WorldContextObject"))
     static void GetWazaName(const UObject* WorldContextObject, EPalWazaID WazaID, FText& outName);
-    
-    UFUNCTION(BlueprintPure, meta=(WorldContext="WorldContextObject"))
+
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetWazaDesc(const UObject* WorldContextObject, EPalWazaID WazaID, FText& outDesc);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
