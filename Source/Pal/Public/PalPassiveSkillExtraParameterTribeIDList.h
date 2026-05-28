@@ -8,7 +8,7 @@ UCLASS(Blueprintable, EditInlineNew)
 class UPalPassiveSkillExtraParameterTribeIDList : public UPalPassiveSkillExtraParameterBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<EPalTribeID> TribeIDs;
     
     UPalPassiveSkillExtraParameterTribeIDList();

@@ -9,13 +9,13 @@ USTRUCT(BlueprintType)
 struct FPalCombiUniqueDatabaseRow : public FTableRowBase {
     GENERATED_BODY()
 public:
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
     EPalTribeID ParentTribeA;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowPrivateAccess = true))
     EPalGenderType ParentGenderA;
-    
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalTribeID ParentTribeB;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

@@ -550,7 +550,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FName GetUniqueNPCID() const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalTribeID GetTribeID() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
