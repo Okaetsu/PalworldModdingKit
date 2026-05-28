@@ -97,7 +97,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetSaveParameterValue_MaxFullStomach(const FPalIndividualCharacterSaveParameter& SaveParameter);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<EPalWazaID> GetSaveParameterValue_MasteredWaza(const FPalIndividualCharacterSaveParameter& SaveParameter);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -130,10 +130,10 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetSaveParameterValue_FavoriteIndexl(const FPalIndividualCharacterSaveParameter& SaveParameter);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static int64 GetSaveParameterValue_Exp(const FPalIndividualCharacterSaveParameter& SaveParameter);
-    
-    UFUNCTION(BlueprintPure)
+
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static TArray<EPalWazaID> GetSaveParameterValue_EquipWaza(const FPalIndividualCharacterSaveParameter& SaveParameter);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

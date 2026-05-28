@@ -13,7 +13,7 @@ class PAL_API UPalActionWazaBase : public UPalActionBase {
     GENERATED_BODY()
 public:
 protected:
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalWazaID WazaID;
     
 public:
@@ -53,7 +53,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void PlayAkSound(UAkAudioEvent* AudioEvent);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalWazaID GetWazaID() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

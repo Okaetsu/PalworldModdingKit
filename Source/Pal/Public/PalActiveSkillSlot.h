@@ -85,7 +85,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsFarMinRange(int32 SlotId, AActor* TargetActor) const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsCoolTimeFinish_ByWazaID(const EPalWazaID WazaID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -97,7 +97,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void InitObject(AActor* ActorSelf);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalWazaID GetWazaType(int32 SlotId) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -127,7 +127,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetBackstepRange(int32 SlotId, AActor* TargetActor) const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 FindSlotIndexByWazaID(EPalWazaID WazaID);
     
     UFUNCTION(BlueprintCallable)
