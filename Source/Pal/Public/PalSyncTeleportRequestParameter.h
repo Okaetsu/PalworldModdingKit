@@ -23,6 +23,9 @@ public:
     bool bIsFadeInSkip;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsFadeOutSkip;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsPlaySyncTeleportStartSE;
     
     PAL_API FPalSyncTeleportRequestParameter();

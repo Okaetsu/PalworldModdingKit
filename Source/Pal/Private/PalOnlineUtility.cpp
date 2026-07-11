@@ -33,6 +33,14 @@ bool UPalOnlineUtility::IsOpenListenServer(const UObject* WorldContextObject) {
     return false;
 }
 
+bool UPalOnlineUtility::IsMutePlayerWithPsn(const UObject* WorldContextObject, const FString& UserId, bool& bOutMute, bool& bOutIsPsnPlayer) {
+    return false;
+}
+
+bool UPalOnlineUtility::IsMutePlayerByPlayerUIdWithPsn(const UObject* WorldContextObject, const FGuid& PlayerUId, bool& bOutMute, bool& bOutIsPsnPlayer) {
+    return false;
+}
+
 bool UPalOnlineUtility::IsMutePlayerByPlayerUId(const UObject* WorldContextObject, const FGuid& PlayerUId, bool& bOutMute) {
     return false;
 }
@@ -59,6 +67,9 @@ bool UPalOnlineUtility::IsBlockPlayerByPlayerUId(const UObject* WorldContextObje
 
 bool UPalOnlineUtility::IsBlockPlayer(const UObject* WorldContextObject, const FString& UserId, bool& bOutBlock) {
     return false;
+}
+
+void UPalOnlineUtility::GetUserInfoByPlayerUId(const UObject* WorldContextObject, APlayerController* PlayerController, FGuid InPlayerUId, FOnGetUserInfoCompleted Callback) {
 }
 
 bool UPalOnlineUtility::GetUserIdByPlayerUIdInSession(const UObject* WorldContextObject, FGuid InPlayerUId, FString& OutUserId) {
@@ -95,6 +106,10 @@ FString UPalOnlineUtility::GetEOSVersion(const UObject* WorldContextObject) {
 
 TArray<FPalOptionOnlineIds> UPalOnlineUtility::GetBlockPlayerList(const UObject* WorldContextObject) {
     return TArray<FPalOptionOnlineIds>();
+}
+
+FText UPalOnlineUtility::Conv_PlayerUIdToDisplayText(const UObject* WorldContextObject, const FGuid& InPlayerUId) {
+    return FText::GetEmpty();
 }
 
 bool UPalOnlineUtility::CheckUserResolvePrivilege(const UObject* WorldContextObject, const EPalUserPrivilege Privilege, bool UIOpen) {

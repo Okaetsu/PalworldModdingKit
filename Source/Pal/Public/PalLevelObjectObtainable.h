@@ -1,9 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "EPalInteractiveObjectIndicatorType.h"
 #include "PalInteractiveObjectIndicatorInterface.h"
 #include "PalLevelObjectActor.h"
+#include "Templates/SubclassOf.h"
 #include "PalLevelObjectObtainable.generated.h"
 
 class AActor;
@@ -11,7 +13,9 @@ class APalLevelObjectObtainable;
 class APalPlayerState;
 class IPalInteractiveObjectComponentInterface;
 class UPalInteractiveObjectComponentInterface;
+class UNiagaraComponent;
 class UNiagaraSystem;
+class UPalAction_ObtainCeremony;
 
 UCLASS(Blueprintable)
 class PAL_API APalLevelObjectObtainable : public APalLevelObjectActor, public IPalInteractiveObjectIndicatorInterface {
@@ -24,7 +28,19 @@ public:
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UPalAction_ObtainCeremony> ObtainCeremonyActionClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bObtainItemDuringCeremony;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UNiagaraSystem> ObtainFXSoftObj;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UNiagaraSystem> ObtainCompleteFXSoftObj;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UNiagaraComponent* SpawnedObtainFXComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TScriptInterface<IPalInteractiveObjectComponentInterface> InteractComp;
@@ -46,6 +62,9 @@ private:
     void OnCompleteSyncPlayer(APalPlayerState* PlayerState);
     
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    FRotator GetObtainFXRotation() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     FVector GetObtainFXLocation() const;
     

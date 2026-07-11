@@ -16,6 +16,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RepairRequiredWorkAmount;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RepairHpPercent;
+    
     PAL_API FPalMapObjectRepairInfo();
 };
 

@@ -39,6 +39,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void SetEnableWhenDayTime(FName Key, bool Enable);
     
+    UFUNCTION(BlueprintCallable)
+    void SetDisableFlag(FName Key, bool Disable);
+    
 private:
     UFUNCTION(BlueprintCallable)
     void CheckOtomoPal_AndSetRange(APalCharacter* SelfCharacter);

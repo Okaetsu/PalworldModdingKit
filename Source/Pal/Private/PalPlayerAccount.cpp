@@ -14,6 +14,7 @@ UPalPlayerAccount::UPalPlayerAccount() {
     this->bIsSelectedInitMapPoint = false;
     this->bShouldSaveOnNextTime = false;
     this->PsnAccountId = 0;
+    this->PlayerPlatform = EPalPlayerPlatform::None;
 }
 
 

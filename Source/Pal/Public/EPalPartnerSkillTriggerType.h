@@ -8,5 +8,6 @@ enum class EPalPartnerSkillTriggerType : uint8 {
     PlayerTrigger,
     OpenTreasure,
     PlayerRevive,
+    PalRevive,
 };
 

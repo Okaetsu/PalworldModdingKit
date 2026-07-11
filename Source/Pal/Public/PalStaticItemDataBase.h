@@ -134,6 +134,9 @@ public:
     void GetNameMsgId(FName& OutMsgID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetMaxUseableNumToCharacter(const UPalIndividualCharacterParameter* TargetCharacter) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMaxStackCount() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

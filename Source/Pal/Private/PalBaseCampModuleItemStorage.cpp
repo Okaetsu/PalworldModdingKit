@@ -10,6 +10,12 @@ void UPalBaseCampModuleItemStorage::OnUpdateItemContainerModule(UPalMapObjectIte
 void UPalBaseCampModuleItemStorage::OnUpdateItemContainer(UPalItemContainer* ItemContainer) {
 }
 
+void UPalBaseCampModuleItemStorage::OnRep_GuildContainerInfo() {
+}
+
+void UPalBaseCampModuleItemStorage::OnRep_ContainerInfos() {
+}
+
 void UPalBaseCampModuleItemStorage::OnReadyItemContainerGuildChest(TScriptInterface<IPalMapObjectItemContainerAccessInterface> ItemContainerAccess) {
 }
 

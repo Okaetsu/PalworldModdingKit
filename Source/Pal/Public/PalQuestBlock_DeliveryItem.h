@@ -13,9 +13,19 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FPalDataTableRowName_ItemData, int32> RequireItemMap;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_DeliveredCount, meta=(AllowPrivateAccess=true))
+    int32 TotalDeliveredCount;
+    
 public:
     UPalQuestBlock_DeliveryItem();
 
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_DeliveredCount();
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasItem(const FGuid& PlayerUId) const;
     

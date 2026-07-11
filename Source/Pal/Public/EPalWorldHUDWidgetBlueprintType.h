@@ -29,5 +29,11 @@ enum class EPalWorldHUDWidgetBlueprintType : uint8 {
     FishPond,
     RaidBossAltar,
     MedicalPalBed,
+    WorkAssignStatus,
+    ConvertItem_Dual,
+    InvadeDeclaration,
+    GenerateEnergyWithOverHeat,
+    RelicRecycler,
+    Clinic,
 };
 

@@ -45,6 +45,7 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bIsShowCharacterStatus = false;
     this->bNotAlertNotValidActionType = false;
     this->bIsShowSkillCoolTime = false;
+    this->bIsShowRideFailureLog = false;
     this->bIsShowCharacterTickInfo = false;
     this->bIsWazaCoolTimeFast = false;
     this->bIsShowUseRootMotion = false;
@@ -64,7 +65,9 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bNoDropInDisposeBuild = false;
     this->BuildRequiredWorkAmount = 0.00f;
     this->bForceConstructConnector = false;
+    this->bInfiniteBuildObjectSupportAbility = false;
     this->bPaintBuildObjectColor = false;
+    this->bNotForceDisplayWorkPositionVisualizerInEditor = false;
     this->bIsDisableEnemyEyeSight = false;
     this->bIsEnableNPCDrawRaycastDebug = false;
     this->bIsHideScreenMessage = false;
@@ -79,6 +82,8 @@ UPalDebugSetting::UPalDebugSetting() {
     this->CaptureFPS = 0;
     this->bIsDisableDropItem = false;
     this->bShowDropItemHitEvent = false;
+    this->bShowActionSkillHitCount = false;
+    this->bShowActionSkillHitCountIndividual = false;
     this->bPrintLogGroupsWhenGroupOperated = false;
     this->bIsSoundRangeVisual = false;
     this->bIsToggleHUDWhenEject = false;
@@ -100,15 +105,25 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bIsRandomizerPalLevelRandom_Override = false;
     this->OverrideSpawnRadius = -1.00f;
     this->OverrideDespawnRadius = -1.00f;
+    this->SpawnerDebugVisualizeDistance = 30000.00f;
+    this->bDrawNPCSpawnerStatePillar = false;
+    this->bDrawNPCSpawnerDirectionalSpawnRange = false;
     this->bIsPlayerCompleteSTEALTH = false;
     this->bIsShowEnemyHate = false;
     this->bIsShowEnemyHateArrow = false;
     this->bIsShowTargetLocalPlayerList = false;
     this->bIsShowMovementMode = false;
+    this->bIsShowRideMenuLockLog = false;
     this->bIsShowOrganization = false;
     this->bCanAccessToOtherGuildMapObject = false;
     this->ExpireGuildEnterRequestLogInfoMinutes = -1;
     this->bActiveLog_UPalGroupManager_IsInGuild = false;
+    this->bShowDebugGuildSecurity = false;
+    this->bShowDebugGuildRoles = false;
+    this->bShowDebugGuildBaseCamp = false;
+    this->bShowDebugGuildPermissionCheck = false;
+    this->bShowDebugGuildBoundary = false;
+    this->bShowDebugGuildAutoTransfer = false;
     this->bFirstBuildPalBox = false;
     this->WorkExtraRate = 1.00f;
     this->bIsDisableFootIK = false;
@@ -116,6 +131,9 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bBuildFXDebugLog = false;
     this->bFootStepNotify_DebugDisplay = false;
     this->bSkipBossCutscene = false;
+    this->bShowDebugCutsceneEndingPlacement = false;
+    this->bShowDebugCutsceneHideRange = false;
+    this->bSuppressEndingCutsceneLoadingScreen = false;
     this->bShowRangeDistributeExpAround = false;
     this->bNotDropOtomoAtPlayerDeath = false;
     this->bNotDropItemsAtPlayerDeath = false;
@@ -141,10 +159,13 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bIgnoreWorkableGenusCategories = false;
     this->bShowDebugWorkAssign = false;
     this->bShowDebugWorkAssignTarget = false;
+    this->bShowDebugWorkerMovementTickSuppress = false;
+    this->bDebugBaseCampPalFarMovementTickSuppress = false;
     this->bForceRunInWork = false;
     this->bContinueSpeedInTransportWork = false;
     this->bNotInterruptTransportingWork = false;
     this->bShowRepairWorkDebugLog = false;
+    this->bShowDebugHatchingEggLog = false;
     this->bPrintLogWorkerEventDetail = false;
     this->BaseCampWorkerEventTriggerInterval = -1.00f;
     this->IgnoreBaseCampTask = false;
@@ -162,6 +183,8 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bDebugLogEnableWanted = false;
     this->bDebugLogEnableCriminalPlayer = false;
     this->bShowDebugWantedSpawnerSphere = false;
+    this->bDisableCrime = false;
+    this->bDisableWildlifeSanctuaryDroneSpawn = false;
     this->bTransportGrantedMonsterToPalBox = false;
     this->bInvaderDisable = false;
     this->DebugSpawnWildPal_DistanceFromPlayer = 500.00f;
@@ -207,6 +230,8 @@ UPalDebugSetting::UPalDebugSetting() {
     this->ForceWordFilterAPIType_ACE = EPalACEWordFilterAPIType::Unknown;
     this->bUseDebugUI_GuildLab = false;
     this->bShowMsgID = false;
+    this->bUnlockHiddenLocationOnWorldMap = false;
+    this->bUnlockAllWorldMap = false;
     this->bIsFixedRandomSeed = false;
     this->actionRandomSeed = 1192;
     this->bAvailableBuildObjectInDevelop = false;
@@ -245,6 +270,8 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bForceSpawnEnemyCamp = false;
     this->bForceSpawnPalEgg = false;
     this->bForceSpawnRarePal = false;
+    this->bForceSpawnPredatorPal = false;
+    this->bForceAwakeningWhenRarePal = false;
     this->IgnoreAudio = false;
     this->bIsShowAudioSoundPlayer = false;
     this->bForceSpawnRandomIncident = false;
@@ -256,13 +283,14 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bInvadeSetting_Override = false;
     this->InvadeProbability_Override = 0.10f;
     this->InvadeOccurablePlayerLevel_Override = 0;
+    this->bBiome_Override = false;
     this->Biome_Override = EPalBiomeType::Undefined;
     this->InvadeJudgmentInterval_Minutes_Override = 1;
     this->InvadeCollTime_Max_Minutes_Override = 30;
     this->InvadeCollTime_Min_Minutes_Override = 10;
     this->InvadeReturnTime_Minutes_Override = 4;
     this->InvadeStartPoint_BaseCampRadius_Min_cm_Override = 5000;
-    this->InvadeStartPoint_BaseCampRadius_Max_cm_Override = 40000;
+    this->bSkipInvaderDeclaration = false;
     this->VisitorNPCProbability_Override = 0.10f;
     this->VisitorNPCReturnTime_Minutes_Override = 20;
     this->bIsDisableCrossKeyQuickSwitch = true;
@@ -300,7 +328,10 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bShowStageDeathPenaltyLocation = false;
     this->bForceLocationTeleport = false;
     this->bShowInvaderDebugLog = false;
+    this->bDrawInvaderPathWaterCheck = false;
     this->bShowStreamingLevel = false;
+    this->bSkipWorldPartitionStreaming = false;
+    this->OverrideStreamingSourceRadius = 0.00f;
     this->bShowInteractPoints = false;
     this->bEnableArenaTest = false;
     this->EnableBossBattleHard = false;
@@ -338,6 +369,10 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bAllReleaseArenaSoloRank = false;
     this->bEnableArenaRule = false;
     this->bEnableABPLean = false;
+}
+
+TArray<FString> UPalDebugSetting::GetInitialStartPointNames() const {
+    return TArray<FString>();
 }
 
 TArray<FString> UPalDebugSetting::GetDataLayerRuntimeSettingsNames() const {

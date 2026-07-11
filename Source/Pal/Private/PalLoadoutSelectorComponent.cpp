@@ -6,7 +6,7 @@ UPalLoadoutSelectorComponent::UPalLoadoutSelectorComponent(const FObjectInitiali
     this->primaryTargetInventoryType = EPalPlayerInventoryType::None;
     this->currentItemSlotIndex = 0;
     this->ThrowOtomoPalWeapon = NULL;
-    this->spawnedWeaponsArray.AddDefaulted(4);
+    this->spawnedWeaponsArray.AddDefaulted(6);
     this->DummyBall = NULL;
     this->replicatedPrimaryTargetInventoryType = EPalPlayerInventoryType::None;
     this->replicatedCurrentItemSlotIndex = 0;

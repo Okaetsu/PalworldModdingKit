@@ -16,7 +16,6 @@
 
 class APalMapObjectSpawnerBase;
 class UPalMapObjectPickableItemModelBase;
-class UPalMapObjectSpawnRequestHandler;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPalNetworkMapObjectComponent : public UActorComponent {
@@ -25,9 +24,6 @@ public:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FGuid, FPalNetworkMapObjectSpawnRequestParameter> MapObjectSpawnRequestParameterMap;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TMap<FGuid, UPalMapObjectSpawnRequestHandler*> SpawnRequestHandlerMap;
     
 public:
     UPalNetworkMapObjectComponent(const FObjectInitializer& ObjectInitializer);
@@ -99,7 +95,13 @@ public:
     UFUNCTION(BlueprintCallable)
     void RequestConcreteModel_bool(const FGuid& ConcreteModelInstanceId, const FName FunctionName, bool Value);
     
+    UFUNCTION(BlueprintCallable)
+    void RequestChangeCustomNameByLocalPlayer(const FGuid& InstanceId, const FString& NewCustomName);
+    
 private:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestChangeCustomName_ToServer(const FGuid& InstanceId, const FString& NewCustomName);
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestBuildCancel_ToServer(const FGuid& InstanceId);
     
@@ -231,6 +233,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void AddStartTeamMissionLog_ToServer();
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void AddCompleteTeamMissionLog_ToClient(const FName& MissionId);
     
 };
 

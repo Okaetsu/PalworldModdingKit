@@ -7,6 +7,7 @@
 #include "Engine/EngineTypes.h"
 #include "Engine/EngineTypes.h"
 #include "PalNiagaraSoundStopInterface.h"
+#include "PalObjectPoolable.h"
 #include "SkillEffectSpawnParameter.h"
 #include "SkillEffectTimeDelegateDelegate.h"
 #include "Templates/SubclassOf.h"
@@ -14,6 +15,7 @@
 
 class APalCharacter;
 class APalSkillEffectBase;
+class APawn;
 class UAkAudioEvent;
 class UObject;
 class UPalAttackFilter;
@@ -21,7 +23,7 @@ class UPalHitFilter;
 class UPalSoundPlayer;
 
 UCLASS(Blueprintable)
-class APalSkillEffectBase : public AActor, public IPalNiagaraSoundStopInterface {
+class APalSkillEffectBase : public AActor, public IPalNiagaraSoundStopInterface, public IPalObjectPoolable {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -35,6 +37,21 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LifeTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MaxActiveInstancesByClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUseObjectPool;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 ObjectPoolSize;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName ObjectPoolKey;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsInactiveInObjectPool;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPalAttackFilter* AttackFilter;
@@ -66,6 +83,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void StopAkSound();
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static APalSkillEffectBase* SpawnSkillEffectWithPool(const UObject* WorldContextObject, TSubclassOf<APalSkillEffectBase> EffectClass, FTransform SpawnTransform, ESpawnActorCollisionHandlingMethod collisionMethod, AActor* OwnerActor, APawn* InstigatorPawn);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static FTimerHandle SetTimeCallbackBySkillEffectSpawnParameter(const UObject* WorldContextObject, const FSkillEffectSpawnParameter& Parameter, UObject* callObject, FSkillEffectTimeDelegate timeDelegate);
@@ -107,6 +127,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     AActor* GetActionTargetActor() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void FinishSkillEffect();
     
     UFUNCTION(BlueprintCallable)
     APalSkillEffectBase* CreateChildSkillEffect(TSubclassOf<APalSkillEffectBase> EffectClass, FTransform SpawnTransform, FRandomStream NewRandomStream, ESpawnActorCollisionHandlingMethod collisionMethod, AActor* ownerActor);

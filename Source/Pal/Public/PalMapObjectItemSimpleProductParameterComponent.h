@@ -20,6 +20,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsGainExp;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bShouldSkipIsWorkableForBuild;
+    
     UPalMapObjectItemSimpleProductParameterComponent(const FObjectInitializer& ObjectInitializer);
 
 };

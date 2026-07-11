@@ -12,5 +12,7 @@ enum class EPalMapObjectCharacterTeamMissionIconTextureType : uint8 {
     Snow,
     Sakurajima,
     DarkIsland,
+    SkyIsland,
+    WorldTree,
 };
 

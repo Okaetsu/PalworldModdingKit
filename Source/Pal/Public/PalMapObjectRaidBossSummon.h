@@ -74,6 +74,9 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnReceiveConfirmStartRaidBossAreaBattleResult(const bool bResult, UPalDialogParameterBase* Parameter);
     
+    UFUNCTION(BlueprintCallable)
+    void NotifyFailedStartRaidByGuildConcurrentLimit_ClientInternal();
+    
 
     // Fix for true pure virtual functions not being implemented
 };

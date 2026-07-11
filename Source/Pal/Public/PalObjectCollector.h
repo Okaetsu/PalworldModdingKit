@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "PalCharacterList.h"
+#include "UObject/NoExportTypes.h"
 #include "PalCharacterSpatialGrid.h"
 #include "PalObjectCollectorMapObjectSpawnerId.h"
 #include "PalWorldSubsystem.h"
@@ -33,23 +33,23 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalCharacterSpatialGrid PalCharacterGrid_Player;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TMap<FPalObjectCollectorMapObjectSpawnerId, APalMapObjectSpawnerBase*> MapObjectSpawnerMap;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FPalObjectCollectorMapObjectSpawnerId, TWeakObjectPtr<APalMapObjectSpawnerBase>> MapObjectSpawnerMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TMap<APalCharacter*, FPalCharacterList> NearestCharacter_FromPlayer;
+    TArray<APalCharacter*> NearestNPC_FromPlayer;
+    
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<TWeakObjectPtr<APalMapObjectSpawnerBase>> NearestSpawnerBase;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSet<APalMapObjectSpawnerBase*> NearestSpawnerBase;
+    TArray<APalCharacter*> CalculationNearestNPC_FromPlayer;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TMap<APalCharacter*, FPalCharacterList> CalculationNearestCharacter_FromPlayer;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<TWeakObjectPtr<APalMapObjectSpawnerBase>> CalculationNearSpawnerBase_FromPlayer;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSet<APalMapObjectSpawnerBase*> CalculationNearSpawnerBase_FromPlayer;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TSet<APalMapObjectSpawnerBase*> CalculationNearSpawnerBase_FromBaseCamp;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<TWeakObjectPtr<APalMapObjectSpawnerBase>> CalculationNearSpawnerBase_FromBaseCamp;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FVector> BaseCampLocationList;

@@ -2,9 +2,11 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
 #include "EPalAdditionalEffectType.h"
 #include "EPalDamageAnimationReactionType.h"
+#include "EPalJetpackShootingOverride.h"
 #include "EPalPassiveSkillEffectType.h"
 #include "EPalShooterFlagContainerPriority.h"
 #include "EPalWeaponType.h"
@@ -12,6 +14,7 @@
 #include "EWeaponNotifyType.h"
 #include "EWeaponPlaySoundType.h"
 #include "FlagContainer.h"
+#include "PalDataTableRowName_ItemData.h"
 #include "PalDataTableRowName_SoundID.h"
 #include "PalItemData.h"
 #include "PalItemId.h"
@@ -34,6 +37,7 @@ class UPalDynamicItemDataBase;
 class UPalDynamicWeaponItemDataBase;
 class UPalSoundSlot;
 class UPalStaticWeaponItemData;
+class UPalWeaponBulletSelector;
 class USceneComponent;
 class UTexture2D;
 
@@ -45,6 +49,7 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUseBulletDelegate, int32, remainingBulletsNum);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReloadBulletsDelegate, int32, bulletsNum);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPalChangeHiddenWeaponDelegate, bool, bIsHidden);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponPlacedOnCharacterDelegate, AActor*, PlacedSubActor);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnShootBulletDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDetachWeaponDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCoolDownUpdateDelegate, float, RemainingTime, float, CoolDownTime);
@@ -83,6 +88,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnDetachWeaponDelegate OnDetachWeaponDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnWeaponPlacedOnCharacterDelegate OnWeaponPlacedOnCharacterDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FWeaponNotifyDelegate OnWeaponNotifyDelegate;
@@ -124,6 +132,9 @@ public:
     EPalWeaponType WeaponType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalJetpackShootingOverride JetpackShootingOverride;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsRequiredBullet;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -131,6 +142,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName BulletItemName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FPalDataTableRowName_ItemData, TSubclassOf<APalBullet>> SupportedBulletMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalDataTableRowName_ItemData FallbackBulletItemId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UMaterialInterface* ShootBlurMaterial;
@@ -248,6 +265,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UMaterialInterface*> OriginalMaterials;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName LastReloadedBulletItemId;
     
 public:
     APalWeaponBase(const FObjectInitializer& ObjectInitializer);
@@ -373,6 +393,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnAnimNotifyBegin(FName NotifyName);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsWeaponOwnerLocallyControlled() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     bool IsUseLeftHandAttach() const;
     
@@ -432,6 +455,9 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetSupportedBulletItemIds(TArray<FName>& OutIds) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FPalSpecialAttackRateInfo> GetSpecialAttackRateInfos() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -444,10 +470,10 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetShooterComponentBlurRate();
     
-public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetRequiredBulletName(FName& outName);
+    int32 GetRemainingCurrentSelectPalSphere() const;
     
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetRemainingCoolDownTime() const;
     
@@ -474,6 +500,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     APalCharacter* GetOwnerCharacter() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UPalWeaponBulletSelector* GetOwnerBulletSelector() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     int32 GetNPCWeaponDamage() const;
     
@@ -490,6 +519,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMagazineSize() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetLoadoutSelectorIndex() const;
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     FTransform GetLeftHandTransform() const;
@@ -509,6 +541,12 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     float GetDefaultBlurAngle() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FName GetCurrentBulletItemId() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+    TSubclassOf<APalBullet> GetCurrentBulletClass() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     FVector GetBulletShootRootLocation();
     
@@ -517,6 +555,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetBlurModifierValue();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    APalBackWeaponBase* GetBackWeaponModel() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FName GetAltFireActionName() const;

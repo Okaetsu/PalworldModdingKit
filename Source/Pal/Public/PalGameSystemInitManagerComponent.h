@@ -4,8 +4,6 @@
 #include "PalGameSystemInitSequenceSet.h"
 #include "PalGameSystemInitManagerComponent.generated.h"
 
-class UPalGameSystemInitProcessHandle;
-
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class PAL_API UPalGameSystemInitManagerComponent : public UGameStateComponent {
     GENERATED_BODY()
@@ -23,12 +21,5 @@ private:
 public:
     UPalGameSystemInitManagerComponent(const FObjectInitializer& ObjectInitializer);
 
-private:
-    UFUNCTION(BlueprintCallable)
-    void OnChangeProcessState(UPalGameSystemInitProcessHandle* ChangedProcessHandle);
-    
-    UFUNCTION(BlueprintCallable)
-    void OnChangeProcessProgressRate(UPalGameSystemInitProcessHandle* ChangedProcessHandle);
-    
 };
 

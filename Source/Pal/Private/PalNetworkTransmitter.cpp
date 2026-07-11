@@ -60,7 +60,7 @@ void APalNetworkTransmitter::SpawnNonReliableActor_ToServer_Implementation(UClas
 void APalNetworkTransmitter::SpawnedNonReliableActor_ToALL_Implementation(UClass* actorClass, FNetworkActorSpawnParameters SpawnParameter, int32 issuerID) {
 }
 
-void APalNetworkTransmitter::SpawnedActor_ToALL_Implementation(AActor* SpawnedActor, AActor* SpawnedController, FNetworkActorSpawnParameters SpawnParameter, FGuid Guid) {
+void APalNetworkTransmitter::SpawnedActor_ToALL_Implementation(AActor* SpawnedActor, AActor* SpawnedController, FGuid Guid) {
 }
 
 FGuid APalNetworkTransmitter::SpawnActorBroadcast(UClass* actorClass, FNetworkActorSpawnParameters SpawnParameter, FNetworkSpawnActorDelegate SpawnDelegate) {

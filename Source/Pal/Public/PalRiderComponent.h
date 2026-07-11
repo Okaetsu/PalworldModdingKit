@@ -61,6 +61,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FFlagContainer DisableUniqueRideIK;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UPalRideMarkerComponent> RidingMarker_ClientCache;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float DefaultJumpZVelocity;
     
@@ -136,6 +139,12 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnSleep(int32 LastDamage);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRidePalStartAim();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRidePalEndAim();
     
     UFUNCTION(BlueprintCallable)
     void OnInactive();

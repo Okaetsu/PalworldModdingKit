@@ -16,5 +16,6 @@ enum class EPalLiftupRequestResult : uint8 {
     FailedIndividualCharacterParameter,
     FailedAlreadyLocked,
     FailedSleeping,
+    FailedNoGuildPermission,
 };
 

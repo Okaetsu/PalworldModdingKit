@@ -6,13 +6,22 @@ APalStationaryWeaponBulletLauncherBase::APalStationaryWeaponBulletLauncherBase(c
     this->AttackableAnglePitchRange = 40.00f;
     this->AttackableAngleYawRange = 80.00f;
     this->RotateSpeed = 10.00f;
+    this->bWeaponActorTickRequired = false;
+    this->bWeaponActorTickRequiredByTrigger = false;
 }
 
 FRotator APalStationaryWeaponBulletLauncherBase::RotateLauncherCalculatePostProcess_Implementation(const FRotator& InRotator) {
     return FRotator{};
 }
 
+void APalStationaryWeaponBulletLauncherBase::OnRep_WeaponActorTickRequired() {
+}
+
 void APalStationaryWeaponBulletLauncherBase::OnRep_LauncherRotator() {
+}
+
+bool APalStationaryWeaponBulletLauncherBase::IsWeaponActorTickRequired_Implementation() const {
+    return false;
 }
 
 float APalStationaryWeaponBulletLauncherBase::GetRotateSpeed() const {
@@ -32,11 +41,16 @@ float APalStationaryWeaponBulletLauncherBase::GetAttackableAnglePitch() const {
     return 0.0f;
 }
 
+void APalStationaryWeaponBulletLauncherBase::ApplyWeaponActorTickRequired() {
+}
+
 
 void APalStationaryWeaponBulletLauncherBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(APalStationaryWeaponBulletLauncherBase, LauncherRotator);
+    DOREPLIFETIME(APalStationaryWeaponBulletLauncherBase, bWeaponActorTickRequired);
+    DOREPLIFETIME(APalStationaryWeaponBulletLauncherBase, bWeaponActorTickRequiredByTrigger);
 }
 
 

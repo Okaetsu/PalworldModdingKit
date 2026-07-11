@@ -47,6 +47,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UPalIndividualCharacterHandle*> OverflownIndividualHandles_OnLoadingWorld;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UPalIndividualCharacterSlot*> CachedNonEmptySlots_InServer;
+    
 public:
     UPalPlayerDataPalStorage();
 

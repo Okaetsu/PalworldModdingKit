@@ -2,6 +2,8 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "EPalBuildObjectTypeA.h"
+#include "PalCharacterContainerSortInfo.h"
+#include "PalUIPaldexFilterInfo.h"
 #include "UITransientData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -39,6 +41,9 @@ public:
     bool LoadingScreenLiving;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bDisableLoadingScreen;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool CanDisplayBlueprintCategoryInBuildRadialMenu;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -52,6 +57,24 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bDiscardRestoreBuildObjectList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FPalUIPaldexFilterInfo PaldeckFilterInfo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FPalCharacterContainerSortInfo PalStorageSearchInfo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FPalCharacterContainerSortInfo GlobalPalStorageSearchInfo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FPalCharacterContainerSortInfo DimensionalStorageSearchInfo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsTipsVisible;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bShowGameClearDialog;
     
     PAL_API FUITransientData();
 };

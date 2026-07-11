@@ -10,6 +10,7 @@
 class UPalBaseCampWorkCollectionReplicationList;
 class UPalIndividualCharacterContainer;
 class UPalIndividualCharacterParameter;
+class UPalMapObjectConcreteModelBase;
 class UPalUIBaseCampWorkFixedAssignManageModel;
 
 UCLASS(Blueprintable)
@@ -21,10 +22,18 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FReturnSelfDelegate OnUpdateWorkInBaseCampDelegate;
     
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UPalMapObjectConcreteModelBase> FilterTargetConcreteModel;
+    
+public:
     UPalUIBaseCampWorkFixedAssignManageModel();
 
     UFUNCTION(BlueprintCallable)
     void SortFixedAssignableWorks(EPalUIFixedAssignManageListSortType SortType, const TArray<FPalUIBaseCampWorkFixedAssignInfo>& OriginalArray, TArray<FPalUIBaseCampWorkFixedAssignInfo>& OutArray);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetFilterTargetConcreteModel(UPalMapObjectConcreteModelBase* InTargetModel);
     
     UFUNCTION(BlueprintCallable)
     void RequestUnassignWork(const FGuid& WorkId, const FPalInstanceID& IndividualId);
@@ -49,6 +58,9 @@ private:
     void OnUpdateWorkInBaseCamp(UPalBaseCampWorkCollectionReplicationList* ReplicationList);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasBasePalOperationPermissionByLocalPlayer() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalIndividualCharacterContainer* GetTargetBaseCampWorkerCharacterContainer() const;
     

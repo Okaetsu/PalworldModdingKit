@@ -21,7 +21,7 @@ void UPalObjectPoolManager::DeactivateToPool(AActor* InActor) {
 void UPalObjectPoolManager::ClearPool(FPalObjectPoolKey InKey, bool bDestroyUsingActor) {
 }
 
-AActor* UPalObjectPoolManager::ActivateFromPool(FPalObjectPoolActivateParameter InParameter) {
+AActor* UPalObjectPoolManager::ActivateFromPool(FPalObjectPoolActivateParameter InParameter, bool& bOutIsCreateNew) {
     return NULL;
 }
 

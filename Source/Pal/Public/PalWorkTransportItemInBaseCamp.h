@@ -2,10 +2,11 @@
 #include "CoreMinimal.h"
 #include "EPalWorkTransportItemType.h"
 #include "PalWorkBase.h"
+#include "PalWorkLaunchRecoveryInterface.h"
 #include "PalWorkTransportItemInBaseCamp.generated.h"
 
 UCLASS(Blueprintable)
-class PAL_API UPalWorkTransportItemInBaseCamp : public UPalWorkBase {
+class PAL_API UPalWorkTransportItemInBaseCamp : public UPalWorkBase, public IPalWorkLaunchRecoveryInterface {
     GENERATED_BODY()
 public:
 private:
@@ -17,5 +18,8 @@ private:
     
 public:
     UPalWorkTransportItemInBaseCamp();
+
+
+    // Fix for true pure virtual functions not being implemented
 };
 

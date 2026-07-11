@@ -9,6 +9,7 @@
 #include "EPalSizeType.h"
 #include "EPalTribeID.h"
 #include "EPalWeaponType.h"
+#include "EPalWorkSuitability.h"
 #include "PalCharacterParameterDatabaseRow.generated.h"
 
 USTRUCT(BlueprintType)
@@ -22,7 +23,10 @@ public:
     FName NamePrefixID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName OverridePartnerSkillTextID;
+    FName OverridePartnerSkillNameTextID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName OverridePartnerSkillDescTextID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsPal;
@@ -101,6 +105,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EnemyInflictDamageRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EnemyWazaCoolTimeRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CaptureRateCorrect;
@@ -221,6 +228,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector MeshRelativeLocation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalWorkSuitability BestWorkSuitability;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 WorkSuitability_EmitFlame;

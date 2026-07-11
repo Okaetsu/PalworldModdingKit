@@ -2,8 +2,10 @@
 #include "Net/UnrealNetwork.h"
 
 UPalCharacterLiftupObjectComponent::UPalCharacterLiftupObjectComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
-    this->bIsLifting = false;
+    this->ThrowState = EPalCharacterLiftupObjectThrowState::None;
     this->bEnableLiftup = false;
+    this->LiftingPlayerCharacter = NULL;
+    this->ThrowIgnorePlayerDuration = 0.50f;
 }
 
 void UPalCharacterLiftupObjectComponent::SetEnable(const bool bInEnable) {
@@ -23,7 +25,13 @@ FGuid UPalCharacterLiftupObjectComponent::GetLastLiftRequestedPlayerUId() const 
     return FGuid{};
 }
 
-void UPalCharacterLiftupObjectComponent::BroadcastSetBeingThrown_Implementation(const bool bInBeingThrown) {
+void UPalCharacterLiftupObjectComponent::BroadcastMarkThrowReleased_Implementation() {
+}
+
+void UPalCharacterLiftupObjectComponent::BroadcastClearThrowState_Implementation() {
+}
+
+void UPalCharacterLiftupObjectComponent::BroadcastBeginThrowPitching_Implementation() {
 }
 
 void UPalCharacterLiftupObjectComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

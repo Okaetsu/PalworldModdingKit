@@ -1,7 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
+#include "EPalPassiveSkillEffectType.h"
 #include "EPalStatusID.h"
+#include "PalStatusInvokerInfo.h"
 #include "StatusDynamicParameter.h"
 #include "Templates/SubclassOf.h"
 #include "PalStatusComponent.generated.h"
@@ -35,6 +39,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<EPalStatusID> DisableAddStatusIDs;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FGuid, FPalStatusInvokerInfo> AddStatusInvokerMap;
+    
 public:
     UPalStatusComponent(const FObjectInitializer& ObjectInitializer);
 
@@ -51,6 +58,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void ResetDisableAddStatusIDs();
     
+    UFUNCTION(BlueprintCallable)
+    void RemoveStatusInvoker(const FGuid& InvokerID);
+    
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RemoveStatus_ToServer(EPalStatusID statusID, int32 issuerID);
@@ -64,10 +74,16 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable)
+    void OnStartPassiveSkill(EPalPassiveSkillEffectType EffectType, float Value);
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_ExecutionStatusList();
     
     UFUNCTION(BlueprintCallable)
-    UPalStatusBase* GetExecutionStatusCache(EPalStatusID statusID);
+    void OnEndPassiveSkill(EPalPassiveSkillEffectType EffectType);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnChangeActiveActor(bool bInIsActive);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -77,10 +93,19 @@ public:
     TArray<EPalStatusID> GetDisableAddStatusIDs() const;
     
     UFUNCTION(BlueprintCallable)
+    void EndPlay(const TEnumAsByte<EEndPlayReason::Type> EndPlayReason);
+    
+    UFUNCTION(BlueprintCallable)
     void BeginPlay();
     
     UFUNCTION(BlueprintCallable)
     void AddStatusParameter(EPalStatusID statusID, FStatusDynamicParameter Param);
+    
+    UFUNCTION(BlueprintCallable)
+    void AddStatusInvokerParameter(EPalStatusID statusID, FStatusDynamicParameter Param, const FGuid& InvokerID);
+    
+    UFUNCTION(BlueprintCallable)
+    void AddStatusInvoker(EPalStatusID statusID, const FGuid& InvokerID);
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)

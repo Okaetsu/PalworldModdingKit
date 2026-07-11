@@ -43,6 +43,14 @@ UDataTable* UPalMasterDataTablesUtility::GetPlayerStatusRankDataTable(const UObj
     return NULL;
 }
 
+UPalMasterDataTableAccess_PartnerSkillParameterData* UPalMasterDataTablesUtility::GetPartnerSkillParameterDataTableAccess(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UDataTable* UPalMasterDataTablesUtility::GetPartnerSkillParameterDataTable(const UObject* WorldContextObject) {
+    return NULL;
+}
+
 UPalMasterDataTableAccess_PalShop* UPalMasterDataTablesUtility::GetPalShopDataTableAccess(const UObject* WorldContextObject) {
     return NULL;
 }
@@ -136,6 +144,22 @@ UPalMasterDataTableAccess_ItemRecipe* UPalMasterDataTablesUtility::GetItemRecipe
 }
 
 UDataTable* UPalMasterDataTablesUtility::GetItemRecipeDataTable(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UPalMasterDataTableAccess_ItemProductData* UPalMasterDataTablesUtility::GetItemProductDataTableAccess(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UDataTable* UPalMasterDataTablesUtility::GetItemProductDataTable(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UPalMasterDataTableAccess_ItemPickupData* UPalMasterDataTablesUtility::GetItemPickupDataTableAccess(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UDataTable* UPalMasterDataTablesUtility::GetItemPickupDataTable(const UObject* WorldContextObject) {
     return NULL;
 }
 
@@ -260,6 +284,14 @@ UPalMasterDataTableAccess_DungeonEnemySpawnerData* UPalMasterDataTablesUtility::
 }
 
 UDataTable* UPalMasterDataTablesUtility::GetDungeonEnemySpawnerDataTable(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UPalMasterDataTableAccess_CrimeMasterData* UPalMasterDataTablesUtility::GetCrimeDataTableAccess(const UObject* WorldContextObject) {
+    return NULL;
+}
+
+UDataTable* UPalMasterDataTablesUtility::GetCrimeDataTable(const UObject* WorldContextObject) {
     return NULL;
 }
 

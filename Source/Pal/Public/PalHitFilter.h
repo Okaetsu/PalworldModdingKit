@@ -3,6 +3,7 @@
 #include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
 #include "Engine/HitResult.h"
+#include "EPalHumanStunType.h"
 #include "Templates/SubclassOf.h"
 #include "PalHitFilter.generated.h"
 
@@ -14,7 +15,7 @@ UCLASS(Blueprintable, EditInlineNew)
 class UPalHitFilter : public UObject {
     GENERATED_BODY()
 public:
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOverlapEndDelegate, UPrimitiveComponent*, MyHitComponent, AActor*, OtherHitActor, UPrimitiveComponent*, OtherHitComponent);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOverlapUpdateDelegate, UPrimitiveComponent*, MyHitComponent, AActor*, OtherHitActor, UPrimitiveComponent*, OtherHitComponent);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_SixParams(FOnHitDelegate, UPrimitiveComponent*, MyHitComponent, AActor*, OtherHitActor, UPrimitiveComponent*, OtherHitComponent, const TArray<int32>&, FoliageIndex, FVector, HitLocation, int32, HitCount);
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -32,6 +33,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bFindNearestCollisionCombination;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalHumanStunType HumanStunType;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 IntersectionNum;
@@ -41,8 +45,19 @@ public:
     FOnHitDelegate OnHitDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FOverlapEndDelegate OnOverlapEndDelegate;
+    FOverlapUpdateDelegate OnOverlapActorStartDelegate;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOverlapUpdateDelegate OnOverlapActorEndDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOverlapUpdateDelegate OnOverlapEndDelegate;
+    
+private:
+    UPROPERTY(EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TArray<TWeakObjectPtr<UPrimitiveComponent>> BoundPrimitiveComponents;
+    
+public:
     UPalHitFilter();
     UFUNCTION(BlueprintCallable)
     void UnbindPrimitiveComponent(UPrimitiveComponent* Component);

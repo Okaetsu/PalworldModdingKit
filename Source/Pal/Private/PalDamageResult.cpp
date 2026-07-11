@@ -10,6 +10,10 @@ FPalDamageResult::FPalDamageResult() {
     this->CameraShake = EPalPlayerDamageCameraShakeCategory::None;
     this->IgnorePlayerEquipItemDamage = false;
     this->AttackElementType = EPalElementType::None;
+    this->WeaponType = EPalWeaponType::None;
     this->ActualDamage = 0;
+    this->BodyPartsType = EPalBodyPartsType::Weak;
+    this->bCannotKill = false;
+    this->BasePower = 0;
 }
 

@@ -2,6 +2,7 @@
 #include "Net/UnrealNetwork.h"
 
 UPalMapObjectModel::UPalMapObjectModel() {
+    this->bSpawnedMapObjectActor = false;
     this->ConcreteModel = NULL;
     this->BuildProcess = NULL;
     this->DamagableType = EPalMapObjectDamagableType::AllRecieve;
@@ -42,6 +43,9 @@ void UPalMapObjectModel::OnRep_Paint() {
 void UPalMapObjectModel::OnRep_Effect() {
 }
 
+void UPalMapObjectModel::OnRep_CustomName() {
+}
+
 void UPalMapObjectModel::OnRep_ConcreteModel() {
 }
 
@@ -62,8 +66,16 @@ FPalMapObjectStatusValue UPalMapObjectModel::GetHP() const {
     return FPalMapObjectStatusValue{};
 }
 
+FString UPalMapObjectModel::GetCustomName() const {
+    return TEXT("");
+}
+
 UPalMapObjectConcreteModelBase* UPalMapObjectModel::GetConcreteModel(const bool bIsForce) const {
     return NULL;
+}
+
+FGuid UPalMapObjectModel::GetBuildPlayerUId_BP() const {
+    return FGuid{};
 }
 
 void UPalMapObjectModel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -75,6 +87,7 @@ void UPalMapObjectModel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
     DOREPLIFETIME(UPalMapObjectModel, ConcreteModel);
     DOREPLIFETIME(UPalMapObjectModel, BaseCampIdBelongTo);
     DOREPLIFETIME(UPalMapObjectModel, GroupIdBelongTo);
+    DOREPLIFETIME(UPalMapObjectModel, CustomName);
     DOREPLIFETIME(UPalMapObjectModel, BuildObjectId);
     DOREPLIFETIME(UPalMapObjectModel, BuildProcess);
     DOREPLIFETIME(UPalMapObjectModel, DamagableType);

@@ -1,12 +1,15 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/EngineTypes.h"
+#include "EPalCharacterMovementCustomMode.h"
 #include "EPalFlyHeightType.h"
 #include "FixedPoint64.h"
 #include "PalDeadInfo.h"
 #include "PalFlyMeshHeightCtrlComponent.generated.h"
 
 class APalCharacter;
+class UPalCharacterMovementComponent;
 class USkeletalMeshComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -19,6 +22,30 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HighFlingAddtionalHeight;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bEnableHoverCapsule;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDisableRideLanding;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FlyingCapsuleHalfHeight;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FlyingCapsuleRadius;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float HoverExtendInterpTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bHoldFlyingCapsuleOnDismount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bStopExtendByHeadHit;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDebugHoverCapsuleLog;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EPalFlyHeightType State;
@@ -29,6 +56,12 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsHighFlingCache;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bSkipWildHighFlingForNPCOtomoSpawn;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDisabledBattleModeFlyingChange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     USkeletalMeshComponent* SK;
@@ -61,6 +94,9 @@ private:
     void OnRep_bIsHighFling();
     
     UFUNCTION(BlueprintCallable)
+    void OnMovementModeChanged(UPalCharacterMovementComponent* Component, TEnumAsByte<EMovementMode> PrevMode, TEnumAsByte<EMovementMode> NewMode, EPalCharacterMovementCustomMode PrevCustomMode, EPalCharacterMovementCustomMode NewCustomMode);
+    
+    UFUNCTION(BlueprintCallable)
     void OnInitializedCharacter(APalCharacter* OwnerCharacter);
     
     UFUNCTION(BlueprintCallable)
@@ -71,9 +107,15 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsRideLandingDisabled() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsFlying() const;
     
 private:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void HighFlyingStart();
+    
     UFUNCTION(BlueprintCallable)
     void HighFlingEnd_Server();
     
@@ -90,6 +132,9 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     void Debug_ForceHighFlingEnd();
+    
+    UFUNCTION(BlueprintCallable)
+    void Debug_DisabledBattleModeFlyingChange();
     
 };
 

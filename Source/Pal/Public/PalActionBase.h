@@ -2,6 +2,8 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "ActionDynamicParameter.h"
 #include "EPalPassiveSkillEffectType.h"
 #include "PalNetArchive.h"
@@ -44,6 +46,9 @@ public:
     bool bIsDisableNavWalk;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bSuppressMovementComponentTick;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsEnableAutoBlink;
     
 protected:
@@ -59,6 +64,9 @@ public:
 
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void TickAction(float DeltaTime);
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+    bool ShouldStopMovementOnAdjustTransform() const;
     
     UFUNCTION(BlueprintCallable)
     void SetAnimRateScale(FName flagName, float AnimRateScale);
@@ -155,6 +163,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     bool CanNextActionCancel();
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    bool CanInterruptByMovementModeAction();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     bool CanGainSP();

@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "PalDataTableRowName_ItemData.h"
 #include "PalBossBattleInstanceModelCreateParameter.generated.h"
 
 class APalBossTower;
@@ -15,13 +16,22 @@ public:
     TSoftClassPtr<APalCutsceneActor> IntroCutsceneActor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<APalCutsceneActor> EndingCutsceneActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataLayerAsset* ReservedDataLayerAsset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TSoftObjectPtr<UAkAudioEvent> BGMAudioEvent;
+    TSoftObjectPtr<UAkAudioEvent> IntroBGMAudioEvent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UAkAudioEvent> LoopBGMAudioEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     APalBossTower* BossTower;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_ItemData> OneTimeRewards;
     
     PAL_API FPalBossBattleInstanceModelCreateParameter();
 };

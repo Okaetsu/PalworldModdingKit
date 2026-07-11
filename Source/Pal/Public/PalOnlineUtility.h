@@ -4,10 +4,12 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "EPalPlayerPlatform.h"
 #include "EPalUserPrivilege.h"
+#include "OnGetUserInfoCompletedDelegate.h"
 #include "PalOptionOnlineIds.h"
 #include "PalOnlineUtility.generated.h"
 
 class APalPlayerState;
+class APlayerController;
 class UObject;
 
 UCLASS(Blueprintable)
@@ -41,6 +43,12 @@ public:
     static bool IsOpenListenServer(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static bool IsMutePlayerWithPsn(const UObject* WorldContextObject, const FString& UserId, bool& bOutMute, bool& bOutIsPsnPlayer);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static bool IsMutePlayerByPlayerUIdWithPsn(const UObject* WorldContextObject, const FGuid& PlayerUId, bool& bOutMute, bool& bOutIsPsnPlayer);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static bool IsMutePlayerByPlayerUId(const UObject* WorldContextObject, const FGuid& PlayerUId, bool& bOutMute);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
@@ -60,6 +68,9 @@ public:
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static bool IsBlockPlayer(const UObject* WorldContextObject, const FString& UserId, bool& bOutBlock);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static void GetUserInfoByPlayerUId(const UObject* WorldContextObject, APlayerController* PlayerController, FGuid InPlayerUId, FOnGetUserInfoCompleted Callback);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool GetUserIdByPlayerUIdInSession(const UObject* WorldContextObject, FGuid InPlayerUId, FString& OutUserId);
@@ -87,6 +98,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static TArray<FPalOptionOnlineIds> GetBlockPlayerList(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static FText Conv_PlayerUIdToDisplayText(const UObject* WorldContextObject, const FGuid& InPlayerUId);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static bool CheckUserResolvePrivilege(const UObject* WorldContextObject, const EPalUserPrivilege Privilege, bool UIOpen);

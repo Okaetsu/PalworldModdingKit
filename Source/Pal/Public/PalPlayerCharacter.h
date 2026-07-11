@@ -14,6 +14,7 @@
 #include "PalDamageResult.h"
 #include "PalDeadInfo.h"
 #include "PalDyingEndInfo.h"
+#include "PalInflictDamageNotifyInterface.h"
 #include "PalInstanceID.h"
 #include "PalInteractiveObjectIndicatorInterface.h"
 #include "PalPlayerDataCharacterMakeInfo.h"
@@ -41,11 +42,12 @@ class UPalShooterComponent;
 class USkeletalMeshComponent;
 
 UCLASS(Blueprintable)
-class APalPlayerCharacter : public APalCharacter, public IPalInteractiveObjectIndicatorInterface {
+class APalPlayerCharacter : public APalCharacter, public IPalInteractiveObjectIndicatorInterface, public IPalInflictDamageNotifyInterface {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnToggleSleepPlayerBedDelegate, bool, IsSleep);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnToggleGrapplingCancelDelegate, bool, CancelEnable);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnSwimBuffAppliedToPlayerOtomo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerReviveDelegate, APalPlayerCharacter*, Player);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerRespawnDelegate, APalPlayerCharacter*, Player);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPlayerMoveToRespawnLocationDelegate, APalPlayerCharacter*, Player, FVector, Location);
@@ -53,15 +55,17 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNoArenaEntryDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLiftupCampPalDelegate, APalCharacter*, LiftingPal);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInsufficientPalStaminaDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInflictDamageDelegate, const FPalDamageResult&, DamageResult);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnForceUpdataWarningLoupeDelegate, APalCharacter*, TargetCharacter, bool, AlwaysDisplay);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnForceUpdataHPGaugeUIDelegate, APalCharacter*, TargetCharacter);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndLiftCampPalDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDefeatCharacterDelegate, const FPalDeadInfo&, DeadInfo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCombatStartUIActionDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCombatRankDownDelegate, EPalPlayerBattleFinishType, FinishType);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCharacterMakeInfoUpdateDelegate, FPalPlayerDataCharacterMakeInfo, MakeInfo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeRegionAreaDelegate, const FName&, RegionNameID);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangePlayerBattleMode, bool, IsBattle);
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnChangeBossTowerEntrancePlayer, FName, BossType, EPalBossBattleDifficulty, Difficulty, const TArray<APalPlayerCharacter*>&, PlayerList);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnChangeBossTowerEntrancePlayer, FName, BossType, EPalBossBattleDifficulty, Difficulty, const TArray<APalPlayerCharacter*>&, PlayerList, const bool, ShouldMask);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeBattleBGMDelegate, EPalBattleBGMType, Rank);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnArenaSequenceStartDelegate, UPalArenaSequencer*, ArenaSequencer);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnArenaSequenceEndDelegate);
@@ -108,9 +112,6 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnPlayerDeathAction OnPlayerDeathAction;
-    
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FOnChangeBossTowerEntrancePlayer OnChangeBossTowerEntrancePlayer;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeBossTowerEntrancePlayer OnChangeBossEntrancePlayer;
@@ -165,6 +166,15 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnForceUpdataWarningLoupeDelegate OnWarningLoupeActWarning;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnInflictDamageDelegate OnInflictDamageDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnDefeatCharacterDelegate OnDefeatCharacterDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnSwimBuffAppliedToPlayerOtomo OnSwimBuffAppliedToPlayerOtomo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FName LastInsideRegionNameID;
@@ -250,7 +260,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void PlayIdleAnimation(UAnimMontage* Montage);
     
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
     void PlayEatAnimation();
     
     UFUNCTION(BlueprintCallable)

@@ -25,6 +25,7 @@ FPalCharacterParameterDatabaseRow::FPalCharacterParameterDatabaseRow() {
     this->EnemyMaxHPRate = 0.00f;
     this->EnemyReceiveDamageRate = 0.00f;
     this->EnemyInflictDamageRate = 0.00f;
+    this->EnemyWazaCoolTimeRate = 0.00f;
     this->CaptureRateCorrect = 0.00f;
     this->ExpRatio = 0.00f;
     this->Price = 0.00f;
@@ -62,6 +63,7 @@ FPalCharacterParameterDatabaseRow::FPalCharacterParameterDatabaseRow() {
     this->IgnoreCombi = false;
     this->MeshCapsuleHalfHeight = 0.00f;
     this->MeshCapsuleRadius = 0.00f;
+    this->BestWorkSuitability = EPalWorkSuitability::None;
     this->WorkSuitability_EmitFlame = 0;
     this->WorkSuitability_Watering = 0;
     this->WorkSuitability_Seeding = 0;

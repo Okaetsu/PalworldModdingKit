@@ -23,8 +23,8 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<EPalCharacterImportanceType, FCharacterListForImportanceManager> CharacterMap;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    TArray<APalNPCSpawnerBase*> SpawnerList;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<TWeakObjectPtr<APalNPCSpawnerBase>> SpawnerList;
     
 public:
     UPalCharacterImportanceManager();

@@ -8,4 +8,8 @@ UPalCoopSkillMetalDetector::UPalCoopSkillMetalDetector() {
 void UPalCoopSkillMetalDetector::MetalDetector(const FVector& Origin, float SearchRadius, const FGuid& RequestPlayerUId) {
 }
 
+TArray<APalMapObject*> UPalCoopSkillMetalDetector::GetDetectedObjects() const {
+    return TArray<APalMapObject*>();
+}
+
 

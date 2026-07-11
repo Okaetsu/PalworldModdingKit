@@ -4,4 +4,7 @@ APalActorClassSpawnerInClientBase::APalActorClassSpawnerInClientBase(const FObje
     this->SpawnedActor = NULL;
 }
 
+void APalActorClassSpawnerInClientBase::ForceDespawn() {
+}
+
 

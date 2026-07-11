@@ -20,10 +20,19 @@ class PAL_API APalUniqueRideWeaponBase : public APalWeaponBase {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnShootHijackBulletDelegate, FPalWeaponBulletHijackInfo, HijackInfo);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnChangeRunningDelegate);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnShootHijackBulletDelegate OnShootHijackBullet;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChangeRunningDelegate OnChangeRunningDelegate;
+    
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsRunningWhileShootingAnim;
+    
+public:
     APalUniqueRideWeaponBase(const FObjectInitializer& ObjectInitializer);
 
 protected:
@@ -34,6 +43,9 @@ protected:
     void ShootOneBullet(TSubclassOf<APalBullet> BulletClass, UNiagaraSystem* MuzzleEffect, FVector MuzzleLocation, FRotator MuzzleRotate, float BulrAngle, TSubclassOf<AActor> AmmoClass, FTransform AmmoEject);
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void SetIsRunning(bool IsRunning);
+    
     UFUNCTION(BlueprintCallable)
     void SetHijackEnable(bool IsEnable);
     

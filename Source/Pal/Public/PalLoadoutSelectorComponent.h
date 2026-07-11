@@ -16,6 +16,7 @@ class PAL_API UPalLoadoutSelectorComponent : public UPalItemSelectorComponent {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FRemoveItem, EPalPlayerInventoryType, inventoryType, int32, Index);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponSpawnedForLoadoutDelegate, APalWeaponBase*, NewWeapon);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FEquipmentItem, EPalPlayerInventoryType, inventoryType, int32, Index);
     
 protected:
@@ -31,6 +32,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRemoveItem OnRemoveItemDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnWeaponSpawnedForLoadoutDelegate OnWeaponSpawnedForLoadoutDelegate;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

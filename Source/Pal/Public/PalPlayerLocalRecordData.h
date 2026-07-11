@@ -91,6 +91,15 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FName> Local_UnlockedOnUIBuildObjectBlueprintList;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FName, bool> Local_WarpPointUnlockFlag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool Local_ShowSkyIslandCloudOnWorldMapUI;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FName> Local_IgnoreMaskBossSpawnerNames;
+    
     UPalPlayerLocalRecordData();
 
     UFUNCTION(BlueprintCallable)

@@ -54,6 +54,9 @@ public:
     bool IsPlayerControlled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsOtomo() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsLocallyControlled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

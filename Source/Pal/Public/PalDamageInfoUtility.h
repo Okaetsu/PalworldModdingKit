@@ -10,6 +10,10 @@ class UPalDamageInfoUtility : public UObject {
     GENERATED_BODY()
 public:
     UPalDamageInfoUtility();
+
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool IsExplosionDamage(const FPalDamageInfo& DamageInfo);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static float GetSpecialAttackRate(const FPalDamageInfo& DamageInfo, const EPalSpecialAttackRateType Type);
     

@@ -1,0 +1,5 @@
+#include "PalWildlifeSanctuaryAlertStateListenerResisterInfo.h"
+
+FPalWildlifeSanctuaryAlertStateListenerResisterInfo::FPalWildlifeSanctuaryAlertStateListenerResisterInfo() {
+}
+

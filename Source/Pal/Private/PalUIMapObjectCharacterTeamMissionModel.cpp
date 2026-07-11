@@ -28,6 +28,9 @@ void UPalUIMapObjectCharacterTeamMissionModel::RequestSelectAuto() {
 void UPalUIMapObjectCharacterTeamMissionModel::RequestSelectAssignedCharacter(const FPalInstanceID& IndividualId) {
 }
 
+void UPalUIMapObjectCharacterTeamMissionModel::RequestChangeExcludeFlag(const FPalInstanceID& IndividualId, bool bNewFlag) {
+}
+
 void UPalUIMapObjectCharacterTeamMissionModel::OnUpdateReleasedMissionInfo(UPalGuildCharacterTeamMission* OwnerGuildCharacterTeamMission) {
 }
 

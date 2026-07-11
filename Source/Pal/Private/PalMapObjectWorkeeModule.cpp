@@ -12,6 +12,10 @@ void UPalMapObjectWorkeeModule::OnRep_TargetWork() {
 void UPalMapObjectWorkeeModule::OnRep_CannotApproachByWork() {
 }
 
+UPalWorkProgressMultiType* UPalMapObjectWorkeeModule::GetWorkProgressMultiType() const {
+    return NULL;
+}
+
 UPalWorkProgress* UPalMapObjectWorkeeModule::GetWorkProgress() const {
     return NULL;
 }

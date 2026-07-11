@@ -21,4 +21,8 @@ void UPalAudioUtility::OnPlayerEnterBaseCamp(UObject* WorldContextObject, APalPl
 void UPalAudioUtility::OnPlayerEnterAmbientArea(UObject* WorldContextObject, APalPlayerCharacter* Player, APalAmbientSoundAreaBase* SpotArea) {
 }
 
+EPalAudioAreaType UPalAudioUtility::GetCurrentAudioAreaType(UObject* WorldContextObject) {
+    return EPalAudioAreaType::None;
+}
+
 

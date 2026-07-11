@@ -29,6 +29,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void UnbindInputMethodChangeEvent();
     
+    UFUNCTION(BlueprintCallable)
+    void Reflesh();
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void OnKeyConfigChanged();

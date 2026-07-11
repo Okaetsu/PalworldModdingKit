@@ -4,6 +4,7 @@
 #include "FlowComponent.h"
 #include "PalNPCTalkFlowComponent.generated.h"
 
+class AActor;
 class APalCharacter;
 class UPalNPCTalkFlowComponent;
 class UPalNPCTalkSystem;
@@ -55,6 +56,9 @@ protected:
     void OnFinishTalkFlow();
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void LaunchTalkIncident(AActor* Other);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FGuid GetToken() const;
     
@@ -62,7 +66,10 @@ public:
     UPalNPCTalkSystem* GetTalkSystem() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    APalCharacter* GetTalker() const;
+    APalCharacter* GetTalkerAsPalCharacter() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    AActor* GetTalker() const;
     
     UFUNCTION(BlueprintCallable)
     void CancelTalkFlow();

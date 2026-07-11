@@ -5,10 +5,11 @@
 #include "PalAIActionBaseCampBase.h"
 #include "PalAIActionBaseCampSleepActivelyParameter.h"
 #include "PalAIActionWorkerInterruptInterface.h"
+#include "PalLaunchRecoveryActionInterface.h"
 #include "PalAIActionBaseCampSleepActively.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
-class PAL_API UPalAIActionBaseCampSleepActively : public UPalAIActionBaseCampBase, public IPalAIActionWorkerInterruptInterface {
+class PAL_API UPalAIActionBaseCampSleepActively : public UPalAIActionBaseCampBase, public IPalAIActionWorkerInterruptInterface, public IPalLaunchRecoveryActionInterface {
     GENERATED_BODY()
 public:
 private:

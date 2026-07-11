@@ -33,6 +33,9 @@ public:
     virtual UPalItemContainer* GetItemContainer_ItemContainerAccessInterface() const PURE_VIRTUAL(GetItemContainer_ItemContainerAccessInterface, return NULL;);
     
     UFUNCTION(BlueprintCallable)
+    virtual int32 GetDisplayContainerSlotNumDefault() PURE_VIRTUAL(GetDisplayContainerSlotNumDefault, return 0;);
+    
+    UFUNCTION(BlueprintCallable)
     virtual void CallOrRegisterOnReadyItemContainerEvent(FPalMapObjectItemContainerAccessDelegate Delegate) PURE_VIRTUAL(CallOrRegisterOnReadyItemContainerEvent,);
     
 };

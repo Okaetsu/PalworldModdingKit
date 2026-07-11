@@ -28,16 +28,25 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsAutoComplete;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bHideFromUI;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CanCompleteFlag, meta=(AllowPrivateAccess=true))
     bool CanCompleteFlag;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalQuestTrackingLocationSettingData LocationSettingData;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_HiddenFixedLocationPointIndices, meta=(AllowPrivateAccess=true))
+    TArray<int32> HiddenFixedLocationPointIndices;
+    
 public:
     UPalQuestBlock();
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+    
+    UFUNCTION(BlueprintCallable)
+    void ShowFixedLocationPoint(int32 Index);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -58,15 +67,24 @@ protected:
     void OnReturn_ServerInternal_ForBP();
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_HiddenFixedLocationPointIndices();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_CanCompleteFlag();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnComplete_ServerInternal_ForBP();
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnAfterApplySaveData_ForBP();
+    
     UFUNCTION(BlueprintCallable)
     void NotifyUpdateQuest_Client();
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void HideFixedLocationPoint(int32 Index);
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     void GetProgressText(FText& OutText);
     

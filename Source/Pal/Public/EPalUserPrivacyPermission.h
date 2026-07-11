@@ -5,5 +5,6 @@
 UENUM(BlueprintType)
 enum class EPalUserPrivacyPermission : uint8 {
     CommunicateUsingText,
+    CommunicateUsingVoice,
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "NiagaraDataInterface.h"
+#include "EPalNiagaraSoundAkComponentTickPolicy.h"
 #include "PalNiagaraDataInterfaceSoundPlayer.generated.h"
 
 class UAkAudioEvent;
@@ -14,6 +15,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FadeOutDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalNiagaraSoundAkComponentTickPolicy AkComponentTickPolicy;
     
     UPalNiagaraDataInterfaceSoundPlayer();
 };

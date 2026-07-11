@@ -3,6 +3,7 @@
 #include "ReplicationGraph.h"
 #include "PalReplicationGraph.generated.h"
 
+class UPalReplicationGraphNode_NetUpdateFrequencyOverride;
 class UReplicationGraphNode_ActorList;
 class UReplicationGraphNode_GridSpatialization2D;
 
@@ -24,6 +25,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UReplicationGraphNode_ActorList* AlwaysRelevantNode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPalReplicationGraphNode_NetUpdateFrequencyOverride* NetUpdateFrequencyOverrideNode;
     
     UPalReplicationGraph();
 };

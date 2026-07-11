@@ -5,6 +5,8 @@ UPalUIOffScreenLoupeBase::UPalUIOffScreenLoupeBase() {
     this->isWaitedClose = false;
     this->isOverrideVisibility = false;
     this->isRequestedDisplay = false;
+    this->isEnableLoupeByTimer = true;
+    this->cachedLoupeVisibilityUpdateInterval = 0.00f;
     this->overrideVisibility = ESlateVisibility::Visible;
 }
 

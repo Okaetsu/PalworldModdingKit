@@ -11,6 +11,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalMapObjectTreasureGradeType GradeType;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName FieldLotteryName;
+    
     UPalMapObjectModelInitializeExtraParameterTreasureBox();
 };
 

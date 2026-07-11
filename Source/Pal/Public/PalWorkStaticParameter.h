@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "PalBoundsTransform.h"
+#include "PalCompositeWorkFacingInfo.h"
 #include "PalWorkAssignLocalLocation.h"
 #include "PalWorkStaticParameter.generated.h"
 
@@ -20,6 +21,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FPalWorkAssignLocalLocation> AssignLocalLocations;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FPalCompositeWorkFacingInfo> CompositeWorkInfos;
     
     PAL_API FPalWorkStaticParameter();
 };

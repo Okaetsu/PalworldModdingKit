@@ -6,6 +6,7 @@ UPalHitFilter::UPalHitFilter() {
     this->HitLocationCalculator = NULL;
     this->bIsIntersectionCollision = false;
     this->bFindNearestCollisionCombination = false;
+    this->HumanStunType = EPalHumanStunType::None;
     this->IntersectionNum = 0;
 }
 

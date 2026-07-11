@@ -11,11 +11,30 @@ UPalGameLocalSettings::UPalGameLocalSettings() {
     this->DLSSGeneratedFrames = 1;
     this->ReflexMode = EPalReflexMode::On;
     this->GraphicsCommonQuality = 2;
-    this->GraphicsLightQuality = 0;
     this->bAppliedSteamDeckSettings = false;
+    this->bNotifyGuildMemberJoined = false;
+    this->bNotifyGuildMemberLeft = false;
+    this->bNotifyGuildMemberLogin = false;
+    this->bNotifyGuildMemberLogout = false;
+    this->bHideJoinByIPInput = false;
+    this->bHasShownFirstLaunchUI = true;
+}
+
+void UPalGameLocalSettings::SetHideJoinByIPInput(bool bHide) {
+}
+
+void UPalGameLocalSettings::SetGuildNotificationEnabled(EPalGuildNotificationType Type, bool bEnabled) {
 }
 
 bool UPalGameLocalSettings::RequireBenchMarkScalaBility() {
+    return false;
+}
+
+bool UPalGameLocalSettings::GetHideJoinByIPInput() {
+    return false;
+}
+
+bool UPalGameLocalSettings::GetGuildNotificationEnabled(EPalGuildNotificationType Type) const {
     return false;
 }
 

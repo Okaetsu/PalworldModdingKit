@@ -82,6 +82,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsAllowRandomizer;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bHasWorldTreeAura;
+    
     PAL_API FPalWildSpawnerDatabaseRow();
 };
 

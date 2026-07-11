@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "PalMapObjectConcreteModelBase.h"
 #include "PalMapObjectPlayerBedModuleOwnerInterface.h"
 #include "PalMapObjectWorkerAvailableFacilityInterface.h"
@@ -77,7 +78,7 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static void CalcCharacterLocationAndRotationOffset(const FName CharacterID, const APalCharacter* Character, const FName MapObjectId, const UPalMapObjectMedicalPalBedSleepOnSideLocationOffsetComponent* LocationOffsetComponent, FVector& OutLocationOffset, FQuat& OutRotationOffset);
+    static void CalcCharacterLocationAndRotationOffset(const FName CharacterID, const APalCharacter* Character, const FName SleepOnSideKey, const UPalMapObjectMedicalPalBedSleepOnSideLocationOffsetComponent* LocationOffsetComponent, FVector& OutLocationOffset, FQuat& OutRotationOffset);
     
 
     // Fix for true pure virtual functions not being implemented

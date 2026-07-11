@@ -1,9 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalBodyPartsType.h"
 #include "EPalDamageAnimationReactionType.h"
 #include "EPalElementType.h"
 #include "EPalPlayerDamageCameraShakeCategory.h"
+#include "EPalWeaponType.h"
 #include "PalDamageResult.generated.h"
 
 class AActor;
@@ -46,7 +48,19 @@ public:
     EPalElementType AttackElementType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalWeaponType WeaponType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ActualDamage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalBodyPartsType BodyPartsType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCannotKill;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 BasePower;
     
     PAL_API FPalDamageResult();
 };

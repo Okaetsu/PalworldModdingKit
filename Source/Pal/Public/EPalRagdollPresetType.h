@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EPalRagdollPresetType : uint8 {
     None,
     BeLiftup,
+    RevivePal,
 };
 

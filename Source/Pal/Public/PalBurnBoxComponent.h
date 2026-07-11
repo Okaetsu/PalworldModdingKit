@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Components/BoxComponent.h"
 #include "Engine/HitResult.h"
 #include "PalBurnBoxComponent.generated.h"
@@ -10,6 +11,11 @@ class UPrimitiveComponent;
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class PAL_API UPalBurnBoxComponent : public UBoxComponent {
     GENERATED_BODY()
+public:
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FGuid BurnStatusInvokerID;
+    
 public:
     UPalBurnBoxComponent(const FObjectInitializer& ObjectInitializer);
 

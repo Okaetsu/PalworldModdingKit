@@ -24,6 +24,7 @@ enum class EPalWeaponType : uint8 {
     MetalDetector,
     GiantClub,
     FishingRod,
+    LaserMiningTool,
     MAX,
 };
 

@@ -17,6 +17,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalDungeonEnemySpawnerRankType RankType;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverwriteRayUpOffset;
+    
 public:
     APalDungeonEnemySpawnerPoint(const FObjectInitializer& ObjectInitializer);
 

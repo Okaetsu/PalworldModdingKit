@@ -41,6 +41,9 @@ public:
     UFUNCTION(BlueprintCallable)
     virtual UObject* Self() const PURE_VIRTUAL(Self, return NULL;);
     
+    UFUNCTION(BlueprintCallable)
+    virtual FText GetInteractTargetName() const PURE_VIRTUAL(GetInteractTargetName, return FText::GetEmpty(););
+    
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     virtual FText GetIndicatorText(const UObject* WorldContextObject, EPalInteractiveObjectIndicatorType IndicatorType) const PURE_VIRTUAL(GetIndicatorText, return FText::GetEmpty(););
     

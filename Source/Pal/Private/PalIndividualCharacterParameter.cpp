@@ -8,12 +8,16 @@ UPalIndividualCharacterParameter::UPalIndividualCharacterParameter() {
     this->bRedirectDamage = false;
     this->bCanTargetFromAI = true;
     this->bIsInRaidArea = false;
+    this->PalReviveSpeedMultiplier = 1.00f;
     this->bNeedResetShieldHP = false;
+    this->bIsWorldTreeAuraPal = false;
     this->IsWaitResponseWordFiltering = false;
     this->EquipItemContainer = NULL;
     this->LastExpUpdateType = EPalExpCalcType::None;
     this->RespawnPenaltyCount = 0;
     this->bDeathAppliedOnLogin = false;
+    this->bIsUncapturable = false;
+    this->bIsForceCapturable = false;
 }
 
 bool UPalIndividualCharacterParameter::TryFindEatItem(const FPalContainerId& ContainerId, int32& SlotIndex) {
@@ -30,6 +34,9 @@ void UPalIndividualCharacterParameter::StartRecuperatingInMedicalBed() {
 }
 
 void UPalIndividualCharacterParameter::SetWorkSuitabilityAddRank(EPalWorkSuitability WorkSuitability, int32 addRank) {
+}
+
+void UPalIndividualCharacterParameter::SetUncapturable(bool bInUncapturable) {
 }
 
 void UPalIndividualCharacterParameter::SetStatusPoint(FName StatusName, int32 Point) {
@@ -56,6 +63,9 @@ void UPalIndividualCharacterParameter::SetSecurityPoliceTargetPlayerId(const FGu
 void UPalIndividualCharacterParameter::SetPhysicalHealth(EPalStatusPhysicalHealthType PhysicalHealth) {
 }
 
+void UPalIndividualCharacterParameter::SetPhaseHPLimitArray(const TArray<float>& InPhaseHPLimitArray) {
+}
+
 void UPalIndividualCharacterParameter::SetParts(UPalIndividualCharacterParameter* InParentParameter, bool InRedirectDamage) {
 }
 
@@ -77,7 +87,13 @@ void UPalIndividualCharacterParameter::SetInRaidArea(bool InRaidArea) {
 void UPalIndividualCharacterParameter::SetInArena(bool InArena) {
 }
 
+void UPalIndividualCharacterParameter::SetFullStomach(float NextValue) {
+}
+
 void UPalIndividualCharacterParameter::SetForcePartBreak() {
+}
+
+void UPalIndividualCharacterParameter::SetForceCapturable(bool bInForceCapturable) {
 }
 
 void UPalIndividualCharacterParameter::SetExStatusPoint(FName StatusName, int32 Point) {
@@ -105,6 +121,9 @@ void UPalIndividualCharacterParameter::RemoveEquipWaza(EPalWazaID WazaID) {
 }
 
 void UPalIndividualCharacterParameter::RemoveDecreaseFullStomachRates(const FName Name) {
+}
+
+void UPalIndividualCharacterParameter::RemoveAllOnUpdateReviveTimerDelegate(UObject* InWidgetPointer) {
 }
 
 void UPalIndividualCharacterParameter::RecuperateInMedicalBed() {
@@ -137,6 +156,14 @@ void UPalIndividualCharacterParameter::OnChangedBlockedUsers() {
 void UPalIndividualCharacterParameter::NaturalUpdateSaveParameter(const EPalCharacterNaturalUpdateType Type) {
 }
 
+bool UPalIndividualCharacterParameter::IsWorldTreeAuraPal() const {
+    return false;
+}
+
+bool UPalIndividualCharacterParameter::IsUncapturable() const {
+    return false;
+}
+
 bool UPalIndividualCharacterParameter::IsStatusPointAllMax() {
     return false;
 }
@@ -165,11 +192,19 @@ bool UPalIndividualCharacterParameter::IsRarePal() const {
     return false;
 }
 
+bool UPalIndividualCharacterParameter::IsPhaseHPLimitValid() const {
+    return false;
+}
+
 bool UPalIndividualCharacterParameter::IsParts() const {
     return false;
 }
 
 bool UPalIndividualCharacterParameter::IsPartBroken() const {
+    return false;
+}
+
+bool UPalIndividualCharacterParameter::IsPalLifeDrainPower_AttackUp() const {
     return false;
 }
 
@@ -182,6 +217,10 @@ bool UPalIndividualCharacterParameter::IsNoFallDamageLastJumpedLocation() const 
 }
 
 bool UPalIndividualCharacterParameter::IsNocturnal() const {
+    return false;
+}
+
+bool UPalIndividualCharacterParameter::IsNightOwl() const {
     return false;
 }
 
@@ -205,7 +244,19 @@ bool UPalIndividualCharacterParameter::IsHPFullRecovered() {
     return false;
 }
 
+bool UPalIndividualCharacterParameter::IsFullStomachDecreaseStoppedByFood() const {
+    return false;
+}
+
+bool UPalIndividualCharacterParameter::IsForceCapturable() const {
+    return false;
+}
+
 bool UPalIndividualCharacterParameter::IsFavoritePal() const {
+    return false;
+}
+
+bool UPalIndividualCharacterParameter::IsExcludedFromTeamMission() const {
     return false;
 }
 
@@ -214,6 +265,10 @@ bool UPalIndividualCharacterParameter::IsEnablePlayerRespawnInHardcore() const {
 }
 
 bool UPalIndividualCharacterParameter::IsDead() const {
+    return false;
+}
+
+bool UPalIndividualCharacterParameter::IsAwakening() const {
     return false;
 }
 
@@ -255,6 +310,10 @@ TMap<EPalWorkSuitability, int32> UPalIndividualCharacterParameter::GetWorkSuitab
 
 int32 UPalIndividualCharacterParameter::GetWorkSuitabilityRank(const EPalWorkSuitability InWorkSuitability) const {
     return 0;
+}
+
+TArray<FPalWorkSuitabilityInfo> UPalIndividualCharacterParameter::GetWorkSuitabilityPassiveAddRankList() const {
+    return TArray<FPalWorkSuitabilityInfo>();
 }
 
 int32 UPalIndividualCharacterParameter::GetWorkSpeedRank() const {
@@ -348,12 +407,24 @@ int32 UPalIndividualCharacterParameter::GetRankUpExp() const {
     return 0;
 }
 
+TMap<EPalWorkSuitability, int32> UPalIndividualCharacterParameter::GetRankBasedWorkSuitabilityBonuses() const {
+    return TMap<EPalWorkSuitability, int32>();
+}
+
+int32 UPalIndividualCharacterParameter::GetRankBasedWorkSuitabilityBonus(const EPalWorkSuitability WorkSuitability) const {
+    return 0;
+}
+
 int32 UPalIndividualCharacterParameter::GetRank() const {
     return 0;
 }
 
 EPalStatusPhysicalHealthType UPalIndividualCharacterParameter::GetPhysicalHealth() const {
     return EPalStatusPhysicalHealthType::Healthful;
+}
+
+TArray<float> UPalIndividualCharacterParameter::GetPhaseHPLimitArray() const {
+    return TArray<float>();
 }
 
 TArray<FName> UPalIndividualCharacterParameter::GetPassiveSkillList() {
@@ -390,6 +461,10 @@ float UPalIndividualCharacterParameter::GetPalEnhancementStatusRate_Attack() con
 
 int32 UPalIndividualCharacterParameter::GetOverrideLevel() const {
     return 0;
+}
+
+EPalWeaponType UPalIndividualCharacterParameter::GetNPCWeaponType() const {
+    return EPalWeaponType::None;
 }
 
 void UPalIndividualCharacterParameter::GetNickNameWithOnlineID(FString& outName) const {
@@ -517,8 +592,16 @@ TArray<EPalWazaID> UPalIndividualCharacterParameter::GetEquipableWaza() const {
     return TArray<EPalWazaID>();
 }
 
+float UPalIndividualCharacterParameter::GetEffectFoodTimeRate_FullStomachKeep() const {
+    return 0.0f;
+}
+
 float UPalIndividualCharacterParameter::GetEffectFoodTimeRate() const {
     return 0.0f;
+}
+
+FName UPalIndividualCharacterParameter::GetEffectFoodName_FullStomachKeep() const {
+    return NAME_None;
 }
 
 FName UPalIndividualCharacterParameter::GetEffectFoodName() const {
@@ -543,6 +626,10 @@ int32 UPalIndividualCharacterParameter::GetDefenceRank() const {
 
 EPalWorkSuitability UPalIndividualCharacterParameter::GetCurrentWorkSuitability() const {
     return EPalWorkSuitability::None;
+}
+
+bool UPalIndividualCharacterParameter::GetCurrentPhaseHPLimit(FFixedPoint64& OutPhaseHPLimit) const {
+    return false;
 }
 
 float UPalIndividualCharacterParameter::GetCraftSpeedSickRate() const {
@@ -611,6 +698,9 @@ void UPalIndividualCharacterParameter::FullRecoveryHP() {
 void UPalIndividualCharacterParameter::EndRecuperatingInMedicalBed() {
 }
 
+void UPalIndividualCharacterParameter::EnableWorldTreeAuraPal() {
+}
+
 void UPalIndividualCharacterParameter::DecrementUnusedStatusPoint() {
 }
 
@@ -634,7 +724,7 @@ void UPalIndividualCharacterParameter::AddPassiveSkill(FName AddSkill, FName Ove
 void UPalIndividualCharacterParameter::AddHP(FFixedPoint64 PlusHP) {
 }
 
-void UPalIndividualCharacterParameter::AddFriendShip(int32 Value) {
+void UPalIndividualCharacterParameter::AddFriendShip(int32 Value, bool bApplyPassiveSkill) {
 }
 
 void UPalIndividualCharacterParameter::AddEquipWaza(EPalWazaID WazaID) {
@@ -651,6 +741,7 @@ void UPalIndividualCharacterParameter::GetLifetimeReplicatedProps(TArray<FLifeti
     DOREPLIFETIME(UPalIndividualCharacterParameter, bRedirectDamage);
     DOREPLIFETIME(UPalIndividualCharacterParameter, bCanTargetFromAI);
     DOREPLIFETIME(UPalIndividualCharacterParameter, bIsInRaidArea);
+    DOREPLIFETIME(UPalIndividualCharacterParameter, PalReviveSpeedMultiplier);
     DOREPLIFETIME(UPalIndividualCharacterParameter, SaveParameter);
     DOREPLIFETIME(UPalIndividualCharacterParameter, EquipItemContainer);
     DOREPLIFETIME(UPalIndividualCharacterParameter, BaseCampId);
@@ -658,6 +749,8 @@ void UPalIndividualCharacterParameter::GetLifetimeReplicatedProps(TArray<FLifeti
     DOREPLIFETIME(UPalIndividualCharacterParameter, RespawnPenaltyCount);
     DOREPLIFETIME(UPalIndividualCharacterParameter, LastRespawnTime);
     DOREPLIFETIME(UPalIndividualCharacterParameter, bDeathAppliedOnLogin);
+    DOREPLIFETIME(UPalIndividualCharacterParameter, bIsUncapturable);
+    DOREPLIFETIME(UPalIndividualCharacterParameter, bIsForceCapturable);
     DOREPLIFETIME(UPalIndividualCharacterParameter, Debug_CurrentAIActionName);
     DOREPLIFETIME(UPalIndividualCharacterParameter, Debug_CurrentActionName);
 }

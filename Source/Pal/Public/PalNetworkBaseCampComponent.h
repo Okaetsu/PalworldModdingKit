@@ -47,11 +47,11 @@ private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestMoveWorkerToPalBox_ToServer(const FGuid& BaseCampId, const FPalCharacterSlotId& SlotId, const int32 CurrentPage, const FGuid& ByMapObjectInstanceId);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestMoveItemToInventory_ToServer(const FGuid& BaseCampId, const FPalItemId& ItemId, const int32 Num);
+    UFUNCTION(Reliable, Server)
+    void RequestMoveItemToInventory_ToServer(const FGuid& BaseCampId, const FPalItemId& ItemId, const int64 Num);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestMoveInventoryItemToBaseCamp_ToServer(const TArray<FPalItemSlotId>& InventoryItemSlotIds, const FGuid& BaseCampId);
+    void RequestMoveInventoryItemToBaseCamp_ToServer(const TArray<FPalItemSlotId>& InventoryItemSlotIds, const FGuid& BaseCampId, const bool bQuickStackMode);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestMoveCharacterToWorker_ToServer(const FGuid& BaseCampId, const FPalCharacterSlotId& SlotId, const FPalContainerId& ToContainerId, const FGuid& ByMapObjectInstanceId);

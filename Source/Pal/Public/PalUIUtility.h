@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "CommonInputBaseTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Engine/DataTable.h"
 #include "InputCoreTypes.h"
@@ -13,24 +14,30 @@
 #include "EPalBuildObjectTypeForUIDisplay.h"
 #include "EPalElementType.h"
 #include "EPalGenusCategoryType.h"
+#include "EPalInteractiveObjectActionType.h"
 #include "EPalItemTypeA.h"
 #include "EPalKeyConfigAxisFilterType.h"
 #include "EPalMapObjectMaterialSubType.h"
 #include "EPalMapObjectOperationResult.h"
 #include "EPalPlayerInventoryType.h"
+#include "EPalRelicType.h"
 #include "EPalUIConditionType.h"
 #include "EPalWazaID.h"
 #include "EPalWorkSuitability.h"
 #include "EPalWorkType.h"
 #include "PalBuildObjectDataSetTypeUIDisplay.h"
+#include "PalCharacterContainerSortInfo.h"
+#include "PalInstanceID.h"
 #include "PalSlateNavigationSetting.h"
 #include "PalUIDisplayCharacterBaseParameterInfo.h"
+#include "PalUIMapObjectStatusIndicatorWorkSuitabilityDisplayData.h"
+#include "PalUIPaldexFilterInfo.h"
 #include "PalUIUtility.generated.h"
 
-class APalCharacter;
 class UObject;
 class UPalIndividualCharacterHandle;
 class UPalIndividualCharacterParameter;
+class UPalIndividualCharacterSlot;
 class UPalItemSlot;
 class UPalTextBlockBase;
 class UPalUserWidget;
@@ -42,6 +49,15 @@ class PAL_API UPalUIUtility : public UBlueprintFunctionLibrary {
 public:
     UPalUIUtility();
 
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static void ToggleFavoritePalBySlot(const UObject* WorldContextObject, UPalIndividualCharacterSlot* TargetSlot);
+    
+    UFUNCTION(BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static TArray<EPalWazaID> SortWazasByElementAndPower(const UObject* WorldContextObject, const TArray<EPalWazaID>& WazaIDs);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void SortRelicTypeArrayForUIDisplay(const UObject* WorldContextObject, const TArray<EPalRelicType>& OriginalArray, TArray<EPalRelicType>& OutArray);
+    
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetVisibilityHUD(const UObject* WorldContextObject, bool IsVisible);
     
@@ -90,11 +106,26 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsLeftAltDown_ForUI();
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool IsEnableCommonUIInput(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool IsDefaultPaldeckFilterInfo(const UObject* WorldContextObject, const FPalUIPaldexFilterInfo& FilterInfo);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool IsDefaultCharacterContainerSortInfo(const UObject* WorldContextObject, const FPalCharacterContainerSortInfo& SortInfo);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsControlDown_ForUI();
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool IsBulletSelectKeyConflictWithInteract(const UObject* WorldContextObject, EPalInteractiveObjectActionType ActionType);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsAltDown_ForUI();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetWorldMapName(const UObject* WorldContextObject, const FName WorldMapId, FText& OutText);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetWorkSuitabilityNameWithMaterialSubType(const UObject* WorldContextObject, const EPalWorkSuitability WorkSuitability, const EPalMapObjectMaterialSubType MaterialSubType, FText& outName);
@@ -133,6 +164,9 @@ public:
     static bool GetUIInputActionRowHandle(const UObject* WorldContextObject, const FName& ActionName, FDataTableRowHandle& outHandle);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static TArray<FPalUIMapObjectStatusIndicatorWorkSuitabilityDisplayData> GetUIDisplayWorkSuitabilityDataByMapObjectId(const UObject* WorldContextObject, const FName& MapObjectId);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool GetUIDIsplayShotAtaackParameterInfo(const UObject* WorldContextObject, UPalIndividualCharacterParameter* IndividualParameter, FPalUIDisplayCharacterBaseParameterInfo& OutParameterInfo);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
@@ -140,6 +174,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetUIDisplayNewUnlockedBuildObjectFlagMap(const UObject* WorldContextObject, TMap<EPalBuildObjectTypeA, bool>& OutMap);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool GetUIDIsplayHPParameterInfo(const UObject* WorldContextObject, UPalIndividualCharacterParameter* IndividualParameter, FPalUIDisplayCharacterBaseParameterInfo& OutParameterInfo);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetUIDisplayFavoriteBuildObjectList(const UObject* WorldContextObject, TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& OutMap);
@@ -157,10 +194,19 @@ public:
     static void GetTeamMissionName(const UObject* WorldContextObject, const FName& MissionId, FText& OutMissionName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetSortedPassiveSkillNameArray(const UObject* WorldContextObject, TArray<FString>& OutPassiveNameArray, TArray<FName>& OutPassiveIdArray);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool GetSortedEssentialItemSlotArray_ForUIDisplay(const UObject* WorldContextObject, TArray<UPalItemSlot*>& OutArray);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetSkinName(const UObject* WorldContextObject, const FName& SkinName, FText& OutSKinName);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetRelicStatusName(const UObject* WorldContextObject, const EPalRelicType RelicType, FText& OutText);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetRelicStatusDescription(const UObject* WorldContextObject, const EPalRelicType RelicType, FText& OutText);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool GetRecipeProductIdByStaticItemId(const UObject* WorldContextObject, const FName StaticItemId, FName& OutProductItemId);
@@ -186,7 +232,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetPalGenusCategoryName(const UObject* WorldContextObject, EPalGenusCategoryType GenusCategory, FText& outName);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void GetPalFirstActivatedInfo(const UObject* WorldContextObject, const FName& CharacterID, FText& outName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
@@ -200,6 +246,15 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetPalConditionDesc(const UObject* WorldContextObject, const EPalUIConditionType ConditionType, FText& outDesc);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static FGuid GetNextOwnedBaseCampIdForMapById(const UObject* WorldContextObject, const FGuid& CurrentBaseCampId);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static FGuid GetNextOwnedBaseCampIdForMap(const UObject* WorldContextObject, const FVector& WorldLocation, float SkipDistance);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static int32 GetMaxCharsPerLineForDialogue();
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static FSlateBrush GetMappedKeyIcon(const UObject* WorldContextObject, const FName InputActionName, ECommonInputType InputType, EPalKeyConfigAxisFilterType FilterType);
@@ -229,13 +284,37 @@ public:
     static void GetInventoryCategoryName(const UObject* WorldContextObject, EPalPlayerInventoryType inventoryType, FText& outName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
-    static void GetFormatedFirstActivatedInfoText(const UObject* WorldContextObject, APalCharacter* Character, FText& outFormatedText);
+    static FText GetGameClearDialogText(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static int32 GetGameClearDialogLog4Value(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetGameClearDialogLog3Values(const UObject* WorldContextObject, int32& OutDefeatedBossCount, int32& OutTotalBossCount);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static int32 GetGameClearDialogLog2Value(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetGameClearDialogLog1Values(const UObject* WorldContextObject, int32& OutCapturedSpeciesCount, int32& OutTotalSpeciesCount);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetFormatedFirstActivatedInfoTextFixedRank(const UObject* WorldContextObject, const FName& CharacterID, int32 Rank, FText& outFormatedText);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static void GetFormatedFirstActivatedInfoText(const UObject* WorldContextObject, const FPalInstanceID& InstanceId, FText& outFormatedText);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetFilteredUIDisplayBuildObjectList(const UObject* WorldContextObject, const TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& InMap, TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& OutMap);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetDisplayNickName(const UObject* WorldContextObject, const FName CharacterID, const FName UniqueNPCID, FString& OutNickName);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static FPalUIPaldexFilterInfo GetDefaultPaldeckFilterInfo(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static FPalCharacterContainerSortInfo GetDefaultCharacterContainerSortInfo(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetBuildObjectUIDIsplayCategoryTextId(const UObject* WorldContextObject, const EPalBuildObjectTypeForUIDisplay DisplayType, FText& OutText);
@@ -262,7 +341,10 @@ public:
     static UPalUserWidget* FindOwningActivatableWidget(const UObject* WorldContextObject, const UWidget* Widget);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
-    static float ConvertReviveTimerToUIDisplayRemainReviveTime(const UObject* WorldContextObject, float ReviveTimer);
+    static void FilteringWorkSpaceRecipe(const UObject* WorldContextObject, const TArray<FName>& RecipeIDArray, TArray<FName>& OutFilteredArray);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static float ConvertReviveTimerToUIDisplayRemainReviveTime(const UObject* WorldContextObject, float ReviveTimer, float ReviveSpeedMultiplier);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FColor ConvertHexToColor(const FString& HexString);
@@ -278,6 +360,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static bool CanDisplayBlueprintCategoryInBuildRadialMenu(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static void AddNewLineTextLinguistically(int32 MaxCharsPerLine, const FString& InString, FString& OutString);
     
 };
 

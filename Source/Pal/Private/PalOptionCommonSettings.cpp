@@ -12,5 +12,7 @@ FPalOptionCommonSettings::FPalOptionCommonSettings() {
     this->ScreenPercentage = 0;
     this->MapObjectDrawDistanceType = EPalOptionMapObjectDrawDistanceType::Invalid;
     this->bArachnophobiaMode = false;
+    this->bShowFriendPalAura = false;
+    this->bUseVerticalFOV = false;
 }
 

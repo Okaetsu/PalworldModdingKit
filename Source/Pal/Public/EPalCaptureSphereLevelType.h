@@ -13,5 +13,7 @@ enum class EPalCaptureSphereLevelType : uint8 {
     Legend,
     Ultimate,
     Exotic,
+    Ancient_1,
+    Ancient_2,
 };
 

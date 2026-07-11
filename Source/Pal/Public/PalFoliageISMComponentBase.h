@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "PalDamageInfo.h"
 #include "PalFoliageISMComponent.h"
+#include "PalFoliageInstanceId.h"
 #include "PalFoliageISMComponentBase.generated.h"
 
 class UPalFoliageInstance;
@@ -16,12 +17,18 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FVector, int32> InstanceIndexMapByLocation;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UPalFoliageInstance*> PendingRegisterInstances;
+    
 public:
     UPalFoliageISMComponentBase(const FObjectInitializer& ObjectInitializer);
 
 private:
     UFUNCTION(BlueprintCallable)
     void SpawnInstance(UPalFoliageInstance* Instance);
+    
+    UFUNCTION(BlueprintCallable)
+    void RegisterInstances(const TMap<FPalFoliageInstanceId, UPalFoliageInstance*>& Instances);
     
     UFUNCTION(BlueprintCallable)
     void OnRemoveInstance(const FName FoliageTypeId, UPalFoliageInstance* Instance);

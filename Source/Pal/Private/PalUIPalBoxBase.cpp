@@ -6,7 +6,10 @@ UPalUIPalBoxBase::UPalUIPalBoxBase() {
 void UPalUIPalBoxBase::TryMoveToOtomo(UPalIndividualCharacterSlot* MoveSlot) {
 }
 
-void UPalUIPalBoxBase::TryMoveToBox(UPalIndividualCharacterSlot* MoveSlot) {
+void UPalUIPalBoxBase::TryMoveToBoxForWorker(UPalIndividualCharacterSlot* MoveSlot) {
+}
+
+void UPalUIPalBoxBase::TryMoveToBoxForOtomo(UPalIndividualCharacterSlot* MoveSlot) {
 }
 
 void UPalUIPalBoxBase::TryMoveToBaseCamp(UPalIndividualCharacterSlot* MoveSlot) {

@@ -6,6 +6,7 @@ UENUM(BlueprintType)
 enum class EPalCoopSkillSearchType : uint8 {
     Undefined,
     MapObject,
+    LevelObject,
     Character,
     DungeonPortal,
     DungeonGoal,

@@ -3,6 +3,7 @@
 #include "PalDataTableRowName_NPCUniqueData.h"
 #include "PalDataTableRowName_PalHumanData.h"
 #include "PalDataTableRowName_PalMonsterData.h"
+#include "PalDeadInfo.h"
 #include "PalQuestBlock.h"
 #include "PalQuestBlock_CountKillEnemy.generated.h"
 
@@ -44,10 +45,14 @@ protected:
     void OnRep_Count();
     
     UFUNCTION(BlueprintCallable)
-    void OnKillCharacter(UPalIndividualCharacterHandle* DeadEnemyHandle);
+    void OnKillCharacter(const FPalDeadInfo& DeadInfo);
     
     UFUNCTION(BlueprintCallable)
     void OnCaptureCharacter(UPalIndividualCharacterHandle* CharacterHandle);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void AddKillCount(int32 Count);
     
 };
 

@@ -24,5 +24,11 @@ private:
 public:
     UPalWeaponCombo();
 
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPlayingComboMontage() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPlayingComboCurrentMontage() const;
+    
 };
 

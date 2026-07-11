@@ -83,6 +83,12 @@ UPalMasterDataTables::UPalMasterDataTables() {
     this->Access_FishPondLotteryDataTable = NULL;
     this->OperatingTablePassiveSkillDataTable = NULL;
     this->Access_OperatingTablePassiveSkillDataTable = NULL;
+    this->PartnerSkillParameterDataTable = NULL;
+    this->Access_PartnerSkillParameterDataTable = NULL;
+    this->ItemPickupDataTable = NULL;
+    this->Access_ItemPickupDataTable = NULL;
+    this->CrimeDataTable = NULL;
+    this->Access_CrimeDataTable = NULL;
 }
 
 

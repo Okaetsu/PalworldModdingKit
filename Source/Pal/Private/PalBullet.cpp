@@ -14,12 +14,14 @@ APalBullet::APalBullet(const FObjectInitializer& ObjectInitializer) : Super(Obje
     this->PvPPlayerToGuildPalDamageRate = 1.00f;
     this->isDamageable = true;
     this->AISoundEmitable = true;
-    this->SneakAttackRate = 2.00f;
+    this->SneakAttackRate = 1.00f;
     this->DeleteTime = -1.00f;
     this->DamageDecayStartRate = -1.00f;
     this->LifeTimer = 0.00f;
     this->weaponBulletDamageReactionType = EPalDamageAnimationReactionType::Big;
     this->bUsePool = false;
+    this->bIsLastBullet = false;
+    this->bIsPartnerSkillAttackBullet = false;
 }
 
 void APalBullet::SetWeaponDamage(int32 Damage) {

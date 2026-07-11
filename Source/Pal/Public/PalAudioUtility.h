@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "EPalAudioAreaType.h"
 #include "PalAudioUtility.generated.h"
 
 class APalAmbientSoundAreaBase;
@@ -31,6 +32,9 @@ public:
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void OnPlayerEnterAmbientArea(UObject* WorldContextObject, APalPlayerCharacter* Player, APalAmbientSoundAreaBase* SpotArea);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static EPalAudioAreaType GetCurrentAudioAreaType(UObject* WorldContextObject);
     
 };
 

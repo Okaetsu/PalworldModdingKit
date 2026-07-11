@@ -14,9 +14,11 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     bool ShouldSetCombatAction() const;
     
+public:
     UFUNCTION(BlueprintCallable)
     void SetOtomoWorkActionFixedAssign(AActor* HitActor);
     
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetOtomoWorkAction();
     

@@ -10,4 +10,8 @@ bool UPalPhysicsUtility::LineTraceSingleByPalTraceType(const UObject* WorldConte
     return false;
 }
 
+bool UPalPhysicsUtility::CapsuleTraceSingleByPalTraceType(const UObject* WorldContextObject, FVector Start, FVector End, float Radius, float HalfHeight, EPalTraceTypeQuery PalTraceType, bool bTraceComplex, bool bReturnPhysicalMaterial, bool bReturnTraceIndex, FHitResult& HitResult, TEnumAsByte<EDrawDebugTrace::Type> DrawDebugType, FLinearColor TraceColor, FLinearColor TraceHitColor, float DrawTime) {
+    return false;
+}
+
 

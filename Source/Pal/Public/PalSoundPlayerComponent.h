@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "EPalAkComponentTickPolicy.h"
 #include "PalSoundPlayerComponent.generated.h"
 
 class UPalSoundSlot;
@@ -14,6 +15,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftClassPtr<UPalSoundSlot> PalSoundSlotClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalAkComponentTickPolicy AkComponentTickPolicy;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnGetAkOwnerComponent OnGetAkOwnerComponent;

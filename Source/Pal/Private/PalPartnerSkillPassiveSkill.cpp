@@ -5,6 +5,7 @@ UPalPartnerSkillPassiveSkill::UPalPartnerSkillPassiveSkill() {
     this->bIsRestricted = false;
     this->bRequireWorkerWorkingPassiveSkill = false;
     this->bIsWorking = false;
+    this->bIsBoundToTimeChange = false;
     this->CurrentRank = 0;
 }
 
@@ -24,6 +25,9 @@ void UPalPartnerSkillPassiveSkill::OnUpdateCurrentGround(TEnumAsByte<EPhysicalSu
 }
 
 void UPalPartnerSkillPassiveSkill::OnUpdateBaseCampId(const FGuid& BaseCampId) {
+}
+
+void UPalPartnerSkillPassiveSkill::OnStartPassiveSkillEffect(EPalPassiveSkillEffectType EffectType, float Value) {
 }
 
 void UPalPartnerSkillPassiveSkill::OnRideInactivated() {
@@ -50,10 +54,25 @@ void UPalPartnerSkillPassiveSkill::OnInactivatedAsOtomoHolder() {
 void UPalPartnerSkillPassiveSkill::OnInactivatedAsOtomo() {
 }
 
+void UPalPartnerSkillPassiveSkill::OnGetOffRide(AActor* RideActor) {
+}
+
+void UPalPartnerSkillPassiveSkill::OnEndPassiveSkillEffect(EPalPassiveSkillEffectType EffectType) {
+}
+
+void UPalPartnerSkillPassiveSkill::OnChangeSprint(UPalCharacterMovementComponent* Component, bool IsInSprint) {
+}
+
+void UPalPartnerSkillPassiveSkill::OnChangeOtomoActive(APalCharacter* Otomo, bool IsActive) {
+}
+
 void UPalPartnerSkillPassiveSkill::OnChangeDisablePassiveSkill(bool isDisable, bool IsAllReset) {
 }
 
 void UPalPartnerSkillPassiveSkill::OnChangeDayTime() {
+}
+
+void UPalPartnerSkillPassiveSkill::OnChangeDashSwim(UPalCharacterMovementComponent* Component, bool IsInDashSwim) {
 }
 
 void UPalPartnerSkillPassiveSkill::OnChangeBattleMode(bool bIsBattleMode) {

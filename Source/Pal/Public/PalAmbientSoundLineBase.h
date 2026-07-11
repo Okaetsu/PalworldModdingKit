@@ -3,8 +3,8 @@
 #include "GameFramework/Actor.h"
 #include "PalAmbientSoundLineBase.generated.h"
 
-class UAkComponent;
 class UBoxComponent;
+class UPalAkComponent;
 class UPalAmbientSoundLineObject;
 
 UCLASS(Blueprintable)
@@ -12,7 +12,7 @@ class PAL_API APalAmbientSoundLineBase : public AActor {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
-    UAkComponent* AkComponent;
+    UPalAkComponent* AkComponent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UBoxComponent* ActivateTrigger;

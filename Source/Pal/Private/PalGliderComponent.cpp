@@ -21,6 +21,9 @@ void UPalGliderComponent::StartGliding_ToServer_Implementation() {
 void UPalGliderComponent::StartGliding() {
 }
 
+void UPalGliderComponent::SetGliderVisibility(bool bIsShow, const bool bForceSet) {
+}
+
 void UPalGliderComponent::SetCurrentGliderSoftClass_ToServer_Implementation(const TSoftClassPtr<APalGliderObject>& gliderSoftClass) {
 }
 
@@ -87,8 +90,20 @@ bool UPalGliderComponent::IsEquipGlider() const {
     return false;
 }
 
+bool UPalGliderComponent::IsAlwaysVisibleJetpack() const {
+    return false;
+}
+
 bool UPalGliderComponent::HasGliderPal() const {
     return false;
+}
+
+bool UPalGliderComponent::GetCurrentGliderVisibility() const {
+    return false;
+}
+
+APalGliderObject* UPalGliderComponent::GetCurrentGliderObject() const {
+    return NULL;
 }
 
 TArray<FName> UPalGliderComponent::GetAllGliderPalNames() const {

@@ -53,5 +53,6 @@ enum class EPalBuildObjectTypeForUIDisplay : uint8 {
     Milling_Crusher,
     Ornament,
     Other,
+    Ancient,
 };
 

@@ -4,6 +4,9 @@
 UPalWorkAssign_LevelObject::UPalWorkAssign_LevelObject() {
 }
 
+void UPalWorkAssign_LevelObject::OnTargetMapObjectDestroyed(UPalMapObjectModel* DestroyedModel) {
+}
+
 void UPalWorkAssign_LevelObject::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     

@@ -9,6 +9,7 @@ APalSupplyDropActor::APalSupplyDropActor(const FObjectInitializer& ObjectInitial
     this->KnockBackMaxPower = 1000;
     this->LandHitDamageRate = 0.50f;
     this->SupplyType = EPalSupplyType::None;
+    this->CurrentTime = 0.00f;
 }
 
 void APalSupplyDropActor::OnReplicateMapObjectModel(UPalMapObjectModel* MapObjectModel) {
@@ -19,6 +20,10 @@ void APalSupplyDropActor::OnRep_MapObjectID() {
 
 
 void APalSupplyDropActor::OnCreateMapObject(APalMapObject* MapObject) {
+}
+
+float APalSupplyDropActor::GetRemainingTimeToLanding() const {
+    return 0.0f;
 }
 
 void APalSupplyDropActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

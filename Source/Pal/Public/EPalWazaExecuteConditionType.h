@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EPalWazaExecuteConditionType : uint8 {
     None,
     HPBelow,
+    GroundHeightDiff,
 };
 

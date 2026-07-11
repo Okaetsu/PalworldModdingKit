@@ -8,6 +8,8 @@
 #include "PalSelectedItemPlayerInventoryDelegateDelegate.h"
 #include "PalHUDDispatchParameter_SelectItemInventory.generated.h"
 
+class APalCharacter;
+
 UCLASS(Blueprintable)
 class UPalHUDDispatchParameter_SelectItemInventory : public UPalHUDDispatchParameterBase {
     GENERATED_BODY()
@@ -28,11 +30,14 @@ public:
     bool shouldSelectNum;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    APalCharacter* TargetCharacter;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalSelectedItemPlayerInventoryDelegate Callback;
     
     UPalHUDDispatchParameter_SelectItemInventory();
     UFUNCTION(BlueprintCallable)
-    void InvokeCallback(const FPalItemSlotId& itemSlotId, const int32 itemNum);
+    void InvokeCallback(const FPalItemSlotId& ItemSlotId, const int64 itemNum);
     
 };
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EPalInteractiveObjectIndicatorType.h"
+#include "PalDamageResult.h"
+#include "PalDeadInfo.h"
 #include "PalInflictDamageNotifyInterface.h"
 #include "PalInteractiveObjectIndicatorInterface.h"
 #include "PalItemSlotId.h"
@@ -10,6 +12,7 @@
 class AActor;
 class IPalInteractiveObjectComponentInterface;
 class UPalInteractiveObjectComponentInterface;
+class UAkAudioEvent;
 class UMaterialInterface;
 class UPalCharacterLiftupObjectComponent;
 class UPalHUDDispatchParameterBase;
@@ -19,11 +22,23 @@ UCLASS(Blueprintable)
 class PAL_API APalMonsterCharacter : public APalNPC, public IPalInteractiveObjectIndicatorInterface, public IPalInflictDamageNotifyInterface {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMonsterInflictDamageDelegate, const FPalDamageResult&, DamageResult);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMonsterDefeatCharacterDelegate, const FPalDeadInfo&, DeadInfo);
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TScriptInterface<IPalInteractiveObjectComponentInterface> InteractiveObj;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
     UPalCharacterLiftupObjectComponent* LiftupObjectComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* RideMoveAkEvent;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnMonsterInflictDamageDelegate OnInflictDamageDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnMonsterDefeatCharacterDelegate OnDefeatCharacterDelegate;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -33,8 +48,8 @@ public:
     APalMonsterCharacter(const FObjectInitializer& ObjectInitializer);
 
 private:
-    UFUNCTION(BlueprintCallable)
-    void SelectedFeedingItem(const FPalItemSlotId& itemSlotId, const int32 Num);
+    UFUNCTION()
+    void SelectedFeedingItem(const FPalItemSlotId& ItemSlotId, const int64 Num);
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -53,6 +68,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     USkeletalMeshComponent* GetRideNPCMesh() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UAkAudioEvent* GetRideMoveAkEvent() const;
     
 
     // Fix for true pure virtual functions not being implemented

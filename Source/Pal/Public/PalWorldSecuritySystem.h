@@ -14,6 +14,7 @@ class APalTriggerAreaBase;
 class UPalIndividualCharacterHandle;
 class UPalWorldSecurityCrimeInstance;
 class UPalWorldSecurityLawBase;
+class UPalWorldSecurityPoliceSpawner;
 
 UCLASS(Blueprintable, Config=Game)
 class PAL_API UPalWorldSecuritySystem : public UPalWorldSubsystem, public IPalSystemInitializeInterface {
@@ -22,6 +23,10 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FReportCriminalDelegate, UPalIndividualCharacterHandle*, CriminalHandle, FPalWorldSecurityWantedStateInfo, WantedStateInfo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReleaseWantedDelegate, UPalIndividualCharacterHandle*, CriminalHandle);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRegisterdAreaTriggerDelegate, APalTriggerAreaBase*, TriggerBase);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnWantedPlayerCountChanged);
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnWantedPlayerCountChanged OnWantedPlayerCountChangedDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FReportCriminalDelegate OnReportCriminalDelegate;
@@ -57,6 +62,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FGuid, UPalIndividualCharacterHandle*> CriminalMap;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FPalInstanceID, UPalWorldSecurityPoliceSpawner*> PoliceSpanwerMap;
+    
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSubclassOf<UPalWorldSecurityLawBase>> LawArray;
@@ -71,6 +79,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void ReleaseCrime(UPalIndividualCharacterHandle* CriminalHandle, const FGuid& CrimeInstanceId);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UPalWorldSecurityPoliceSpawner* GetPoliceSpawner(const FPalInstanceID& CriminalIndividualId);
     
     UFUNCTION(BlueprintCallable)
     APalTriggerAreaBase* GetNearestTriggerArea(FVector Location);

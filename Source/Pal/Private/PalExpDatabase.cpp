@@ -4,6 +4,7 @@ UPalExpDatabase::UPalExpDatabase() {
     this->ExpDataTable = NULL;
     this->PaldexBonusExpDataTable = NULL;
     this->WorldMapAreaBonusExpTableReferenceNumDataTable = NULL;
+    this->ExpDataTable_V1 = NULL;
 }
 
 int64 UPalExpDatabase::GetTotalExp(int32 Level, bool IsPlayer) {
@@ -15,6 +16,10 @@ int64 UPalExpDatabase::GetNextExp(int32 Level, bool IsPlayer) {
 }
 
 int32 UPalExpDatabase::GetFindAreaBonusExpTableReferenceNum(int32 CompletedAreaNum) const {
+    return 0;
+}
+
+int64 UPalExpDatabase::GetDropExpBase(int32 Level) {
     return 0;
 }
 

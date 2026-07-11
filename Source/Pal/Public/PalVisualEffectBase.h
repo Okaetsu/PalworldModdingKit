@@ -53,6 +53,9 @@ public:
     void TerminatingTickVisualEffect(float DeltaTime);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void RefreshVisualEffect();
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnEndVisualEffect();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

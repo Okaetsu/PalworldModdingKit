@@ -27,6 +27,10 @@ void UPalUIDimensionPalStorage::RegisterDPSLocalContainerId(const FPalContainerI
 
 
 
+bool UPalUIDimensionPalStorage::IsPrivateLock() const {
+    return false;
+}
+
 
 
 

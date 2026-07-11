@@ -6,6 +6,7 @@
 #include "EPalArenaRank.h"
 #include "EPalPassiveSkillEffectType.h"
 #include "PalArenaRule.h"
+#include "PalArenaSequencerInitializeParameter.h"
 #include "PalArenaSoloClearItemInfo.h"
 #include "PalArenaWorldRankingRecord.h"
 #include "PalWorldSubsystem.h"
@@ -20,6 +21,7 @@ class UDataLayerAsset;
 class UDataTable;
 class UPalArenaInstanceModel;
 class UPalArenaSequencer;
+class UPalArenaStartReadinessWaiter;
 class UPalIndividualCharacterHandle;
 
 UCLASS(Blueprintable)
@@ -28,12 +30,16 @@ class PAL_API UPalArenaWorldSubsystem : public UPalWorldSubsystem {
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPalOnLocalPlayerRankingInfoNotified, FPalArenaWorldRankingRecord, RankingInfo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUIRequestRepliedDelegate, EPalArenaMenuActionType, ActionType);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnArenaTopMenuCloseDelegate);
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnUIRequestRepliedDelegate OnUIRequestRepliedDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalOnLocalPlayerRankingInfoNotified OnLocalPlayerRankingInfoNotified;
+    
+    UPROPERTY(BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnArenaTopMenuCloseDelegate OnArenaTopMenuCloseDelegate;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -85,9 +91,21 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGuid GroupGuid;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool ArenaTopMenuLive;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPalArenaStartReadinessWaiter* ArenaStartReadinessWaiter;
+    
 public:
     UPalArenaWorldSubsystem();
 
+    UFUNCTION(BlueprintCallable)
+    void ShowOverLimitWarning();
+    
+    UFUNCTION(BlueprintCallable)
+    void SetArenaTopMenuLive(bool IsLive);
+    
     UFUNCTION(BlueprintCallable)
     void RequestExitSpectate();
     
@@ -109,6 +127,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnChangeBattleEndTime_ServerInternal(FDateTime BattleEndTime);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnArenaStartReady(const FPalArenaSequencerInitializeParameter& InitParam);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)

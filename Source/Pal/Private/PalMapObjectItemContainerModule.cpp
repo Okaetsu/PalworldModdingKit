@@ -5,6 +5,8 @@ UPalMapObjectItemContainerModule::UPalMapObjectItemContainerModule() {
     this->TargetContainer = NULL;
     this->bDropItemAtDisposed = true;
     this->UsageType = EPalContainerUsageType::None;
+    this->DisplayContainerSlotNumDefault = -1;
+    this->bAutoSort = false;
 }
 
 void UPalMapObjectItemContainerModule::UnbindUpdateContents(UPalMapObjectItemContainerModule::FUpdateContentsDelegate Delegate) {
@@ -14,7 +16,7 @@ bool UPalMapObjectItemContainerModule::TryGetContainer(UPalItemContainer*& OutCo
     return false;
 }
 
-void UPalMapObjectItemContainerModule::RequestSortContainer_ServerInternal() {
+void UPalMapObjectItemContainerModule::RequestSortContainer_ServerInternal(const int32 RequestPlayerId) {
 }
 
 void UPalMapObjectItemContainerModule::RequestSortContainer() {
@@ -45,6 +47,7 @@ void UPalMapObjectItemContainerModule::GetLifetimeReplicatedProps(TArray<FLifeti
     DOREPLIFETIME(UPalMapObjectItemContainerModule, SlotAttributeIndexes);
     DOREPLIFETIME(UPalMapObjectItemContainerModule, AllSlotAttribute);
     DOREPLIFETIME(UPalMapObjectItemContainerModule, UsageType);
+    DOREPLIFETIME(UPalMapObjectItemContainerModule, DisplayContainerSlotNumDefault);
 }
 
 

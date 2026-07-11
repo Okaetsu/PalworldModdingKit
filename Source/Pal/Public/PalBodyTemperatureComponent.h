@@ -39,6 +39,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FTimerHandle SlipDamageTimer;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FTimerHandle TemperatureDamageLogTimer;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_TemperatureInfo, meta=(AllowPrivateAccess=true))
     FPalTemperatureInfo TemperatureInfo;
     
@@ -81,6 +84,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnChangeHour();
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetTemperatureInfo(FPalTemperatureInfo& OutInfo) const;
+    
+private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void CallOnChangeTemperature(int32 Next);
     

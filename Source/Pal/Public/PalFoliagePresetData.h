@@ -35,6 +35,9 @@ public:
     EPalMapObjectDestroyFXType DestroyFXType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DestroyFXLocationRateByStaticMesh;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DistanceFromPlayerNotRespawn;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -42,6 +45,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 RetryRespawnIntervalRealMinutes;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float AutoDecayProximityDistance;
     
     PAL_API FPalFoliagePresetData();
 };

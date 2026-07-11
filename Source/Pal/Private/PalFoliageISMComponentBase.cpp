@@ -6,6 +6,9 @@ UPalFoliageISMComponentBase::UPalFoliageISMComponentBase(const FObjectInitialize
 void UPalFoliageISMComponentBase::SpawnInstance(UPalFoliageInstance* Instance) {
 }
 
+void UPalFoliageISMComponentBase::RegisterInstances(const TMap<FPalFoliageInstanceId, UPalFoliageInstance*>& Instances) {
+}
+
 void UPalFoliageISMComponentBase::OnRemoveInstance(const FName FoliageTypeId, UPalFoliageInstance* Instance) {
 }
 

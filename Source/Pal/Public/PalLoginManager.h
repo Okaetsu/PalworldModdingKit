@@ -20,6 +20,11 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnLoginCompleted(const UPocketpairUserInfo* UserInfo, bool bSuccess, const FString& ErrorStr);
     
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnConfirmAlert_NetworkRequired(bool bSuccess);
+    
+public:
     UFUNCTION(BlueprintCallable)
     void OnConfirmAlert_Login(bool bSuccess);
     

@@ -12,5 +12,6 @@ enum class EPalPassiveSkillEffectTargetType : uint8 {
     ToBuildObject,
     ToOtomo,
     ToTrainerAndOtomo,
+    ToActiveOtomo,
 };
 

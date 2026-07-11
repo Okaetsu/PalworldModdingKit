@@ -16,6 +16,7 @@ class UPalMasterDataTableAccess_BuildObjectIconData;
 class UPalMasterDataTableAccess_CharacterTeamMission;
 class UPalMasterDataTableAccess_CharacterTeamMissionChallengeCondition;
 class UPalMasterDataTableAccess_CharacterUpgradeData;
+class UPalMasterDataTableAccess_CrimeMasterData;
 class UPalMasterDataTableAccess_DungeonEnemySpawnerData;
 class UPalMasterDataTableAccess_DungeonItemLotteryData;
 class UPalMasterDataTableAccess_DungeonLevelData;
@@ -30,6 +31,8 @@ class UPalMasterDataTableAccess_FishShadowData;
 class UPalMasterDataTableAccess_FishingSpotLotteryData;
 class UPalMasterDataTableAccess_FishingSpotLotteryNameData;
 class UPalMasterDataTableAccess_ItemLotteryData;
+class UPalMasterDataTableAccess_ItemPickupData;
+class UPalMasterDataTableAccess_ItemProductData;
 class UPalMasterDataTableAccess_ItemRecipe;
 class UPalMasterDataTableAccess_ItemShop;
 class UPalMasterDataTableAccess_ItemShopLottery;
@@ -41,6 +44,7 @@ class UPalMasterDataTableAccess_NPCEmoteLotteryData;
 class UPalMasterDataTableAccess_OperatingTablePassiveSkillData;
 class UPalMasterDataTableAccess_PalRandomizerData;
 class UPalMasterDataTableAccess_PalShop;
+class UPalMasterDataTableAccess_PartnerSkillParameterData;
 class UPalMasterDataTableAccess_PlayerStatusRankData;
 class UPalMasterDataTableAccess_SpawnerPlacementData;
 class UPalMasterDataTableAccess_UIInputActionData;
@@ -83,6 +87,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UDataTable* GetPlayerStatusRankDataTable(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UPalMasterDataTableAccess_PartnerSkillParameterData* GetPartnerSkillParameterDataTableAccess(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UDataTable* GetPartnerSkillParameterDataTable(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UPalMasterDataTableAccess_PalShop* GetPalShopDataTableAccess(const UObject* WorldContextObject);
@@ -155,6 +165,18 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UDataTable* GetItemRecipeDataTable(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UPalMasterDataTableAccess_ItemProductData* GetItemProductDataTableAccess(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UDataTable* GetItemProductDataTable(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UPalMasterDataTableAccess_ItemPickupData* GetItemPickupDataTableAccess(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UDataTable* GetItemPickupDataTable(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UPalMasterDataTableAccess_ItemLotteryData* GetItemLotteryDataTableAccess(const UObject* WorldContextObject);
@@ -248,6 +270,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UDataTable* GetDungeonEnemySpawnerDataTable(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UPalMasterDataTableAccess_CrimeMasterData* GetCrimeDataTableAccess(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static UDataTable* GetCrimeDataTable(const UObject* WorldContextObject);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UPalMasterDataTableAccess_CharacterUpgradeData* GetCharacterUpgradeDataTableAccess(const UObject* WorldContextObject);

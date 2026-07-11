@@ -27,6 +27,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalSpawnerOneTribeInfo> PalList;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bHasWorldTreeAura;
+    
     PAL_API FPalSpawnerGroupInfo();
 };
 

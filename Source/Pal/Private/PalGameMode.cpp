@@ -29,6 +29,10 @@ APlayerStart* APalGameMode::FindPlayerStartWithTag(const FName& Tag) {
     return NULL;
 }
 
+APlayerStart* APalGameMode::FindPlayerStartDebugInitialStart() {
+    return NULL;
+}
+
 void APalGameMode::CreateSession(const FString& Address) {
 }
 

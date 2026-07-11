@@ -17,5 +17,15 @@ FPalLoggedinPlayerSaveDataRecordData::FPalLoggedinPlayerSaveDataRecordData() {
     this->CampConqueredCount = 0;
     this->FoundTreasureCount = 0;
     this->bFirstFishingComplete = false;
+    this->BossDefeatExpBonusTableIndex = 0;
+    this->RelicBonusExpTableIndex = 0;
+    this->NoteBonusExpTableIndex = 0;
+    this->ItemPIckupBonusExpTableIndex = 0;
+    this->FastTravelBonusExpTableIndex = 0;
+    this->bCaptureCompletionRelicFixupDone = false;
+    this->MutationCount = 0;
+    this->AwakeningCount = 0;
+    this->bIsGameCleared = false;
+    this->bFieldBossDefeatFlagResetDone = false;
 }
 

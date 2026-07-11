@@ -6,7 +6,8 @@ UENUM(BlueprintType)
 enum class EPalDungeonLevelVersion : uint8 {
     BeforeVersionWasAdded,
     ConvertDungeonLevelsToNewer,
+    MoveDungeonLevels_1_0,
     VersionPlusOne,
-    LatestVersion = ConvertDungeonLevelsToNewer,
+    LatestVersion = MoveDungeonLevels_1_0,
 };
 

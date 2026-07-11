@@ -4,6 +4,7 @@ UPalMapObjectItemSimpleProductParameterComponent::UPalMapObjectItemSimpleProduct
     this->SlotNum = 1;
     this->WorkSpeedAdditionalRate = 1.00f;
     this->bIsGainExp = true;
+    this->bShouldSkipIsWorkableForBuild = false;
 }
 
 

@@ -7,9 +7,14 @@ UPalRichTextBlockBase::UPalRichTextBlockBase() {
     this->IgnoreFontSizeSetting = false;
     this->MaxWidth = 100;
     this->JustificationVerticalCenter = false;
+    this->ScrollStyle_Verticle = NULL;
+    this->bIsScrollingEnabled_Verticle = false;
 }
 
 void UPalRichTextBlockBase::SetText_GDKInternal(bool IsSuccess, const FString& OutString) {
+}
+
+void UPalRichTextBlockBase::SetScrollingEnabled_Verticle(bool bInIsScrollingEnabled) {
 }
 
 void UPalRichTextBlockBase::OnUISettingChanged(const FPalOptionUISettings& PreSetting, const FPalOptionUISettings& NewSetting) {

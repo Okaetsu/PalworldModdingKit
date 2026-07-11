@@ -2,6 +2,8 @@
 #include "Net/UnrealNetwork.h"
 
 UPalMapObjectGenerateEnergyModel::UPalMapObjectGenerateEnergyModel() {
+    this->bOverHeatCoolingInProgress = false;
+    this->bHasOperationalLoadModule = false;
     this->EnergyType = EPalEnergyType::None;
     this->GenerateEnergyRateByWorker = 1.00f;
     this->MaxEnergyStorage = 0.00f;
@@ -16,7 +18,25 @@ void UPalMapObjectGenerateEnergyModel::OnUpdateAssignedCharacter_ServerInternal(
 void UPalMapObjectGenerateEnergyModel::OnTickCharacterWorkWait_ServerInternal(UPalWorkOnlyJoin* Work) {
 }
 
+void UPalMapObjectGenerateEnergyModel::OnStartOverHeatCoolingWork_ServerInternal(UPalWorkBase* Work, const FPalInstanceID& IndividualId) {
+}
+
 void UPalMapObjectGenerateEnergyModel::OnRep_StoredEnergyAmount() {
+}
+
+void UPalMapObjectGenerateEnergyModel::OnEndOverHeatCoolingWork_ServerInternal(UPalWorkBase* Work, const FPalInstanceID& IndividualId) {
+}
+
+void UPalMapObjectGenerateEnergyModel::OnDisposeOverHeatCoolingWork_ServerInternal(UPalWorkBase* Work) {
+}
+
+void UPalMapObjectGenerateEnergyModel::HandleOverloadStarted() {
+}
+
+void UPalMapObjectGenerateEnergyModel::HandleOverloadEnded() {
+}
+
+void UPalMapObjectGenerateEnergyModel::HandleLoadReductionRequired(float LoadRatio) {
 }
 
 float UPalMapObjectGenerateEnergyModel::GetStoredEnergyAmount() const {
@@ -34,6 +54,7 @@ EPalEnergyType UPalMapObjectGenerateEnergyModel::GetEnergyType() const {
 void UPalMapObjectGenerateEnergyModel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
+    DOREPLIFETIME(UPalMapObjectGenerateEnergyModel, bHasOperationalLoadModule);
     DOREPLIFETIME(UPalMapObjectGenerateEnergyModel, EnergyType);
     DOREPLIFETIME(UPalMapObjectGenerateEnergyModel, GenerateEnergyRateByWorker);
     DOREPLIFETIME(UPalMapObjectGenerateEnergyModel, MaxEnergyStorage);

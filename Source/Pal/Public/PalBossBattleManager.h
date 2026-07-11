@@ -8,23 +8,28 @@
 #include "EPalBossBattleDifficulty.h"
 #include "EPalBossType.h"
 #include "PalBossBattleStaticInfo.h"
+#include "PalGameWorldDataSaveInterface.h"
 #include "PalWorldSubsystem.h"
 #include "Templates/SubclassOf.h"
 #include "PalBossBattleManager.generated.h"
 
+class AActor;
 class APalBossTower;
+class APalCharacter;
+class APalCutsceneActor;
 class APalPlayerCharacter;
 class UPalBossBattleInstanceModel;
 class UPalBossBattleSequencer;
+class UPalEndingCutsceneProcess;
 class UPalIndividualCharacterHandle;
 
 UCLASS(Blueprintable)
-class PAL_API UPalBossBattleManager : public UPalWorldSubsystem {
+class PAL_API UPalBossBattleManager : public UPalWorldSubsystem, public IPalGameWorldDataSaveInterface {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnLocalPlayerBossBattleSuccessDelegate, APalPlayerCharacter*, LocalJoinedPlayer, EPalBossType, BossType);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCombatStartUIDelegate, APalBossTower*, BossTower);
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCombatEndUIActionDelegate, EPalBossBattleCombatResult, CombatResult);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCombatEndUIActionDelegate, EPalBossBattleCombatResult, CombatResult, bool, bIsSkipUI);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnLocalPlayerBossBattleSuccessDelegate OnLocalBossBattleSuccessDelegate;
@@ -36,9 +41,6 @@ public:
     FOnCombatEndUIActionDelegate OnCombatEndUIAction;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 MAX_TIME_LIMIT;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PlayerRespawnTimeLimit;
     
@@ -55,7 +57,16 @@ private:
     TMap<EPalBossType, FPalBossBattleStaticInfo> BossInfoMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<APalCutsceneActor> EndingCutsceneClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPalEndingCutsceneProcess* EndingCutsceneProcess;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalBossType HardUnlockTiggerBoss;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RecommendLevelPlus;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<EPalBossType, UPalBossBattleInstanceModel*> InstanceModelMap;
@@ -65,9 +76,6 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGuid GroupGuid;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    EPalBossType DisableSkyBossType_LocalPlayer;
     
 public:
     UPalBossBattleManager();
@@ -80,11 +88,17 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable)
+    void OnBossCharacterSpawned(APalCharacter* SpawnedCharacter);
+    
+    UFUNCTION(BlueprintCallable)
     void OnBossBattleCombatStart(EPalBossType BossType);
     
 public:
     UFUNCTION(BlueprintCallable)
     void LoadAsyncBossBattle_ServerInternal(EPalBossType BossType);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsFieldBossType(EPalBossType BossType) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FTransform GetTopWarpPointTransform(EPalBossType BossType) const;
@@ -99,30 +113,39 @@ public:
     int32 GetMaxJoinablePlayerNum();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    UPalBossBattleSequencer* GetLocalBossBattleSequencer() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetIsServer();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalBossType GetHardUnlockTiggerBoss() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetBossHPMultiPlayerRate(int32 JoinedPlayerNum);
     
-    UFUNCTION(BlueprintCallable)
-    FString GetBossAchievementIndex(EPalBossType BossType) const;
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetBossDefeatTechPoints(EPalBossType BossType) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    float GetBattleTimeLimit() const;
+    UPalBossBattleSequencer* GetBossBattleSequencerByActor(const AActor* Actor) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetBossBattleRecommendLevelPlus();
+    
+    UFUNCTION(BlueprintCallable)
+    FString GetBossAchievementIndex(EPalBossType BossType) const;
     
 private:
     UFUNCTION(BlueprintCallable)
     void EmptyInstanceCleanup();
     
 public:
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
-    void DisableSkyCreator(bool Disable);
-    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanStartBossBattle(EPalBossType BossType);
     
     UFUNCTION(BlueprintCallable)
-    bool CanEntryHard(const APalPlayerCharacter* Player) const;
+    bool CanEntryHard(EPalBossType BossType, const APalPlayerCharacter* Player) const;
     
     UFUNCTION(BlueprintCallable)
     void BossBattleExit(EPalBossType BossType, APalPlayerCharacter* ExitPlayer);
@@ -136,5 +159,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void AddGroupCharacter(UPalIndividualCharacterHandle* AddIndividualHandle);
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

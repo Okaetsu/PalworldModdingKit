@@ -5,8 +5,10 @@
 #include "PalNetworkNPCTalkRequestData.h"
 #include "PalFlowNode_NPCTalkBase.generated.h"
 
+class AActor;
 class APalCharacter;
 class UObject;
+class UPalNPCTalkFlowComponent;
 class UPalNPCTalkSystem;
 
 UCLASS(Abstract, Blueprintable)
@@ -26,6 +28,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TWeakObjectPtr<UObject> WeakWorldContextObject;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UPalNPCTalkFlowComponent> WeakTalkFlowComponent;
+    
 public:
     UPalFlowNode_NPCTalkBase();
 
@@ -38,7 +43,10 @@ public:
     FPalNetworkNPCTalkRequestData MakeNetworkRequestData() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    APalCharacter* GetTalker() const;
+    APalCharacter* GetTalkerAsPalCharacter() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    AActor* GetTalker() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalNPCTalkSystem* GetNPCTalkSystem() const;

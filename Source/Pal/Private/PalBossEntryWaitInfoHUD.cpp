@@ -3,9 +3,10 @@
 UPalBossEntryWaitInfoHUD::UPalBossEntryWaitInfoHUD() {
     this->EnableCountDown = false;
     this->BossTower = NULL;
+    this->TimeLimitDate = 0.00f;
 }
 
-void UPalBossEntryWaitInfoHUD::UpdateWaitInfo(bool bIsCountDown, FDateTime TimeLimit) {
+void UPalBossEntryWaitInfoHUD::UpdateWaitInfo(bool bIsCountDown, float TimeLimit) {
 }
 
 

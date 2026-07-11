@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalGuildRole.h"
 #include "PalGuildPlayerInfo.h"
 #include "PalUIGuildMemberDisplayInfo.h"
 #include "PalUserWidgetOverlayUI.h"
@@ -16,6 +17,9 @@ public:
 protected:
     UFUNCTION(BlueprintCallable)
     void RequestExitGuild();
+    
+    UFUNCTION(BlueprintCallable)
+    void RequestChangeRole(const FGuid& PlayerUId, EPalGuildRole NewRole);
     
     UFUNCTION(BlueprintCallable)
     void RequestChangeGuildName(const FString& NewGuildName);
@@ -48,8 +52,16 @@ protected:
     bool IsAdminLocalPlayer();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetPlayerInfo(const FGuid& PlayerUId, FPalGuildPlayerInfo& OutInfo) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalGroupGuildBase* GetMyGuild() const;
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static FText GetJoinGuildRequestConfirmMessage();
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetGuildNameModifierPlayerUId(FGuid& OutAdminPlayerUId);
     
@@ -62,6 +74,11 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetGuildMemberInfo(TMap<FGuid, FPalUIGuildMemberDisplayInfo>& OutDisplayInfoMap) const;
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static FText GetExitGuildConfirmMessage();
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetAdminPlayerUId(FGuid& OutAdminPlayerUId);
     

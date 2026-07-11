@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "ReplicationGraph.h"
+#include "PalAlwaysRelevantActorInfo.h"
 #include "PalReplicationGraphNode_AlwaysRelevant_ForConnection.generated.h"
 
 class AActor;
@@ -13,8 +14,8 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     AActor* LastPawn;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FAlwaysRelevantActorInfo> PastRelevantActors;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalAlwaysRelevantActorInfo> PastRelevantActors;
     
 public:
     UPalReplicationGraphNode_AlwaysRelevant_ForConnection();

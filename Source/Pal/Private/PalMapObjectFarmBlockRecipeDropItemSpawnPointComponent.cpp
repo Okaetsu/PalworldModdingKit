@@ -1,0 +1,6 @@
+#include "PalMapObjectFarmBlockRecipeDropItemSpawnPointComponent.h"
+
+UPalMapObjectFarmBlockRecipeDropItemSpawnPointComponent::UPalMapObjectFarmBlockRecipeDropItemSpawnPointComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
+
+

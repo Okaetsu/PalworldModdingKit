@@ -19,6 +19,18 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalAudioBus, FPalAudioFadeParameter> BussFadeMap;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<EPalAudioBus> LoadMuteBuses;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverrideFadeInSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverrideFadeOutSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float LoadMuteRecoverDelaySeconds;
+    
 public:
     UPalAudioSettingSystem();
 
@@ -27,6 +39,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void Tick_BP(float DeltaTime);
+    
+    UFUNCTION(BlueprintCallable)
+    void StartLoadMuteFade(EPalAudioFadeType FadeType, float DurationSeconds, bool bImmediately);
+    
+    UFUNCTION(BlueprintCallable)
+    void StartAudioFadeBuses(const TArray<EPalAudioBus>& AudioBuses, EPalAudioFadeType FadeType, float DurationSeconds, bool bImmediately);
     
     UFUNCTION(BlueprintCallable)
     void StartAudioFade(EPalAudioBus AudioBus, EPalAudioFadeType FadeType, bool bImmediately);

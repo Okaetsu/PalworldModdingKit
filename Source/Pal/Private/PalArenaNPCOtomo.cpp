@@ -6,5 +6,8 @@ FPalArenaNPCOtomo::FPalArenaNPCOtomo() {
     this->Rank = 0;
     this->FriendshipRank = 0;
     this->isAlwaysPicked = false;
+    this->EnemyMaxHPRate = 0.00f;
+    this->EnemyReceiveDamageRate = 0.00f;
+    this->EnemyInflictDamageRate = 0.00f;
 }
 

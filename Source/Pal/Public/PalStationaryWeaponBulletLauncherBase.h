@@ -25,6 +25,13 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_LauncherRotator, meta=(AllowPrivateAccess=true))
     FRotator LauncherRotator;
     
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_WeaponActorTickRequired, meta=(AllowPrivateAccess=true))
+    bool bWeaponActorTickRequired;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_WeaponActorTickRequired, meta=(AllowPrivateAccess=true))
+    bool bWeaponActorTickRequiredByTrigger;
+    
 public:
     APalStationaryWeaponBulletLauncherBase(const FObjectInitializer& ObjectInitializer);
 
@@ -35,7 +42,13 @@ protected:
     FRotator RotateLauncherCalculatePostProcess(const FRotator& InRotator);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_WeaponActorTickRequired();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_LauncherRotator();
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    bool IsWeaponActorTickRequired() const;
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -52,6 +65,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetAttackableAnglePitch() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void ApplyWeaponActorTickRequired();
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

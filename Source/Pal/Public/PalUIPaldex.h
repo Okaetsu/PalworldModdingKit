@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "PalUIPaldexFilterInfo.h"
 #include "PalUIPaldex_DisplayInfo.h"
 #include "PalUserWidgetOverlayUI.h"
 #include "PalUIPaldex.generated.h"
@@ -15,9 +16,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalUIPaldex_DisplayInfo> displayInfoArray;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> HideFilteringCharacterIdArray;
+    
 public:
     UPalUIPaldex();
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TArray<FPalUIPaldex_DisplayInfo> GetFilteredDisplayInfoArray(const FPalUIPaldexFilterInfo& FilterInfo) const;
+    
     UFUNCTION(BlueprintCallable)
     void CreateDisplayInfo();
     

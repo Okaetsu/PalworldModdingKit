@@ -2,7 +2,9 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "EPalOtomoPalOrderType.h"
+#include "EPalPlayerPlatform.h"
 #include "PalContainerId.h"
 #include "PalInstanceID.h"
 #include "PalLoggedinPlayerSaveDataRecordData.h"
@@ -71,10 +73,22 @@ public:
     uint64 PsnAccountId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FPalOrderedQuestSaveData> OrderedQuestArray;
+    TArray<FPalOrderedQuestSaveData> OrderedQuestArray_DUPRECATED;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FName> CompletedQuestArray;
+    TArray<FName> CompletedQuestArray_DUPRECATED;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalOrderedQuestSaveData> OrderedQuestArray_FullRelease;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> CompletedQuestArray_FullRelease;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDateTime LastOnlineDateTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalPlayerPlatform PlayerPlatform;
     
     PAL_API FPalWorldPlayerSaveData();
 };

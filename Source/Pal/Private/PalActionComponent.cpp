@@ -3,6 +3,7 @@
 
 UPalActionComponent::UPalActionComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->CurrentAction = NULL;
+    this->EndedActionMovementModeHistoryMaxNum = 8;
 }
 
 UPalActionBase* UPalActionComponent::PlayActionParameter(FActionDynamicParameter Param, TSubclassOf<UPalActionBase> actionClass) {
@@ -68,6 +69,12 @@ UPalActionBase* UPalActionComponent::GetCurrentAction() const {
 
 TSubclassOf<AActor> UPalActionComponent::GetActionTool(EPalActionType ActionType, TSubclassOf<AActor> InDefaultClass) const {
     return NULL;
+}
+
+void UPalActionComponent::CancelQueuedWazaActions_ToServer_Implementation() {
+}
+
+void UPalActionComponent::CancelQueuedWazaActions_ToALL_Implementation() {
 }
 
 void UPalActionComponent::CancelAllAction_ToServer_Implementation(int32 ID) {

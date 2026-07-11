@@ -1,0 +1,6 @@
+#include "PalBaseCampPassiveEffect_SanityDecreaseSuppressor_Watchtower.h"
+
+UPalBaseCampPassiveEffect_SanityDecreaseSuppressor_Watchtower::UPalBaseCampPassiveEffect_SanityDecreaseSuppressor_Watchtower() {
+}
+
+

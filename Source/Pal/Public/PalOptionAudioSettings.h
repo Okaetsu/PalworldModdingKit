@@ -19,7 +19,10 @@ public:
     float PalVoice;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float HumanVoice;
+    float PlayerVoice;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float NPCVoice;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Ambient;
@@ -37,16 +40,7 @@ public:
     bool bEnableCraneGameSound;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bVoiceChatMuteMyself;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bVoiceChatMuteOthers;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float VoiceChatInputVolume;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float VoiceChatOutputVolume;
+    bool bEnableBaseCampPalWorkingSound;
     
     PAL_API FPalOptionAudioSettings();
 };

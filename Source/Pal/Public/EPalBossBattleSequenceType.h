@@ -5,6 +5,8 @@
 UENUM(BlueprintType)
 enum class EPalBossBattleSequenceType : uint8 {
     None,
+    PreEntry,
+    Ready,
     Opening,
     Combat,
     Ending,

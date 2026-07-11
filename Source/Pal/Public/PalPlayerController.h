@@ -10,9 +10,13 @@
 #include "ActionDynamicParameter.h"
 #include "DelegateTickFunction.h"
 #include "EPalGlobalStorageImportResult.h"
+#include "EPalGroupOperationResult.h"
 #include "EPalGuildJoinRequestConfirm.h"
 #include "EPalGuildJoinRequestResult.h"
+#include "EPalGuildPermission.h"
+#include "EPalGuildRole.h"
 #include "EPalLiftupRequestResult.h"
+#include "EPalLocalizeTextCategory.h"
 #include "EPalLogPriority.h"
 #include "EPalShooterFlagContainerPriority.h"
 #include "EPalStepAxisType.h"
@@ -26,6 +30,7 @@
 #include "PalGlobalPalStorageImportResultAdditionalData.h"
 #include "PalGlobalPalStorageSaveParameter.h"
 #include "PalGotStatusPoint.h"
+#include "PalGuildMarkerData.h"
 #include "PalInstanceID.h"
 #include "PalItemId.h"
 #include "PalItemSlotIdAndNum.h"
@@ -46,6 +51,7 @@ class APalOilRigCannonBase;
 class APalPlayerCharacter;
 class APalPlayerState;
 class APalSphereBodyBase;
+class APalWeaponBase;
 class APawn;
 class UCameraShakeBase;
 class UCurveFloat;
@@ -61,11 +67,13 @@ class UPalCutsceneComponent;
 class UPalDamageExplodeComponent;
 class UPalDiscordClient;
 class UPalDynamicWeaponItemDataBase;
+class UPalGuildDebugReplicator;
 class UPalIndividualCharacterHandle;
 class UPalKillLogFilteringWaiter;
 class UPalLoadoutSelectorComponent;
 class UPalLongPressObject;
 class UPalNPCTalkFlowComponent;
+class UPalOtomoAutoAssignComponent;
 class UPalPlayerDamageCamShakeRegulator;
 class UPalPlayerInputOneFlameCommandList;
 class UPalShooterComponent;
@@ -78,6 +86,7 @@ UCLASS(Blueprintable)
 class APalPlayerController : public ACommonPlayerController {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartSelectiongBulletDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnReleasedThrowPalButtonDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnReleasedSpawnPalButtonDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPressedThrowPalButtonDelegate);
@@ -86,12 +95,14 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnPressedMoveForwardDelegate, float, InputValue, bool, IsController);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPressedJumpDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPressConstructionMenuButtonDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnNPCTalkEndInServerDelegate, UPalNPCTalkFlowComponent*, TalkFlowComponent, const FName&, UniqueNPCID);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNotifyUnableToPlaySkillDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNotifyRideWallStopDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnMoveInputDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLongReleasedSpawnPalButtonDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLongPressedSpawnPalButtonDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInteractDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndSelectiongBulletDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCoopRequestDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCoopReleaseDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnAntiAirMissleAttackDelegate, FVector, AttackerLocation, bool, IsEnable, FGuid, AttackerID);
@@ -104,6 +115,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
     UPalCutsceneComponent* CutsceneComponent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, meta=(AllowPrivateAccess=true))
+    UPalOtomoAutoAssignComponent* OtomoAutoAssignComponent;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
@@ -124,6 +138,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnCoopReleaseDelegate OnCoopReleaseDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnCoopRequestDelegate OnCoopRequestDelegateForUI;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnInteractDelegate OnInteractDelegate;
@@ -167,6 +184,12 @@ private:
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnLongReleasedSpawnPalButtonDelegate OnLongReleasedSpawnPalButtonDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnStartSelectiongBulletDelegate OnStartSelectingBulletDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnEndSelectiongBulletDelegate OnEndSelectingBulletDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnPressedPartnerInstructionsButtonDelegate OnPressedPartnerInstructionsButtonDelegate;
@@ -236,6 +259,14 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UPalKillLogFilteringWaiter*> FilteringWaiterArray;
     
+public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnNPCTalkEndInServerDelegate OnNPCTalkEndInServerDelegate;
+    
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<AActor> CurrentTalkRelevantActor_Server;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FPalInstanceID, int32> ImportGPSDataContainerIndexMap;
     
@@ -258,6 +289,11 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPalDiscordClient* DiscordClient;
     
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPalGuildDebugReplicator* GuildDebugReplicator;
+    
+public:
     APalPlayerController(const FObjectInitializer& ObjectInitializer);
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -268,6 +304,9 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     bool TrySwitchOtomo();
+    
+    UFUNCTION(BlueprintCallable)
+    void TryExecuteDirectAttackOrder();
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -283,6 +322,9 @@ public:
     void StartStepCoolDownCoolTimer();
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void StartRollingCameraModifier();
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void StartFlyToServer();
     
@@ -312,10 +354,16 @@ public:
     void ShooterComponent_ReloadWeapon_ToServer(UPalShooterComponent* Shooter, int32 ID);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void ShooterComponent_PullCancel_ToServer(UPalShooterComponent* Shooter);
+    void ShooterComponent_PullCancel_ToServer(UPalShooterComponent* Shooter, int32 ID);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void ShooterComponent_NotifyBulletItemId_ToServer(UPalShooterComponent* Shooter, const APalWeaponBase* TargetWeapon, const FName& BulletItemId);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ShooterComponent_ChangeIsShooting_ToServer(UPalShooterComponent* Shooter, int32 ID, bool IsShooting, bool bCanShootOnRelease);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void ShooterComponent_ChangeIsJetpackShooting_ToServer(UPalShooterComponent* Shooter, int32 ID, bool IsShooting);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ShooterComponent_ChangeIsAltShooting_ToServer(UPalShooterComponent* Shooter, int32 ID, bool IsShooting, bool bCanShootOnRelease);
@@ -362,10 +410,22 @@ public:
     void SetDisableSetViewTargetFlag(FName flagName, bool isDisable);
     
     UFUNCTION(BlueprintCallable)
+    void SetDisableSelectingBulletFlag(FName flagName, bool isDisable);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetDisablePartnerInstructionsFlag(FName flagName, bool isDisable);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void SetDisableInputFlag_ToClient(FName flagName, bool bIsDisable);
+    
+    UFUNCTION(BlueprintCallable)
     void SetDisableInputFlag(FName flagName, bool isDisable);
     
     UFUNCTION(BlueprintCallable)
     void SetDisableCoopFlag(FName flagName, bool isDisable);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetDisableAimInputFlag(FName flagName, bool isDisable);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void SetCriticalCaptureFlagForSphere_ToServer(int32 PlayerId, APalSphereBodyBase* TargetSphere, bool bIsCritical);
@@ -390,17 +450,25 @@ private:
     void SetCameraRotatorToPlayerCharacter_ToServer(FRotator CameraRotator);
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void SetAutoRun(bool bEnable);
+    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void SendScreenLogToClient(const FString& Message, FLinearColor Color, float Duration, const FName& Key);
     
 private:
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void SendLog_ToClient(const EPalLogPriority Priority, const FText& Text, const FPalLogAdditionalData& AdditionalData);
+    void SendLog_ToClient(const EPalLogPriority Priority, EPalLocalizeTextCategory TextCategory, const FName TextId, const FPalLogAdditionalData& AdditionalData);
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void SendBuldingActiveFlag_ToServer(bool IsActive);
     
+private:
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void SendAlertDialog_ToClient(const FName TextId);
+    
+public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void SelfKillPlayer();
     
@@ -434,6 +502,9 @@ public:
     void RequestSortDimensionStorage_ToServer(const FPalCharacterContainerSortInfo& SortInfo);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestSetRolePermission_ToServer(EPalGuildRole TargetRole, EPalGuildPermission Permission, bool bEnable);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestSendAllDimensionStorage_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -441,6 +512,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestRestoreDimensionStorage_ToServer(int32 OriginalLockerDataIndex, int32 TargetRestorePalStorageRootPageIndex);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestRemoveGuildMarker_ToServer(const FGuid& MarkerID);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestOpenDimensionStorage_ToServer(const FGuid& LockerMapObjectId);
@@ -462,6 +536,9 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestImportGlobalPalStorageData_ToServer(const FPalGlobalPalStorageSaveParameter& ImportParameter, const int32 TargetSlotIndex, const FPalGlobalPalStorageImportOption& ImportOption);
     
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestGetUserInfoByPlayerUId_ToServer(FGuid InPlayerUId);
+    
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestFastTravel_ToServer(const FGuid& LocationId);
@@ -479,7 +556,13 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestEndNPCTalkFlow(UPalNPCTalkFlowComponent* TalkFlowComponent, const FGuid& Token, bool bIsCancel);
+    void RequestEndNPCTalkFlow(UPalNPCTalkFlowComponent* TalkFlowComponent, const FGuid& Token, bool bIsCancel, bool bResetCount);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestEnableGuildDebugReplicator_ToServer(const FGuid& GuildId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestDisableGuildDebugReplicator_ToServer(const FGuid& GuildId);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestDestroyOilrigCannon(APalOilRigCannonBase* Cannon);
@@ -491,10 +574,28 @@ public:
     void RequestDecreaseWeaponDurability_ToServer(FPalItemId ItemId, float DecreaseValue);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestDebugValidateResult_ToServer(const FGuid& GuildId, EPalGuildPermission Permission, const FGuid& TargetPlayerUId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestDebugReplicationCompare_ToServer(const FGuid& GuildId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestDebugOtherGuildInfo_ToServer(const FGuid& GuildId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestDebugGuildInfo_ToServer(const FGuid& GuildId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestCloseDimensionStorage_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestChangeRole_ToServer(const FGuid& TargetPlayerUId, EPalGuildRole NewRole);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeGuildName_ToServer(const FString& NewGuildName);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestChangeGuildMarker_ToServer(const FGuid& MarkerID, const FPalGuildMarkerData& NewMarker);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeDimensionStoragePage_ToServer(int32 NewPageNum);
@@ -507,6 +608,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestBanPlayerFromGuild_ToServer(const FGuid& TargetPlayerUId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestAddGuildMarker_ToServer(const FGuid& MarkerID, const FPalGuildMarkerData& NewMarker);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestAddDimensionStorageDataFixedDataIndex_ToServer(int32 TargetLockerDataIndex, int32 OriginalPalStorageDataSlotIndex);
@@ -545,6 +649,18 @@ public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void ReceiveFailedRequestGuildWithAlert_ToClient(const EPalGuildJoinRequestResult Result);
     
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void ReceiveDebugValidateResult_ToClient(bool bHasPermission, EPalGroupOperationResult Result);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void ReceiveDebugReplicationCompare_ToClient(bool bInSync, int32 MemberCountServer, int32 MemberCountClient);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void ReceiveDebugOtherGuildInfo_ToClient(const FGuid& GuildId, const FString& GuildName, int32 MemberCount);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void ReceiveDebugGuildInfo_ToClient(const FGuid& GuildId, const FString& GuildName, int32 MemberCount, const FGuid& MasterUId);
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ReauestDamageExplode_ToServer(UPalDamageExplodeComponent* ExplodeComponent, const FPalDamageInfo DamageInfo);
     
@@ -563,6 +679,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnUpdateWeightInventory(float Weight);
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnUpdateStatusPoint_FoodDecayReduction(FName StatusName, int32 PrevPoint, int32 NewPoint);
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnUpdateOtomoSlotWithCompletedInitializedParameter_ServerInternal(APalCharacter* PalCharacter);
     
@@ -596,11 +717,20 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnReceiveConfirmResultRequestGuild_ClientInternal(const bool bResponse);
     
+    UFUNCTION(BlueprintCallable)
+    void OnPressedWeaponPrevButton();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnPressedWeaponNextButtonKeyboard();
+    
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnPressedUseRecoveryItemButton();
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnPressedInteract2Button();
+    
     UFUNCTION(BlueprintCallable)
     void OnOverWeightInventory(float Weight);
     
@@ -719,6 +849,9 @@ public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void NotifyNPCTalkToken(UPalNPCTalkFlowComponent* TalkFlowComponent, const FGuid& NewToken, const int32 TalkCount);
     
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyNickNameUpdated_ToClient(FGuid PlayerUId, const FString& PlayerName, FGuid GroupId, const FString& GuildName);
+    
 private:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void NotifyLiftupCampPal_ToClient(APalCharacter* TargetCharacter);
@@ -726,6 +859,12 @@ private:
 public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void NotifyImportGlobalPalStorageDataResult_ToClient(EPalGlobalStorageImportResult ImportResult, const FPalGlobalPalStorageImportResultAdditionalData& AdditionalData);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyGuildNameUpdated_ToClient(FGuid GroupId, const FString& NewGuildName);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyGetUserInfoByPlayerUId_ToClient(bool bSuccess, FGuid PlayerUId, const FString& PlayerName, FGuid GroupId, const FString& GuildName);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void NotifyFailedStartRaidByOverConcurrentStageLimitation_ToClient();
@@ -749,6 +888,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsSpectating() const;
     
+private:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsSelectingBullet() const;
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsRidingFlyPal() const;
     
@@ -825,6 +969,9 @@ private:
     void FlushCoopActionLongPressInput();
     
 public:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void EnterChat_Receive(const FString& Message, uint8 Category);
+    
     UFUNCTION(BlueprintCallable)
     void EndSpectate();
     
@@ -844,7 +991,13 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_UnlockAllAreaBarriers_ToServer();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_TogglePartnerSkillNoDecrease();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_ToggleBaseCampPalFarMovementTickSuppress_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_TeleportToNearestPlayer();
@@ -857,6 +1010,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_TeleportToBotCamp(int32 botIndex);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_Teleport2D_FixedZ(const FVector& Location);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_Teleport2D(const FVector& Location);
@@ -883,6 +1039,9 @@ public:
     void Debug_SetFPSForServer(float fps);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_SetBaseCampPalFarMovementTickSuppress_ToServer(bool bOn);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_SetArenaRankPoint(int32 RankPoint);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -903,19 +1062,25 @@ public:
     void Debug_NotConsumeMaterialsInBuild();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_NetRepGraphPrintGraph_ToServer();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_Muteki_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_InvaderMarchRandom();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Debug_InvaderMarch();
+    void Debug_InvaderMarchForNearCamp(FName InvaderGropuName, bool bSkipInvaderDeclaration);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_InvaderMarch(FName InvaderGropuName, bool bSkipInvaderDeclaration);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_InsightsTraceStop_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void Debug_InsightsTraceStart_ToServer();
+    void Debug_InsightsTraceStart_ToServer(const FString& TraceFilePrefix);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_IgnoreRestrictedByItemsForPartnerSkill();
@@ -930,7 +1095,19 @@ public:
     void Debug_ForceSpawnRarePal_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_ForceSpawnPredatorPal_ToServer();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_EnableCollectPalCount();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_DumpPalCharacterActors_ToServer();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_DumpActors_ToServer();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void Debug_DisableAnimTickForServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void Debug_CheatCommand_ToServer(const FString& Command);
@@ -963,6 +1140,9 @@ public:
     void DamageReactionComponent_ProcessDamage_ToServer_ToEnemyPlayer(const FPalDamageInfo& Info, const AActor* Defender);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
+    void ConfirmRequestJoinGuildWarning_ToClient(const FGuid& FlowUniqueId);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
     void ConfirmRequestGuild_ToClient(const FGuid& FlowUniqueId, const EPalGuildJoinRequestConfirm ConfirmType);
     
     UFUNCTION(BlueprintCallable, Client, Unreliable)
@@ -980,6 +1160,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void ChangeSpectateMoveSpeed(int32 Direction);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanPlayWhistleForRideCall() const;
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void CannonDamageReactionComponent_ProcessDamage_ToServer(UPalCannonDamageReactionComponent* CannonDamage, const FPalDamageInfo& Info);
     
@@ -987,6 +1170,12 @@ public:
     bool CanCooping() const;
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void CancelSelectingBullet();
+    
+    UFUNCTION(BlueprintCallable)
+    void CancelRollingCameraModifier();
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void CallOnCoopReleaseDelegate_ToServer();
     

@@ -11,6 +11,7 @@ FPalMakeDamageInfo::FPalMakeDamageInfo() {
     this->WeaponType = EPalWeaponType::None;
     this->IsLeanBack = false;
     this->IsBlow = false;
+    this->HumanStunType = EPalHumanStunType::None;
     this->EffectType1 = EPalAdditionalEffectType::None;
     this->EffectValue1 = 0;
     this->EffectValueEx1 = 0.00f;
@@ -31,5 +32,9 @@ FPalMakeDamageInfo::FPalMakeDamageInfo() {
     this->ForceRagdollSize = EPalSizeType::None;
     this->OverrideNetworkOwner = NULL;
     this->WeaponDamageRatePvP = 0.00f;
+    this->bIsExplosionDamage = false;
+    this->bCannotKill = false;
+    this->bIsLastBullet = false;
+    this->bIsPartnerSkillAttackBullet = false;
 }
 

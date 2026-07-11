@@ -59,6 +59,12 @@ void UPalRiderComponent::OnSleepPlayer(int32 LastDamage) {
 void UPalRiderComponent::OnSleep(int32 LastDamage) {
 }
 
+void UPalRiderComponent::OnRidePalStartAim() {
+}
+
+void UPalRiderComponent::OnRidePalEndAim() {
+}
+
 void UPalRiderComponent::OnInactive() {
 }
 

@@ -19,6 +19,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRotator RotationOffset;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FVector Scale;
+    
     PAL_API FPalWorkPositionVisualizerSettings();
 };
 

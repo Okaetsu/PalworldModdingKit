@@ -3,10 +3,11 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "PalMapObject.h"
+#include "PalMapObjectPhysicsTargetInterface.h"
 #include "PalMapObjectDropItem.generated.h"
 
 UCLASS(Blueprintable)
-class PAL_API APalMapObjectDropItem : public APalMapObject {
+class PAL_API APalMapObjectDropItem : public APalMapObject, public IPalMapObjectPhysicsTargetInterface {
     GENERATED_BODY()
 public:
 protected:
@@ -25,5 +26,7 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnProceedTimerMovementActive();
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

@@ -51,6 +51,13 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FTimerHandle NightSkipTimerHandle;
     
+protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EmissiveTimeForStage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float EmissiveInGameTimeOverride;
+    
 public:
     UPalTimeManager();
 
@@ -60,7 +67,13 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable)
+    void SetTimeOverrideForEmissive(float InTime, float InDuration);
+    
+    UFUNCTION(BlueprintCallable)
     void SetGameTime_FixDay(const int32 NextHour);
+    
+    UFUNCTION(BlueprintCallable)
+    void ResetTimeOverrideForEmissive(float InDuration);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FString PalTimeSecondsToString(float InSeconds);
@@ -68,6 +81,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetSleepingPlayerCount(const bool bForceLocalPlayerSleep) const;
     
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetEmissiveTimeValue() const;
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetDebugTimeString() const;
     
@@ -90,7 +108,7 @@ public:
     int32 GetCurrentPalWorldTime_Day() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    float GetCurrentPalWorldHoursFloat();
+    float GetCurrentPalWorldHoursFloat() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalOneDayTimeType GetCurrentDayTimeType() const;
@@ -98,6 +116,11 @@ public:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void ClearTimer(const UObject* WorldContextObject, const FPalTimerHandle& Handle);
     
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void BP_ApplyEmissiveTimeParameters(float NewEmissiveTime);
+    
+public:
     UFUNCTION(BlueprintCallable)
     FPalTimerHandle AddTimerEventBySpan(const UPalTimeManager::FTimerEventDelegate& Delegate, const float Hours, const float Minutes, const float Seconds);
     

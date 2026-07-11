@@ -1,0 +1,5 @@
+#include "PalWorldObjectRecordData_LevelObjectRecoverParty.h"
+
+FPalWorldObjectRecordData_LevelObjectRecoverParty::FPalWorldObjectRecordData_LevelObjectRecoverParty() {
+}
+

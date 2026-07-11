@@ -20,6 +20,9 @@ public:
     void RequestUpdateWorkHardType(const EPalBaseCampPassiveEffectWorkHardType Type);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasBasePalOperationPermissionByLocalPlayer() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalBaseCampPassiveEffect_WorkHard* GetPassiveEffectWorkHard() const;
     
 };

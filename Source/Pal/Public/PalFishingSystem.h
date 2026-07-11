@@ -60,6 +60,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalDataTableRowName_PassiveSkillData KingPassiveSkillId;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalDataTableRowName_PassiveSkillData BossPassiveSkillId;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UPalFishingCatchBattle> CatchBattleBlueprintClass;

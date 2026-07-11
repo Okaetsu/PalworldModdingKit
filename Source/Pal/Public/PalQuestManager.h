@@ -2,9 +2,12 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
+#include "EPalBossType.h"
+#include "EPalQuestType.h"
 #include "PalLocalQuestLocationData.h"
 #include "PalOrderedQuestSaveData.h"
 #include "PalQuestReplicationData.h"
+#include "PalQuestSettingPerBossDefeat.h"
 #include "PalQuestManager.generated.h"
 
 class UDataTable;
@@ -56,6 +59,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FName> InitialOrderQuestIdArray;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FName, int32> ForceTrackingQuestMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalBossType, FPalQuestSettingPerBossDefeat> QuestSettingsPerBossDefeat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalQuestSettingPerBossDefeat QuestSettingsOnAnyBossDefeat;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FName, FPalLocalQuestLocationData> LocalLocationMap;
     
@@ -89,6 +101,9 @@ protected:
     
 private:
     UFUNCTION(BlueprintCallable)
+    void OnTowerBossDefeatFlagUpdated(FName Key, bool bNewValue);
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_OrderedQuestArray();
     
 protected:
@@ -108,6 +123,9 @@ protected:
     void OnCompletedQuest_ServerInternal(UPalQuestData* CompletedQuest);
     
 public:
+    UFUNCTION(BlueprintCallable)
+    void JumpToQuestBlock_ServerInternal(const FName& QuestName, int32 TargetBlockIndex);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsQuestOrdered(const FName& QuestId) const;
     
@@ -120,6 +138,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FName GetTrackingQuestId() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalQuestType GetQuestType(const FName& QuestId) const;
+    
 protected:
     UFUNCTION(BlueprintCallable)
     TArray<FName> GetQuestIdRowName() const;
@@ -130,6 +151,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetNearestQuestLocationDistance(const FName& QuestId) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetLocalQuestTrackingLocationData(const FName& QuestId, FPalLocalQuestLocationData& OutData) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<UPalQuestData*> GetAllOrderedQuest() const;

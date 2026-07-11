@@ -7,5 +7,6 @@ enum class EPalQuestType : uint8 {
     Invalid,
     Main,
     Sub,
+    Hidden,
 };
 

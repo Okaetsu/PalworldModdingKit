@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "PalMapObjectItemProductData.h"
 #include "PalMasterDataTableAccessBase.h"
 #include "PalMasterDataTableAccess_ItemProductData.generated.h"
 
@@ -8,5 +9,10 @@ class UPalMasterDataTableAccess_ItemProductData : public UPalMasterDataTableAcce
     GENERATED_BODY()
 public:
     UPalMasterDataTableAccess_ItemProductData();
+
+private:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FPalMapObjectItemProductData BP_FindRow(FName RowName, bool& bResult) const;
+    
 };
 

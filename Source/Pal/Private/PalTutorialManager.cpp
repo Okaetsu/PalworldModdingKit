@@ -11,4 +11,8 @@ void UPalTutorialManager::TutorialTrigger_Common(EPalTutorialTriggerConditionTyp
 void UPalTutorialManager::TutorialTrigger_Capture(FPalUIPalCaptureInfo CaptureInfo, bool CaptureSuccess) {
 }
 
+bool UPalTutorialManager::IsTutorialTriggered_Common(EPalTutorialTriggerConditionType TriggerType) const {
+    return false;
+}
+
 

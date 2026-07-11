@@ -5,7 +5,6 @@
 #include "PalItemThrottledSpawnUtilitySubsystem.generated.h"
 
 class UPalItemThrottledSpawnRequest;
-class UPalMapObjectSpawnRequestHandler;
 
 UCLASS(Blueprintable)
 class UPalItemThrottledSpawnUtilitySubsystem : public UTickableWorldSubsystem {
@@ -14,9 +13,6 @@ public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UPalItemThrottledSpawnRequest*> SpawnQueue;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<UPalMapObjectSpawnRequestHandler*> ActiveSpawnedHandlers;
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<uint64, int32> GridSpawnCounterMap;

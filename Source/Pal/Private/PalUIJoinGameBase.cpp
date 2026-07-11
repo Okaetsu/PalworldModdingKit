@@ -10,7 +10,16 @@ UPalUIJoinGameBase::UPalUIJoinGameBase() {
     this->SaveConfigCategoryName = TEXT("JoinGameSettings");
 }
 
+void UPalUIJoinGameBase::SetIsCheckedInputPassword(bool bNewValue) {
+}
+
 void UPalUIJoinGameBase::SaveConfigValue() {
+}
+
+void UPalUIJoinGameBase::RestorePasswordForServerByGUID(const FString& WorldGUID) {
+}
+
+void UPalUIJoinGameBase::RestorePasswordForServer(const FString& ServerAddress, int32 ServerPort) {
 }
 
 void UPalUIJoinGameBase::RequestOfficialServerIPRange() {

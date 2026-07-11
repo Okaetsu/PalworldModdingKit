@@ -13,8 +13,10 @@
 
 class UPalItemContainer;
 class UPalItemSlot;
+class UPalMapObjectConcreteModelModuleBase;
 class UPalMapObjectConvertItemModel;
 class UPalMapObjectEnergyModule;
+class UPalMapObjectWorkeeModule;
 class UPalWorkBase;
 
 UCLASS(Blueprintable)
@@ -31,6 +33,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFinishConvertDelegate OnFinishConvertDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FFinishConvertDelegate OnCompleteAllConvertDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRecieveUpdateRecipeRequestResultDelegate OnRecieveUpdateRecipeRequestResultDelegate;
@@ -122,6 +127,12 @@ protected:
     void OnRep_CurrentRecipeId();
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnReadyStatusHUDWork(UPalMapObjectWorkeeModule* Module, UPalWorkBase* Work);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnReadyStatusHUDModule(UPalMapObjectConcreteModelBase* ConcreteModel, UPalMapObjectConcreteModelModuleBase* Module);
+    
     UFUNCTION(BlueprintCallable)
     void OnFinishWorkInServer(UPalWorkBase* Work);
     

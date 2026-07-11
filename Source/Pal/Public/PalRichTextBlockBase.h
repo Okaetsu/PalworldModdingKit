@@ -3,7 +3,10 @@
 #include "CommonRichTextBlock.h"
 #include "Engine/DataTable.h"
 #include "PalOptionUISettings.h"
+#include "Templates/SubclassOf.h"
 #include "PalRichTextBlockBase.generated.h"
+
+class UPalTextScrollStyle;
 
 UCLASS(Blueprintable)
 class PAL_API UPalRichTextBlockBase : public UCommonRichTextBlock {
@@ -33,10 +36,22 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool JustificationVerticalCenter;
     
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UPalTextScrollStyle> ScrollStyle_Verticle;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsScrollingEnabled_Verticle;
+    
+public:
     UPalRichTextBlockBase();
 protected:
     UFUNCTION(BlueprintCallable)
     void SetText_GDKInternal(bool IsSuccess, const FString& OutString);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void SetScrollingEnabled_Verticle(bool bInIsScrollingEnabled);
     
 private:
     UFUNCTION(BlueprintCallable)

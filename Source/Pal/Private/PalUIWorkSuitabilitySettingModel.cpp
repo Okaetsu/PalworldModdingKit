@@ -9,6 +9,10 @@ void UPalUIWorkSuitabilitySettingModel::RequestChangeWorkSuitability(const FPalI
 void UPalUIWorkSuitabilitySettingModel::RequestChangeBaseCampBattle(const FPalInstanceID& TargetIndividualId, const bool bOn) {
 }
 
+bool UPalUIWorkSuitabilitySettingModel::HasBasePalOperationPermissionByLocalPlayer() const {
+    return false;
+}
+
 UPalIndividualCharacterContainer* UPalUIWorkSuitabilitySettingModel::GetTargetBaseCampWorkerCharacterContainer() const {
     return NULL;
 }

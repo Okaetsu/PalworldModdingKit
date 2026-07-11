@@ -26,6 +26,9 @@ void UPalFishingComponent::OnSuccessFight() {
 void UPalFishingComponent::OnSuccessCatchBattle() {
 }
 
+void UPalFishingComponent::OnReturnToFieldFromStage_ClientInternal() {
+}
+
 void UPalFishingComponent::OnRep_RodState() {
 }
 

@@ -3,10 +3,11 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "PalAIActionBase.h"
+#include "PalLaunchRecoveryActionInterface.h"
 #include "PalAIActionBaseCampTrantrum.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
-class PAL_API UPalAIActionBaseCampTrantrum : public UPalAIActionBase {
+class PAL_API UPalAIActionBaseCampTrantrum : public UPalAIActionBase, public IPalLaunchRecoveryActionInterface {
     GENERATED_BODY()
 public:
 protected:
@@ -28,5 +29,8 @@ private:
     
 public:
     UPalAIActionBaseCampTrantrum();
+
+
+    // Fix for true pure virtual functions not being implemented
 };
 

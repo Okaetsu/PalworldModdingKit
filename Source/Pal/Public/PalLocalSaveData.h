@@ -10,6 +10,7 @@
 #include "PalOrderedQuestSaveData.h"
 #include "PalOtomoLoadoutData.h"
 #include "PalTutorialTriggerSaveData.h"
+#include "PalWorldMapUISaveData.h"
 #include "PalLocalSaveData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -77,6 +78,9 @@ public:
     TArray<uint8> WorldMapMaskTextureV4;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FName, FPalWorldMapUISaveData> WorldMapUISaveDataMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalCustomMarkerSaveData> Local_CustomMarkerSaveData;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -117,6 +121,18 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FName> Local_UnlockedOnUIBuildObjectBlueprintList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FName, bool> Local_HiddenLocationFlagMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FName, bool> Local_WarpPointUnlockFlag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool Local_ShowSkyIslandCloudOnWorldMapUI;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> Local_IgnoreMaskBossSpawnerNames;
     
     PAL_API FPalLocalSaveData();
 };

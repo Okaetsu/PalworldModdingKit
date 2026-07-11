@@ -14,4 +14,8 @@ bool UPalAnimNotify_FootStep::GetFloorPosition(AActor* Owner, FTransform FootTra
     return false;
 }
 
+bool UPalAnimNotify_FootStep::CalcFootStepDecalTransform(AActor* Owner, FVector FootBoneLocation, float MaxHeightAboveGround, FVector& OutLocation, FVector& OutNormal) const {
+    return false;
+}
+
 

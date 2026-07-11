@@ -4,6 +4,7 @@
 #include "UObject/Object.h"
 #include "PalCommonQuestRewardData.h"
 #include "PalOrderedQuestSaveData.h"
+#include "PalQuestBlockGroup.h"
 #include "PalQuestData.generated.h"
 
 class UPalQuestBlock;
@@ -28,13 +29,19 @@ public:
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_CurrentBlock, meta=(AllowPrivateAccess=true))
-    UPalQuestBlock* NowQuestBlock;
+    TArray<UPalQuestBlock*> NowQuestBlocks;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_QuestBlockIndex, meta=(AllowPrivateAccess=true))
+    int32 QuestBlockIndex;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_QuestId, meta=(AllowPrivateAccess=true))
     FName QuestId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<TSoftClassPtr<UPalQuestBlock>> QuestBlockList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalQuestBlockGroup> QuestBlockGroupList;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName QuestTitleMsgId;
@@ -48,6 +55,12 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalCommonQuestRewardData CommonRewardData;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bPlayOrderEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bPlayCompleteEffect;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalOrderedQuestSaveData CachedSaveData;
     
@@ -56,6 +69,9 @@ public:
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void TakeAdditionalReward();
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void OnUpdatedQuestBlock_ServerInternal(UPalQuestBlock* UpdatedBlock);
@@ -65,6 +81,9 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void OnRep_QuestId();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_QuestBlockIndex();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentBlock();
@@ -78,6 +97,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void InitializeForUI(const FGuid& InOwnerPlayerUId, const FName& InQuestName);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetSortedQuestBlocksForUI(TArray<UPalQuestBlock*>& OutBlocks) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetQuestNameText(FText& OutText) const;
@@ -102,7 +124,13 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetQuestBlock(UPalQuestBlock*& OutBlock) const;
+    void GetQuestBlocks(TArray<UPalQuestBlock*>& OutBlocks) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGuid GetOwnerPlayerUId() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+    FPalCommonQuestRewardData GetCustomDisplayRewardData();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetCommonRewardData(FPalCommonQuestRewardData& OutData);

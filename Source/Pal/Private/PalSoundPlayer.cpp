@@ -4,6 +4,7 @@ UPalSoundPlayer::UPalSoundPlayer() {
     this->StopWhenOwnerDestroyed = false;
     this->OwnerComponent = NULL;
     this->AkComponent = NULL;
+    this->AkComponentTickPolicy = EPalAkComponentTickPolicy::UseComponentDefault;
 }
 
 void UPalSoundPlayer::UpdateOutputBusBolume() {

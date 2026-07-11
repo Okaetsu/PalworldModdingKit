@@ -20,6 +20,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bRespawnableMulti;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsWorldTreePalEgg;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 WorldTreePalEggProbability;
+    
 public:
     APalMapObjectSpawnerPalEgg(const FObjectInitializer& ObjectInitializer);
 

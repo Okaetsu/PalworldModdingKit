@@ -42,6 +42,9 @@ public:
     void SetVisibleTalkHUD(const FName& FlagKey, bool bIsVisible);
     
     UFUNCTION(BlueprintCallable)
+    void SetTalkWindowVisibility(const FName& FlagKey, bool bIsVisible);
+    
+    UFUNCTION(BlueprintCallable)
     void SetDynamicParameters(const FName& ParameterName, UPalNPCTalkDynamicParameter* InParameter);
     
 protected:

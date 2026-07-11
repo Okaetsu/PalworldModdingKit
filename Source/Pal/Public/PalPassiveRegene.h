@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "EPalPassiveSkillEffectType.h"
+#include "EPalTribeID.h"
 #include "PalPassiveRegene.generated.h"
 
 UCLASS(Blueprintable)
@@ -23,6 +24,15 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGuid PassiveId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsPartnerSkill;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalTribeID TribeId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsStackablePartnerSkillBySameTribe;
     
     UPalPassiveRegene();
 

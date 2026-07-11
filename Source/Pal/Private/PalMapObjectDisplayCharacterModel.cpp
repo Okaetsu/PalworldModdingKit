@@ -21,6 +21,10 @@ bool UPalMapObjectDisplayCharacterModel::GetDisplaySlots(TArray<UPalIndividualCh
     return false;
 }
 
+bool UPalMapObjectDisplayCharacterModel::CanMoveSlotToDisplayCage(const UPalIndividualCharacterSlot* fromSlot) const {
+    return false;
+}
+
 void UPalMapObjectDisplayCharacterModel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     

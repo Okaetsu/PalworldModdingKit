@@ -2,6 +2,7 @@
 
 UPalItemIDManager::UPalItemIDManager() {
     this->StaticItemDataAsset = NULL;
+    this->ItemIDRedirectDataTable = NULL;
     this->StaticItemDataTable = NULL;
 }
 

@@ -6,6 +6,10 @@ APalSkillEffectBase::APalSkillEffectBase(const FObjectInitializer& ObjectInitial
     this->MinSize = 0.10f;
     this->MaxSize = 9999.00f;
     this->LifeTime = 15.00f;
+    this->MaxActiveInstancesByClass = 0;
+    this->bUseObjectPool = false;
+    this->ObjectPoolSize = 64;
+    this->bIsInactiveInObjectPool = false;
     this->AttackFilter = NULL;
     this->HitFilterGround = NULL;
     this->HitFilterCustomRange = NULL;
@@ -17,6 +21,10 @@ void APalSkillEffectBase::StopAllNiagaraSound() {
 }
 
 void APalSkillEffectBase::StopAkSound() {
+}
+
+APalSkillEffectBase* APalSkillEffectBase::SpawnSkillEffectWithPool(const UObject* WorldContextObject, TSubclassOf<APalSkillEffectBase> EffectClass, FTransform SpawnTransform, ESpawnActorCollisionHandlingMethod collisionMethod, AActor* OwnerActor, APawn* InstigatorPawn) {
+    return NULL;
 }
 
 FTimerHandle APalSkillEffectBase::SetTimeCallbackBySkillEffectSpawnParameter(const UObject* WorldContextObject, const FSkillEffectSpawnParameter& Parameter, UObject* callObject, FSkillEffectTimeDelegate timeDelegate) {
@@ -57,6 +65,9 @@ FVector APalSkillEffectBase::GetActionTargetLocation() const {
 
 AActor* APalSkillEffectBase::GetActionTargetActor() const {
     return NULL;
+}
+
+void APalSkillEffectBase::FinishSkillEffect() {
 }
 
 APalSkillEffectBase* APalSkillEffectBase::CreateChildSkillEffect(TSubclassOf<APalSkillEffectBase> EffectClass, FTransform SpawnTransform, FRandomStream NewRandomStream, ESpawnActorCollisionHandlingMethod collisionMethod, AActor* ownerActor) {

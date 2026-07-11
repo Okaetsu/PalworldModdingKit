@@ -10,6 +10,7 @@ UPalBaseCampWorkerDirector::UPalBaseCampWorkerDirector() {
     this->WorkerEventTickCount = 0;
     this->State = EPalBaseCampWorkerDirectorState::Init;
     this->bEnableWorkerPlayerTracking = false;
+    this->bIsRaidBossAreaShuttingDown = false;
 }
 
 void UPalBaseCampWorkerDirector::OrderCommand(const EPalMapBaseCampWorkerOrderType OrderType) {
@@ -40,6 +41,10 @@ void UPalBaseCampWorkerDirector::OnDeadWorkerInServer_Internal(APalCharacter* De
 }
 
 void UPalBaseCampWorkerDirector::OnDeadWorkerInServer(const FPalDeadInfo Info) {
+}
+
+bool UPalBaseCampWorkerDirector::HasWorkerWithSuitabilityRank(const EPalWorkSuitability WorkSuitability, const int32 RequireRank) const {
+    return false;
 }
 
 void UPalBaseCampWorkerDirector::GetCharacterHandleSlots(TArray<UPalIndividualCharacterSlot*>& OutSlots) const {

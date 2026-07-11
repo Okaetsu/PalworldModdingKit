@@ -4,7 +4,10 @@
 UPalBaseCampMapObjectCollection::UPalBaseCampMapObjectCollection() {
 }
 
-void UPalBaseCampMapObjectCollection::OnTriggeredBurnAnyMapObject(UPalMapObjectModelEffect_AccumulateTrigger* This, UPalMapObjectModel* OwnerModel) {
+void UPalBaseCampMapObjectCollection::OnUpdatedSpawnedMapObjectActor(UPalMapObjectModel* Model) {
+}
+
+void UPalBaseCampMapObjectCollection::OnTriggeredBurnAnyMapObject(UPalMapObjectModelEffect_AccumulateTrigger* Self, UPalMapObjectModel* OwnerModel) {
 }
 
 void UPalBaseCampMapObjectCollection::OnRemovedEffectAnyMapObject(UPalMapObjectModel* OwnerModel, UPalMapObjectModelEffectBase* Effect, EPalStatusID statusID) {

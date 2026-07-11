@@ -42,6 +42,10 @@ EPalAIResponseType UPalAISensorComponent::SelectResponseBySenses(EPalAIResponseT
 void UPalAISensorComponent::ResetResponsedMaxBiologicalGrade() {
 }
 
+bool UPalAISensorComponent::RequestSightCheckAsync(bool bIncludePlayer, bool bIncludeAliveNPC, bool bIncludeEdibleDeadNPC, float RangeRate, bool bIgnoreOtomo) {
+    return false;
+}
+
 void UPalAISensorComponent::ReceiveSound(int32 SoundRadius, FVector EmitLocation, AActor* Emitter) {
 }
 
@@ -52,6 +56,10 @@ bool UPalAISensorComponent::IsInSightKillerAndDeadBody(AActor* Killer, AActor* D
     return false;
 }
 
+float UPalAISensorComponent::GetSightDistance() {
+    return 0.0f;
+}
+
 void UPalAISensorComponent::EnableHearing() {
 }
 
@@ -59,6 +67,10 @@ void UPalAISensorComponent::DisableHearing() {
 }
 
 void UPalAISensorComponent::DeadAutoRemoveDelegate(FPalDeadInfo DeadInfo) {
+}
+
+bool UPalAISensorComponent::CheckCombatableByLevelDiff(AActor* TargetActor) {
+    return false;
 }
 
 

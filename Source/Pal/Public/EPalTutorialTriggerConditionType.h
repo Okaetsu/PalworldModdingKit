@@ -27,5 +27,6 @@ enum class EPalTutorialTriggerConditionType : uint8 {
     SAN,
     Sick,
     SkipWork,
+    ChangeWeaponBullet,
 };
 

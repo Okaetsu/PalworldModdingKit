@@ -3,6 +3,11 @@
 
 UPalLocationPointFastTravel::UPalLocationPointFastTravel() {
     this->ShouldUnlockFlag = false;
+    this->bUnlockMapPoint = false;
+}
+
+bool UPalLocationPointFastTravel::IsUnlockMapPoint() const {
+    return false;
 }
 
 void UPalLocationPointFastTravel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -11,6 +16,7 @@ void UPalLocationPointFastTravel::GetLifetimeReplicatedProps(TArray<FLifetimePro
     DOREPLIFETIME(UPalLocationPointFastTravel, LocationId);
     DOREPLIFETIME(UPalLocationPointFastTravel, ShouldUnlockFlag);
     DOREPLIFETIME(UPalLocationPointFastTravel, FastTravelPointID);
+    DOREPLIFETIME(UPalLocationPointFastTravel, bUnlockMapPoint);
 }
 
 

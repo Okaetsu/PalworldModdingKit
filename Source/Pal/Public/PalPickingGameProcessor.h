@@ -79,6 +79,9 @@ public:
     EPalPickingGameDifficultyType GetDifficultyType();
     
     UFUNCTION(BlueprintCallable)
+    void AddPickingToolPositionLoop(float AddPosition);
+    
+    UFUNCTION(BlueprintCallable)
     void AddPickingToolPosition(float AddPosition);
     
     UFUNCTION(BlueprintCallable)

@@ -28,7 +28,7 @@ UPalIndividualCharacterHandle* UPalMapObjectMedicalPalBedModel::GetSleepingHandl
 void UPalMapObjectMedicalPalBedModel::ClearSleepingCharacterHandle() {
 }
 
-void UPalMapObjectMedicalPalBedModel::CalcCharacterLocationAndRotationOffset(const FName CharacterID, const APalCharacter* Character, const FName MapObjectId, const UPalMapObjectMedicalPalBedSleepOnSideLocationOffsetComponent* LocationOffsetComponent, FVector& OutLocationOffset, FQuat& OutRotationOffset) {
+void UPalMapObjectMedicalPalBedModel::CalcCharacterLocationAndRotationOffset(const FName CharacterID, const APalCharacter* Character, const FName SleepOnSideKey, const UPalMapObjectMedicalPalBedSleepOnSideLocationOffsetComponent* LocationOffsetComponent, FVector& OutLocationOffset, FQuat& OutRotationOffset) {
 }
 
 void UPalMapObjectMedicalPalBedModel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

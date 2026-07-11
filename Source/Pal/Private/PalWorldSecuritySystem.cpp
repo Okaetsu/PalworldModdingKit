@@ -13,6 +13,10 @@ void UPalWorldSecuritySystem::ReleaseWanted(UPalIndividualCharacterHandle* Crimi
 void UPalWorldSecuritySystem::ReleaseCrime(UPalIndividualCharacterHandle* CriminalHandle, const FGuid& CrimeInstanceId) {
 }
 
+UPalWorldSecurityPoliceSpawner* UPalWorldSecuritySystem::GetPoliceSpawner(const FPalInstanceID& CriminalIndividualId) {
+    return NULL;
+}
+
 APalTriggerAreaBase* UPalWorldSecuritySystem::GetNearestTriggerArea(FVector Location) {
     return NULL;
 }

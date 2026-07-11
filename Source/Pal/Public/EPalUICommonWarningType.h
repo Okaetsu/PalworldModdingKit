@@ -7,5 +7,6 @@ enum class EPalUICommonWarningType : uint8 {
     Default,
     MissileWarning,
     RaidWarning,
+    WildlifeSanctuaryWarning,
 };
 

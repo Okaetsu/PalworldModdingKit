@@ -46,6 +46,9 @@ protected:
     UFUNCTION(BlueprintCallable)
     APlayerStart* FindPlayerStartWithTag(const FName& Tag);
     
+    UFUNCTION(BlueprintCallable)
+    APlayerStart* FindPlayerStartDebugInitialStart();
+    
 private:
     UFUNCTION(BlueprintCallable)
     void CreateSession(const FString& Address);

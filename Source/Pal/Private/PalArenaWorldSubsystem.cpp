@@ -12,6 +12,14 @@ UPalArenaWorldSubsystem::UPalArenaWorldSubsystem() {
     this->InitialHateLow = 5000.00f;
     this->ArenaWorldRankingInfo = NULL;
     this->ArenaEntrance = NULL;
+    this->ArenaTopMenuLive = false;
+    this->ArenaStartReadinessWaiter = NULL;
+}
+
+void UPalArenaWorldSubsystem::ShowOverLimitWarning() {
+}
+
+void UPalArenaWorldSubsystem::SetArenaTopMenuLive(bool IsLive) {
 }
 
 void UPalArenaWorldSubsystem::RequestExitSpectate() {
@@ -33,6 +41,9 @@ void UPalArenaWorldSubsystem::OnSoloNPCSpawned(APalArenaSoloNPCSpawner* Spawner)
 }
 
 void UPalArenaWorldSubsystem::OnChangeBattleEndTime_ServerInternal(FDateTime BattleEndTime) {
+}
+
+void UPalArenaWorldSubsystem::OnArenaStartReady(const FPalArenaSequencerInitializeParameter& InitParam) {
 }
 
 TArray<FPalArenaSoloClearItemInfo> UPalArenaWorldSubsystem::GetSoloClearReward(EPalArenaRank Rank, bool bIsFirstClear) {

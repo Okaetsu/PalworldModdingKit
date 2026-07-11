@@ -32,6 +32,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetTextList(const TArray<FName>& InMsgIDList);
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void SetHide(bool bHide);
+    
     UFUNCTION(BlueprintCallable)
     void OnEndTalk();
     

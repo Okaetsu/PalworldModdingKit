@@ -37,6 +37,9 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPrivateLock() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanOpenDimensionPalStorageMenu_LocalPlayer() const;
     
 };

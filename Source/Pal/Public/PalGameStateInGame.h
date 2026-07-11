@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "Engine/EngineTypes.h"
 #include "GameDateTime.h"
 #include "PalChatMessage.h"
 #include "PalGameState.h"
+#include "PalOptionGraphicsSettings.h"
 #include "PalGameStateInGame.generated.h"
 
 class APalBotBuilderLocationBase;
@@ -25,7 +25,6 @@ class APalGameStateInGame : public APalGameState {
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRecievedServerNoticeDelegate, const FString&, NoticeMessage);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRecievedChatMessageDelegate, const FPalChatMessage&, Message);
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEndTrial);
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FDateTime RealProgressDateTime_ForRep;
@@ -151,12 +150,6 @@ private:
     FString SaveConfigCategoryName;
     
 public:
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FEndTrial FEndTrialDelegate;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FTimerHandle TrialTimerHandle;
-    
     APalGameStateInGame(const FObjectInitializer& ObjectInitializer);
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -189,11 +182,6 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnRep_BaseCampReplicator();
     
-public:
-    UFUNCTION(BlueprintCallable)
-    void OnOverTrialTime();
-    
-private:
     UFUNCTION(BlueprintCallable)
     void OnCompleteSyncAllFromServer_InClient(APalPlayerState* PlayerState);
     
@@ -208,9 +196,6 @@ public:
     float GetServerFrameTime() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetRemainTrialTimeSecond();
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMaxPlayerNum() const;
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
@@ -218,6 +203,9 @@ public:
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void BroadcastChatMessage(const FPalChatMessage& ChatMessage);
+    
+    UFUNCTION(BlueprintCallable)
+    void ApplyGrid0LoadingRangeFromGraphicsOption(const FPalOptionGraphicsSettings& PrevSettings, const FPalOptionGraphicsSettings& NewSettings);
     
 };
 

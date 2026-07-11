@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalWorkAssignableCheckResult.h"
 #include "PalAIActionCompositeBase.h"
 #include "Templates/SubclassOf.h"
 #include "PalAIActionCompositeWorker.generated.h"
@@ -42,7 +43,7 @@ public:
     bool TryFindNextWork();
     
     UFUNCTION(BlueprintCallable)
-    void RegisterFixedAssignWorkAttack(const FGuid& MapObjectModelInstanceId);
+    void RegisterFixedAssignWorkAttack(const FGuid& MapObjectModelInstanceId, EPalWorkAssignableCheckResult& OutCheckResult, const bool bByOtomo);
     
     UFUNCTION(BlueprintCallable)
     void RegisterFixedAssignWork(const FGuid& WorkId);

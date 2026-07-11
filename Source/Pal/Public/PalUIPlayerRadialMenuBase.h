@@ -10,8 +10,8 @@ class PAL_API UPalUIPlayerRadialMenuBase : public UPalUserWidget {
 public:
     UPalUIPlayerRadialMenuBase();
 private:
-    UFUNCTION(BlueprintCallable)
-    void SelectedFeed(const FPalItemSlotId& itemSlotId, const int32 itemNum);
+    UFUNCTION()
+    void SelectedFeed(const FPalItemSlotId& ItemSlotId, const int64 itemNum);
     
 protected:
     UFUNCTION(BlueprintCallable)

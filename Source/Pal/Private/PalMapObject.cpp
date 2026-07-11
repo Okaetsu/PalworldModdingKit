@@ -1,7 +1,6 @@
 #include "PalMapObject.h"
 #include "Net/UnrealNetwork.h"
 #include "PalMapObjectDamageReactionComponent.h"
-#include "PalMapObjectVisualEffectComponent.h"
 
 APalMapObject::APalMapObject(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bReplicates = true;
@@ -9,7 +8,7 @@ APalMapObject::APalMapObject(const FObjectInitializer& ObjectInitializer) : Supe
     (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
     this->ConcreteModelClass = NULL;
     this->DamageReaction = CreateDefaultSubobject<UPalMapObjectDamageReactionComponent>(TEXT("DamageReaction"));
-    this->VisualEffect = CreateDefaultSubobject<UPalMapObjectVisualEffectComponent>(TEXT("VisualEffect"));
+    this->VisualEffect = NULL;
     this->bSpawnableIfOverlapped = false;
     this->bNotSpawnableIfOverlapMapObject = false;
     this->bLevelSpawnObject = false;
@@ -40,6 +39,9 @@ void APalMapObject::SetIgnoreSave_ServerInternal(const bool bIgnore) {
 }
 
 void APalMapObject::OnUpdatedEnableTickByModel(UPalMapObjectModel* Model) {
+}
+
+void APalMapObject::OnRep_PoolSpawnState() {
 }
 
 void APalMapObject::OnRep_MapObjectModel() {
@@ -98,6 +100,15 @@ void APalMapObject::BroadcastShouldNotPlayDestroyFX_Implementation() {
 void APalMapObject::BroadcastShouldNotPlayBuildCancelDestroyFX_Implementation() {
 }
 
+void APalMapObject::BroadcastPlayRespawnFX_Implementation() {
+}
+
+void APalMapObject::BroadcastDestroyPoolableObjectWithDestroyFX_Implementation() {
+}
+
+void APalMapObject::BroadcastDestroyPoolableObject_Implementation() {
+}
+
 void APalMapObject::BP_OnSetConcreteModel_Implementation(UPalMapObjectConcreteModelBase* ConcreteModel) {
 }
 
@@ -106,6 +117,7 @@ void APalMapObject::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLif
     
     DOREPLIFETIME(APalMapObject, ModelInstanceId);
     DOREPLIFETIME(APalMapObject, MapObjectModel);
+    DOREPLIFETIME(APalMapObject, PoolSpawnState);
 }
 
 

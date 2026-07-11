@@ -1,4 +1,5 @@
 #include "PalNPCSpawnerBase.h"
+#include "Templates/SubclassOf.h"
 
 APalNPCSpawnerBase::APalNPCSpawnerBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bNetLoadOnClient = false;
@@ -8,11 +9,26 @@ APalNPCSpawnerBase::APalNPCSpawnerBase(const FObjectInitializer& ObjectInitializ
     this->Ignore_FarCheck = false;
     this->bDoSpawnedTick = true;
     this->SpawnRadiusType = EPalSpawnRadiusType::S;
+    this->bUseDirectionalSpawnCheck = true;
+    this->MinMoveSpeedForDirectionalSpawn = 200.00f;
+    this->LastMoveDirectionGraceTime = 1.00f;
+    this->NearAlwaysSpawnRadiusScale = 0.25f;
+    this->IdleSpawnRadiusScale = 0.25f;
+    this->BaseSideWidthScale = 0.20f;
+    this->HalfAngleDeg = 30.00f;
+    this->MaxSideWidthScale = 0.75f;
+    this->BackAllowance = 3000.00f;
+    this->ForwardSpawnDistanceScale = 1.20f;
+    this->CameraForwardSpawnDistanceScale = 0.80f;
+    this->PalSpawnDistanceRate = 1.00f;
+    this->CharacterBPPreloadDistance = 0.00f;
+    this->CharacterBPPreloadReleaseDistance = 60000.00f;
     this->IsSquadBehaviour = true;
     this->LocationResetDistance_SpawnerToCharacterTooFar = 500000.00f;
     this->LocationResetHeight_SpawnerToCharacterTooLow = 50000.00f;
     this->NavInvokerComponent = NULL;
     this->IgnoreBaseCampCheck = false;
+    this->OverwriteRayUpOffset = 0.00f;
     this->Squad = NULL;
     this->ImportanceType = EPalSpwnerImportanceType::Undefined;
     this->SpawnerRuleClass = NULL;
@@ -35,6 +51,9 @@ void APalNPCSpawnerBase::SetSpawnedFlag(bool NewIsSpawned) {
 void APalNPCSpawnerBase::SetSpawnDisableFlag(const FName& Name, bool isDisable) {
 }
 
+void APalNPCSpawnerBase::SetOverwriteRayUpOffset(float InOffset) {
+}
+
 void APalNPCSpawnerBase::SetIgnoreRandomizer(bool bInIgnoreRandomizer) {
 }
 
@@ -42,6 +61,10 @@ void APalNPCSpawnerBase::SetDisableBossSpawner_ToSaveData(FName KeyName) {
 }
 
 void APalNPCSpawnerBase::SetCheckRadius(float SpawnRadius, float DespawnRadius) {
+}
+
+
+void APalNPCSpawnerBase::RequestPreloadCharacterBPs() {
 }
 
 
@@ -104,6 +127,10 @@ bool APalNPCSpawnerBase::IsIgnoreRandomizer() const {
     return false;
 }
 
+FGuid APalNPCSpawnerBase::GetWildGroupGuid() const {
+    return FGuid{};
+}
+
 EPalSpawnRadiusType APalNPCSpawnerBase::GetSpawnRadiusType() const {
     return EPalSpawnRadiusType::S;
 }
@@ -130,6 +157,10 @@ float APalNPCSpawnerBase::GetSpawnerRadiusByType() const {
 
 FString APalNPCSpawnerBase::GetSpawnDisableDebugInfo() const {
     return TEXT("");
+}
+
+TSubclassOf<APalCharacter> APalNPCSpawnerBase::GetPreloadedCharacterBPClass(FName CharacterID) const {
+    return NULL;
 }
 
 

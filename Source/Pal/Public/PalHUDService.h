@@ -2,11 +2,15 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
+#include "UObject/NoExportTypes.h"
 #include "GameplayTagContainer.h"
 #include "EPalFadeWidgetLayerType.h"
 #include "EPalHUDWidgetPriority.h"
 #include "EPalWidgetBlueprintType.h"
+#include "PalStaticItemIdAndNum.h"
+#include "PalUICommonExpRewardData.h"
 #include "PalUICommonItemInfoDisplayData.h"
+#include "PalUICommonItemRewardData.h"
 #include "PalUICommonRewardDisplayData.h"
 #include "PalUICommonWarningDisplayData.h"
 #include "PalUIPalCaptureInfo.h"
@@ -38,10 +42,14 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnRequestOpenChat);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPushedStackableUI, const FGuid&, pushedWidgetID);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNotifyUpdateReticleVisibility, bool, bVisible);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNotifyCommonItemReward, const FPalUICommonItemRewardData&, RewardData);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNotifyCommonExpReward, const FPalUICommonExpRewardData&, RewardData);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFadeInAnimationCompleted);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndAllFadeIn);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDisplayCharacterHPGauge, UPalIndividualCharacterParameter*, Parameter);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeleteCharacterHPGauge, UPalIndividualCharacterParameter*, Parameter);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCompleteChat);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChestQuickStackDelegate, const TArray<FPalStaticItemIdAndNum>&, StackItems);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnApplicationActivationStateChangedDelegate, bool, bIsFocused);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInvalidatePlayerInputGuard);
     
@@ -73,10 +81,22 @@ public:
     FOnEndAllFadeIn OnEndAllFadeIn;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnFadeInAnimationCompleted OnFadeInAnimationCompleted;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnRequestOpenChat OnRequestOpenChat;
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnCompleteChat OnCompleteChat;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnNotifyCommonItemReward OnNotifyCommonItemRewardDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnNotifyCommonExpReward OnNotifyCommonExpRewardDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChestQuickStackDelegate OnChestQuickStackDelegate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FUITransientData TransientData;
@@ -113,10 +133,22 @@ public:
     void ShowCommonReward(const FPalUICommonRewardDisplayData& RewardDisplayData);
     
     UFUNCTION(BlueprintCallable)
+    void ShowCommonItemReward(const FPalUICommonItemRewardData& ItemRewardData);
+    
+    UFUNCTION(BlueprintCallable)
     void ShowCommonItemInfo(const FPalUICommonItemInfoDisplayData& DisplayData);
     
     UFUNCTION(BlueprintCallable)
+    void ShowCommonExpReward(const FPalUICommonExpRewardData& ExpRewardData);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetIgnoreMaskBossSpawnerNames(const TArray<FName>& NewNames);
+    
+    UFUNCTION(BlueprintCallable)
     void SetHUDLayerHideFlag(const FGameplayTag& LayerTagName, const FName& HideReasonName, bool IsHide);
+    
+    UFUNCTION(BlueprintCallable)
+    void RestoreIgnoreMaskFromLocalRecord();
     
     UFUNCTION(BlueprintCallable)
     void RemoveWorldHUDFromWidgetId(const FGuid& ID);
@@ -138,6 +170,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAnyOverlayUIActive();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsAnyFadeWidgetActive() const;
     
     UFUNCTION(BlueprintCallable)
     void InvokeTargetWidgetFunction(const FGuid& WidgetId, const FName FunctionName);

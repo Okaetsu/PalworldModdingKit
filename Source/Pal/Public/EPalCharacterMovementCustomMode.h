@@ -15,5 +15,7 @@ enum class EPalCharacterMovementCustomMode : uint8 {
     Grappling,
     AirDash,
     ActionRolling,
+    JetpackGlider,
+    DismountSlide,
 };
 

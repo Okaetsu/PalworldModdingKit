@@ -3,13 +3,13 @@
 
 UPalFoliageInstance::UPalFoliageInstance() {
     this->Hp = -1;
-    this->bAlive = true;
+    this->InstanceState = EPalFoliageInstanceState::Alive;
 }
 
 void UPalFoliageInstance::OnRep_WorldTransform() {
 }
 
-void UPalFoliageInstance::OnRep_Alive(bool bOldValue) {
+void UPalFoliageInstance::OnRep_State(EPalFoliageInstanceState OldState) {
 }
 
 void UPalFoliageInstance::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
@@ -17,7 +17,7 @@ void UPalFoliageInstance::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& 
     
     DOREPLIFETIME(UPalFoliageInstance, FoliageTypeId);
     DOREPLIFETIME(UPalFoliageInstance, Hp);
-    DOREPLIFETIME(UPalFoliageInstance, bAlive);
+    DOREPLIFETIME(UPalFoliageInstance, InstanceState);
     DOREPLIFETIME(UPalFoliageInstance, WorldTransform);
 }
 

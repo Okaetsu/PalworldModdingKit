@@ -27,6 +27,10 @@ bool UPalWorkAssign::IsAssigned() const {
     return false;
 }
 
+EPalWorkSuitability UPalWorkAssign::GetWorkSuitability() const {
+    return EPalWorkSuitability::None;
+}
+
 EPalWorkWorkerWorkingState UPalWorkAssign::GetWorkingState() const {
     return EPalWorkWorkerWorkingState::Wait;
 }

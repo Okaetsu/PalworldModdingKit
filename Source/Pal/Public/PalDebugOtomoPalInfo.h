@@ -34,6 +34,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 FriendshipRank;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsAwakening;
+    
     PAL_API FPalDebugOtomoPalInfo();
 };
 

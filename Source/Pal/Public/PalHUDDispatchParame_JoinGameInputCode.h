@@ -18,6 +18,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalUIServerDisplayData TargetServerDisplayInfo;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString InitialInputText;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bInitialSaveServerPassword;
+    
     UPalHUDDispatchParame_JoinGameInputCode();
 
 };

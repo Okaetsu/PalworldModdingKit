@@ -8,7 +8,8 @@ APalCapturedCage::APalCapturedCage(const FObjectInitializer& ObjectInitializer) 
     this->SpawnedPalLevel = 0;
     this->bIsDoorOpened = false;
     this->bIsEnemyCamp = true;
-    this->IsInSpawnedRange = false;
+    this->bShouldSpawnPal = false;
+    this->bResetRequested = false;
     this->bDisabledLottery = false;
     this->SpawnedPalHandle = NULL;
 }
@@ -27,6 +28,14 @@ void APalCapturedCage::ResetCage_ToAll_Implementation() {
 }
 
 void APalCapturedCage::OpenDoor_ToAll_Implementation() {
+}
+
+
+
+void APalCapturedCage::OnSpawnPal(FPalInstanceID ID) {
+}
+
+void APalCapturedCage::OnDespawnPal(FPalInstanceID ID) {
 }
 
 void APalCapturedCage::OnCreateHandle(FPalInstanceID ID) {

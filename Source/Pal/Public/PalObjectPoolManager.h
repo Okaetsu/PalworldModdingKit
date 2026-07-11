@@ -45,7 +45,7 @@ public:
     void ClearPool(FPalObjectPoolKey InKey, bool bDestroyUsingActor);
     
     UFUNCTION(BlueprintCallable)
-    AActor* ActivateFromPool(FPalObjectPoolActivateParameter InParameter);
+    AActor* ActivateFromPool(FPalObjectPoolActivateParameter InParameter, bool& bOutIsCreateNew);
     
 };
 

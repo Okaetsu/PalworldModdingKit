@@ -8,6 +8,7 @@ UPalDynamicWeaponItemDataBase::UPalDynamicWeaponItemDataBase() {
     this->RemainingBullets = 0;
     this->bIsEmptyBulletInventory = false;
     this->ForceUpdateBulletsCounter = 0;
+    this->MaxMagazineSize = 0;
 }
 
 int32 UPalDynamicWeaponItemDataBase::UseBullets(int32 UseNum) {
@@ -28,6 +29,9 @@ void UPalDynamicWeaponItemDataBase::SetBulletsNum(int32 bulletsNum) {
 }
 
 void UPalDynamicWeaponItemDataBase::ResetReloadStartRemainingBullets_Local() {
+}
+
+void UPalDynamicWeaponItemDataBase::OnRep_RemainingBullets() {
 }
 
 void UPalDynamicWeaponItemDataBase::OnRep_ForceUpdateBulletsCounter() {
@@ -64,6 +68,10 @@ float UPalDynamicWeaponItemDataBase::GetMaxDurability() const {
     return 0.0f;
 }
 
+FName UPalDynamicWeaponItemDataBase::GetInMagazineBulletId() const {
+    return NAME_None;
+}
+
 float UPalDynamicWeaponItemDataBase::GetDurability() const {
     return 0.0f;
 }
@@ -88,6 +96,7 @@ void UPalDynamicWeaponItemDataBase::GetLifetimeReplicatedProps(TArray<FLifetimeP
     DOREPLIFETIME(UPalDynamicWeaponItemDataBase, bIsEmptyBulletInventory);
     DOREPLIFETIME(UPalDynamicWeaponItemDataBase, PassiveSkillList);
     DOREPLIFETIME(UPalDynamicWeaponItemDataBase, ForceUpdateBulletsCounter);
+    DOREPLIFETIME(UPalDynamicWeaponItemDataBase, InMagazineBulletItemId);
 }
 
 

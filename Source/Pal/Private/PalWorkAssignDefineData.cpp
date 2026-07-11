@@ -12,5 +12,6 @@ FPalWorkAssignDefineData::FPalWorkAssignDefineData() {
     this->WorkerMaxNum = 0;
     this->AffectSanityValue = 0.00f;
     this->AffectFullStomachValue = 0.00f;
+    this->bUseMultiWorkType = false;
 }
 

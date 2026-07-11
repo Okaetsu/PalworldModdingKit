@@ -13,6 +13,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CurrentVolume;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FadeDurationSeconds;
+    
     PAL_API FPalAudioFadeParameter();
 };
 

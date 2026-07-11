@@ -4,6 +4,7 @@
 UPalMapObjectConcreteModelBase::UPalMapObjectConcreteModelBase() {
     this->bDisposed = false;
     this->WorkeeModuleCache = NULL;
+    this->GuildSecurityModuleCache = NULL;
 }
 
 FName UPalMapObjectConcreteModelBase::TryGetMapObjectId() const {
@@ -45,6 +46,10 @@ UPalMapObjectPasswordLockModule* UPalMapObjectConcreteModelBase::GetPasswordLock
     return NULL;
 }
 
+FGuid UPalMapObjectConcreteModelBase::GetModelInstanceId() const {
+    return FGuid{};
+}
+
 void UPalMapObjectConcreteModelBase::GetMapObjectLocation(FVector& outVector) {
 }
 
@@ -56,8 +61,16 @@ TScriptInterface<IPalMapObjectItemContainerAccessInterface> UPalMapObjectConcret
     return NULL;
 }
 
+TScriptInterface<IPalMapObjectItemContainerAccessInterface> UPalMapObjectConcreteModelBase::GetItemChestContainerAccess() {
+    return NULL;
+}
+
 FGuid UPalMapObjectConcreteModelBase::GetInstanceId() const {
     return FGuid{};
+}
+
+UPalMapObjectGuildSecurityModule* UPalMapObjectConcreteModelBase::GetGuildSecurityModule() const {
+    return NULL;
 }
 
 UPalMapObjectEnergyModule* UPalMapObjectConcreteModelBase::GetEnergyModule() const {

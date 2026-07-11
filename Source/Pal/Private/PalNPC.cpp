@@ -10,6 +10,9 @@ APalNPC::APalNPC(const FObjectInitializer& ObjectInitializer) : Super(ObjectInit
 void APalNPC::RemoveEnemyFromBattleManager(FPalDeadInfo DeadInfo) {
 }
 
+void APalNPC::OnPostSpawned() {
+}
+
 void APalNPC::OnCompletedInitParam(APalCharacter* InCharacter) {
 }
 

@@ -3,10 +3,11 @@
 #include "PalAIActionBase.h"
 #include "PalBaseCampWorkerWalkAroundDynamicInfo.h"
 #include "PalBaseCampWorkerWalkAroundSettings.h"
+#include "PalLaunchRecoveryActionInterface.h"
 #include "PalAIActionBaseCampDodgeWork.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
-class PAL_API UPalAIActionBaseCampDodgeWork : public UPalAIActionBase {
+class PAL_API UPalAIActionBaseCampDodgeWork : public UPalAIActionBase, public IPalLaunchRecoveryActionInterface {
     GENERATED_BODY()
 public:
 private:
@@ -19,5 +20,7 @@ private:
 public:
     UPalAIActionBaseCampDodgeWork();
 
+
+    // Fix for true pure virtual functions not being implemented
 };
 

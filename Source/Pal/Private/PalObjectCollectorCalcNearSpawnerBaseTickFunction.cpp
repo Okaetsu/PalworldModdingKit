@@ -1,0 +1,5 @@
+#include "PalObjectCollectorCalcNearSpawnerBaseTickFunction.h"
+
+FPalObjectCollectorCalcNearSpawnerBaseTickFunction::FPalObjectCollectorCalcNearSpawnerBaseTickFunction() {
+}
+

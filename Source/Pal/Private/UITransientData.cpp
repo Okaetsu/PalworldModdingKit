@@ -7,9 +7,12 @@ FUITransientData::FUITransientData() {
     this->IsOpenedSurvivalGuide = false;
     this->ServerLobbyDialogOpened = false;
     this->LoadingScreenLiving = false;
+    this->bDisableLoadingScreen = false;
     this->CanDisplayBlueprintCategoryInBuildRadialMenu = false;
     this->ShouldPopQuickStackDialog = false;
     this->LastSelectedBuildObjectListCategory = EPalBuildObjectTypeA::Product;
     this->bDiscardRestoreBuildObjectList = false;
+    this->bIsTipsVisible = false;
+    this->bShowGameClearDialog = false;
 }
 

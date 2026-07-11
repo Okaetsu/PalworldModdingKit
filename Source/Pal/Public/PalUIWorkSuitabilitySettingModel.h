@@ -20,6 +20,9 @@ public:
     void RequestChangeBaseCampBattle(const FPalInstanceID& TargetIndividualId, const bool bOn);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasBasePalOperationPermissionByLocalPlayer() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalIndividualCharacterContainer* GetTargetBaseCampWorkerCharacterContainer() const;
     
 };

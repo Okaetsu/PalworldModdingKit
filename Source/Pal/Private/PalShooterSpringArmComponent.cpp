@@ -20,16 +20,40 @@ UPalShooterSpringArmComponent::UPalShooterSpringArmComponent(const FObjectInitia
     this->SlidingCameraArmLength = 400.00f;
     this->SlidingHipShootCameraArmLength = 300.00f;
     this->SlidingAimCameraArmLength = 100.00f;
+    this->bUseWaterCameraParameter = false;
+    this->WaterCameraArmLength = 400.00f;
+    this->WaterHipShootCameraArmLength = 300.00f;
+    this->WaterAimCameraArmLength = 100.00f;
     this->DeadCameraArmLength = 0.00f;
     this->ClimbCameraTargetOffset = 10.00f;
+    this->bDefaultEnableCameraLag = false;
     this->DefaultCameraLagSpeed = 0.00f;
+    this->DefaultCameraLagMaxDistance = 0.00f;
     this->ShooterComponent = NULL;
     this->MoveComponent = NULL;
     this->ParameterComponent = NULL;
     this->DamageReactionComponent = NULL;
     this->bIsSpectated = false;
     this->CameraModifier = NULL;
+    this->CameraModifierWeightInterpSpeed = 2.00f;
+    this->SafetyNetArmLengthInterpSpeed = 12.00f;
+    this->SafetyNetSocketOffsetInterpSpeed = 10.00f;
+    this->SafetyNetTargetOffsetInterpSpeed = 8.00f;
+    this->SafetyNetCameraLagSpeedInterpSpeed = 12.00f;
     this->OriginalTargetArmLength = 0.00f;
+    this->bEnableAttachmentLag = true;
+    this->AttachmentLagSpeed = 10.00f;
+    this->PreviousCapsuleHalfHeight = 0.00f;
+    this->bAttachmentLagInitialized = false;
+    this->bEnableAdaptiveZSmoothing = true;
+    this->AdaptiveZSmoothBufferSize = 3;
+    this->AdaptiveZSmoothCorrectionSpeed = 3.00f;
+    this->AdaptiveZSmoothMaxOffset = 200.00f;
+    this->PreviousFrameZ = 0.00f;
+    this->AdaptiveZSmoothOffset = 0.00f;
+    this->bAdaptiveZSmoothInitialized = false;
+    this->ZDeltaBufferIndex = 0;
+    this->ZDeltaBufferCount = 0;
 }
 
 void UPalShooterSpringArmComponent::UpdateCameraInterp(float DeltaTime) {
@@ -54,6 +78,9 @@ void UPalShooterSpringArmComponent::RegisterAdditionalOffset(const FShooterSprin
 }
 
 void UPalShooterSpringArmComponent::OnUpdatePlayerHp(FFixedPoint64 nowHP, FFixedPoint64 nowMaxHP) {
+}
+
+void UPalShooterSpringArmComponent::OnSwimming(bool IsInSwimming) {
 }
 
 void UPalShooterSpringArmComponent::OnStartAim() {

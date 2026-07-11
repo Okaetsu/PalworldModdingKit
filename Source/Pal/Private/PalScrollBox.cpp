@@ -18,6 +18,8 @@ UPalScrollBox::UPalScrollBox() {
     this->ScrollWhenFocusChanges = EPalScrollWhenFocusChanges::NoScroll;
     this->bAllowRightClickDragScrolling = true;
     this->WheelScrollMultiplier = 1.00f;
+    this->bEnableRightStickScroll = false;
+    this->RightStickScrollSpeed = 0.00f;
 }
 
 void UPalScrollBox::SetWheelScrollMultiplier(float NewWheelScrollMultiplier) {

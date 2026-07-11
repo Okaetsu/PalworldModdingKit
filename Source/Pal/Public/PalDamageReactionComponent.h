@@ -7,6 +7,7 @@
 #include "EPalDamageAnimationReactionType.h"
 #include "EPalDeadType.h"
 #include "EPalWazaID.h"
+#include "PalDamageInfo.h"
 #include "PalDamageRactionInfo.h"
 #include "PalDamageResult.h"
 #include "PalDeadInfo.h"
@@ -27,6 +28,7 @@ class UPalDamageReactionComponent : public UActorComponent {
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSlipDamageDelegate, const FPalDamageResult&, DamageResult);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSleepDelegate, int32, LastDamage);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnProcessedActualDamageDelegate, AActor*, Attacker, AActor*, Defender, int32, ActualDamage);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPartBrokenDelegate, FPalDeadInfo, AttackInfo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnNooseTrapDelegate, AActor*, TrapActor, FVector, FixLocation);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMentalDamageDelegate, FPalDamageResult, DamageResult);
@@ -73,6 +75,9 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnNooseTrapDelegate OnNooseTrapDelegate;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnProcessedActualDamageDelegate OnProcessedActualDamageDelegate;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UPalHitEffectSlot> DamageEffectSlotClass;
     
@@ -108,7 +113,7 @@ public:
     void SlipDamageAndBlowWhenDead(int32 Damage, FVector Velocity);
     
     UFUNCTION(BlueprintCallable)
-    void SlipDamage(int32 Damage, bool ShieldIgnore, EPalDeadType DeadType);
+    void SlipDamage(int32 Damage, bool ShieldIgnore, EPalDeadType DeadType, bool ClearShield);
     
 private:
     UFUNCTION(BlueprintCallable)
@@ -152,6 +157,11 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsIgnoreElementStatus(EPalAdditionalEffectType Effect);
     
+private:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasRevivePalPartnerSkill(const EPalDeadType DeadType) const;
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalInstanceID GetLastAttackerInstanceID();
     
@@ -164,6 +174,9 @@ public:
     void DeathDamage_ForSelfDestruct(FVector Velocity, EPalWazaID WazaID);
     
 private:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanStun(const AActor* Attacker, const AActor* Defender, const FPalDamageInfo& Info) const;
+    
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void CallOnSlipDamageDelegate_ToAll(FPalDamageResult DamageResult);
     
@@ -171,7 +184,18 @@ private:
     void CallOnDamageDelegateAlways(FPalDamageResult DamageResult);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void CallOnActualDamageProcessed_ToAll(AActor* Attacker, AActor* Defender, int32 ActualDamage);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void CallDeadDelegate_ToALL(FPalDeadInfo DeadInfo);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void AddLargeDownAbleHPRate(float HPRate);
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void AddElementStatusAdditionalValue_OneType(EPalAdditionalEffectType Effect, float Value);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void AddDeadImplus(FPalDamageResult DamageResult);

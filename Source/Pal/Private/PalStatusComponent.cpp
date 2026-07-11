@@ -13,6 +13,9 @@ void UPalStatusComponent::SetDisableAddStatusIDs(TArray<EPalStatusID> StatusIDs)
 void UPalStatusComponent::ResetDisableAddStatusIDs() {
 }
 
+void UPalStatusComponent::RemoveStatusInvoker(const FGuid& InvokerID) {
+}
+
 void UPalStatusComponent::RemoveStatus_ToServer_Implementation(EPalStatusID statusID, int32 issuerID) {
 }
 
@@ -22,11 +25,16 @@ void UPalStatusComponent::RemoveStatus(EPalStatusID statusID) {
 void UPalStatusComponent::RemoveAll() {
 }
 
+void UPalStatusComponent::OnStartPassiveSkill(EPalPassiveSkillEffectType EffectType, float Value) {
+}
+
 void UPalStatusComponent::OnRep_ExecutionStatusList() {
 }
 
-UPalStatusBase* UPalStatusComponent::GetExecutionStatusCache(EPalStatusID statusID) {
-    return NULL;
+void UPalStatusComponent::OnEndPassiveSkill(EPalPassiveSkillEffectType EffectType) {
+}
+
+void UPalStatusComponent::OnChangeActiveActor(bool bInIsActive) {
 }
 
 UPalStatusBase* UPalStatusComponent::GetExecutionStatus(EPalStatusID statusID) {
@@ -37,10 +45,19 @@ TArray<EPalStatusID> UPalStatusComponent::GetDisableAddStatusIDs() const {
     return TArray<EPalStatusID>();
 }
 
+void UPalStatusComponent::EndPlay(const TEnumAsByte<EEndPlayReason::Type> EndPlayReason) {
+}
+
 void UPalStatusComponent::BeginPlay() {
 }
 
 void UPalStatusComponent::AddStatusParameter(EPalStatusID statusID, FStatusDynamicParameter Param) {
+}
+
+void UPalStatusComponent::AddStatusInvokerParameter(EPalStatusID statusID, FStatusDynamicParameter Param, const FGuid& InvokerID) {
+}
+
+void UPalStatusComponent::AddStatusInvoker(EPalStatusID statusID, const FGuid& InvokerID) {
 }
 
 void UPalStatusComponent::AddStatus_ToServer_Implementation(EPalStatusID statusID, FStatusDynamicParameter Param, int32 issuerID) {

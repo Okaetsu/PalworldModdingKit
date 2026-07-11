@@ -105,7 +105,7 @@ private:
     void SpawnedNonReliableActor_ToALL(UClass* actorClass, FNetworkActorSpawnParameters SpawnParameter, int32 issuerID);
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void SpawnedActor_ToALL(AActor* SpawnedActor, AActor* SpawnedController, FNetworkActorSpawnParameters SpawnParameter, FGuid Guid);
+    void SpawnedActor_ToALL(AActor* SpawnedActor, AActor* SpawnedController, FGuid Guid);
     
 public:
     UFUNCTION(BlueprintCallable)

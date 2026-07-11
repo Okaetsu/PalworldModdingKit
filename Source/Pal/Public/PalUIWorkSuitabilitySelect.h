@@ -27,6 +27,9 @@ protected:
     void RequestChangeBattleSetting(const UPalIndividualCharacterSlot* TargetCharacterSlot, bool CanBattle);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasBasePalOperationPermissionByLocalPlayer() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetTargetCharacterContainer(UPalIndividualCharacterContainer*& OutContainer) const;
     
 };

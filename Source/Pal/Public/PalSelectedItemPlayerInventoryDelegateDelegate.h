@@ -3,5 +3,5 @@
 #include "PalItemSlotId.h"
 #include "PalSelectedItemPlayerInventoryDelegateDelegate.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_TwoParams(FPalSelectedItemPlayerInventoryDelegate, const FPalItemSlotId&, itemSlotId, const int32, itemNum);
+UDELEGATE() DECLARE_DYNAMIC_DELEGATE_TwoParams(FPalSelectedItemPlayerInventoryDelegate, const FPalItemSlotId&, ItemSlotId, const int64, itemNum);
 

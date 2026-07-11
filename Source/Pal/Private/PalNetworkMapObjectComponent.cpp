@@ -66,6 +66,12 @@ void UPalNetworkMapObjectComponent::RequestConcreteModel_FPalNetArchive(const FG
 void UPalNetworkMapObjectComponent::RequestConcreteModel_bool(const FGuid& ConcreteModelInstanceId, const FName FunctionName, bool Value) {
 }
 
+void UPalNetworkMapObjectComponent::RequestChangeCustomNameByLocalPlayer(const FGuid& InstanceId, const FString& NewCustomName) {
+}
+
+void UPalNetworkMapObjectComponent::RequestChangeCustomName_ToServer_Implementation(const FGuid& InstanceId, const FString& NewCustomName) {
+}
+
 void UPalNetworkMapObjectComponent::RequestBuildCancel_ToServer_Implementation(const FGuid& InstanceId) {
 }
 
@@ -193,6 +199,9 @@ void UPalNetworkMapObjectComponent::BroadcastStartTeamMissionLog_ToServer_Implem
 }
 
 void UPalNetworkMapObjectComponent::AddStartTeamMissionLog_ToServer_Implementation() {
+}
+
+void UPalNetworkMapObjectComponent::AddCompleteTeamMissionLog_ToClient_Implementation(const FName& MissionId) {
 }
 
 

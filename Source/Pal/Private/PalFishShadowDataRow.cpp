@@ -6,6 +6,7 @@ FPalFishShadowDataRow::FPalFishShadowDataRow() {
     this->SearchRadius = 0.00f;
     this->SearchProbability = 0.00f;
     this->KingPassiveRate = 0.00f;
+    this->BossPassiveRate = 0.00f;
     this->RarePassiveRate = 0.00f;
     this->BehaviorType = EPalFishBattleBehaviorType::Normal;
 }

@@ -10,5 +10,6 @@ enum class EPalAttackType : uint8 {
     SlipDamage,
     Mine,
     WorkActionAttack,
+    LaserMiningTool,
 };
 

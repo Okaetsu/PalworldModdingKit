@@ -110,6 +110,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* ArenaUnusableItemDataTable;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* PalAwakeningItemElementTable;
+    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<float> TalentMagnificationList;
@@ -134,6 +137,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 HigherLevelOtomoFromTrainer(const UPalIndividualCharacterParameter* IndividualCharacterParameter) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetZukanIndex(FName RowName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetWorkSuitabilityRank(FName RowName, TMap<EPalWorkSuitability, int32>& WorkSuitabilities);
@@ -193,7 +199,7 @@ public:
     void GetPassiveSkill(FName RowName, TArray<FName>& PassiveSkill);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    void GetPartnerSkillMsgID(const FName& CharacterID, FName& OutMsgID);
+    EPalElementType GetPalAwakeningItemElement(FName ItemId) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalOrganizationType GetOrganizationType(FName RowName);
@@ -308,6 +314,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TSoftObjectPtr<UTexture2D> GetBossNPCIconTexture(const FName& SpawnerID) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetBestWorkSuitability(FName RowName, EPalWorkSuitability& BestWorkSuitability);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalBattleBGMType GetBattleBGM(FName RowName);

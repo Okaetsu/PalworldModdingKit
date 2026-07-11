@@ -1,0 +1,5 @@
+#include "PalLevelGimmick_AreaBarrier_Lock_SpawnerOverrideInfo.h"
+
+FPalLevelGimmick_AreaBarrier_Lock_SpawnerOverrideInfo::FPalLevelGimmick_AreaBarrier_Lock_SpawnerOverrideInfo() {
+}
+

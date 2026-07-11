@@ -1,10 +1,10 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "EPalWazaID.h"
 #include "PalActiveSkill.generated.h"
 
-class AActor;
 class UPalWazaBulletEmiiterOverlapBase;
 
 UCLASS(Blueprintable)
@@ -23,12 +23,6 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnCoolStateChange OnCoolFinish;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_ChangeCTState, meta=(AllowPrivateAccess=true))
-    bool IsCooling;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_UpdateCoolTime, meta=(AllowPrivateAccess=true))
-    float ReuseCoolTimer;
-    
 private:
     UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EPalWazaID WazaType;
@@ -40,10 +34,22 @@ private:
     bool IsStopTimer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float PendingDecreaseSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float RemainingSecondsAtStop;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float CoolDownMaxAtStop;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float DatabaseCoolTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    float NextCoolTime;
+    FDateTime LastUsedTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float CoolDownTimeMax;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsTransient;
@@ -54,19 +60,8 @@ private:
 public:
     UPalActiveSkill();
 
-    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-
-    UFUNCTION(BlueprintCallable)
-    void OnRep_UpdateCoolTime();
-    
-    UFUNCTION(BlueprintCallable)
-    void OnRep_ChangeCTState();
-    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsCoolTimeFinish() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool IsConditionSatisfy(AActor* SelfActor) const;
     
 };
 

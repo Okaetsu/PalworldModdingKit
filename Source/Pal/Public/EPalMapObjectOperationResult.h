@@ -6,6 +6,7 @@ UENUM(BlueprintType)
 enum class EPalMapObjectOperationResult : uint8 {
     None,
     Canceled,
+    FailedInLimitVolume_WorldTree,
     FailedInUnderRaidPVP,
     FailedInLimitVolume,
     FailedInDungeon,
@@ -25,6 +26,7 @@ enum class EPalMapObjectOperationResult : uint8 {
     FailedInValidRequestHandler,
     FailedCannotDismantleNotAuthenticatedPasswordLock,
     FailedCannotDismantleLockedPrivateByNotLocalPlayer,
+    FailedCannotDismantleGuildSecurityRestricted,
     FailedNotReady,
     FailNotFoundClass,
     FailLackSupportedLevel,
@@ -58,6 +60,10 @@ enum class EPalMapObjectOperationResult : uint8 {
     FailedExceedMaxBuildCountInRaidBossArea,
     FailedCannotInstallOutOfBaseCampInRaidBossArea,
     FailedPlayerCannotSpawn,
+    FailInvaderTarget,
+    FailedNoGuildPermission,
+    FailedServerValidationFloating,
+    FailedNoBlueprintItem,
     Success,
 };
 

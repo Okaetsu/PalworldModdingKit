@@ -19,6 +19,7 @@ class UPalBaseCampModel;
 class UPalMapObjectCharacterContainerModule;
 class UPalMapObjectConcreteModelBase;
 class UPalMapObjectEnergyModule;
+class UPalMapObjectGuildSecurityModule;
 class UPalMapObjectItemContainerModule;
 class UPalMapObjectPasswordLockModule;
 class UPalMapObjectSwitchModule;
@@ -54,6 +55,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPalMapObjectWorkeeModule* WorkeeModuleCache;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPalMapObjectGuildSecurityModule* GuildSecurityModuleCache;
     
 public:
     UPalMapObjectConcreteModelBase();
@@ -96,6 +100,9 @@ public:
     UPalMapObjectPasswordLockModule* GetPasswordLockModule() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGuid GetModelInstanceId() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetMapObjectLocation(FVector& outVector);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -105,7 +112,13 @@ public:
     TScriptInterface<IPalMapObjectItemContainerAccessInterface> GetItemContainerAccess();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    TScriptInterface<IPalMapObjectItemContainerAccessInterface> GetItemChestContainerAccess();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     FGuid GetInstanceId() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UPalMapObjectGuildSecurityModule* GetGuildSecurityModule() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalMapObjectEnergyModule* GetEnergyModule() const;

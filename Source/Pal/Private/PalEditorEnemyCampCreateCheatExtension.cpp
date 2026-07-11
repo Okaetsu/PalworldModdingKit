@@ -3,6 +3,9 @@
 UPalEditorEnemyCampCreateCheatExtension::UPalEditorEnemyCampCreateCheatExtension() {
 }
 
+void UPalEditorEnemyCampCreateCheatExtension::RecalcurateBuildObjectConnectDurability() {
+}
+
 void UPalEditorEnemyCampCreateCheatExtension::InstallBuildObject(const FName BuildObjectId, const FVector& Location, const float Yaw) {
 }
 

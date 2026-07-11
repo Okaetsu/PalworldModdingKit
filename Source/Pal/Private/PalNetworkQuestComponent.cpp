@@ -12,6 +12,12 @@ void UPalNetworkQuestComponent::RequestOrderQuest_ToServer_Implementation(const 
 void UPalNetworkQuestComponent::RequestOrderInitialQuest_ToServer_Implementation() {
 }
 
+void UPalNetworkQuestComponent::RequestJumpToQuestBlock_ToServer_Implementation(const FName& QuestId, int32 TargetBlockIndex) {
+}
+
+void UPalNetworkQuestComponent::RequestCompleteQuestTreeForce_ToServer_Implementation(const FName& QuestId) {
+}
+
 void UPalNetworkQuestComponent::RequestCompleteQuest_ToServer_Implementation(const FName& QuestId) {
 }
 

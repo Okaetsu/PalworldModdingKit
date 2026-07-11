@@ -8,11 +8,16 @@ UPalActionBase::UPalActionBase() {
     this->bIsChangeWalkableFloorAngle = true;
     this->ActionWalkableFloorAngle = 45.00f;
     this->bIsDisableNavWalk = false;
+    this->bSuppressMovementComponentTick = false;
     this->bIsEnableAutoBlink = false;
     this->bIsReflectForClient = false;
 }
 
 void UPalActionBase::TickAction_Implementation(float DeltaTime) {
+}
+
+bool UPalActionBase::ShouldStopMovementOnAdjustTransform_Implementation() const {
+    return false;
 }
 
 void UPalActionBase::SetAnimRateScale(FName flagName, float AnimRateScale) {
@@ -123,6 +128,10 @@ bool UPalActionBase::CanStepCancel_Implementation() {
 }
 
 bool UPalActionBase::CanNextActionCancel_Implementation() {
+    return false;
+}
+
+bool UPalActionBase::CanInterruptByMovementModeAction_Implementation() {
     return false;
 }
 

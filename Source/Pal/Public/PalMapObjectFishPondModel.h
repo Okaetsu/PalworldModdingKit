@@ -4,6 +4,7 @@
 #include "PalMapObjectConcreteModelBase.h"
 #include "PalMapObjectFishPondCaughtCharacterInfo.h"
 #include "PalNetArchive.h"
+#include "PalWorkProgressWorkableCheckInterface.h"
 #include "Templates/SubclassOf.h"
 #include "PalMapObjectFishPondModel.generated.h"
 
@@ -12,7 +13,7 @@ class UPalUserWidgetOverlayUI;
 class UPalWorkBase;
 
 UCLASS(Blueprintable)
-class PAL_API UPalMapObjectFishPondModel : public UPalMapObjectConcreteModelBase {
+class PAL_API UPalMapObjectFishPondModel : public UPalMapObjectConcreteModelBase, public IPalWorkProgressWorkableCheckInterface {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReturnSelfMulticastDelegate, UPalMapObjectFishPondModel*, Model);
@@ -80,5 +81,7 @@ private:
     UFUNCTION(BlueprintCallable)
     void NotifyFailedObtainCharacters_ClientInternal();
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

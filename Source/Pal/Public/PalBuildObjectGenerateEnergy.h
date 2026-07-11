@@ -13,6 +13,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Generating, meta=(AllowPrivateAccess=true))
     bool bGenerating;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_OverHeatCooling, meta=(AllowPrivateAccess=true))
+    bool bOverHeatCooling;
+    
 public:
     APalBuildObjectGenerateEnergy(const FObjectInitializer& ObjectInitializer);
 
@@ -24,10 +27,19 @@ private:
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnStartOverHeatCoolingWork();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnStartGenerate();
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_OverHeatCooling(const bool bOldValue);
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_Generating(const bool bOldValue);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnEndOverHeatCoolingWork();
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnEndGenerate();

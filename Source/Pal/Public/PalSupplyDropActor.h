@@ -39,6 +39,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_MapObjectID, meta=(AllowPrivateAccess=true))
     FGuid MapObjectId;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    float CurrentTime;
+    
 public:
     APalSupplyDropActor(const FObjectInitializer& ObjectInitializer);
 
@@ -57,6 +60,10 @@ protected:
 public:
     UFUNCTION(BlueprintCallable)
     void OnCreateMapObject(APalMapObject* MapObject);
+    
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetRemainingTimeToLanding() const;
     
 };
 

@@ -86,6 +86,9 @@ public:
     FSoftObjectPath GameProgressPresetTableAssetPath;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSoftObjectPath ItemPickupDataTableAssetPath;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bEditorToolMenu_DisplaySpreadSheetName;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -93,6 +96,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FSoftObjectPath> DataLayerSettingsAssetPathMap;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> StartDebugTeleportPointNames;
     
     UPalEditorSetting();
 

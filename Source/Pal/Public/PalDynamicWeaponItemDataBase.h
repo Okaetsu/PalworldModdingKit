@@ -19,7 +19,7 @@ protected:
     float OldDurability;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RemainingBullets, meta=(AllowPrivateAccess=true))
     int32 RemainingBullets;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
@@ -30,6 +30,12 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ForceUpdateBulletsCounter, meta=(AllowPrivateAccess=true))
     uint8 ForceUpdateBulletsCounter;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MaxMagazineSize;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FName InMagazineBulletItemId;
     
 public:
     UPalDynamicWeaponItemDataBase();
@@ -58,6 +64,9 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
+    void OnRep_RemainingBullets();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_ForceUpdateBulletsCounter();
     
     UFUNCTION(BlueprintCallable)
@@ -84,6 +93,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     float GetMaxDurability() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FName GetInMagazineBulletId() const;
     
     UFUNCTION(BlueprintCallable)
     float GetDurability() const;

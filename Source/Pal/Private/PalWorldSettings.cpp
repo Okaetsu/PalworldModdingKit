@@ -14,8 +14,10 @@ APalWorldSettings::APalWorldSettings(const FObjectInitializer& ObjectInitializer
     this->FunnelCharacterManagerClass = NULL;
     this->ArenaWorldSubsystemClass = NULL;
     this->RaidBossAreaWorldSubsystemClass = NULL;
+    this->LaunchRecoverySubsystemClass = NULL;
     this->StaticMeshImposterSubsystemClass = NULL;
     this->bRequestCharacterMake = false;
+    this->bShouldCreatePostProcessHeightFog = false;
 }
 
 

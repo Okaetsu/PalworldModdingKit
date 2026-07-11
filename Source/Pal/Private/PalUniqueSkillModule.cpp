@@ -30,6 +30,10 @@ bool UPalUniqueSkillModule::IsPlayerControlled() const {
     return false;
 }
 
+bool UPalUniqueSkillModule::IsOtomo() const {
+    return false;
+}
+
 bool UPalUniqueSkillModule::IsLocallyControlled() const {
     return false;
 }

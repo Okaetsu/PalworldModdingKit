@@ -10,6 +10,7 @@
 #include "EPalWorkSuitability.h"
 #include "FixedPoint64.h"
 #include "PalIndividualCharacterSaveParameter.h"
+#include "PalWorkSuitabilityInfo.h"
 #include "PalWorkSuitabilityPreferenceInfo.h"
 #include "PalIndividualCharacterSaveParameterUtility.generated.h"
 
@@ -20,6 +21,9 @@ public:
     UPalIndividualCharacterSaveParameterUtility();
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool IsValid(const FPalIndividualCharacterSaveParameter& SaveParameter);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static TArray<FPalWorkSuitabilityInfo> GetWorkSuitabilityPassiveAddRankList(const UObject* WorldContextObject, const FPalIndividualCharacterSaveParameter& SaveParameter);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static FPalWorkSuitabilityPreferenceInfo GetSaveParameterValue_WorkSuitabilityOptionInfo(const FPalIndividualCharacterSaveParameter& SaveParameter);
@@ -140,6 +144,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool GetSaveParameterValue_bImportedCharacter(const FPalIndividualCharacterSaveParameter& SaveParameter);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool GetSaveParameterValue_Awakening(const FPalIndividualCharacterSaveParameter& SaveParameter);
     
 };
 

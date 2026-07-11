@@ -33,6 +33,7 @@ enum class EPalLocalizeTextCategory : uint8 {
     CharacterTeamMission,
     LabResearch,
     FishPondTargetType,
+    PartnerSkillAppendText,
     Max,
 };
 

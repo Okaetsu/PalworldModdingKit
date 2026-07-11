@@ -4,6 +4,7 @@
 #include "PalDataTableRowName_ItemData.h"
 #include "PalPassivePartnerSkillActiveSkillParameters.h"
 #include "PalPassivePartnerSkillIdAndParameters.h"
+#include "PalPassivePartnerSkillIdForTextReference.h"
 #include "PalPartnerSkillParameterDataRow.generated.h"
 
 USTRUCT(BlueprintType)
@@ -18,6 +19,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalPassivePartnerSkillIdAndParameters> PassiveSkills;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalPassivePartnerSkillIdForTextReference> TextReferencePassiveSkills;
     
     PAL_API FPalPartnerSkillParameterDataRow();
 };

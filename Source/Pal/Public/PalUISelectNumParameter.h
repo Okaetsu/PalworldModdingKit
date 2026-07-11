@@ -17,24 +17,24 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalUISelectNumChangedNumDelegate changedNumCallBacl;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 MinNum;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int64 MinNum;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 MaxNum;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int64 MaxNum;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 defaultNum;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int64 defaultNum;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector2D Position;
     
     UPalUISelectNumParameter();
     UFUNCTION(BlueprintCallable)
-    void InvokeComplateCallback(EPalUISelectNumResult Result, int32 selectedNum);
+    void InvokeComplateCallback(EPalUISelectNumResult Result, int64 selectedNum);
     
     UFUNCTION(BlueprintCallable)
-    void InvokeChangedNumCallback(int32 selectedNum);
+    void InvokeChangedNumCallback(int64 selectedNum);
     
 };
 

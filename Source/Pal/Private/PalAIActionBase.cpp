@@ -5,6 +5,9 @@ UPalAIActionBase::UPalAIActionBase() {
     this->bIsAutoStopBehaviorTree = true;
     this->AiActionCategory = EPalAIActionCategory::Undefined;
     this->DefaultPriority = EAIRequestPriority::SoftScript;
+    this->bRejectUnwalkableNonLinkPath = false;
+    this->UnwalkablePathRejectZTolerance = 80.00f;
+    this->UnwalkablePathMaxValidationDistance = 800.00f;
 }
 
 void UPalAIActionBase::SetWalkSpeedByMaxSpeed_ForAIAction(const float MaxSpeed, const EPalMovementSpeedType DefaultMoveSpeedType) {
@@ -25,13 +28,15 @@ bool UPalAIActionBase::PushChildAction(UPawnAction* action) {
     return false;
 }
 
-
 bool UPalAIActionBase::IsPaused() const {
     return false;
 }
 
 bool UPalAIActionBase::IsActive() const {
     return false;
+}
+
+void UPalAIActionBase::HandleSensorSightCheckAsyncCompleted(bool bIncludedPlayer, bool bIncludedAliveNPC, bool bIncludedEdibleDeadNPC, const TArray<APalCharacter*>& InSightCharacters) {
 }
 
 FString UPalAIActionBase::GetSimpleName() const {

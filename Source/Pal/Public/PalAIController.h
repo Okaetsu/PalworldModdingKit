@@ -3,9 +3,14 @@
 #include "AIController.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
+#include "EPalAsyncMoveStatus.h"
 #include "EPalCharacterImportanceType.h"
 #include "EPalWazaID.h"
+#include "PalAsyncMoveRequestId.h"
+#include "PalAsyncMoveRequester.h"
 #include "PalDeadInfo.h"
 #include "PalPathFollowingBlockDetectionParams.h"
 #include "Templates/SubclassOf.h"
@@ -23,7 +28,7 @@ class UPalHate;
 class UPalSquad;
 
 UCLASS(Blueprintable)
-class PAL_API APalAIController : public AAIController {
+class PAL_API APalAIController : public AAIController, public IPalAsyncMoveRequester {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -81,9 +86,6 @@ protected:
     TSubclassOf<UPalAIBlackboardBase> PalBlackboardClass;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    FTimerHandle DeadBodyDeleteTimerHandle;
-    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsDeadBodyTimeDelate;
     
@@ -114,7 +116,7 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable)
-    void SimpleMoveToActorWithLineTraceGround(const AActor* GoalActor);
+    void SimpleMoveToActorWithLineTraceGround(const AActor* GoalActor, TEnumAsByte<ECollisionChannel> CollisionChannel);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -227,11 +229,25 @@ protected:
     AActor* CopyTargetFromOtherAI(const AActor* FromAcotr);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanMoveStraight_TargetLocation(FVector TargetLocation);
+    
+    UFUNCTION(BlueprintCallable)
+    FPalAsyncMoveRequestId BP_RequestAsyncMoveTo(FVector Goal, float AcceptanceRadius, bool bProjectDestinationToNavigation, bool bCanStrafe, bool bAllowPartialPath);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalAsyncMoveStatus BP_GetAsyncMoveStatus(FPalAsyncMoveRequestId ID, bool& bIsOwnerActive) const;
+    
+    UFUNCTION(BlueprintCallable)
+    bool BP_CancelAsyncMoveIfOwner(FPalAsyncMoveRequestId ID);
+    
     UFUNCTION(BlueprintCallable)
     void AddTargetPlayer_ForEnemy(AActor* PlayerOrPal);
     
     UFUNCTION(BlueprintCallable)
     void AddTargetNPC(AActor* NPC);
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

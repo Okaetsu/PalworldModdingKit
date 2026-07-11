@@ -39,7 +39,7 @@ void UPalFacialComponent::ChangeMouth_ForMontageNotify(EPalFacialMouthType Mouth
 void UPalFacialComponent::ChangeEyeAndMouthMesh(EPalFacialEyeType Eye) {
 }
 
-void UPalFacialComponent::ChangeEye_ForMontageNotify(EPalFacialEyeType Eye) {
+void UPalFacialComponent::ChangeEye_ForMontageNotify(EPalFacialEyeType Eye, EPalFacialEyeTarget EyeTarget) {
 }
 
 void UPalFacialComponent::ChangeDefaultFacial() {

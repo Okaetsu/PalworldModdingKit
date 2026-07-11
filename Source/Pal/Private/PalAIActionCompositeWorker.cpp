@@ -19,7 +19,7 @@ bool UPalAIActionCompositeWorker::TryFindNextWork() {
     return false;
 }
 
-void UPalAIActionCompositeWorker::RegisterFixedAssignWorkAttack(const FGuid& MapObjectModelInstanceId) {
+void UPalAIActionCompositeWorker::RegisterFixedAssignWorkAttack(const FGuid& MapObjectModelInstanceId, EPalWorkAssignableCheckResult& OutCheckResult, const bool bByOtomo) {
 }
 
 void UPalAIActionCompositeWorker::RegisterFixedAssignWork(const FGuid& WorkId) {

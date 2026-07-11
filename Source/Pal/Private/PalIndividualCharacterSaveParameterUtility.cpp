@@ -7,6 +7,10 @@ bool UPalIndividualCharacterSaveParameterUtility::IsValid(const FPalIndividualCh
     return false;
 }
 
+TArray<FPalWorkSuitabilityInfo> UPalIndividualCharacterSaveParameterUtility::GetWorkSuitabilityPassiveAddRankList(const UObject* WorldContextObject, const FPalIndividualCharacterSaveParameter& SaveParameter) {
+    return TArray<FPalWorkSuitabilityInfo>();
+}
+
 FPalWorkSuitabilityPreferenceInfo UPalIndividualCharacterSaveParameterUtility::GetSaveParameterValue_WorkSuitabilityOptionInfo(const FPalIndividualCharacterSaveParameter& SaveParameter) {
     return FPalWorkSuitabilityPreferenceInfo{};
 }
@@ -164,6 +168,10 @@ FName UPalIndividualCharacterSaveParameterUtility::GetSaveParameterValue_Charact
 }
 
 bool UPalIndividualCharacterSaveParameterUtility::GetSaveParameterValue_bImportedCharacter(const FPalIndividualCharacterSaveParameter& SaveParameter) {
+    return false;
+}
+
+bool UPalIndividualCharacterSaveParameterUtility::GetSaveParameterValue_Awakening(const FPalIndividualCharacterSaveParameter& SaveParameter) {
     return false;
 }
 

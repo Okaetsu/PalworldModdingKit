@@ -76,6 +76,9 @@ protected:
     void SetAreaRadius(EPalRandomIncidentSpawnerAreaType AreaType, float Radius);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void ReceiveDrawDebugShape(float Delta);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnIncidentSpawned(UPalIncidentBase* Incident, UPalIncidentDynamicParameterRandom* DynamicParameter);
     
 public:

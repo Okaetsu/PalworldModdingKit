@@ -2,6 +2,7 @@
 
 FPalDamageInfo::FPalDamageInfo() {
     this->NativeDamageValue = 0;
+    this->BasePower = 0;
     this->RedirectDamageValue = 0;
     this->Category = EPalWazaCategory::Melee;
     this->IsBlowAttack = false;
@@ -39,5 +40,11 @@ FPalDamageInfo::FPalDamageInfo() {
     this->WeaponDamageRatePvP = 0.00f;
     this->statusID = EPalStatusID::None;
     this->bRedirectDamage = false;
+    this->IgnoreCanProcessDamage = false;
+    this->HumanStunType = EPalHumanStunType::None;
+    this->bIsExplosionDamage = false;
+    this->bCannotKill = false;
+    this->bIsLastBullet = false;
+    this->bIsPartnerSkillAttackBullet = false;
 }
 

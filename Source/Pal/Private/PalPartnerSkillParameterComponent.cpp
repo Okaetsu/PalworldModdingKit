@@ -3,14 +3,9 @@
 #include "Templates/SubclassOf.h"
 
 UPalPartnerSkillParameterComponent::UPalPartnerSkillParameterComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
-    this->SkillName = TEXT("Unknown");
-    this->WazaID = EPalWazaID::None;
     this->bCanThrowPal = true;
     this->bCanChangeWeapon = true;
     this->bIsToggleKey = false;
-    this->bIdlelCostDecreaseEveryFrame = false;
-    this->bIsExecSkillContinuation = false;
-    this->bIsOneShotRideAction = false;
     this->bIsRunning = false;
     this->bIsOverheat = false;
     this->bIsExecuting = false;
@@ -19,11 +14,10 @@ UPalPartnerSkillParameterComponent::UPalPartnerSkillParameterComponent(const FOb
     this->FunnelCharacterClass = NULL;
     this->FunnelControllerClass = NULL;
     this->FunnelAttackWazaID = EPalWazaID::None;
+    this->FunnelCharacterClass_NoAutoSpawn = NULL;
+    this->FunnelControllerClass_NoAutoSpawn = NULL;
     this->ResidentModuleClass = NULL;
     this->PassiveSkill = NULL;
-    this->IsRidingActiveSkillNotWeapon = false;
-    this->RidingActiveSkillNotWeaponCondition = EPalRidingActiveSkillNotWeaponCondition::None;
-    this->bIsToggleRidingActiveSkillNotWeapon = false;
 }
 
 void UPalPartnerSkillParameterComponent::Stop() {
@@ -57,6 +51,12 @@ void UPalPartnerSkillParameterComponent::OnUpdateInventoryContainer(UPalItemCont
 }
 
 void UPalPartnerSkillParameterComponent::OnUpdateCharacterRank(const int32 NowRank, const int32 OldRank) {
+}
+
+void UPalPartnerSkillParameterComponent::OnTrainerPassiveSkillRemoved(EPalPassiveSkillEffectType EffectType) {
+}
+
+void UPalPartnerSkillParameterComponent::OnTrainerPassiveSkillChanged(EPalPassiveSkillEffectType EffectType, float Value) {
 }
 
 void UPalPartnerSkillParameterComponent::OnRideInactivated() {
@@ -110,7 +110,7 @@ bool UPalPartnerSkillParameterComponent::IsRunning() const {
     return false;
 }
 
-bool UPalPartnerSkillParameterComponent::IsRestrictedByItems(AActor* Trainer) const {
+bool UPalPartnerSkillParameterComponent::IsRestrictedByItems(const AActor* Trainer) const {
     return false;
 }
 
@@ -119,6 +119,10 @@ bool UPalPartnerSkillParameterComponent::IsPlayerTrigger() const {
 }
 
 bool UPalPartnerSkillParameterComponent::IsPlayerReviveTrigger() const {
+    return false;
+}
+
+bool UPalPartnerSkillParameterComponent::IsPalReviveTrigger() const {
     return false;
 }
 
@@ -175,6 +179,14 @@ float UPalPartnerSkillParameterComponent::GetResidentSkillMainValueByRank() cons
 
 FFixedPoint UPalPartnerSkillParameterComponent::GetMainDamage() const {
     return FFixedPoint{};
+}
+
+TSubclassOf<APalAIController> UPalPartnerSkillParameterComponent::GetFunnelControllerClassNoAutoSpawn() {
+    return NULL;
+}
+
+TSubclassOf<APalFunnelCharacter> UPalPartnerSkillParameterComponent::GetFunnelCharacterClassNoAutoSpawn() {
+    return NULL;
 }
 
 float UPalPartnerSkillParameterComponent::GetEffectTimeRatio() {

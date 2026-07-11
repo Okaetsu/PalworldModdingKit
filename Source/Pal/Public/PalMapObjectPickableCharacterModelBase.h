@@ -52,5 +52,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalIndividualCharacterSaveParameter GetCharacterSaveParameter() const;
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void CorrectInvalidCreatedAtRealTimeForOldSave_ServerInternal();
+    
 };
 

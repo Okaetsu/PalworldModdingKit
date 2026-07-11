@@ -49,5 +49,17 @@ enum class EPalMapObjectDestroyFXType : uint8 {
     Reserved018,
     Reserved019,
     Reserved020,
+    FoliageTree_WorldTree_BrightYellow,
+    FoliageTree_WorldTree_Yellow,
+    FoliageTree_WorldTree_DarkGreen,
+    FoliageTree_WorldTree_Green,
+    FoliageTree_WorldTree_Orange,
+    FoliageTree_WorldTree_RedOrange,
+    FoliageTree_WorldTree_Purple,
+    FoliageTree_WorldTree_White,
+    FoliageTree_WorldTree_White01,
+    FoliageTree_Blue,
+    FoliageTree_TreeSea,
+    FoliageTree_DarkGreen,
 };
 

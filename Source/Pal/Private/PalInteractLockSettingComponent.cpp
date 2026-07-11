@@ -3,6 +3,9 @@
 UPalInteractLockSettingComponent::UPalInteractLockSettingComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 }
 
+void UPalInteractLockSettingComponent::ShowDialogWithCallback_LocalPlayer(FPalDialogBoolCallback Callback) {
+}
+
 void UPalInteractLockSettingComponent::ShowDialog_LocalPlayer() {
 }
 

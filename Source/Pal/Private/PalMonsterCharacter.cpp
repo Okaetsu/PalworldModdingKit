@@ -4,9 +4,10 @@
 APalMonsterCharacter::APalMonsterCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bAllowReceiveTickEventOnDedicatedServer = false;
     this->LiftupObjectComponent = CreateDefaultSubobject<UPalCharacterLiftupObjectComponent>(TEXT("Liftup"));
+    this->RideMoveAkEvent = NULL;
 }
 
-void APalMonsterCharacter::SelectedFeedingItem(const FPalItemSlotId& itemSlotId, const int32 Num) {
+void APalMonsterCharacter::SelectedFeedingItem(const FPalItemSlotId& ItemSlotId, const int64 Num) {
 }
 
 void APalMonsterCharacter::RefreshSkin(bool bIsActive) {
@@ -20,6 +21,11 @@ void APalMonsterCharacter::OnSelectedOrderWorkerRadialMenu(UPalHUDDispatchParame
 
 bool APalMonsterCharacter::IsLiftupObject() const {
     return false;
+}
+
+
+UAkAudioEvent* APalMonsterCharacter::GetRideMoveAkEvent() const {
+    return NULL;
 }
 
 

@@ -3,6 +3,7 @@
 UPalInvaderBaseCampObserver::UPalInvaderBaseCampObserver() {
     this->TargetBaseCamp = NULL;
     this->bIsInvading = false;
+    this->bIsInvaderPathSearching = false;
     this->bIsCoolTime = false;
     this->CoolTimeFinish = 0.00f;
     this->CoolTimeElapsed = 0.00f;

@@ -1,7 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EPalElementType.h"
-#include "PalDataTableRowName_PalMonsterData.h"
+#include "EPalTribeID.h"
 #include "PalPassiveSkillFindOtomoParameter.generated.h"
 
 USTRUCT(BlueprintType)
@@ -9,10 +9,10 @@ struct FPalPassiveSkillFindOtomoParameter {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    EPalElementType TargetElementType;
+    TArray<EPalElementType> TargetElementTypes;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FPalDataTableRowName_PalMonsterData> TargetPalIds;
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<EPalTribeID> TargetPalTribeIds;
     
     PAL_API FPalPassiveSkillFindOtomoParameter();
 };

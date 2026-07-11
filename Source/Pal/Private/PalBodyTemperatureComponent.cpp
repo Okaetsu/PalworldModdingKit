@@ -33,6 +33,9 @@ void UPalBodyTemperatureComponent::OnEndPassiveSkill(EPalPassiveSkillEffectType 
 void UPalBodyTemperatureComponent::OnChangeHour() {
 }
 
+void UPalBodyTemperatureComponent::GetTemperatureInfo(FPalTemperatureInfo& OutInfo) const {
+}
+
 void UPalBodyTemperatureComponent::CallOnChangeTemperature_Implementation(int32 Next) {
 }
 

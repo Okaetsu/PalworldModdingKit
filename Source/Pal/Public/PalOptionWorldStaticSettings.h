@@ -85,6 +85,9 @@ public:
     FPalOptionValueInt DropItemMaxNum;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionValueInt PhysicsActiveDropItemMaxNum;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalOptionValueInt DropItemMaxNum_UNKO;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -125,6 +128,21 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalOptionValueFloat ItemCorruptionMultiplier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionValueFloat MonsterFarmActionSpeedRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionValueFloat AutoTransferMasterCheckIntervalSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionValueInt AutoTransferMasterThresholdDays;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionValueInt GuildRejoinCooldownMinutes;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionValueInt MaxGuildsPerFrame;
     
     PAL_API FPalOptionWorldStaticSettings();
 };

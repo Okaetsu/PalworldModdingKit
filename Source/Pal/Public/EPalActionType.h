@@ -108,5 +108,17 @@ enum class EPalActionType : uint8 {
     PlayerReviveByPartner,
     DigOut_TreasureMapPoint,
     BackStep,
+    SideStep_Left,
+    SideStep_Right,
+    GetOff_HorseRide,
+    GetOff_BiggerHorseRide,
+    GetOff_HumanRide,
+    GetOff_SitRide,
+    Teleport,
+    RoundStep_Left,
+    RoundStep_Right,
+    CancelJump,
+    FieldItemPickup,
+    TransformToCoopWeapon,
 };
 

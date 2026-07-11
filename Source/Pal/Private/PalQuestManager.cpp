@@ -18,6 +18,9 @@ void UPalQuestManager::OrderQuest_ServerInternal(const FName& QuestName, int32 F
 void UPalQuestManager::OnUpdatedQuest_ServerInternal(UPalQuestData* UpdatedQuest) {
 }
 
+void UPalQuestManager::OnTowerBossDefeatFlagUpdated(FName Key, bool bNewValue) {
+}
+
 void UPalQuestManager::OnRep_OrderedQuestArray() {
 }
 
@@ -36,6 +39,9 @@ void UPalQuestManager::OnDeleteCharacterHPGauge(UPalIndividualCharacterParameter
 void UPalQuestManager::OnCompletedQuest_ServerInternal(UPalQuestData* CompletedQuest) {
 }
 
+void UPalQuestManager::JumpToQuestBlock_ServerInternal(const FName& QuestName, int32 TargetBlockIndex) {
+}
+
 bool UPalQuestManager::IsQuestOrdered(const FName& QuestId) const {
     return false;
 }
@@ -52,6 +58,10 @@ FName UPalQuestManager::GetTrackingQuestId() const {
     return NAME_None;
 }
 
+EPalQuestType UPalQuestManager::GetQuestType(const FName& QuestId) const {
+    return EPalQuestType::Invalid;
+}
+
 TArray<FName> UPalQuestManager::GetQuestIdRowName() const {
     return TArray<FName>();
 }
@@ -62,6 +72,10 @@ UPalQuestData* UPalQuestManager::GetQuestData(const FName& QuestId) const {
 
 float UPalQuestManager::GetNearestQuestLocationDistance(const FName& QuestId) const {
     return 0.0f;
+}
+
+bool UPalQuestManager::GetLocalQuestTrackingLocationData(const FName& QuestId, FPalLocalQuestLocationData& OutData) const {
+    return false;
 }
 
 TArray<UPalQuestData*> UPalQuestManager::GetAllOrderedQuest() const {

@@ -26,7 +26,7 @@ public:
     void RequestStartReplicateItemStackInfo();
     
     UFUNCTION(BlueprintCallable)
-    void RequestMoveItemToInventory(const FPalItemId& ItemId, int32 StackCount);
+    void RequestMoveItemToInventory(const FPalItemId& ItemId, int64 StackCount);
     
     UFUNCTION(BlueprintCallable)
     void RequestMoveInventoryItemToBaseCamp(const TArray<FPalItemSlotId>& InventoryItemSlotIds);
@@ -42,6 +42,9 @@ private:
     void OnReadyModuleItemStackInfo(UPalBaseCampModel* Model, UPalBaseCampFunctionModuleBase* Module);
     
 public:
+    UFUNCTION(BlueprintPure)
+    int64 GetItemStackCount64(const FName& StaticItemId) const;
+    
     UFUNCTION(BlueprintCallable)
     void Debug_RequestMoveInventoryItemToBaseCamp_ByItemName(const FName StaticItemId);
     

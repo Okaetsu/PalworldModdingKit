@@ -1,6 +1,8 @@
 #include "PalSkillModule_Tackle.h"
 
 UPalSkillModule_Tackle::UPalSkillModule_Tackle() {
+    this->TackleNetUpdateFrequency = 20.00f;
+    this->bUseAuthorityOnlyMovementMutation = false;
     this->StartAnimMontage = NULL;
     this->LoopAnimMontage = NULL;
     this->EndAnimMontage = NULL;
@@ -13,6 +15,8 @@ UPalSkillModule_Tackle::UPalSkillModule_Tackle() {
     this->TackleHomingRate = 0.10f;
     this->StartHomingRate = 4.00f;
     this->TackleHomingDistanceLimit = 100.00f;
+    this->EnableDashSkip = false;
+    this->DashSkipTime = 0.00f;
     this->bIsTackleHoming = true;
     this->bIsEffectSpawnOnGround = true;
     this->EndSkillEffectNotifyName = TEXT("EndSkillEffect");
@@ -46,6 +50,9 @@ void UPalSkillModule_Tackle::SetCurrentState(EPalTackleState InState) {
 void UPalSkillModule_Tackle::ResetTackleTimes() {
 }
 
+void UPalSkillModule_Tackle::OnTackleStateChanged_Implementation(const EPalTackleState NewState) {
+}
+
 void UPalSkillModule_Tackle::OnStartTossin_Implementation() {
 }
 
@@ -71,6 +78,10 @@ void UPalSkillModule_Tackle::OnEndMontageBlendOut_Implementation(FName NotifyNam
 }
 
 void UPalSkillModule_Tackle::OnEndAttack_Implementation() {
+}
+
+bool UPalSkillModule_Tackle::IsTackleMontagePlaying_Implementation() const {
+    return false;
 }
 
 bool UPalSkillModule_Tackle::IsPlayingEndMontage() const {
@@ -101,6 +112,10 @@ bool UPalSkillModule_Tackle::CheckEndHoming_Implementation() {
 }
 
 bool UPalSkillModule_Tackle::CheckEndCurrentState_Implementation() {
+    return false;
+}
+
+bool UPalSkillModule_Tackle::CanDashSkip(APalCharacter* Character) const {
     return false;
 }
 

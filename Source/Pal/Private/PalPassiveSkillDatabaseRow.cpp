@@ -13,6 +13,9 @@ FPalPassiveSkillDatabaseRow::FPalPassiveSkillDatabaseRow() {
     this->EffectType3 = EPalPassiveSkillEffectType::no;
     this->EffectValue3 = 0.00f;
     this->TargetType3 = EPalPassiveSkillEffectTargetType::None;
+    this->EffectType4 = EPalPassiveSkillEffectType::no;
+    this->EffectValue4 = 0.00f;
+    this->TargetType4 = EPalPassiveSkillEffectTargetType::None;
     this->InvokeActiveOtomo = false;
     this->InvokeWorker = false;
     this->InvokeRiding = false;
@@ -24,6 +27,8 @@ FPalPassiveSkillDatabaseRow::FPalPassiveSkillDatabaseRow() {
     this->AddInvokeTriggerType_2 = EPalPassiveAddTriggerType::None;
     this->AddPal = false;
     this->AddRarePal = false;
+    this->AddWorldTreePal = false;
+    this->AddMutationPal = false;
     this->AddShotWeapon = false;
     this->AddMeleeWeapon = false;
     this->AddArmor = false;

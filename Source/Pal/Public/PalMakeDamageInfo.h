@@ -6,6 +6,7 @@
 #include "EPalAttackType.h"
 #include "EPalDamageAnimationReactionType.h"
 #include "EPalElementType.h"
+#include "EPalHumanStunType.h"
 #include "EPalPlayerDamageCameraShakeCategory.h"
 #include "EPalSizeType.h"
 #include "EPalWazaCategory.h"
@@ -55,6 +56,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector BlowVelocity;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalHumanStunType HumanStunType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FHitResult HitInfo;
@@ -127,6 +131,18 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName AttackStaticItemID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsExplosionDamage;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCannotKill;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsLastBullet;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsPartnerSkillAttackBullet;
     
     PAL_API FPalMakeDamageInfo();
 };

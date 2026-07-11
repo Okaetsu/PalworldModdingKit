@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalFoliageInstanceState.h"
 #include "EPalMapObjectItemCollectableType.h"
 #include "GameDateTime.h"
 #include "PalBaseCampAssignableObjectInterface.h"
@@ -34,8 +35,8 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     int32 Hp;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Alive, meta=(AllowPrivateAccess=true))
-    bool bAlive;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_State, meta=(AllowPrivateAccess=true))
+    EPalFoliageInstanceState InstanceState;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_WorldTransform, meta=(AllowPrivateAccess=true))
     FPalFoliageInstanceTransform WorldTransform;
@@ -56,7 +57,7 @@ protected:
     void OnRep_WorldTransform();
     
     UFUNCTION(BlueprintCallable)
-    void OnRep_Alive(bool bOldValue);
+    void OnRep_State(EPalFoliageInstanceState OldState);
     
 
     // Fix for true pure virtual functions not being implemented

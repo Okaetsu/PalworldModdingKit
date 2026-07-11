@@ -38,6 +38,9 @@ private:
     FPalFastBaseCampMapObjectRepInfoArray MapObjectInstanceIdRepInfoArray;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<FGuid> UnspawnedBuildObjectInstanceIds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FGuid> DropItemConcreteModelInstanceIds;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -48,6 +51,10 @@ public:
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnUpdatedSpawnedMapObjectActor(UPalMapObjectModel* Model);
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void OnTriggeredBurnAnyMapObject(UPalMapObjectModelEffect_AccumulateTrigger* This, UPalMapObjectModel* OwnerModel);

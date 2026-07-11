@@ -8,5 +8,6 @@ enum class EPalPlayerJoinResult : uint8 {
     FailedInvalidLoginPlayerId,
     FailedInvalidLoginPlayerCharacterHandle,
     FailedDuplicateAccountCreation,
+    FailedPlayerSaveRecoveryFailed,
 };
 

@@ -2,6 +2,7 @@
 #include "Net/UnrealNetwork.h"
 
 UPalGroupIndependentGuild::UPalGroupIndependentGuild() {
+    this->GuildChestAllowedRoles.AddDefaulted(2);
 }
 
 void UPalGroupIndependentGuild::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

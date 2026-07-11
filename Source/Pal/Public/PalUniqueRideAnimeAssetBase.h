@@ -44,6 +44,12 @@ protected:
     UAnimSequence* RidingAnimation;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimSequence* RidingSprintStartAnimation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAnimSequence* RidingSprintAnimation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* RidingAnimation_Ball_Aim;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -58,6 +64,13 @@ private:
     
 public:
     UPalUniqueRideAnimeAssetBase();
+
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UAnimSequence* GetRidingSprintStartAnimation();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UAnimSequence* GetRidingSprintAnimation();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UAnimSequence* GetRideAnimSequence();
     

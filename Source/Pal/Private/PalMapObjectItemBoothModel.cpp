@@ -15,7 +15,7 @@ void UPalMapObjectItemBoothModel::RequestTrade(const int32 TradeIndex, const int
 void UPalMapObjectItemBoothModel::RequestTogglePrivateLock() {
 }
 
-void UPalMapObjectItemBoothModel::RequestSortStore_ServerInternal() {
+void UPalMapObjectItemBoothModel::RequestSortStore_ServerInternal(const int32 RequestPlayerId) {
 }
 
 void UPalMapObjectItemBoothModel::RequestSortStore() {

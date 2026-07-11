@@ -24,6 +24,7 @@ UPalDatabaseCharacterParameter::UPalDatabaseCharacterParameter() {
     this->FriendshipRankTable = NULL;
     this->ArenaRankingNPCIconDataTable = NULL;
     this->ArenaUnusableItemDataTable = NULL;
+    this->PalAwakeningItemElementTable = NULL;
     this->PettingPressetInstance = NULL;
     this->CombiMonsterParameter = NULL;
 }
@@ -40,6 +41,10 @@ bool UPalDatabaseCharacterParameter::IsArenaUnusableItem(FName ItemId) const {
 }
 
 int32 UPalDatabaseCharacterParameter::HigherLevelOtomoFromTrainer(const UPalIndividualCharacterParameter* IndividualCharacterParameter) const {
+    return 0;
+}
+
+int32 UPalDatabaseCharacterParameter::GetZukanIndex(FName RowName) {
     return 0;
 }
 
@@ -114,7 +119,8 @@ UPalPettingPresset* UPalDatabaseCharacterParameter::GetPettingPreset() {
 void UPalDatabaseCharacterParameter::GetPassiveSkill(FName RowName, TArray<FName>& PassiveSkill) {
 }
 
-void UPalDatabaseCharacterParameter::GetPartnerSkillMsgID(const FName& CharacterID, FName& OutMsgID) {
+EPalElementType UPalDatabaseCharacterParameter::GetPalAwakeningItemElement(FName ItemId) const {
+    return EPalElementType::None;
 }
 
 EPalOrganizationType UPalDatabaseCharacterParameter::GetOrganizationType(FName RowName) {
@@ -264,6 +270,9 @@ TSoftClassPtr<APalCharacter> UPalDatabaseCharacterParameter::GetBPClass(FName Ro
 
 TSoftObjectPtr<UTexture2D> UPalDatabaseCharacterParameter::GetBossNPCIconTexture(const FName& SpawnerID) const {
     return NULL;
+}
+
+void UPalDatabaseCharacterParameter::GetBestWorkSuitability(FName RowName, EPalWorkSuitability& BestWorkSuitability) {
 }
 
 EPalBattleBGMType UPalDatabaseCharacterParameter::GetBattleBGM(FName RowName) {

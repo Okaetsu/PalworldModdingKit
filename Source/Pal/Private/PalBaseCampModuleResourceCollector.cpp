@@ -3,6 +3,9 @@
 UPalBaseCampModuleResourceCollector::UPalBaseCampModuleResourceCollector() {
 }
 
+void UPalBaseCampModuleResourceCollector::OnUnregisteredFoliageModel_ServerInternal(UPalFoliageInstance* Instance) {
+}
+
 void UPalBaseCampModuleResourceCollector::OnRespawnFoliageInstance(UPalFoliageInstance* Instance) {
 }
 

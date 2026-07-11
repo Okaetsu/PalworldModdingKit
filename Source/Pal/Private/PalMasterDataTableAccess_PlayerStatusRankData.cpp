@@ -3,7 +3,7 @@
 UPalMasterDataTableAccess_PlayerStatusRankData::UPalMasterDataTableAccess_PlayerStatusRankData() {
 }
 
-int32 UPalMasterDataTableAccess_PlayerStatusRankData::GetMaxRank() {
+int32 UPalMasterDataTableAccess_PlayerStatusRankData::GetMaxRank(EPalRelicType RelicType) {
     return 0;
 }
 

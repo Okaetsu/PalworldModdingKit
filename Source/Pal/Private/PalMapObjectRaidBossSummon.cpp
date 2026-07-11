@@ -34,6 +34,9 @@ void UPalMapObjectRaidBossSummon::OnReceiveConfirmStartRaidBossBattleResult(cons
 void UPalMapObjectRaidBossSummon::OnReceiveConfirmStartRaidBossAreaBattleResult(const bool bResult, UPalDialogParameterBase* Parameter) {
 }
 
+void UPalMapObjectRaidBossSummon::NotifyFailedStartRaidByGuildConcurrentLimit_ClientInternal() {
+}
+
 void UPalMapObjectRaidBossSummon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     

@@ -42,6 +42,12 @@ void UPalMapObjectConvertItemModel::OnRep_IsWorkable() {
 void UPalMapObjectConvertItemModel::OnRep_CurrentRecipeId() {
 }
 
+void UPalMapObjectConvertItemModel::OnReadyStatusHUDWork(UPalMapObjectWorkeeModule* Module, UPalWorkBase* Work) {
+}
+
+void UPalMapObjectConvertItemModel::OnReadyStatusHUDModule(UPalMapObjectConcreteModelBase* ConcreteModel, UPalMapObjectConcreteModelModuleBase* Module) {
+}
+
 void UPalMapObjectConvertItemModel::OnFinishWorkInServer(UPalWorkBase* Work) {
 }
 
