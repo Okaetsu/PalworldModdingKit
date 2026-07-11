@@ -46,6 +46,9 @@ public:
     void RequestCircumNpcItemTrade_ToServer(const UObject* WorldContextObject, const FGuid PlayerUId, const FName& RequestTradeDataId);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestChangeExcludeTeamMissionFlag(const FPalInstanceID& InstanceId, bool bNewFlag);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestApplyPalLoadoutData_ToServer(const FGuid PlayerUId, const TArray<FPalInstanceID>& LoadoutPalIds);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)

@@ -10,7 +10,6 @@
 #include "Components/PanelWidget.h"
 #include "EPalDescendantScrollDestination.h"
 #include "EPalScrollWhenFocusChanges.h"
-#include "OnUserScrolledEventDelegate2.h"
 #include "PalScrollBox.generated.h"
 
 class USlateWidgetStyleAsset;
@@ -20,6 +19,8 @@ UCLASS(Blueprintable)
 class UPalScrollBox : public UPanelWidget {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUserScrolledEvent, float, CurrentOffset);
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FScrollBoxStyle WidgetStyle;
     
@@ -73,6 +74,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WheelScrollMultiplier;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bEnableRightStickScroll;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RightStickScrollSpeed;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnUserScrolledEvent OnUserScrolled;

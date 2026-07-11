@@ -4,11 +4,17 @@
 UPalStaticCharacterParameterComponent::UPalStaticCharacterParameterComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->MeshCapsuleHalfHeight = 0.00f;
     this->MeshCapsuleRadius = 0.00f;
+    this->ApproachArrivalRadius = 0.00f;
     this->CallApproachWalkSpeedMultiplier = 1.00f;
+    this->AwakeningMontageType = EPalActionType::Menace;
     this->SleepOnSideAnimMontage = NULL;
     this->bFadeSleepOnSide = true;
     this->bIsWazaAdjustPitchDisable = false;
     this->OverrideCommonWazaID = EPalWazaID::None;
+    this->bIsMimicablePal = false;
+    this->bEnableRideAimWazaMode = false;
+    this->MimicEncountType = EPalMimicEncountType::None;
+    this->UniqueWazaChoiceRate = 0.80f;
     this->CaptureSuccessRate = 1.00f;
     this->IsPal = false;
     this->SkillEffectScale = 1.00f;
@@ -22,8 +28,10 @@ UPalStaticCharacterParameterComponent::UPalStaticCharacterParameterComponent(con
     this->MovementType = EPalMonsterMovementType::GroundOnly;
     this->Weight_KG = 10.00f;
     this->Mass_Scale = 100;
+    this->bIsSeparatedRagdoll = false;
     this->IsGroundCrossRange = 50.00f;
     this->IsUncapturable = false;
+    this->IsDisableSpawnInStage = false;
     this->IsBackWalkForwardAnime = false;
     this->IsRightLeft_WakeupFromRagdoll = false;
     this->PettingSize = EPalPettingSizeType::Small;
@@ -69,11 +77,19 @@ void UPalStaticCharacterParameterComponent::SetSpawnedCharacterType(EPalSpawnedC
 void UPalStaticCharacterParameterComponent::LoadWazaActionClass(EPalWazaID WazaID) {
 }
 
+bool UPalStaticCharacterParameterComponent::IsWorldTreeAuraPal() const {
+    return false;
+}
+
 bool UPalStaticCharacterParameterComponent::IsTowerBossPal() const {
     return false;
 }
 
 bool UPalStaticCharacterParameterComponent::IsSwimPal() {
+    return false;
+}
+
+bool UPalStaticCharacterParameterComponent::IsSeparatedRagdoll() const {
     return false;
 }
 

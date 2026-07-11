@@ -3,8 +3,10 @@
 #include "Components/ActorComponent.h"
 #include "EPalCharacterStatusOperationName.h"
 #include "EPalCharacterStatusOperationResult.h"
+#include "EPalRelicType.h"
 #include "PalCharacterStatusOperationResultDelegateDelegate.h"
 #include "PalInstanceID.h"
+#include "PalPlayerRankupRequestInfo.h"
 #include "PalStatusAndRank.h"
 #include "PalNetworkCharacterStatusOperationComponent.generated.h"
 
@@ -24,6 +26,14 @@ public:
 
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestReviveCharacterFromDyingByPartnerSkill_ToServer(APalCharacter* Character);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void RequestReviveCharacterFromDyingByPartnerSkill(APalCharacter* Character);
+    
+private:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestReviveCharacterFromDying_ToServer(APalCharacter* Character);
     
 public:
@@ -32,17 +42,20 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestPlayerStatusUp_ToServer(int32 ToRank);
+    void RequestPlayerStatusUp_ToServer(EPalRelicType RelicType, int32 ToRank);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestPlayerStatusClear_ToServer();
+    void RequestPlayerStatusClear_ToServer(EPalRelicType RelicType);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestPlayerRankUp_ToServer(const TArray<FPalPlayerRankupRequestInfo>& RankupInfo);
     
 public:
     UFUNCTION(BlueprintCallable)
-    void RequestPlayerRankClear();
+    void RequestPlayerRankClear(EPalRelicType RelicType);
     
     UFUNCTION(BlueprintCallable)
-    void RequestPlayerRankAdd(const int32 ToRank);
+    void RequestPlayerRankAdd(EPalRelicType RelicType, int32 ToRank);
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)

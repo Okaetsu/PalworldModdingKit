@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "EPalMapObjectSpawnerState.h"
 #include "PalLevelObjectActor.h"
 #include "PalStageInstanceId.h"
@@ -24,9 +25,6 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bDebugBreakPointTryRespawnFor;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bResetSpawnedObjectTransformAtActivated;
-    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalStageInstanceId StageInstanceIdBelongTo;
@@ -46,6 +44,10 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     void OnWorldMapObjectSpawnableInServer();
+    
+protected:
+    UFUNCTION(BlueprintCallable)
+    FTransform GetSpawnTransform(int32 Index) const;
     
 };
 

@@ -6,6 +6,7 @@
 #include "EPalBaseCampWorkerDirectionBattleType.h"
 #include "EPalBaseCampWorkerDirectorState.h"
 #include "EPalMapBaseCampWorkerOrderType.h"
+#include "EPalWorkSuitability.h"
 #include "PalBaseCampWorkAssignRequest.h"
 #include "PalDeadInfo.h"
 #include "PalInstanceID.h"
@@ -77,7 +78,10 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bEnableWorkerPlayerTracking;
     
-    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsRaidBossAreaShuttingDown;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FPalInstanceID, FGuid> WorkerSpawnedByPlayerMap;
     
 public:
@@ -119,6 +123,9 @@ private:
     void OnDeadWorkerInServer(const FPalDeadInfo Info);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasWorkerWithSuitabilityRank(const EPalWorkSuitability WorkSuitability, const int32 RequireRank) const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetCharacterHandleSlots(TArray<UPalIndividualCharacterSlot*>& OutSlots) const;
     

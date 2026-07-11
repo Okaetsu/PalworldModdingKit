@@ -13,6 +13,9 @@ enum class EPalAudioBus : uint8 {
     PalVoice,
     HumanVoice,
     UI,
+    UI_LoadingMute,
+    PlayerVoice,
+    NPCVoice,
     MAX,
 };
 

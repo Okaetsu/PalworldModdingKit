@@ -1,37 +1,20 @@
 #include "PalActiveSkill.h"
-#include "Net/UnrealNetwork.h"
 
 UPalActiveSkill::UPalActiveSkill() {
-    this->IsCooling = false;
-    this->ReuseCoolTimer = 0.00f;
     this->WazaType = EPalWazaID::None;
     this->IsIgnoreRaycast = false;
     this->IsStopTimer = false;
+    this->PendingDecreaseSeconds = 0.00f;
+    this->RemainingSecondsAtStop = 0.00f;
+    this->CoolDownMaxAtStop = 0.00f;
     this->DatabaseCoolTime = 0.00f;
-    this->NextCoolTime = 0.00f;
+    this->CoolDownTimeMax = 0.00f;
     this->bIsTransient = false;
     this->BulletEmiiterOverlap = NULL;
 }
 
-void UPalActiveSkill::OnRep_UpdateCoolTime() {
-}
-
-void UPalActiveSkill::OnRep_ChangeCTState() {
-}
-
 bool UPalActiveSkill::IsCoolTimeFinish() const {
     return false;
-}
-
-bool UPalActiveSkill::IsConditionSatisfy(AActor* SelfActor) const {
-    return false;
-}
-
-void UPalActiveSkill::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-    
-    DOREPLIFETIME(UPalActiveSkill, IsCooling);
-    DOREPLIFETIME(UPalActiveSkill, ReuseCoolTimer);
 }
 
 

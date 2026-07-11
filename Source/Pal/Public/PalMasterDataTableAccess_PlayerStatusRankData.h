@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EPalRelicType.h"
 #include "PalMasterDataTableAccessBase.h"
 #include "PalMasterDataTableAccess_PlayerStatusRankData.generated.h"
 
@@ -9,7 +10,7 @@ class UPalMasterDataTableAccess_PlayerStatusRankData : public UPalMasterDataTabl
 public:
     UPalMasterDataTableAccess_PlayerStatusRankData();
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetMaxRank();
+    int32 GetMaxRank(EPalRelicType RelicType);
     
 };
 

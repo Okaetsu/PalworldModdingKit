@@ -4,6 +4,7 @@
 #include "Engine/EngineTypes.h"
 #include "EPalCharacterMovementCustomMode.h"
 #include "EPalPlayerEquipItemSlotType.h"
+#include "PalDataTableRowName_ItemData.h"
 #include "PalDataTableRowName_SoundID.h"
 #include "PalDeadInfo.h"
 #include "PalGliderPalInfo.h"
@@ -34,6 +35,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalGliderPalInfo> GliderPalInfos;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_ItemData> DisablePalGliderItemIds;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -72,6 +76,9 @@ private:
 public:
     UFUNCTION(BlueprintCallable)
     void StartGliding();
+    
+    UFUNCTION(BlueprintCallable)
+    void SetGliderVisibility(bool bIsShow, const bool bForceSet);
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -154,7 +161,16 @@ public:
     bool IsEquipGlider() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsAlwaysVisibleJetpack() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasGliderPal() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetCurrentGliderVisibility() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    APalGliderObject* GetCurrentGliderObject() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     TArray<FName> GetAllGliderPalNames() const;

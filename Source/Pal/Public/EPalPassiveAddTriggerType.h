@@ -9,5 +9,6 @@ enum class EPalPassiveAddTriggerType : uint8 {
     Night,
     NonBattle = 4,
     AllOtomoTribeDifferent = 8,
+    Sprint = 16,
 };
 

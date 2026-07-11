@@ -11,6 +11,7 @@
 #include "PalContainerId.h"
 #include "PalItemAndNum.h"
 #include "PalItemId.h"
+#include "PalItemSlotId.h"
 #include "PalPlayerDataEquipLanternData.h"
 #include "PalPlayerDataInventoryInfo.h"
 #include "PalPlayerInventoryData.generated.h"
@@ -175,7 +176,10 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestFillSlotToTargetContainerFromInventory_ToServer(const FPalContainerId& ToContainerId);
+    void RequestFillSlotToTargetContainerFromInventory_ToServer(const FPalContainerId& ToContainerId, const bool EnableFeedback);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestFillSlotToTargetContainerFromInventory_SlotExcepts_ToServer(const FPalContainerId& ToContainerId, const TArray<FPalItemSlotId>& ExceptSlotIds, const bool EnableFeedback);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestFillSlotToInventoryFromTargetContainer_ToServer(const FPalContainerId& FromContainerId);
@@ -185,7 +189,7 @@ public:
     void RequestChangeLanternSetting(const FPalPlayerDataEquipLanternData& NewLanternSettings);
     
     UFUNCTION(BlueprintCallable)
-    void RequestAddItem(const FName StaticItemId, const int32 Count, bool IsAssignPassive);
+    void RequestAddItem_ForDebug(const FName StaticItemId, const int32 Count, bool IsAssignPassive);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -242,6 +246,9 @@ public:
     bool IsEquipSlot(UPalItemSlot* CheckSlot);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsEquipForWeapon(const FName& StaticItemId) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsEquip(EPalPlayerEquipItemSlotType EquipmentSlotType, const FName& StaticItemId) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -249,6 +256,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAccessorySlot(UPalItemSlot*& Slot);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetUnlockedWeaponSlotNum() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetUnlockedFoodEquipSlotNum() const;
@@ -277,6 +287,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalPlayerInventoryType GetInventoryTypeFromItemTypeA(const EPalItemTypeA ItemTypeA) const;
     
+    UFUNCTION(BlueprintPure)
+    int64 CountItemNum64(const FName& StaticItemId) const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 CountItemNum(const FName& StaticItemId) const;
     
@@ -287,7 +300,7 @@ public:
     bool CanCheckPalTalentsByInventoryItem();
     
     UFUNCTION(BlueprintCallable)
-    EPalItemOperationResult AddItem_ServerInternal(const FName StaticItemId, const int32 Count, bool IsAssignPassive, const float LogDelay);
+    EPalItemOperationResult AddItem_ServerInternal(const FName StaticItemId, const int32 Count, bool IsAssignPassive, const float LogDelay, bool bNotifyLog);
     
     UFUNCTION(BlueprintCallable)
     void AddFullInventoryLog_Client();

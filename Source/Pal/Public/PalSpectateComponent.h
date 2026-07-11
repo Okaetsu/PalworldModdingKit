@@ -58,7 +58,7 @@ private:
     void ServerSyncSpectatorLocation(FVector NewLoc, FRotator NewRot);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void ServerForceEndSpectate(bool bUpdateEnvironment);
+    void ServerForceEndSpectate(bool bReflectSkyCreator);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ServerEndSpectate();
@@ -77,9 +77,12 @@ public:
     bool IsAdminMode() const;
     
     UFUNCTION(BlueprintCallable)
-    void ForceEndSpectate(bool bUpdateEnvironment);
+    void ForceEndSpectate(bool bReflectSkyCreator);
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void EventOnPrePlayCutscene();
+    
     UFUNCTION(BlueprintCallable)
     void EventOnPlayerTeleport();
     
@@ -107,7 +110,7 @@ private:
     void ClientVerifyNextPlayer(APalPlayerState* Next, FVector NextLocation);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
-    void ClientForceEndSpectate(bool bUpdateEnvironment);
+    void ClientForceEndSpectate(bool bReflectSkyCreator);
     
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void ClientChangeInternalState(EPalSpectateInternalState NewState);

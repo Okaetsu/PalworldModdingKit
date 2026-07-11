@@ -41,6 +41,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<float> ActiveSkill_OverWriteCoolTimeByRank;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<float> ActiveSkill_OverWriteEffectTimeByRank;
+    
     PAL_API FPalPassivePartnerSkillActiveSkillParameters();
 };
 

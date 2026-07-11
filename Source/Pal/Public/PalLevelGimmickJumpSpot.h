@@ -1,22 +1,23 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "Engine/EngineTypes.h"
-#include "EPalCharacterMovementCustomMode.h"
+#include "PalCharacterJumpModifier.h"
 #include "PalLevelObjectActor.h"
+#include "Templates/SubclassOf.h"
 #include "PalLevelGimmickJumpSpot.generated.h"
 
 class AActor;
-class UPalCharacterMovementComponent;
+class UPalAction_JumpFromJumpSpot;
 class USceneComponent;
 
 UCLASS(Blueprintable)
-class APalLevelGimmickJumpSpot : public APalLevelObjectActor {
+class APalLevelGimmickJumpSpot : public APalLevelObjectActor, public IPalCharacterJumpModifier {
     GENERATED_BODY()
 public:
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSimpleDynamicMulticastDelegate);
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UPalAction_JumpFromJumpSpot> JumpActionClass;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FSimpleDynamicMulticastDelegate OnLaunchCharacterDelegate;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bPlayJumpPrepareMontage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float JumpFowardVelocity;
@@ -31,18 +32,21 @@ private:
 public:
     APalLevelGimmickJumpSpot(const FObjectInitializer& ObjectInitializer);
 
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnLaunchCharacter();
+    
 private:
-    UFUNCTION(BlueprintCallable)
-    void EventOnCharacterMovementModeChanged(UPalCharacterMovementComponent* MovementComponent, TEnumAsByte<EMovementMode> PrevMode, TEnumAsByte<EMovementMode> NewMode, EPalCharacterMovementCustomMode PrevCustomMode, EPalCharacterMovementCustomMode NewCustomMode);
-    
-    UFUNCTION(BlueprintCallable)
-    void EventOnCharacterJumpOrFly(UPalCharacterMovementComponent* MovementComponent);
-    
     UFUNCTION(BlueprintCallable)
     void EventOnActorEndOverlap(AActor* OverlappedActor, AActor* OtherActor);
     
     UFUNCTION(BlueprintCallable)
     void EventOnActorBeginOverlap(AActor* OverlappedActor, AActor* OtherActor);
     
+    UFUNCTION(BlueprintCallable)
+    void EventOnActionLaunchCharacter();
+    
+    
+    // Fix for true pure virtual functions not being implemented
 };
 

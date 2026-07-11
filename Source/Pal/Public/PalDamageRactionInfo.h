@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalHumanStunType.h"
 #include "PalDamageRactionInfo.generated.h"
 
 USTRUCT(BlueprintType)
@@ -24,6 +25,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector HitLocation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalHumanStunType HumanStunType;
     
     PAL_API FPalDamageRactionInfo();
 };

@@ -37,5 +37,8 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     bool GetFloorPosition(AActor* Owner, FTransform FootTransform, FHitResult& HitResult) const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure=false)
+    bool CalcFootStepDecalTransform(AActor* Owner, FVector FootBoneLocation, float MaxHeightAboveGround, FVector& OutLocation, FVector& OutNormal) const;
+    
 };
 

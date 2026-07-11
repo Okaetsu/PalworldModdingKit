@@ -17,5 +17,8 @@ protected:
 public:
     APalActorClassSpawnerInClientBase(const FObjectInitializer& ObjectInitializer);
 
+    UFUNCTION(BlueprintCallable)
+    void ForceDespawn();
+    
 };
 

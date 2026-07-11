@@ -48,6 +48,9 @@ void APalBuildObject::OnTickBuildCompleteAnimation() {
 void APalBuildObject::OnStartTriggerInteractBuilding(AActor* OtherActor, EPalInteractiveObjectIndicatorType IndicatorType) {
 }
 
+void APalBuildObject::OnStartSimulation_Implementation() {
+}
+
 void APalBuildObject::OnSetPaintInMapObjectModel(UPalMapObjectModel* Model, UPalMapObjectModelPaint* Paint) {
 }
 

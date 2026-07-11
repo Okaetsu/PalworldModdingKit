@@ -1,31 +1,59 @@
 #include "PalWorldMapUIData.h"
 
 UPalWorldMapUIData::UPalWorldMapUIData() {
-    this->MaskRenderTarget = NULL;
-    this->MaskTexture = NULL;
-    this->worldMapDataTable = NULL;
+    this->WorldMapDataTable = NULL;
 }
 
-bool UPalWorldMapUIData::UnlockMap(const FName& regionId, const int32 PlayerId) {
-    return false;
+void UPalWorldMapUIData::UpdateHiddenLocationFlagByLocation(const FVector& Location, float BoxSize) {
 }
 
 void UPalWorldMapUIData::UnlockByScroll(const float& Diameter, const FVector2f& ActorLocation) {
 }
 
-bool UPalWorldMapUIData::IsUnlockedMap(const FName& regionId) {
+void UPalWorldMapUIData::SetupHiddenLocationData() {
+}
+
+
+
+UTextureRenderTarget2D* UPalWorldMapUIData::GetRenderTargetByMapName(const FName& MapName) const {
+    return NULL;
+}
+
+bool UPalWorldMapUIData::GetMapUIRowDataByWorldLocation(const FVector& Location, FPalWorldMapUIDataTableRow& OutData) const {
     return false;
 }
 
-void UPalWorldMapUIData::GetUnlockedMapData(TMap<FName, bool>& outMapData) {
-}
-
-bool UPalWorldMapUIData::GetCurrentPlayMapUIData(FPalWorldMapUIDataTableRow& OutData) {
+bool UPalWorldMapUIData::GetMapUIRowData(const FName& MapName, FPalWorldMapUIDataTableRow& OutData) const {
     return false;
 }
 
-FName UPalWorldMapUIData::GetCurrentPlayMapName() {
+FName UPalWorldMapUIData::GetMapNameByWorldLocation(const FVector& Location) const {
     return NAME_None;
+}
+
+bool UPalWorldMapUIData::GetHiddenLocationFlag(const FName& Key) const {
+    return false;
+}
+
+UTextureRenderTarget2D* UPalWorldMapUIData::GetCurrentRenderTarget() const {
+    return NULL;
+}
+
+bool UPalWorldMapUIData::GetCurrentPlayMapUIRowData(FPalWorldMapUIDataTableRow& OutData) const {
+    return false;
+}
+
+FName UPalWorldMapUIData::GetCurrentPlayMapName() const {
+    return NAME_None;
+}
+
+void UPalWorldMapUIData::GetAllWorldMapNames(TArray<FName>& OutMapNames) const {
+}
+
+void UPalWorldMapUIData::GetAllUnlockedWorldMapNames(TArray<FName>& OutMapNames) const {
+}
+
+void UPalWorldMapUIData::CreateRenderTarget() {
 }
 
 

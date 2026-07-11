@@ -2,7 +2,12 @@
 #include "Net/UnrealNetwork.h"
 
 UPalQuestData::UPalQuestData() {
-    this->NowQuestBlock = NULL;
+    this->QuestBlockIndex = -1;
+    this->bPlayOrderEffect = true;
+    this->bPlayCompleteEffect = true;
+}
+
+void UPalQuestData::TakeAdditionalReward_Implementation() {
 }
 
 void UPalQuestData::OnUpdatedQuestBlock_ServerInternal(UPalQuestBlock* UpdatedBlock) {
@@ -12,6 +17,9 @@ void UPalQuestData::OnRequestReturnBlock_ServerInternal(UPalQuestBlock* UpdatedB
 }
 
 void UPalQuestData::OnRep_QuestId() {
+}
+
+void UPalQuestData::OnRep_QuestBlockIndex() {
 }
 
 void UPalQuestData::OnRep_CurrentBlock() {
@@ -24,6 +32,9 @@ void UPalQuestData::LoadQuestBlockForUI(const int32 Index) {
 }
 
 void UPalQuestData::InitializeForUI(const FGuid& InOwnerPlayerUId, const FName& InQuestName) {
+}
+
+void UPalQuestData::GetSortedQuestBlocksForUI(TArray<UPalQuestBlock*>& OutBlocks) const {
 }
 
 void UPalQuestData::GetQuestNameText(FText& OutText) const {
@@ -48,7 +59,15 @@ TArray<FName> UPalQuestData::GetQuestDescriptionMsgIdRowNames() const {
     return TArray<FName>();
 }
 
-void UPalQuestData::GetQuestBlock(UPalQuestBlock*& OutBlock) const {
+void UPalQuestData::GetQuestBlocks(TArray<UPalQuestBlock*>& OutBlocks) const {
+}
+
+FGuid UPalQuestData::GetOwnerPlayerUId() const {
+    return FGuid{};
+}
+
+FPalCommonQuestRewardData UPalQuestData::GetCustomDisplayRewardData_Implementation() {
+    return FPalCommonQuestRewardData{};
 }
 
 void UPalQuestData::GetCommonRewardData(FPalCommonQuestRewardData& OutData) {
@@ -63,7 +82,8 @@ void UPalQuestData::FormatQuestDescriptionText_Implementation(const FText& InOri
 void UPalQuestData::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
-    DOREPLIFETIME(UPalQuestData, NowQuestBlock);
+    DOREPLIFETIME(UPalQuestData, NowQuestBlocks);
+    DOREPLIFETIME(UPalQuestData, QuestBlockIndex);
     DOREPLIFETIME(UPalQuestData, QuestId);
 }
 

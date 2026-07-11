@@ -4,6 +4,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Chaos/ChaosEngineInterface.h"
+#include "EPalAudioRTPC.h"
 #include "PalDataTableRowName_SoundID.h"
 #include "PalSoundOptions.h"
 #include "PalSoundUtility.generated.h"
@@ -35,6 +36,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     static void SetSwitchByActor(AActor* Actor, const FString& SwitchGroup, const FString& SwitchState);
+    
+    UFUNCTION(BlueprintCallable)
+    static void SetRTPCValueByActorByEnum(AActor* Actor, EPalAudioRTPC rtpc, float Value, float interpolSec);
     
     UFUNCTION(BlueprintCallable)
     static void SetRTPCValueByActor(AActor* Actor, const FName Name, float Value, float interpolSec);

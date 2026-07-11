@@ -9,6 +9,7 @@ enum class EPalHUDWidgetPriority : uint8 {
     DamagePopUp,
     PlayerInputGuard,
     PlayerUI,
+    PalFight,
     CaptureingLoupe,
     CaptureReticle,
     InteractIndicator,

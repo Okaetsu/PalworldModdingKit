@@ -22,7 +22,7 @@ public:
     UPalMapObjectUtility();
 
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    static bool TryGetItemVisualModelStaticMesh(TSubclassOf<AActor> actorClass, UStaticMesh*& OutStaticMesh, FTransform& OutComponentTransform, FVector& OutCenterOfMass, UMaterialInterface*& OutMaterialInterface);
+    static bool TryGetItemVisualModelStaticMesh(TSubclassOf<AActor> actorClass, UStaticMesh*& OutStaticMesh, FTransform& OutComponentTransform, FVector& OutCenterOfMass, TArray<UMaterialInterface*>& OutMaterialInterface);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static bool TryGetItemVisualModelSkeletalMesh(TSubclassOf<AActor> actorClass, USkeletalMesh*& OutSkeletalMesh, FTransform& OutComponentTransform, FVector& OutCenterOfMass, UMaterialInterface*& OutMaterialInterface);

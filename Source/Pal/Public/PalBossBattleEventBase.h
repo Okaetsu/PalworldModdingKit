@@ -26,6 +26,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsCombatStarted;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsClearConditionOverride;
+    
 public:
     APalBossBattleEventBase(const FObjectInitializer& ObjectInitializer);
 
@@ -65,6 +68,9 @@ protected:
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsNearLocalPlayer() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+    bool IsBossCleared() const;
     
     UFUNCTION(BlueprintCallable)
     void Initialize();

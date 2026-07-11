@@ -6,6 +6,7 @@ UPalCharacterParameterComponent::UPalCharacterParameterComponent(const FObjectIn
     this->bIsEnableSendReticleTarget = false;
     this->bIsEnableMuteki = false;
     this->bIsDisableSummonWeapon = false;
+    this->bIsInfinitySP = false;
     this->IsSPOverheat = false;
     this->bIsHyperArmor = false;
     this->bIsDebugMuteki = false;
@@ -17,6 +18,7 @@ UPalCharacterParameterComponent::UPalCharacterParameterComponent(const FObjectIn
     this->IsOverrideTarget = false;
     this->bIsOverrideDefenceTarget = false;
     this->Trainer = NULL;
+    this->bIsOtomoStandbyAI = false;
     this->OtomoPal = NULL;
     this->IndividualHandle = NULL;
     this->IndividualParameter = NULL;
@@ -27,18 +29,19 @@ UPalCharacterParameterComponent::UPalCharacterParameterComponent(const FObjectIn
     this->BiologicalGrade = 0;
     this->IsPredator = false;
     this->IsEdible = true;
-    this->HiddenCollisionOverlapCount = 0;
-    this->BurnCollisionOverlapCount = 0;
-    this->LavaCollisionOverlapCount = 0;
     this->DamageUpElement_ByElementStatus = EPalElementType::None;
     this->DamageDownElement_ByElementStatus = EPalElementType::None;
     this->IsDarknessRandomAttack = false;
     this->AttackUp = 0;
+    this->AttackDown = 0;
     this->DefenseUp = 0;
     this->IsSleepAction = false;
     this->IsDisableOtomoReturnEffect = false;
     this->IsPendingMeatCutDeath = false;
     this->MaxHPRate_ForTowerBoss = 1.00f;
+    this->AdditionalEnemyMaxHPRate = 1.00f;
+    this->AdditionalEnemyReceiveDamageRate = 1.00f;
+    this->AdditionalEnemyInflictDamageRate = 1.00f;
     this->MaxSPBuffRate = 1.00f;
     this->bIsPreCooping = false;
     this->bRespawnedWaitTeleport = false;
@@ -54,6 +57,7 @@ UPalCharacterParameterComponent::UPalCharacterParameterComponent(const FObjectIn
     this->DyingMaxHP = 100.00f;
     this->ItemContainer = NULL;
     this->IsCapturedProcessing = false;
+    this->PlayerLastPreFTLocationOverriding = false;
     this->CanDropItem = false;
     this->IsImmortality = false;
     this->IsMimicryMode = false;
@@ -82,6 +86,9 @@ void UPalCharacterParameterComponent::SetSP(FFixedPoint64 NewSP) {
 void UPalCharacterParameterComponent::SetReticleTarget_ToServer_Implementation(AActor* Actor) {
 }
 
+void UPalCharacterParameterComponent::SetPlayerLastPreFTLocation(const FVector& Location) {
+}
+
 void UPalCharacterParameterComponent::SetOverrideTargetLocation_ToServer_Implementation(FVector TargetLocation) {
 }
 
@@ -89,6 +96,9 @@ void UPalCharacterParameterComponent::SetOverrideTargetLocation(FVector TargetLo
 }
 
 void UPalCharacterParameterComponent::SetOverrideDefenceTargetLocation(FVector TargetLocation) {
+}
+
+void UPalCharacterParameterComponent::SetOtomoLastActiveLocation(const FVector& Location) {
 }
 
 void UPalCharacterParameterComponent::SetMuteki(FName flagName, bool IsEnable) {
@@ -169,6 +179,9 @@ void UPalCharacterParameterComponent::OnRep_PossessStaticItemId() {
 void UPalCharacterParameterComponent::OnRep_ItemContainer() {
 }
 
+void UPalCharacterParameterComponent::OnRep_IsCapturedProcessing() {
+}
+
 void UPalCharacterParameterComponent::OnRep_IndividualParameter() {
 }
 
@@ -181,7 +194,18 @@ void UPalCharacterParameterComponent::OnInitialize_AfterSetIndividualParameter(A
 void UPalCharacterParameterComponent::OnDamage(const FPalDamageResult DamageResult) {
 }
 
+void UPalCharacterParameterComponent::Multicast_DecreaseAllActiveSkillCoolDownByRate_Implementation(float Rate) {
+}
+
+bool UPalCharacterParameterComponent::IsStatusHitActive(const FPalStatusHit& StatusHit) {
+    return false;
+}
+
 bool UPalCharacterParameterComponent::IsPlayersOtomo() const {
+    return false;
+}
+
+bool UPalCharacterParameterComponent::IsPlayerLastPreFTLocationValid() const {
     return false;
 }
 
@@ -190,6 +214,10 @@ bool UPalCharacterParameterComponent::IsPartBroken() const {
 }
 
 bool UPalCharacterParameterComponent::IsOverrideDefenceTarget() const {
+    return false;
+}
+
+bool UPalCharacterParameterComponent::IsOtomoStandbyAI() const {
     return false;
 }
 
@@ -205,7 +233,11 @@ bool UPalCharacterParameterComponent::IsLive() const {
     return false;
 }
 
-bool UPalCharacterParameterComponent::IsInHiddenCollision() {
+bool UPalCharacterParameterComponent::IsInfinitySP() const {
+    return false;
+}
+
+bool UPalCharacterParameterComponent::IsInactiveOtomo() const {
     return false;
 }
 
@@ -269,6 +301,10 @@ UPalWorkBase* UPalCharacterParameterComponent::GetWork() const {
     return NULL;
 }
 
+FPalStatusHit UPalCharacterParameterComponent::GetStatusHit(EPalStatusHitType StatusHitType) const {
+    return FPalStatusHit{};
+}
+
 FFixedPoint64 UPalCharacterParameterComponent::GetSP() {
     return FFixedPoint64{};
 }
@@ -289,11 +325,19 @@ float UPalCharacterParameterComponent::GetRadius() const {
     return 0.0f;
 }
 
+FVector UPalCharacterParameterComponent::GetPlayerLastPreFTLocation() const {
+    return FVector{};
+}
+
 FVector UPalCharacterParameterComponent::GetOverrideTargetLocation_ConsiderRide() {
     return FVector{};
 }
 
 FVector UPalCharacterParameterComponent::GetOverrideDefenceTargetLocation() const {
+    return FVector{};
+}
+
+FVector UPalCharacterParameterComponent::GetOtomoLastActiveLocation() const {
     return FVector{};
 }
 
@@ -439,11 +483,17 @@ void UPalCharacterParameterComponent::GetLifetimeReplicatedProps(TArray<FLifetim
     DOREPLIFETIME(UPalCharacterParameterComponent, bIsEnableMuteki);
     DOREPLIFETIME(UPalCharacterParameterComponent, bIsDisableSummonWeapon);
     DOREPLIFETIME(UPalCharacterParameterComponent, OverrideTargetLocation);
+    DOREPLIFETIME(UPalCharacterParameterComponent, OtomoLastActiveLocation);
+    DOREPLIFETIME(UPalCharacterParameterComponent, PlayerLastPreFTLocation);
     DOREPLIFETIME(UPalCharacterParameterComponent, Trainer);
+    DOREPLIFETIME(UPalCharacterParameterComponent, bIsOtomoStandbyAI);
     DOREPLIFETIME(UPalCharacterParameterComponent, IndividualParameter);
     DOREPLIFETIME(UPalCharacterParameterComponent, IsCanSneakAttacked);
     DOREPLIFETIME(UPalCharacterParameterComponent, IsFriendBulletIgnore);
     DOREPLIFETIME(UPalCharacterParameterComponent, MaxHPRate_ForTowerBoss);
+    DOREPLIFETIME(UPalCharacterParameterComponent, AdditionalEnemyMaxHPRate);
+    DOREPLIFETIME(UPalCharacterParameterComponent, AdditionalEnemyReceiveDamageRate);
+    DOREPLIFETIME(UPalCharacterParameterComponent, AdditionalEnemyInflictDamageRate);
     DOREPLIFETIME(UPalCharacterParameterComponent, bBeingSleptOnSide);
     DOREPLIFETIME(UPalCharacterParameterComponent, WorkAssignId);
     DOREPLIFETIME(UPalCharacterParameterComponent, WorkType);
@@ -453,6 +503,8 @@ void UPalCharacterParameterComponent::GetLifetimeReplicatedProps(TArray<FLifetim
     DOREPLIFETIME(UPalCharacterParameterComponent, DyingHP);
     DOREPLIFETIME(UPalCharacterParameterComponent, DyingMaxHP);
     DOREPLIFETIME(UPalCharacterParameterComponent, ItemContainer);
+    DOREPLIFETIME(UPalCharacterParameterComponent, IsCapturedProcessing);
+    DOREPLIFETIME(UPalCharacterParameterComponent, PlayerLastPreFTLocationOverriding);
     DOREPLIFETIME(UPalCharacterParameterComponent, IsImmortality);
     DOREPLIFETIME(UPalCharacterParameterComponent, UnreachableMapObjectRepInfoArray);
 }

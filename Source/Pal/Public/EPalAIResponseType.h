@@ -8,5 +8,6 @@ enum class EPalAIResponseType : uint8 {
     Escape,
     Battle,
     Special,
+    Battle_Anyway,
 };
 

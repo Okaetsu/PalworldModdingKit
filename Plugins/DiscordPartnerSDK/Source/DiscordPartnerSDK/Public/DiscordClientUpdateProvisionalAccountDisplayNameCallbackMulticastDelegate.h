@@ -1,0 +1,8 @@
+#pragma once
+#include "CoreMinimal.h"
+#include "DiscordClientUpdateProvisionalAccountDisplayNameCallbackMulticastDelegate.generated.h"
+
+class UDiscordClientResult;
+
+UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDiscordClientUpdateProvisionalAccountDisplayNameCallbackMulticast, UDiscordClientResult*, Result);
+

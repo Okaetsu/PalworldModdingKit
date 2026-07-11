@@ -3,8 +3,7 @@
 UPalUIMapObjectStatusIndicatorBase::UPalUIMapObjectStatusIndicatorBase() {
 }
 
-EPalWorkSuitability UPalUIMapObjectStatusIndicatorBase::GetWorkSuitability() const {
-    return EPalWorkSuitability::None;
+void UPalUIMapObjectStatusIndicatorBase::GetWorkSuitabilityDisplayData(TArray<FPalUIMapObjectStatusIndicatorWorkSuitabilityDisplayData>& OutDisplayData) const {
 }
 
 

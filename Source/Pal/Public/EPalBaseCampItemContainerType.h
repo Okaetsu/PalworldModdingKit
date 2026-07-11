@@ -7,5 +7,6 @@ enum class EPalBaseCampItemContainerType : uint8 {
     Chest,
     GuildChest,
     Other,
+    ItemBoothStore,
 };
 

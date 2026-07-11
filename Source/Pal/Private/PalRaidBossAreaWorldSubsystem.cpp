@@ -16,8 +16,16 @@ void UPalRaidBossAreaWorldSubsystem::OnNotifiedMovedOutOfStageInClient(APalPlaye
 void UPalRaidBossAreaWorldSubsystem::OnNotifiedMovedIntoStageInClient(APalPlayerState* PlayerState, const FPalStageInstanceId& StageInstanceId) {
 }
 
+bool UPalRaidBossAreaWorldSubsystem::IsInProcessRaidBattleInByOwnerBaseCampId(const FGuid& OwnerBaseCampId) const {
+    return false;
+}
+
 UPalRaidBossAreaInstanceModel* UPalRaidBossAreaWorldSubsystem::GetInstanceModel(const FGuid& RaidBossInstanceId) {
     return NULL;
+}
+
+EPalRaidBossAreaPhase UPalRaidBossAreaWorldSubsystem::GetEnteringStageCurrentPhaseForLocalPlayer() const {
+    return EPalRaidBossAreaPhase::None;
 }
 
 

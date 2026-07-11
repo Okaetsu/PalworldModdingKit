@@ -12,5 +12,14 @@ enum class EPalPhysicalSurface : uint8 {
     Water,
     Snow,
     Lava,
+    Coin,
+    Metal,
+    BridgeCreak,
+    Fabric,
+    Ice,
+    Tatami,
+    Glass,
+    Clean,
+    Acid,
 };
 

@@ -34,6 +34,10 @@ FString UPalMapObjectSignboardModel::GetSignboardText() {
     return TEXT("");
 }
 
+FGuid UPalMapObjectSignboardModel::GetLastModifiedPlayerUid_BP() const {
+    return FGuid{};
+}
+
 void UPalMapObjectSignboardModel::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     

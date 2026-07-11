@@ -2,9 +2,12 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
+#include "BoolValUpdateDelegateDelegate.h"
+#include "EPalRelicType.h"
 #include "PalPlayerRecordDataFoundTreasureMapPoint.h"
 #include "PalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal.h"
 #include "PalPlayerRecordDataRepInfoArrayThreadSafe_IntVal.h"
+#include "PalRelicPossessNumArray.h"
 #include "PalStageInstanceId.h"
 #include "ThreadSafeBoolean.h"
 #include "ThreadSafeInt32.h"
@@ -19,18 +22,21 @@ class PAL_API UPalPlayerRecordData : public UObject {
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateTreasureMapPointDelegate, const FGuid&, PointId);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FUpdateTreasureMapPointDataDelegate, const FGuid&, PointId, const FPalPlayerRecordDataFoundTreasureMapPoint&, PointData);
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnRelicNumUpdateDelegate);
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRelicNumAddedDelegate, int32, AddNum);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRelicNumUpdateDelegate, EPalRelicType, Type, int32, NewNum);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRelicNumAddedByTypeDelegate, EPalRelicType, Type, int32, AddNum);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEnteringStageInstanceIdUpdateDelegate);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnRelicNumUpdateDelegate OnRelicNumUpdate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FOnRelicNumAddedDelegate OnRelicNumAdd;
+    FOnRelicNumAddedByTypeDelegate OnRelicNumAddByType;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnEnteringStageInstanceIdUpdateDelegate OnEnteringStageInstanceIdUpdate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FBoolValUpdateDelegate OnTowerBossDefeatFlagUpdated;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -88,20 +94,74 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FThreadSafeInt32 AreaBonusExpTableIndex;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 BossDefeatExpTableIndex;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 RelicBonusExpTableIndex;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 NoteBonusExpTableIndex;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 ItemPIckupBonusExpTableIndex;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 FastTravelBonusExpTableIndex;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal FindAreaFlag;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
-    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag;
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_CapturePower;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RelicNum, meta=(AllowPrivateAccess=true))
-    FThreadSafeInt32 RelicPossessNum;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_HungerReduction;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_SwimSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_FoodDecayReduction;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_JumpPower;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_GliderSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_ClimbSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_StatusAilmentResist;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_StaminaReduction;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_SphereHoming;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_ExpBonus;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_RainbowPassiveRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal RelicObtainForInstanceFlag_MoveSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_RelicNumArray, meta=(AllowPrivateAccess=true))
+    FPalRelicPossessNumArray RelicPossessNumArray;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    FThreadSafeInt32 RelicPossessNumMirror;
+    FPalRelicPossessNumArray RelicPossessNumArrayMirror;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal NoteObtainForInstanceFlag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal ItemPickupObtainForInstanceFlag;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal FastTravelPointUnlockFlag;
@@ -157,8 +217,26 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal NPCAchivementRewardFlag;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bCaptureCompletionRelicFixupDone;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FThreadSafeBoolean bFirstFishingComplete;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal AreaBarrierUnlockFlags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FPalPlayerRecordDataRepInfoArrayThreadSafe_BoolVal UnlockedWorldMapFlags;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 MutationCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeInt32 AwakeningCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FThreadSafeBoolean bIsGameCleared;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -188,7 +266,7 @@ public:
 
 protected:
     UFUNCTION(BlueprintCallable)
-    void OnRep_RelicNum();
+    void OnRep_RelicNumArray();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_EnteringStageInstanceId();
@@ -205,6 +283,15 @@ public:
     int32 GetTotalPalCaptureCount() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetRelicPossessNumByType(EPalRelicType Type) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetRelicLevelByType(EPalRelicType Type) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetRelicEffectRateByType(EPalRelicType Type) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetNormalBossDefeatCount() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -212,6 +299,13 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetBonusExpTableIndex() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    void GetAllRelicPossessNum(TMap<EPalRelicType, int32>& OutMap) const;
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void ForwardTowerBossDefeatFlagUpdated(FName Key, bool NewValue);
     
 };
 

@@ -25,6 +25,9 @@ void UPalNetworkCharacterComponent::RequestDoctorSurgi_ToServer_Implementation(U
 void UPalNetworkCharacterComponent::RequestCircumNpcItemTrade_ToServer_Implementation(const UObject* WorldContextObject, const FGuid PlayerUId, const FName& RequestTradeDataId) {
 }
 
+void UPalNetworkCharacterComponent::RequestChangeExcludeTeamMissionFlag_Implementation(const FPalInstanceID& InstanceId, bool bNewFlag) {
+}
+
 void UPalNetworkCharacterComponent::RequestApplyPalLoadoutData_ToServer_Implementation(const FGuid PlayerUId, const TArray<FPalInstanceID>& LoadoutPalIds) {
 }
 

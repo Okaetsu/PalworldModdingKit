@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
-#include "EPalNPCTalkUIType.h"
 #include "PalDataTableRowName_NPCAppearFlagData.h"
 #include "PalEnemyCampStatus.h"
 #include "PalGameWorldDataSaveInterface.h"
@@ -16,7 +15,6 @@ class APalCharacter;
 class UDataTable;
 class UNavigationQueryFilter;
 class UPalIndividualCharacterHandle;
-class UPalNPCMultiTalkHandle;
 class UPalNPCTalkFlowAssetBase;
 class UPalWildPalDrinkWaterSpotProvider;
 
@@ -53,19 +51,7 @@ protected:
     UDataTable* UniqueNPCDataTable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDataTable* NPCOneTalkDataTable;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    UDataTable* NPCMultiTalkDataTable;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* NPCTalkFlowDataTable;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<EPalNPCTalkUIType, UDataTable*> TalkDataTableMap;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<FName, EPalNPCTalkUIType> NPCNameTalkTypeMap;
     
 public:
     UPalNPCManager();
@@ -90,34 +76,16 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool IsTransientTalkCount(APalCharacter* Character);
+    bool IsTransientTalkCount(const APalCharacter* Character) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool IsTalkable(APalCharacter* Character);
+    bool IsTalkable(const APalCharacter* Character) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    EPalNPCTalkUIType GetTalkUIType(APalCharacter* Character);
+    UPalNPCTalkFlowAssetBase* GetNPCTalkFlowAssetById(const FName& TalkId) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalNPCTalkFlowAssetBase* GetNPCTalkFlowAsset(APalCharacter* Character) const;
-    
-    UFUNCTION(BlueprintCallable)
-    UDataTable* GetNPCTalkDTFromTalkUIType(EPalNPCTalkUIType TalkUIType);
-    
-    UFUNCTION(BlueprintCallable)
-    UDataTable* GetNPCOneTalkDTFromTalkId(FName TalkId);
-    
-    UFUNCTION(BlueprintCallable)
-    UDataTable* GetNPCOneTalkDTFromCharacter(APalCharacter* Character);
-    
-    UFUNCTION(BlueprintCallable)
-    TSubclassOf<UPalNPCMultiTalkHandle> GetNPCMultiTalkClassFromTalkId(FName TalkId);
-    
-    UFUNCTION(BlueprintCallable)
-    TSubclassOf<UPalNPCMultiTalkHandle> GetNPCMultiTalkClass(APalCharacter* Character);
-    
-    UFUNCTION(BlueprintCallable)
-    UDataTable* GetNPCCharacterTalkDT(FName CharacterID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalEnemyCampStatus GetEnemyCampStatus(FName KeyName) const;
@@ -126,7 +94,7 @@ public:
     UPalWildPalDrinkWaterSpotProvider* GetDrinkWaterSpotProvider();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    FName GetCharacterIDFromUniqueNPCID(FName UniqueNPCID);
+    FName GetCharacterIDFromUniqueNPCID(FName UniqueNPCID) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FName GetCharacterIDFromCharacterIDAndUniqueNPCID(FName CharacterID, FName UniqueNPCID);

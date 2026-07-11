@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
 #include "EPalCharacterStatusOperationName.h"
+#include "EPalRelicType.h"
 #include "PalCharacterStatusOperation.generated.h"
 
 class UPalIndividualCharacterHandle;
@@ -13,11 +14,14 @@ class PAL_API UPalCharacterStatusOperation : public UObject {
 public:
     UPalCharacterStatusOperation();
 
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static FName GetStatusPointNameByRelicType(EPalRelicType Type);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static TMap<FName, int32> GetReturnItemsForResetCharacterStatusAll(const UObject* WorldContextObject, const UPalIndividualCharacterParameter* TargetIndividualParameter);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
-    static int32 GetRequiredRelicCountForLocalPlayer(const UObject* WorldContextObject);
+    static int32 GetRequiredRelicCountForLocalPlayer(const UObject* WorldContextObject, EPalRelicType RelicType);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static int32 GetRequiredMoneyCountForResetLocalPlayer(const UObject* WorldContextObject);
@@ -34,11 +38,20 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetRequiredItemCountForCharacterStatus(const UObject* WorldContextObject, UPalIndividualCharacterParameter* TargetParameter, const TMap<EPalCharacterStatusOperationName, int32> StatusMap, TMap<FName, int32>& RequiredItems);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static float GetRelicEffectRate(const UObject* WorldContextObject, EPalRelicType RelicType, int32 Rank);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static int32 GetCurrentStatusRankByRelicTypeForLocalPlayer(const UObject* WorldContextObject, EPalRelicType RelicType);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     static int32 GetCurrentStatusRank(const UPalIndividualCharacterParameter* TargetIndividualParameter, const EPalCharacterStatusOperationName StatusName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
-    static int32 GetCurrentLocalPlayerTotalStatusPoint(const UObject* WorldContextObject, const FName StatusName);
+    static int32 GetCurrentLocalPlayerTotalStatusPoint(const UObject* WorldContextObject, EPalRelicType RelicType);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static int32 CalcRequiredRelicCountForLocalPlayer(const UObject* WorldContextObject, EPalRelicType RelicType, const int32 ToRank);
     
 };
 

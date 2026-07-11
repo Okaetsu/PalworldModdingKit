@@ -16,6 +16,7 @@
 #include "PalDistributeTickManager.h"
 #include "PalEventNotifySystem.h"
 #include "PalExpDatabase.h"
+#include "PalGameDataBridge.h"
 #include "PalGameSetting.h"
 #include "PalHUDService.h"
 #include "PalItemContainerManager.h"
@@ -43,7 +44,11 @@
 UPalGameInstance::UPalGameInstance() {
     this->bNetworkError = false;
     this->bSaveError = false;
+    this->bSaveServerPassword = false;
+    this->LastConnectedServerPort = 0;
     this->LoginManager = NULL;
+    this->GameDataBridgeClass = UPalGameDataBridge::StaticClass();
+    this->GameDataBridge = NULL;
     this->GameSettingClass = UPalGameSetting::StaticClass();
     this->GameSetting = NULL;
     this->OnlineManager = NULL;
@@ -117,14 +122,17 @@ UPalGameInstance::UPalGameInstance() {
     this->SkinManagerClass = UPalSkinManager::StaticClass();
     this->SkinManager = NULL;
     this->SupplyManagerClass = UPalSupplyManager::StaticClass();
+    this->RandomizerManagerClass = NULL;
     this->TreasureMapWorldSubsystemClass = UPalTreasureMapWorldSubsystem::StaticClass();
     this->ShopManagerSubsystemClass = UPalShopManager::StaticClass();
     this->ObjectPoolClass = NULL;
     this->FishingSystemClass = NULL;
-    this->revisionNum = 90464;
+    this->revisionNum = 100427;
     this->bUseAsyncMovement = true;
     this->MemoryWarningThresholdMB = 0;
+    this->bShowEarlyAccessDialogOnGDK = false;
     this->DimensionLockerControlSubsystemClass = UPalDimensionLockerControlSubsystem::StaticClass();
+    this->bSkipSplashScreen = false;
     this->DisplaySafeAreaDebugger = NULL;
     this->TitleBGMPlayerClass = UPalPersistentSoundPlayer::StaticClass();
     this->TitleBGMPlayer = NULL;
@@ -140,6 +148,9 @@ void UPalGameInstance::SetNewWorldName(const FString& WorldName) {
 }
 
 void UPalGameInstance::SetIsNewGame() {
+}
+
+void UPalGameInstance::SetAlreadyShowModDetectionDialog() {
 }
 
 bool UPalGameInstance::SelectWorldSaveDirectoryName(const FString& WorldSaveDirectoryName) {
@@ -169,6 +180,9 @@ void UPalGameInstance::OnCompletedJoinSession(bool IsSuccess, JoinSessionResultT
 void UPalGameInstance::OnCompletedFindSessions(bool bIsSuccess, const TArray<FBlueprintSessionResult>& Results, const FString& ErrorStr) {
 }
 
+void UPalGameInstance::OnClosedModCautionWithExternalMods(bool bResult) {
+}
+
 
 bool UPalGameInstance::IsPlayFromTitle() {
     return false;
@@ -179,6 +193,10 @@ bool UPalGameInstance::IsNewGame() const {
 }
 
 bool UPalGameInstance::IsLoggedin() {
+    return false;
+}
+
+bool UPalGameInstance::IsAlreadyShowModDetectionDialog() const {
     return false;
 }
 
@@ -202,6 +220,10 @@ UPalOnlineManager* UPalGameInstance::GetOnlineManager() const {
 }
 
 UPalGdkManager* UPalGameInstance::GetGdkManager() const {
+    return NULL;
+}
+
+UPalGameDataBridge* UPalGameInstance::GetGameDataBridge() const {
     return NULL;
 }
 

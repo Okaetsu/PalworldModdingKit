@@ -8,6 +8,9 @@ FGeneralAnimationParameter::FGeneralAnimationParameter() {
     this->bIsSwimming = false;
     this->RangeForGround = 0.00f;
     this->bIsNearGround = false;
+    this->bIsJetpackGliding = false;
+    this->JetpackGliderPitchDelta = 0.00f;
+    this->JetpackGliderYawDelta = 0.00f;
     this->FootIKRootOffset = 0.00f;
     this->MoveSpeedPlusByRotateYaw = 0.00f;
     this->YawSpeed = 0.00f;

@@ -5,6 +5,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Engine/DataTable.h"
 #include "EPalBaseCampWorkerEventType.h"
+#include "EPalTribeID.h"
 #include "PalBaseCampSignificanceInfo.h"
 #include "PalBuildObjectSpawnValidationCheckInterface.h"
 #include "PalGameWorldDataSaveInterface.h"
@@ -17,6 +18,7 @@ class AController;
 class APalBaseCampInvasionDetector;
 class UDataTable;
 class UPalAIActionBaseCampDefenseBase;
+class UPalAIActionCompositeBase;
 class UPalBaseCampModel;
 class UPalBaseCampWorkerEventBase;
 class UPalMapObjectModel;
@@ -43,6 +45,15 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<AController> BaseCampAIControllerClass;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalTribeID, TSubclassOf<AController>> BaseCampAIControllerOverridePerTribe;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalTribeID, TSubclassOf<UPalAIActionCompositeBase>> BaseCampCompositeOverridePerTribe;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalTribeID, int32> BaseCampWorkerLimitPerTribe;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<APalBaseCampInvasionDetector> BaseCampInvasionDetectorClass;

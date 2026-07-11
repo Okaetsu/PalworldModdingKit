@@ -42,6 +42,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalItemAndNum tmpLiftedItemAndNum;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCanLiftSlot;
+    
 public:
     UPalUIInventoryModel();
 

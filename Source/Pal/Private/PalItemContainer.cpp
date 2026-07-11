@@ -3,6 +3,7 @@
 
 UPalItemContainer::UPalItemContainer() {
     this->CorruptionMultiplier = 1.00f;
+    this->bIsGuildChestContainer = false;
 }
 
 void UPalItemContainer::OnUpdateSlotContent(UPalItemSlot* Slot) {
@@ -23,6 +24,14 @@ int32 UPalItemContainer::Num() const {
 
 FPalItemPermission UPalItemContainer::GetPermission() const {
     return FPalItemPermission{};
+}
+
+int32 UPalItemContainer::GetLastNotEmptyIndex() const {
+    return 0;
+}
+
+int64 UPalItemContainer::GetItemStackCount64(const FName StaticItemId) const {
+    return 0;
 }
 
 int32 UPalItemContainer::GetItemStackCount(const FName StaticItemId) const {

@@ -28,10 +28,22 @@ FGuid UPalHUDService::ShowCommonUI(const EPalWidgetBlueprintType WBPType, UPalHU
 void UPalHUDService::ShowCommonReward(const FPalUICommonRewardDisplayData& RewardDisplayData) {
 }
 
+void UPalHUDService::ShowCommonItemReward(const FPalUICommonItemRewardData& ItemRewardData) {
+}
+
 void UPalHUDService::ShowCommonItemInfo(const FPalUICommonItemInfoDisplayData& DisplayData) {
 }
 
+void UPalHUDService::ShowCommonExpReward(const FPalUICommonExpRewardData& ExpRewardData) {
+}
+
+void UPalHUDService::SetIgnoreMaskBossSpawnerNames(const TArray<FName>& NewNames) {
+}
+
 void UPalHUDService::SetHUDLayerHideFlag(const FGameplayTag& LayerTagName, const FName& HideReasonName, bool IsHide) {
+}
+
+void UPalHUDService::RestoreIgnoreMaskFromLocalRecord() {
 }
 
 void UPalHUDService::RemoveWorldHUDFromWidgetId(const FGuid& ID) {
@@ -55,6 +67,10 @@ bool UPalHUDService::IsTopLayerUI(const FGuid& WidgetId) {
 }
 
 bool UPalHUDService::IsAnyOverlayUIActive() {
+    return false;
+}
+
+bool UPalHUDService::IsAnyFadeWidgetActive() const {
     return false;
 }
 

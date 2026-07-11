@@ -6,11 +6,13 @@ FPalWazaDatabaseRaw::FPalWazaDatabaseRaw() {
     this->IgnoreRandomInherit = false;
     this->Category = EPalWazaCategory::Melee;
     this->Power = 0;
+    this->DisplayPower = 0;
     this->IsLeanBack = false;
     this->CameraShake = EPalPlayerDamageCameraShakeCategory::None;
     this->IgnoreRaycast = false;
     this->MinRange = 0;
     this->MaxRange = 0;
+    this->MaxHeightDiff = 0;
     this->CoolTime = 0.00f;
     this->ForceRagdollSize = EPalSizeType::None;
     this->EffectType1 = EPalAdditionalEffectType::None;
@@ -20,7 +22,9 @@ FPalWazaDatabaseRaw::FPalWazaDatabaseRaw() {
     this->EffectValue2 = 0;
     this->EffectValueEx2 = 0.00f;
     this->bIsWeaponDamage = false;
+    this->bIsExplosionDamage = false;
     this->DisabledData = false;
+    this->Strength = EPalWazaStrength::None;
     this->BulletEmiiterOverlapClass = NULL;
 }
 

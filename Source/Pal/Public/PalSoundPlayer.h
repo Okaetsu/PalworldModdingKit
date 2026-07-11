@@ -5,6 +5,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Chaos/ChaosEngineInterface.h"
+#include "EPalAkComponentTickPolicy.h"
 #include "PalSoundOptions.h"
 #include "PalSoundPlayingParameter.h"
 #include "PalSoundPlayer.generated.h"
@@ -42,6 +43,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, float> OutputBusVolumes;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalAkComponentTickPolicy AkComponentTickPolicy;
     
 public:
     UPalSoundPlayer();

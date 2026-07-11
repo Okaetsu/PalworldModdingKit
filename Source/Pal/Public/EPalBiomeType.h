@@ -13,5 +13,9 @@ enum class EPalBiomeType : uint8 {
     CentralCity,
     SkyCityCity,
     WorldTree,
+    Forest,
+    Sakurajima,
+    Yamishima,
+    WildlifeSanctuary2,
 };
 

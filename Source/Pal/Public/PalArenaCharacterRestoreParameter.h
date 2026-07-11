@@ -33,6 +33,12 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalFoodRegeneInfo FoodRegeneEffectInfo;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName FoodWithFullStomachKeep;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 Tiemr_FoodWithFullStomachKeep;
+    
     PAL_API FPalArenaCharacterRestoreParameter();
 };
 

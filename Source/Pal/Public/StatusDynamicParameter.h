@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "PalInstanceID.h"
 #include "StatusDynamicParameter.generated.h"
 
 USTRUCT(BlueprintType)
@@ -11,6 +12,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName GeneralName;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float GeneralFloatValue;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalInstanceID GeneralInstanceID;
     
     PAL_API FStatusDynamicParameter();
 };

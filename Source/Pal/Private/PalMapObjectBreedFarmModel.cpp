@@ -10,6 +10,9 @@ UPalMapObjectBreedFarmModel::UPalMapObjectBreedFarmModel() {
 void UPalMapObjectBreedFarmModel::OnUpdateAssignedCharacter(UPalWorkBase* Work) {
 }
 
+void UPalMapObjectBreedFarmModel::OnUnassignedCharacter_ServerInternal(UPalWorkBase* Work, const FPalInstanceID& IndividualId) {
+}
+
 void UPalMapObjectBreedFarmModel::OnRep_UpdateBreedProgress() {
 }
 

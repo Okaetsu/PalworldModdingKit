@@ -165,6 +165,9 @@ private:
     void OnSuccessCatchBattle();
     
     UFUNCTION(BlueprintCallable)
+    void OnReturnToFieldFromStage_ClientInternal();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_RodState();
     
     UFUNCTION(BlueprintCallable)

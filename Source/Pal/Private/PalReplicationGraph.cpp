@@ -3,5 +3,6 @@
 UPalReplicationGraph::UPalReplicationGraph() {
     this->GridNode = NULL;
     this->AlwaysRelevantNode = NULL;
+    this->NetUpdateFrequencyOverrideNode = NULL;
 }
 

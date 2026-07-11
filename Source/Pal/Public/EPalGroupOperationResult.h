@@ -32,5 +32,12 @@ enum class EPalGroupOperationResult : uint8 {
     FailedNotFoundBaseCamp,
     FailedBaseCampOperation,
     FailedNotImplement,
+    Failed_PermissionDenied,
+    FailedPermissionDenied_NoPermission,
+    FailedPermissionDenied_TargetRoleHigher,
+    FailedCannotChangeOwnRole,
+    FailedCannotDemoteMaster,
+    FailedCannotPromoteToGuildMaster,
+    Failed_CannotExitGuildMaster,
 };
 

@@ -4,10 +4,12 @@
 #include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "Engine/HitResult.h"
+#include "EPalCharacterLiftupObjectThrowState.h"
 #include "PalInteractiveObjectIndicatorInterface.h"
 #include "PalCharacterLiftupObjectComponent.generated.h"
 
 class AActor;
+class APalPlayerCharacter;
 class UPrimitiveComponent;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -16,11 +18,17 @@ class UPalCharacterLiftupObjectComponent : public UActorComponent, public IPalIn
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool bIsLifting;
+    EPalCharacterLiftupObjectThrowState ThrowState;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool bEnableLiftup;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    APalPlayerCharacter* LiftingPlayerCharacter;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ThrowIgnorePlayerDuration;
     
 public:
     UPalCharacterLiftupObjectComponent(const FObjectInitializer& ObjectInitializer);
@@ -46,7 +54,13 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void BroadcastSetBeingThrown(const bool bInBeingThrown);
+    void BroadcastMarkThrowReleased();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void BroadcastClearThrowState();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void BroadcastBeginThrowPitching();
     
 
     // Fix for true pure virtual functions not being implemented

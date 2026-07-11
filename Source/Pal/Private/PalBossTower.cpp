@@ -6,7 +6,11 @@ APalBossTower::APalBossTower(const FObjectInitializer& ObjectInitializer) : Supe
     const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
     (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
     this->BossType = EPalBossType::None;
+    this->bIsStandaloneBossTower = false;
     this->InstanceModel = NULL;
+    this->CombatTimeLimit = 0.00f;
+    this->CombatTimeMax = 0;
+    this->bShouldUpdateBattleInfoTowerBossCountdown = true;
 }
 
 bool APalBossTower::WriteBossDefeatRecord_ServerInternal(APalPlayerCharacter* TargetPlayer) {
@@ -19,22 +23,33 @@ void APalBossTower::UpdateEntry_Multicast_Implementation(EPalBossBattleDifficult
 void APalBossTower::ShowWaitInfo(const FVector TargetLocation, const FVector DisplayOffset, bool isWaiting) {
 }
 
+bool APalBossTower::ShouldInfoMaskByBossType() const {
+    return false;
+}
+
 void APalBossTower::RequestBossBattleStart() {
 }
 
 void APalBossTower::RequestBossBattleEntry(EPalBossBattleDifficulty Difficulty) {
 }
 
-void APalBossTower::RemoveInDoorPlayer(APalPlayerCharacter* Player) {
+void APalBossTower::OnUpdateLocalBossDefeatFlag(FName Key, bool bNewValue) {
 }
 
 void APalBossTower::OnRep_InstanceModel() {
 }
 
+void APalBossTower::OnCompleteSyncLocalPlayer(APalPlayerState* PlayerState) {
+}
+
+
 void APalBossTower::OnChangeEntryPlayer(TArray<APalPlayerCharacter*> EntryPlayers) {
 }
 
-void APalBossTower::OnChangeCombatTimeLimit(FDateTime NewCombatTimeLimit) {
+void APalBossTower::OnChangeCombatTimeMax(int32 NewCombatTimeMax) {
+}
+
+void APalBossTower::OnChangeCombatTimeLimit(float NewCombatTimeLimit) {
 }
 
 
@@ -42,6 +57,10 @@ void APalBossTower::OnChangeBossBattleState(EPalBossBattleState NewBossBattleSta
 }
 
 void APalBossTower::NotifyEntryUpdateAll() {
+}
+
+bool APalBossTower::IsLocalBossDefeated() const {
+    return false;
 }
 
 bool APalBossTower::IsEntered(APalPlayerCharacter* Player) const {
@@ -52,16 +71,8 @@ FTransform APalBossTower::GetTopWarpPoint_Implementation() const {
     return FTransform{};
 }
 
-TArray<APalPlayerCharacter*> APalBossTower::GetStartablePlayers() {
-    return TArray<APalPlayerCharacter*>();
-}
-
 FTransform APalBossTower::GetFrontWarpPoint_Implementation() const {
     return FTransform{};
-}
-
-TArray<APalPlayerCharacter*> APalBossTower::GetForceWarpTargets() const {
-    return TArray<APalPlayerCharacter*>();
 }
 
 FTransform APalBossTower::GetDeadItemDropPoint_Implementation() const {
@@ -75,14 +86,13 @@ FName APalBossTower::GetBossBattleRowName() {
 void APalBossTower::CloseWaitInfo() {
 }
 
-void APalBossTower::AddInDoorPlayer(APalPlayerCharacter* Player) {
-}
-
 void APalBossTower::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     
     DOREPLIFETIME(APalBossTower, InstanceModel);
     DOREPLIFETIME(APalBossTower, CombatTimeLimit);
+    DOREPLIFETIME(APalBossTower, CombatTimeMax);
+    DOREPLIFETIME(APalBossTower, bShouldUpdateBattleInfoTowerBossCountdown);
 }
 
 

@@ -20,6 +20,9 @@ void UPalActiveSkillSlot::SetSkill(int32 SlotId, EPalWazaID WazaType) {
 void UPalActiveSkillSlot::SetCoolTimeRate(FName Key, float Rate) {
 }
 
+void UPalActiveSkillSlot::ResumeCoolTime(int32 SlotId) {
+}
+
 void UPalActiveSkillSlot::RestartCoolTime_ByWazaID(EPalWazaID WazaID) {
 }
 
@@ -27,6 +30,10 @@ void UPalActiveSkillSlot::RestartCoolTime(int32 SlotId) {
 }
 
 void UPalActiveSkillSlot::RemoveSkill(int32 SlotId) {
+}
+
+bool UPalActiveSkillSlot::RayCheck(int32 SlotId, AActor* TargetActor) const {
+    return false;
 }
 
 void UPalActiveSkillSlot::OnChangeEquipWaza(UPalIndividualCharacterParameter* IndividualParameter) {
@@ -64,7 +71,7 @@ bool UPalActiveSkillSlot::IsCoolTimeFinish(int32 SlotId) const {
     return false;
 }
 
-bool UPalActiveSkillSlot::IsConditionSatisfy(int32 SlotId) const {
+bool UPalActiveSkillSlot::IsConditionSatisfy(int32 SlotId, AActor* TargetActor) const {
     return false;
 }
 
@@ -91,7 +98,11 @@ float UPalActiveSkillSlot::GetMaxRange(int32 SlotId) const {
     return 0.0f;
 }
 
-TArray<int32> UPalActiveSkillSlot::GetEnableSlotIDs() const {
+float UPalActiveSkillSlot::GetMaxHeightDiff(int32 SlotId) const {
+    return 0.0f;
+}
+
+TArray<int32> UPalActiveSkillSlot::GetEnableSlotIDs(AActor* TargetActor) const {
     return TArray<int32>();
 }
 
@@ -111,7 +122,7 @@ int32 UPalActiveSkillSlot::FindSlotIndexByWazaID(EPalWazaID WazaID) {
     return 0;
 }
 
-int32 UPalActiveSkillSlot::FindSlotIDForWildPal(AActor* TargetActor) {
+int32 UPalActiveSkillSlot::FindSlotIDForWildPal(AActor* TargetActor, const TArray<EPalWazaID> TempIgnoreWazaId) {
     return 0;
 }
 
@@ -123,7 +134,7 @@ int32 UPalActiveSkillSlot::FindFarthestSlotID_IgnoreSlotID(int32 IgnoreID) {
     return 0;
 }
 
-int32 UPalActiveSkillSlot::ChoiceEnableSlotIDByRandom(AActor* TargetActor) const {
+int32 UPalActiveSkillSlot::ChoiceEnableSlotIDByRandom(AActor* TargetActor, const TArray<EPalWazaID> TempIgnoreWazaId) const {
     return 0;
 }
 

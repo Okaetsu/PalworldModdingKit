@@ -36,6 +36,7 @@ FPalOptionWorldSettings::FPalOptionWorldSettings() {
     this->bEnableAimAssistPad = false;
     this->bEnableAimAssistKeyboard = false;
     this->DropItemMaxNum = 0;
+    this->PhysicsActiveDropItemMaxNum = 0;
     this->DropItemMaxNum_UNKO = 0;
     this->BaseCampMaxNum = 0;
     this->BaseCampWorkerMaxNum = 0;
@@ -84,8 +85,13 @@ FPalOptionWorldSettings::FPalOptionWorldSettings() {
     this->bAllowGlobalPalboxImport = false;
     this->EquipmentDurabilityDamageRate = 0.00f;
     this->ItemContainerForceMarkDirtyInterval = 0.00f;
+    this->PlayerDataPalStorageUpdateCheckTickInterval = 0.00f;
     this->ItemCorruptionMultiplier = 0.00f;
+    this->MonsterFarmActionSpeedRate = 0.00f;
     this->GuildRejoinCooldownMinutes = 0;
+    this->AutoTransferMasterCheckIntervalSeconds = 0.00f;
+    this->AutoTransferMasterThresholdDays = 0;
+    this->MaxGuildsPerFrame = 0;
     this->BlockRespawnTime = 0.00f;
     this->RespawnPenaltyDurationThreshold = 0.00f;
     this->RespawnPenaltyTimeScale = 0.00f;
@@ -93,11 +99,16 @@ FPalOptionWorldSettings::FPalOptionWorldSettings() {
     this->bDisplayPvPItemNumOnWorldMap_Player = false;
     this->AdditionalDropItemNumWhenPlayerKillingInPvPMode = 0;
     this->bAdditionalDropItemWhenPlayerKillingInPvPMode = false;
+    this->bEnableVoiceChat = false;
+    this->VoiceChatMaxVolumeDistance = 0.00f;
+    this->VoiceChatZeroVolumeDistance = 0.00f;
     this->bAllowEnhanceStat_Health = false;
     this->bAllowEnhanceStat_Attack = false;
     this->bAllowEnhanceStat_Stamina = false;
     this->bAllowEnhanceStat_Weight = false;
     this->bAllowEnhanceStat_WorkSpeed = false;
+    this->bEnableBuildingPlayerUIdDisplay = false;
+    this->BuildingNameDisplayCacheTTLSeconds = 0;
     this->bIsForceEnableRandomizerPalLevelRandom_ForUI = false;
 }
 

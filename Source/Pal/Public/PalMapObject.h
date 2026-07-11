@@ -15,6 +15,7 @@
 #include "PalMapObjectConcreteModelMulticastDelegateDelegate.h"
 #include "PalMapObjectDisposeOptions.h"
 #include "PalMapObjectMeshVisibleData.h"
+#include "PalMapObjectPoolSpawnState.h"
 #include "PalReticleTargetableInterface.h"
 #include "Templates/SubclassOf.h"
 #include "PalMapObject.generated.h"
@@ -123,6 +124,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_MapObjectModel, meta=(AllowPrivateAccess=true))
     UPalMapObjectModel* MapObjectModel;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_PoolSpawnState, meta=(AllowPrivateAccess=true))
+    FPalMapObjectPoolSpawnState PoolSpawnState;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bUnmanagedInLocal;
     
@@ -169,6 +173,9 @@ private:
     void OnUpdatedEnableTickByModel(UPalMapObjectModel* Model);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_PoolSpawnState();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_MapObjectModel();
     
 protected:
@@ -210,7 +217,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void CallOrRegisterOnSetConcreteModel(FPalMapObjectConcreteModelDelegate Delegate);
     
-private:
+protected:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void BroadcastShouldPlayDestroyFX();
     
@@ -223,7 +230,15 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void BroadcastShouldNotPlayBuildCancelDestroyFX();
     
-protected:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void BroadcastPlayRespawnFX();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void BroadcastDestroyPoolableObjectWithDestroyFX();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void BroadcastDestroyPoolableObject();
+    
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void BP_OnSetConcreteModel(UPalMapObjectConcreteModelBase* ConcreteModel);
     

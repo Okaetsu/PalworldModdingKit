@@ -8,5 +8,6 @@ enum class EPalChatCategory : uint8 {
     Global,
     Guild,
     Say,
+    Discord,
 };
 

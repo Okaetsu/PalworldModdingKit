@@ -1,4 +1,5 @@
 #include "PalWeaponBase.h"
+#include "Templates/SubclassOf.h"
 
 APalWeaponBase::APalWeaponBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->BulletDeleteTime = 0.50f;
@@ -12,6 +13,7 @@ APalWeaponBase::APalWeaponBase(const FObjectInitializer& ObjectInitializer) : Su
     this->ShotForceFeedbackEffect = NULL;
     this->WeaponCoopType = EWeaponCoopType::None;
     this->WeaponType = EPalWeaponType::None;
+    this->JetpackShootingOverride = EPalJetpackShootingOverride::None;
     this->IsRequiredBullet = true;
     this->IsRequiredBulletForAltFire = false;
     this->ShootBlurMaterial = NULL;
@@ -131,6 +133,12 @@ void APalWeaponBase::OnCreatedBullet_Implementation(APalBullet* Bullet) {
 void APalWeaponBase::OnAttachWeapon_Implementation(AActor* attachActor) {
 }
 
+
+
+bool APalWeaponBase::IsWeaponOwnerLocallyControlled() const {
+    return false;
+}
+
 bool APalWeaponBase::IsUseLeftHandAttach_Implementation() const {
     return false;
 }
@@ -194,6 +202,9 @@ AActor* APalWeaponBase::GetWeaponAttacker_Implementation() {
     return NULL;
 }
 
+void APalWeaponBase::GetSupportedBulletItemIds(TArray<FName>& OutIds) const {
+}
+
 TArray<FPalSpecialAttackRateInfo> APalWeaponBase::GetSpecialAttackRateInfos() const {
     return TArray<FPalSpecialAttackRateInfo>();
 }
@@ -210,7 +221,8 @@ float APalWeaponBase::GetShooterComponentBlurRate() {
     return 0.0f;
 }
 
-void APalWeaponBase::GetRequiredBulletName(FName& outName) {
+int32 APalWeaponBase::GetRemainingCurrentSelectPalSphere() const {
+    return 0;
 }
 
 float APalWeaponBase::GetRemainingCoolDownTime() const {
@@ -245,6 +257,10 @@ APalCharacter* APalWeaponBase::GetOwnerCharacter_Implementation() const {
     return NULL;
 }
 
+UPalWeaponBulletSelector* APalWeaponBase::GetOwnerBulletSelector() const {
+    return NULL;
+}
+
 
 int32 APalWeaponBase::GetNeedSpawnSummonWeaponCount() {
     return 0;
@@ -259,6 +275,10 @@ USceneComponent* APalWeaponBase::GetMainMesh_Implementation() {
 }
 
 int32 APalWeaponBase::GetMagazineSize() const {
+    return 0;
+}
+
+int32 APalWeaponBase::GetLoadoutSelectorIndex() const {
     return 0;
 }
 
@@ -283,6 +303,14 @@ float APalWeaponBase::GetDurability() const {
 }
 
 
+FName APalWeaponBase::GetCurrentBulletItemId() const {
+    return NAME_None;
+}
+
+TSubclassOf<APalBullet> APalWeaponBase::GetCurrentBulletClass_Implementation() const {
+    return NULL;
+}
+
 FVector APalWeaponBase::GetBulletShootRootLocation_Implementation() {
     return FVector{};
 }
@@ -293,6 +321,10 @@ float APalWeaponBase::GetBulletDeleteTime() const {
 
 float APalWeaponBase::GetBlurModifierValue() {
     return 0.0f;
+}
+
+APalBackWeaponBase* APalWeaponBase::GetBackWeaponModel() const {
+    return NULL;
 }
 
 FName APalWeaponBase::GetAltFireActionName() const {

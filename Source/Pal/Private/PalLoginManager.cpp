@@ -12,6 +12,9 @@ void UPalLoginManager::OnLoginEOSCompleted(const UPocketpairUserInfo* UserInfo, 
 void UPalLoginManager::OnLoginCompleted(const UPocketpairUserInfo* UserInfo, bool bSuccess, const FString& ErrorStr) {
 }
 
+void UPalLoginManager::OnConfirmAlert_NetworkRequired(bool bSuccess) {
+}
+
 void UPalLoginManager::OnConfirmAlert_Login(bool bSuccess) {
 }
 

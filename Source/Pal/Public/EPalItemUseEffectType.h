@@ -11,5 +11,7 @@ enum class EPalItemUseEffectType : uint8 {
     PalPassiveSkillChange,
     TreasureMap,
     PlayerLamp,
+    PalAwakening,
+    GrantTemporaryStatus,
 };
 

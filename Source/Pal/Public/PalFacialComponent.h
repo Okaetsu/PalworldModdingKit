@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "EPalFacialEyeTarget.h"
 #include "EPalFacialEyeType.h"
 #include "EPalFacialMouthType.h"
 #include "PalFacialComponent.generated.h"
@@ -63,7 +64,7 @@ public:
     void ChangeEyeAndMouthMesh(EPalFacialEyeType Eye);
     
     UFUNCTION(BlueprintCallable)
-    void ChangeEye_ForMontageNotify(EPalFacialEyeType Eye);
+    void ChangeEye_ForMontageNotify(EPalFacialEyeType Eye, EPalFacialEyeTarget EyeTarget);
     
     UFUNCTION(BlueprintCallable)
     void ChangeDefaultFacial();

@@ -11,5 +11,6 @@ enum class EPalUIRewardDisplayType : uint8 {
     DefeatBoss,
     UnlockHardMode,
     NoTitleHint,
+    UnlockMapMask,
 };
 

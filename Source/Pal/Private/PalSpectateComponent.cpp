@@ -19,7 +19,7 @@ void UPalSpectateComponent::ServerVerifyNextPlayer_Implementation(int32 Directio
 void UPalSpectateComponent::ServerSyncSpectatorLocation_Implementation(FVector NewLoc, FRotator NewRot) {
 }
 
-void UPalSpectateComponent::ServerForceEndSpectate_Implementation(bool bUpdateEnvironment) {
+void UPalSpectateComponent::ServerForceEndSpectate_Implementation(bool bReflectSkyCreator) {
 }
 
 void UPalSpectateComponent::ServerEndSpectate_Implementation() {
@@ -40,7 +40,10 @@ bool UPalSpectateComponent::IsAdminMode() const {
     return false;
 }
 
-void UPalSpectateComponent::ForceEndSpectate(bool bUpdateEnvironment) {
+void UPalSpectateComponent::ForceEndSpectate(bool bReflectSkyCreator) {
+}
+
+void UPalSpectateComponent::EventOnPrePlayCutscene() {
 }
 
 void UPalSpectateComponent::EventOnPlayerTeleport() {
@@ -67,7 +70,7 @@ void UPalSpectateComponent::EndSpectate() {
 void UPalSpectateComponent::ClientVerifyNextPlayer_Implementation(APalPlayerState* Next, FVector NextLocation) {
 }
 
-void UPalSpectateComponent::ClientForceEndSpectate_Implementation(bool bUpdateEnvironment) {
+void UPalSpectateComponent::ClientForceEndSpectate_Implementation(bool bReflectSkyCreator) {
 }
 
 void UPalSpectateComponent::ClientChangeInternalState_Implementation(EPalSpectateInternalState NewState) {

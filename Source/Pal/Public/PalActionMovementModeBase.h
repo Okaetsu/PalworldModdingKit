@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "Engine/EngineTypes.h"
 #include "EPalActionMovementBaseType.h"
 #include "EPalActionMovementEndReplicationType.h"
@@ -57,22 +58,25 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void K2_OnMovementModeChanged(UPalCharacterMovementComponent* Component, EMovementMode PrevMode, EMovementMode NewMode, EPalCharacterMovementCustomMode PrevCustomMode, EPalCharacterMovementCustomMode NewCustomMode);
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void K2_Async_UpdateVelocity(float InDeltaTime);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void K2_Async_PhysCustom(float InDeltaTime, int32 Iterations);
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     FVector K2_Async_GetVelocity(FVector BaseVelocity, bool& bUseOriginalCalcVelocity) const;
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     FVector K2_Async_GetFinishVelocity(FVector BaseVelocity);
     
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+    FRotator K2_Async_GetDesiredRotation(FRotator CurrentRotation, bool& bUseActionRotation) const;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void K2_Async_EndMovementMode();
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void K2_Async_BeginMovementMode();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)

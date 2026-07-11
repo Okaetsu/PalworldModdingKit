@@ -25,6 +25,7 @@ enum class EPalMapObjectModelInitializeExtraParameterType : uint8 {
     Paint,
     BaseCampPoint,
     RaidBossArea,
+    WeakPoint,
     InstanceId,
 };
 

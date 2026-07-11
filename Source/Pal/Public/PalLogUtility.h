@@ -1,10 +1,12 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "EPalLogType.h"
 #include "EPalWorkType.h"
 #include "PalBaseCampWorkerMovementLogDisplayData.h"
 #include "PalGuildLabCompleteLogDisplayData.h"
+#include "PalInstanceID.h"
 #include "PalItemAndNum.h"
 #include "PalItemId.h"
 #include "PalKillLogDisplayData.h"
@@ -41,6 +43,12 @@ public:
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void SetTextureToAdditionalDataFromCharacterID(const UObject* WorldContextObject, UPARAM(Ref) FPalLogAdditionalData& targetData, const FName CharacterID);
     
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static void RemoveRaidAnyBaseCampLog(const UObject* WorldContextObject, const FGuid& logId);
+    
+    UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
+    static FText CreateSphereRecoveryLogText(const UObject* WorldContextObject, const FPalInstanceID& IndividualId, const FPalStaticItemIdAndNum& ItemAndNum);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void CreateLogText(const UObject* WorldContextObject, EPalLogType LogType, FText& OutText);
     
@@ -72,7 +80,7 @@ public:
     static void AddWorkerCompleteBuildLog(const UObject* WorldContextObject, const UPalIndividualCharacterHandle* workerHandle, const FName& buildedMapObjectName);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
-    static void AddStartRaidAnyBaseCampLog(const UObject* WorldContextObject, const FPalStartRaidAnyBaseCampLogDisplayData& DisplayData);
+    static FGuid AddStartRaidAnyBaseCampLog(const UObject* WorldContextObject, const FPalStartRaidAnyBaseCampLogDisplayData& DisplayData);
     
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     static void AddSkillLog(const UObject* WorldContextObject, EPalLogType logType, const FPalLogInfo_Skill& Info);

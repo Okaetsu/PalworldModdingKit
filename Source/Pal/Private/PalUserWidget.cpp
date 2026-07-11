@@ -6,6 +6,7 @@ UPalUserWidget::UPalUserWidget() {
     this->DeactivatedVisibility = ESlateVisibility::HitTestInvisible;
     this->InputConfig = EPalWidgetInputMode::GameAndMenu;
     this->bSyncPlayerInventory = false;
+    this->bDelayCollapseUntilAnimationFinished = false;
     this->Param = NULL;
 }
 
@@ -16,6 +17,10 @@ void UPalUserWidget::UnregisterActionBinding(FPalUIActionBindData& BindingData) 
 }
 
 void UPalUserWidget::RequestInventorySync(bool bOpen) const {
+}
+
+FPalUIActionBindData UPalUserWidget::RegisterActionBindingPersistent(const FName& ActionName, bool IsDisplayActionBar, TEnumAsByte<EInputEvent> InputType, FOnInputAction Callback) {
+    return FPalUIActionBindData{};
 }
 
 FPalUIActionBindData UPalUserWidget::RegisterActionBinding_NotConcume(const FName& ActionName, bool IsDisplayActionBar, TEnumAsByte<EInputEvent> InputType, FOnInputAction Callback) {

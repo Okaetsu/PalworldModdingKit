@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalWorkSuitability.h"
 #include "EPalWorkWorkerState.h"
 #include "EPalWorkWorkerWorkingState.h"
 #include "PalInstanceID.h"
@@ -56,6 +57,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAssigned() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalWorkSuitability GetWorkSuitability() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalWorkWorkerWorkingState GetWorkingState() const;

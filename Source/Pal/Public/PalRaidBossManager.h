@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalRaidBattleGuildCheckResult.h"
 #include "EPalRaidBossBattleFinishType.h"
 #include "PalRaidBossDataRow.h"
 #include "PalRaidBossSpawnInfo.h"
@@ -59,11 +60,17 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGuid GroupGuid;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<FName> CachedPreloadItemIds;
+    
 public:
     UPalRaidBossManager();
 
     UFUNCTION(BlueprintCallable)
     bool IsRaidBossOfferItem(FName ItemName);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsInProcessRaidBattleInByOwnerBaseCampId(const FGuid& OwnerBaseCampId) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetNPCTargetCount_ForForcePlayerTarget() const;
@@ -85,6 +92,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalRaidBossDataRow FindRaidBossData(FName ItemName) const;
+    
+    UFUNCTION(BlueprintCallable)
+    void EnsureRaidBossWazaPreloaded_ServerInternal(FName StaticItemId);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    void CheckRaidBattleAllowedInGuildOfPlayer(const FGuid& RequestPlayerUId, EPalRaidBattleGuildCheckResult& OutResult) const;
     
 };
 

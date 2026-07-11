@@ -30,6 +30,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bCompletedGlobapPalboxTutotial;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bHideCommonKeyGuide;
+    
     PAL_API FPalOptionUISettings();
 };
 

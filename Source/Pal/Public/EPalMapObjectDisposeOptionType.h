@@ -14,5 +14,7 @@ enum class EPalMapObjectDisposeOptionType : uint8 {
     RequireRespawnImmediately,
     Replace,
     BuildCancel,
+    NotPlayDestroyFX,
+    ConnectivityCollapse,
 };
 

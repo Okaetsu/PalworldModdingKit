@@ -7,11 +7,14 @@ UPalRideMarkerComponent::UPalRideMarkerComponent(const FObjectInitializer& Objec
     this->bIsFixScale = true;
     this->bHiddenCharacterWhenAim = true;
     this->bHiddenCharacterWhenLowAngleAim = -1.00f;
+    this->bDisableRide = false;
     this->bDisableLookAtByRide = false;
     this->bDisableFullBodyIK_UniqueRide = false;
     this->UniqueRidePalWeaponClass = NULL;
+    this->RideNetUpdateFrequency = 0.00f;
     this->SkillSlot = NULL;
     this->WeaponActor = NULL;
+    this->RideMovePlayingId = -1;
 }
 
 void UPalRideMarkerComponent::UpdateOpacity() {
@@ -32,11 +35,18 @@ void UPalRideMarkerComponent::SetupUniqueWeapon() {
 void UPalRideMarkerComponent::SetRidingFlag_Implementation(bool bIsEnable) {
 }
 
+void UPalRideMarkerComponent::OnEndShootingAnimation(UAnimMontage* Montage) {
+}
+
 bool UPalRideMarkerComponent::IsRiding() const {
     return false;
 }
 
 bool UPalRideMarkerComponent::IsNeedLowAngleOpacity() const {
+    return false;
+}
+
+bool UPalRideMarkerComponent::IsDisableRideByMarker() const {
     return false;
 }
 

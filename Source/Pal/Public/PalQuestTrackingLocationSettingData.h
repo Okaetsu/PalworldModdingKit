@@ -22,6 +22,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalDataTableRowName_NPCUniqueData> TrackingUniqueNPCIdArray;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bTrackNearestOnly;
+    
     PAL_API FPalQuestTrackingLocationSettingData();
 };
 

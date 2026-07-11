@@ -3,6 +3,14 @@
 UPalDefine::UPalDefine() {
 }
 
+FName UPalDefine::WorldMapName_Tree() {
+    return NAME_None;
+}
+
+FName UPalDefine::WorldMapName_MW5() {
+    return NAME_None;
+}
+
 FGameplayTag UPalDefine::UILayerTag_Modal() {
     return FGameplayTag{};
 }
@@ -67,6 +75,22 @@ FName UPalDefine::TextId_UICommon_SystemErrorCantMoveNotOwned() {
     return NAME_None;
 }
 
+FName UPalDefine::TextId_UICommon_SystemErrorCannotSpawnInStage() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_SystemErrorCannotSpawnInBaseCamp() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_SystemErrorBaseCampWorkerLimitOnePerCharacter() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_SystemDialog_WarpAltar() {
+    return NAME_None;
+}
+
 FName UPalDefine::TextId_UICommon_RewardFishPondTitle() {
     return NAME_None;
 }
@@ -75,7 +99,35 @@ FName UPalDefine::TextId_UICommon_RewardFishPondInfo() {
     return NAME_None;
 }
 
+FName UPalDefine::TextId_UICommon_LOG_RaidAlreadyStart() {
+    return NAME_None;
+}
+
 FName UPalDefine::TextId_UICommon_LOG_NeedItemToOpenTreasureBox() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestSuccess_Water() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestSuccess_Fire() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestSuccess_Electricity() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestFailure_Water() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestFailure_Fire() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestFailure_Electricity() {
     return NAME_None;
 }
 
@@ -96,6 +148,10 @@ FName UPalDefine::TextId_UICommon_InteractIndicator_Salvage_NotAvailable_Broken(
 }
 
 FName UPalDefine::TextId_UICommon_InteractIndicator_Salvage_NotAvailable() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_InteractIndicator_RecoverParty_NotAvailable() {
     return NAME_None;
 }
 
@@ -199,12 +255,16 @@ FName UPalDefine::StatusPointName_AddCaptureLevel() {
     return NAME_None;
 }
 
-TArray<FName> UPalDefine::StaticItemIDArray_UnlockPicking() {
+TArray<FName> UPalDefine::StaticItemIDArray_UnlockWeaponSlot() {
     return TArray<FName>();
 }
 
-FName UPalDefine::StaticItemID_UnlockTalentCheck() {
-    return NAME_None;
+TArray<FName> UPalDefine::StaticItemIDArray_UnlockTalentCheck() {
+    return TArray<FName>();
+}
+
+TArray<FName> UPalDefine::StaticItemIDArray_UnlockPicking() {
+    return TArray<FName>();
 }
 
 FName UPalDefine::StaticItemID_UnlockAutoMeal_Tier(int32 Num) {
@@ -216,6 +276,58 @@ FName UPalDefine::StaticItemID_UnlockAccessorySlot_02() {
 }
 
 FName UPalDefine::StaticItemID_UnlockAccessorySlot_01() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_SwimSpeed() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_StatusAilmentResist() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_StaminaReduction() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_SphereHoming() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_RainbowPassiveRate() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_MoveSpeed() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_JumpPower() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_HungerReduction() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_GliderSpeed() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_FoodDecayReduction() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_ExpBonus() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_ClimbSpeed() {
+    return NAME_None;
+}
+
+FName UPalDefine::StaticItemID_Relic_CapturePower() {
     return NAME_None;
 }
 
@@ -389,6 +501,10 @@ FName UPalDefine::BS_BodyArmMinName() {
 
 FName UPalDefine::BS_BodyArmMaxName() {
     return NAME_None;
+}
+
+FString UPalDefine::AudioSwitchGroup_AreaType() {
+    return TEXT("");
 }
 
 FName UPalDefine::ActionNotify_MiningImpactTiming() {

@@ -50,5 +50,8 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetDisplaySlots(TArray<UPalIndividualCharacterSlot*>& Slots);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanMoveSlotToDisplayCage(const UPalIndividualCharacterSlot* fromSlot) const;
+    
 };
 

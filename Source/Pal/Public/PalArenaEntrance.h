@@ -31,7 +31,7 @@ public:
     void RequestEnterSpectate(int32 Index);
     
     UFUNCTION(BlueprintCallable)
-    void RequestEnterPvP();
+    void RequestEnterPvP(const bool RequestNewRoom);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OpenArenaGuide();

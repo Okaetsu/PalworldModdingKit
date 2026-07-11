@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EPalGuildRole.h"
 #include "PalBaseCampFunctionModuleBase.h"
 #include "PalFastBaseCampItemStackRepInfoArray.h"
 #include "PalMapObjectPasswordLockPlayerInfo.h"
@@ -7,6 +8,7 @@
 
 class UPalBaseCampModuleItemStackInfo;
 class UPalMapObjectConcreteModelBase;
+class UPalMapObjectGuildSecurityModule;
 class UPalMapObjectItemChestModel;
 class UPalMapObjectItemContainerModule;
 class UPalMapObjectPasswordLockModule;
@@ -38,6 +40,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnUpdateItemContainer(UPalMapObjectItemContainerModule* ItemContainerModule);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnUpdateGuildSecurity_ServerInternal(UPalMapObjectGuildSecurityModule* SecurityModule, const TArray<EPalGuildRole>& NewAllowedRoles);
     
 protected:
     UFUNCTION(BlueprintCallable)

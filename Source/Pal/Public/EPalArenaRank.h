@@ -10,5 +10,6 @@ enum class EPalArenaRank : uint8 {
     Platinum,
     Diamond,
     Master,
+    Legend,
 };
 

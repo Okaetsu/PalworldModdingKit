@@ -12,8 +12,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalItemId ItemId;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 StackCount;
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int64 StackCount;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPalDynamicItemDataBase* DynamicItemData;

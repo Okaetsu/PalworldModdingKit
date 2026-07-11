@@ -3,10 +3,13 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "EPalArenaRank.h"
 #include "EPalBaseCampItemContainerType.h"
 #include "EPalBaseCampPassiveEffectWorkHardType.h"
+#include "EPalBaseCampWorkerSickType.h"
 #include "EPalBuildObjectInstallStrategy.h"
 #include "EPalCaptureSphereLevelType.h"
 #include "EPalCharacterImportanceType.h"
@@ -26,8 +29,10 @@
 #include "EPalWorkType.h"
 #include "PalBaseCampPassiveEffectWorkHardInfo.h"
 #include "PalCaptureBonusExpTableSetting.h"
+#include "PalClinicHygieneStarLevelRange.h"
 #include "PalDataTableRowName_ItemData.h"
 #include "PalDataTableRowName_MapObjectData.h"
+#include "PalDataTableRowName_PalMonsterData.h"
 #include "PalDataTableRowName_RecipeTechnologyData.h"
 #include "PalDebugOtomoPalInfo.h"
 #include "PalDeforestRankDefineData.h"
@@ -41,6 +46,7 @@
 #include "PalOptimizeParameter.h"
 #include "PalPassiveSkillEffectItemTypeInfo.h"
 #include "PalPickingItemSetting.h"
+#include "PalRarePalSetting.h"
 #include "PalWorkAssignDefineDataStaticSetting.h"
 #include "PalWorkSuitabilityCollectionDefineData.h"
 #include "PalWorkSuitabilityDefineData.h"
@@ -53,11 +59,16 @@
 #include "PalGameSetting.generated.h"
 
 class AActor;
+class APalPlayerCharacter;
+class UAkAudioEvent;
 class UDataTable;
 class UFont;
+class UMaterialParameterCollection;
 class UNiagaraSystem;
 class UObject;
+class UPalBreedingItemEffectDataAsset;
 class UPalIndividualCharacterHandle;
+class UPalMapObjectCharacterTeamMissionFunctionsBase;
 class UPalOptimizeParameterSetting;
 class UPalOptionSubsystem;
 
@@ -93,6 +104,12 @@ public:
     float OtomoWazaCoolDownSpeedRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoBattleMoveSpeedRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoBattleMoveSpeedMax;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BerserkerOtomoSerchRadius_FromPlayer;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -105,6 +122,33 @@ public:
     float OtomoWorkTargetCameraAngleRange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoStandbyTrainerIdleSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoStandbyTrainerMoveSpeedThreshold;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoStandbyRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoStandbyTurnToTrainerSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoStandbyTurnToTrainerLerpSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoAutoAssignMaxDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OtomoAutoAssignCooldownSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CommonAttackSkipTimeoutSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WazaReselectTimeoutSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PlayerHPRateFromRespawn;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -114,7 +158,37 @@ public:
     float RarePal_AppearanceProbability;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float RarePal_LevelMultiply;
+    float PredatorPal_AppearanceProbability;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RarePal_LevelAdd;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RarePal_CaptureLevelDecrease;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RarePalCaptureBonusExpRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RarePalDefeatBonusExpRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_ItemData> RarePalBonusDropItems;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RelicObtainBonusExpTableAdvance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 NoteObtainBonusExpTableAdvance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 RuinClearBonusExpTableAdvance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 FastTravelUnlockBonusExpTableAdvance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalRarePalSetting> RarePalSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 BossOrRarePal_TalentMin;
@@ -156,6 +230,9 @@ public:
     TMap<int32, float> BodyTemperature_StomachDecreaceRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float TemperatureDamageLogIntervalSec;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSoftObjectPtr<UNiagaraSystem> SleepFXDefault;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -168,7 +245,25 @@ public:
     float LiftupCharacterClearCollisionDelayTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float LiftupCharacterThrowFloorClearanceMargin;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float LiftupCharacterThrowFloorClearanceMax;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 NickNameMaxLength;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MapObjectCustomNameMaxLength;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 TotalPalSpeciesCount;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RollingBurnDurationRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RollingMuddyDurationRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IntervalForPalAttackFromBall;
@@ -291,6 +386,12 @@ public:
     float PlayerToGuildPalDamageRateForPvP;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PalToPlayerDamageRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PalToPalDamageRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float StatusCalculate_LevelMultiply_HP;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -327,7 +428,7 @@ public:
     float BreakedArmorDefenseRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float ArmorDurabilityDamageDivide;
+    float EquipmentDurabilityBaseDecreaseValue;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PalEnhancement_AttackRate;
@@ -348,6 +449,9 @@ public:
     float PalEnhancement_DefenseRate3;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float AwakeningStatusMultiply;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ClimbingStamina_Move;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -355,6 +459,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RideWazaStaminaRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* RideStartAkEvent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UAkAudioEvent* RideEndAkEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsEnableJumpPreliminary;
@@ -421,6 +531,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float OverWeightMinSpeed;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverWeightHardThresholdRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverWeightSoftMaxJumpReductionRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WalkableFloorAngleForDefault;
@@ -576,6 +692,12 @@ public:
     TMap<int32, FPalCaptureBonusExpTableSetting> CaptureExpBonusTableSettingMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 CaptureBonusExpTableAdvanceCountPerTowerBossFirstDefeat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 CaptureBonusExpTableAdvanceCountPerNormalBossFirstDefeat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalDebugOtomoPalInfo> NewGameOtomoPalSet;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -601,6 +723,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float FarmCropIncreaseRateByWaterFillRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_ItemData> FarmSkillFruitsLotteryExcludeItemIds;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString MaxMoney;
@@ -637,9 +762,6 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PalPriceConstantValueB;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    float SellPalRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 ImportedPalSellPrice;
@@ -741,6 +863,12 @@ public:
     int32 NightEndHour;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 DarkPalSleepStartHour;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 DarkPalSleepEndHour;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 PlayerMorningHour;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -763,6 +891,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float BuildSimulationFoundationFloatingAllowance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalDataTableRowName_ItemData WaterBuildingAllowItemId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WaterBuildingFoundationMinHeightAboveWaterSurface;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalBuildObjectInstallStrategy, FVector> BuildSimulationFoundationCheckCollisionScale;
@@ -796,6 +930,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SnapBuildObjectAttachDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float SnapBuildObjectHeightDistance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SnapBuildObjectMinBoxExtentZ;
@@ -987,6 +1124,18 @@ public:
     float WorkTransportingItemNumRateInShouldTeleportWorker;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<int32, FPalClinicHygieneStarLevelRange> ClinicHygieneStarLevelRanges;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<int32, float> ClinicAdditionalSuppressRateByMedicineLv;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<int32, float> ClinicAdditionalSanitySuppressRateByMedicineLv;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalBaseCampWorkerSickType, int32> ClinicRequiredMedicineLvForSickness;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalWorkTypeSet> WorkTypeAssignPriorityOrder;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1011,6 +1160,9 @@ public:
     FPalWorkAssignDefineDataStaticSetting WorkAssignDefineData_ExtinguishBurn;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalWorkAssignDefineDataStaticSetting WorkAssignDefineData_CoolOverHeat;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalWorkAssignDefineDataStaticSetting> WorkAssignDefineData_TreasureBoxUnlock;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1018,6 +1170,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 WorkSuitabilityMaxRank;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<float> TransportItemAbsorbRangeByWorkSuitabilityRank;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalWorkSuitability, FPalWorkSuitabilityDefineData> WorkSuitabilityDefineDataMap;
@@ -1104,6 +1259,9 @@ public:
     int32 InvadeOccurablePlayerLevel;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 InvadeOccurableBaseCampLevel;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 InvadeJudgmentInterval_Minutes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1113,10 +1271,7 @@ public:
     int32 InvadeCollTime_Min_Minutes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 InvadeReturnTime_NotArrived_Minutes;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    int32 InvadeReturnTime_AfterArrival_Minutes;
+    int32 InvadeReturnTime_Minutes;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 InvadeStartPoint_BaseCampRadius_Min_cm;
@@ -1125,10 +1280,22 @@ public:
     int32 InvadeStartPoint_BaseCampRadius_Max_cm;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float InvaderPathWaterContinuousDistanceThreshold;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float InvaderPathWaterTotalDistanceThreshold;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float VisitorNPCProbability;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 VisitorNPCReturnTime_Minutes;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float InvaderDeclarationIntarvalMinutes;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 InvadeGradeOffset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RecruitBadPalProbability;
@@ -1266,6 +1433,12 @@ public:
     int32 worldmapUIMaxMarker;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 worldmapUIMaxGuildMarker;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 worldmapUIMaxGuildPin;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float NPCHPGaugeUpdateSpan;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1317,6 +1490,9 @@ public:
     float ThrowPalBattleRadius;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DirectOrderTargetSearchRadius;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ThrowPalWorkRadius;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1350,6 +1526,9 @@ public:
     TArray<FName> ExceptCapturedItemList;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_ItemData> ExceptMeatCutItemList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalCaptureSphereLevelType, int32> CaptureSphereLevelMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1357,6 +1536,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IgnoreFirstCaptureFailedHPRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float IgnoreFirstCaptureFailedCaptureRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CaptureRateAdd_ByLegHold;
@@ -1372,6 +1554,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LongPressInterval_StartRaidBoss;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float LongPressInterval_ChangeBullet;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float RaidBossArea_PhaseTimeLimit_Ready;
@@ -1402,6 +1587,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CrimeStateMaintainDurationBaseDefault;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CrimeMisfireSafeTimeDuration;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CrimeMisfireSafeCooldownDuration;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 technologyPointPerLevel;
@@ -1441,6 +1632,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float SpawnerDisableDistanceCM_FromBaseCamp;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float EnemyCampSpawnerDisableDistanceCM_FromBaseCamp;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float Spawner_DefaultSpawnRadius_S;
@@ -1596,10 +1790,19 @@ public:
     FPalOptimizeParameter RuntimeOptimizeParameter;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<int32, FPalWorldSecurityWantedPoliceSettingData> WorldSecurityWantedPoliceSettingDataMap;
+    TArray<int32> WorldSecurityBountyByWantedLevelMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TMap<int32, FPalWorldSecurityWantedPoliceSettingData> WorldSecurityWantedPoliceSettingDataMapForDS;
+    TArray<FPalWorldSecurityWantedPoliceSettingData> WorldSecurityWantedPoliceSettingDataMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalWorldSecurityWantedPoliceSettingData> WorldSecurityWantedPoliceSettingDataMapForDS;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 WorldSecurityGlobalPoliceSpawnCap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 WorldSecurityGlobalPoliceSpawnCapForDS;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 StatusPointPerLevel;
@@ -1656,6 +1859,33 @@ public:
     TMap<EPalElementType, FPalDataTableRowName_MapObjectData> PalEggMapObjectIdMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalDataTableRowName_MapObjectData PalEggMapObjectId_WorldTree;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float Combi_MutationRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float Combi_MutationRankCoefficient;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float Combi_MutationRankDiffPenalty;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float Combi_MutationRandomCoefficient;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalDataTableRowName_MapObjectData PalEggMapObjectId_Mutation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 Combi_MutationMinTalent;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 Combi_MutationInitialRank;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPalBreedingItemEffectDataAsset* BreedingItemEffectDataAsset;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<int32, float> PalEggHatchingSpeedRateByTemperature;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1683,6 +1913,9 @@ public:
     float DeadBodyDestroySecond;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DeadBodyOutOfSightDestroySecond;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float EnemyCampRespawnCoolTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1705,6 +1938,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CombatHeliHPGaugeDisplayDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float KingWhaleHPGaugeDisplayDistance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 MaxOtomoLoadoutCount;
@@ -1776,6 +2012,9 @@ public:
     TArray<FColor> DefaultMapObjectPaintColors;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FColor> DefaultMapObjectLampColors;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DimensionLockerTimeoutSec;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1829,6 +2068,24 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 TrialPlayMinute;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UMaterialParameterCollection* GlobalMaterialParameterCollection;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WildlifeSanctuaryFlyingDetectSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 WildWarlikePalMaxBattleLevelDiff;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CutsceneSkipForceStopDelay;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalDataTableRowName_PalMonsterData> EndingExcludeCharacterIDs;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FString> SkippedAchievementIdsOnPS5;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* SoundSourceDataTable;
@@ -1837,6 +2094,9 @@ protected:
     TMap<EPalOptimizeType, TSubclassOf<UPalOptimizeParameterSetting>> OptimizeParameterSettingClass;
     
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UPalMapObjectCharacterTeamMissionFunctionsBase> ExpeditionStrengthSortFunctionsClass;
+    
     UPalGameSetting();
 
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -1847,6 +2107,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
     float GetWeakScale(int32 weakCount);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetTransportItemAbsorbRange(int32 WorkSuitabilityRank) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetSoundRadius_cm(FName RowName);
@@ -1889,7 +2152,10 @@ public:
     float GetBaseCampNeighborMinimumDistance() const;
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
-    float CalcCaptureRate(float captureItemLevel, const UPalIndividualCharacterHandle* targetHandle, const UPalIndividualCharacterHandle* throwCharacterHandle);
+    int32 CalcExpeditionBonusExp(float BonusExpRate, APalPlayerCharacter* Player);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    float CalcCaptureRate(float captureItemLevel, const UPalIndividualCharacterHandle* targetHandle, const UPalIndividualCharacterHandle* throwCharacterHandle, bool bIsSneakBonus);
     
 };
 

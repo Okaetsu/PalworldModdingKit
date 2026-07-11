@@ -74,6 +74,12 @@ private:
     
 public:
     UFUNCTION(BlueprintCallable)
+    void RefreshVisualEffectIfExist(EPalVisualEffectID VisualEffectID);
+    
+    UFUNCTION(BlueprintCallable)
+    void EndPlay(const TEnumAsByte<EEndPlayReason::Type> EndPlayReason);
+    
+    UFUNCTION(BlueprintCallable)
     void BeginPlay();
     
     UFUNCTION(BlueprintCallable)

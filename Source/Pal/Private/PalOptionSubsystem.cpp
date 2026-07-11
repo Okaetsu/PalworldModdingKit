@@ -13,6 +13,9 @@ bool UPalOptionSubsystem::VerifyWorldSettingThresholds(const FPalOptionWorldSett
     return false;
 }
 
+void UPalOptionSubsystem::SetVoiceChatSettings(const FPalOptionVoiceChatSettings& InVoiceChatSettings) {
+}
+
 void UPalOptionSubsystem::SetupForSteamDeck() {
 }
 
@@ -34,6 +37,9 @@ void UPalOptionSubsystem::SetKeyConfigSettings(const FPalKeyConfigSettings& InKe
 void UPalOptionSubsystem::SetKeyboardSettings(const FPalOptionKeyboardSettings& InKeyboardSettings) {
 }
 
+void UPalOptionSubsystem::SetHasShownFirstLaunchUI(bool bHasShown) {
+}
+
 void UPalOptionSubsystem::SetGraphicsSettings(const FPalOptionGraphicsSettings& InGraphicsSettings) {
 }
 
@@ -43,10 +49,16 @@ void UPalOptionSubsystem::SetCommonSettings(const FPalOptionCommonSettings& InCo
 void UPalOptionSubsystem::SetAudioSettings(const FPalOptionAudioSettings& InAudioSettings) {
 }
 
+void UPalOptionSubsystem::RequestTemporaryVolumetricFogForLocalEffect(UObject* Requester) {
+}
+
 void UPalOptionSubsystem::RequestSaveLocalSettings() {
 }
 
 void UPalOptionSubsystem::RequestSaveLocalSaveData() {
+}
+
+void UPalOptionSubsystem::ReleaseTemporaryVolumetricFogForLocalEffect(UObject* Requester) {
 }
 
 void UPalOptionSubsystem::RefreshBanList() {
@@ -61,6 +73,10 @@ bool UPalOptionSubsystem::IsCrossPlayAllowConnectPlatform() const {
 
 FPalOptionWorldSettinThresholds UPalOptionSubsystem::GetWorldSettingThresholds() const {
     return FPalOptionWorldSettinThresholds{};
+}
+
+FPalOptionVoiceChatSettings UPalOptionSubsystem::GetVoiceChatSettings() const {
+    return FPalOptionVoiceChatSettings{};
 }
 
 FPalOptionUISettings UPalOptionSubsystem::GetUISettings() const {
@@ -96,6 +112,10 @@ FPalKeyConfigSettings UPalOptionSubsystem::GetKeyConfigSettings() const {
 
 FPalOptionKeyboardSettings UPalOptionSubsystem::GetKeyboardSettings() const {
     return FPalOptionKeyboardSettings{};
+}
+
+bool UPalOptionSubsystem::GetHasShownFirstLaunchUI() const {
+    return false;
 }
 
 FPalOptionGraphicsSettings UPalOptionSubsystem::GetGraphicsSettings() const {

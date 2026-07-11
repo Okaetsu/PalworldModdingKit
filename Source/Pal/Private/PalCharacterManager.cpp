@@ -12,6 +12,14 @@ UPalIndividualCharacterHandle* UPalCharacterManager::SpawnNewCharacterWithInitia
     return NULL;
 }
 
+UPalIndividualCharacterHandle* UPalCharacterManager::SpawnNewCharacterWithInitializeAndIndividualParameterCallback(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, EPalCharacterCompleteDelegatePriority InitializeParameterCallbackPriority, FPalOnCharacterCompleteInitializeParameter InitializeParameterCallback, UPalCharacterManager::FIndividualParameterCallback IndividualParameterCallback, UPalCharacterManager::FIndividualIDCallback spawnCallback) {
+    return NULL;
+}
+
+UPalIndividualCharacterHandle* UPalCharacterManager::SpawnNewCharacterWithIndividualParameterCallback(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, UPalCharacterManager::FIndividualParameterCallback IndividualParameterCallback, UPalCharacterManager::FIndividualIDCallback spawnCallback) {
+    return NULL;
+}
+
 UPalIndividualCharacterHandle* UPalCharacterManager::SpawnNewCharacter(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, UPalCharacterManager::FIndividualIDCallback spawnCallback) {
     return NULL;
 }

@@ -10,6 +10,9 @@ public:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FName, FName> CharacterIDReplacer;
     
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<FName, FName> ItemIDReplacer;
+    
     UPalReplaceSetting();
 
 };

@@ -46,6 +46,11 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnReadyGPSSubsystem();
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPrivateLock() const;
+    
+protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void HandleExportFailed(EPalGlobalStorageExportResult Result, UPalIndividualCharacterSlot* TargetSlot, int32 ExportDataIndex, const FPalGlobalPalStorageExportOption& ExportOption);
     

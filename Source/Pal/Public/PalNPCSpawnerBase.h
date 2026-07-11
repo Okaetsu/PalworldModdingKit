@@ -14,6 +14,7 @@
 #include "Templates/SubclassOf.h"
 #include "PalNPCSpawnerBase.generated.h"
 
+class APalCharacter;
 class APalNPCSpawnerBase;
 class UObject;
 class UPalIndividualCharacterHandle;
@@ -21,7 +22,7 @@ class UPalNavigationInvokerComponent;
 class UPalSpawnerRuleObjectBase;
 class UPalSquad;
 
-UCLASS(Blueprintable)
+UCLASS(Blueprintable, Config=Game)
 class PAL_API APalNPCSpawnerBase : public AActor {
     GENERATED_BODY()
 public:
@@ -48,6 +49,51 @@ protected:
     EPalSpawnRadiusType SpawnRadiusType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUseDirectionalSpawnCheck;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MinMoveSpeedForDirectionalSpawn;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float LastMoveDirectionGraceTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float NearAlwaysSpawnRadiusScale;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float IdleSpawnRadiusScale;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float BaseSideWidthScale;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float HalfAngleDeg;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MaxSideWidthScale;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float BackAllowance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ForwardSpawnDistanceScale;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CameraForwardSpawnDistanceScale;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PalSpawnDistanceRate;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CharacterBPPreloadDistance;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CharacterBPPreloadReleaseDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FName, TSubclassOf<APalCharacter>> LoadedCharacterBPClassMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsSquadBehaviour;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -67,6 +113,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IgnoreBaseCampCheck;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float OverwriteRayUpOffset;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FVector> NPCLocations;
@@ -124,6 +173,9 @@ public:
     void SetSpawnDisableFlag(const FName& Name, bool isDisable);
     
     UFUNCTION(BlueprintCallable)
+    void SetOverwriteRayUpOffset(float InOffset);
+    
+    UFUNCTION(BlueprintCallable)
     void SetIgnoreRandomizer(bool bInIgnoreRandomizer);
     
 protected:
@@ -136,6 +188,14 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetAllNPCLocation();
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void RequestPreloadCharacterBPs();
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void RequestLottery();
+    
+protected:
     UFUNCTION(BlueprintCallable)
     void RequestDespawn();
     
@@ -200,6 +260,9 @@ public:
     bool IsIgnoreRandomizer() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGuid GetWildGroupGuid() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalSpawnRadiusType GetSpawnRadiusType() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -233,11 +296,17 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetSpawnDisableDebugInfo() const;
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TSubclassOf<APalCharacter> GetPreloadedCharacterBPClass(FName CharacterID) const;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     TArray<FPalSpawnerGroupInfo> GetOriginalSpawnGroupList() const;
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     int32 GetMaxMonsterLevel() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void GetLotteriedIDs(TArray<FName>& ids);
     
 protected:
     UFUNCTION(BlueprintCallable, BlueprintPure)

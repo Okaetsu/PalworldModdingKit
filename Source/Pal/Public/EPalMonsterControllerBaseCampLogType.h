@@ -13,5 +13,6 @@ enum class EPalMonsterControllerBaseCampLogType : uint8 {
     FailedFixedAssignNotAssignableOtomo,
     FailedFixedAssignNoSuitability,
     FailedFixedAssignNotWantToDo,
+    FailedFixedAssignOtomoLackSuitabilityLevel,
 };
 

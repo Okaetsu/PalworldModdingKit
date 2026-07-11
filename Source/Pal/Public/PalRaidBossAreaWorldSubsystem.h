@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "EPalRaidBossAreaPhase.h"
 #include "PalGameWorldDataSaveInterface.h"
 #include "PalRaidBossAreaInstanceLoadedSaveData.h"
 #include "PalStageInstanceId.h"
@@ -55,7 +56,13 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsInProcessRaidBattleInByOwnerBaseCampId(const FGuid& OwnerBaseCampId) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalRaidBossAreaInstanceModel* GetInstanceModel(const FGuid& RaidBossInstanceId);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalRaidBossAreaPhase GetEnteringStageCurrentPhaseForLocalPlayer() const;
     
 
     // Fix for true pure virtual functions not being implemented

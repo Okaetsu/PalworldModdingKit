@@ -16,13 +16,20 @@ UPalCameraModifier::UPalCameraModifier() {
     this->CameraOffsetModifyType = EPalCameraModifierParameterType::None;
     this->CameraLengthModifyType = EPalCameraModifierParameterType::None;
     this->TargetCameraLength = 0.00f;
+    this->TargetOffsetModifyType = EPalCameraModifierParameterType::None;
+    this->bOverrideCameraLag = false;
+    this->bEnableCameraLag = false;
+    this->CameraLagSpeed = 0.00f;
+    this->CameraLagMaxDistance = 0.00f;
     this->bIsActive = false;
     this->ElapsedTime = 0.00f;
     this->BlendOutElapsedTime = 0.00f;
+    this->BlendOutStartAlpha = 1.00f;
     this->RestartStartTime = 0.00f;
     this->bBlendingIn = false;
     this->bBlendingOut = false;
     this->bRestartingBlendingIn = false;
+    this->UnderlyingModifier = NULL;
 }
 
 

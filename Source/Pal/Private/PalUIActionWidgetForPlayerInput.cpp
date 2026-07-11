@@ -8,6 +8,9 @@ UPalUIActionWidgetForPlayerInput::UPalUIActionWidgetForPlayerInput() {
 void UPalUIActionWidgetForPlayerInput::UnbindInputMethodChangeEvent() {
 }
 
+void UPalUIActionWidgetForPlayerInput::Reflesh() {
+}
+
 void UPalUIActionWidgetForPlayerInput::OnKeyConfigChanged() {
 }
 

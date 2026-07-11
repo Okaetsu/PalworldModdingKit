@@ -10,6 +10,8 @@ FPalOptimizeParameter::FPalOptimizeParameter() {
     this->CharacterImportance_NearDistance = 0.00f;
     this->CharacterImportance_FarDistance = 0.00f;
     this->CharacterImportance_FarthestDistance = 0.00f;
+    this->DeadBodyDespawn_SightRange = 0.00f;
+    this->DeadBodyDespawn_UpdateIntervalSeconds = 0.00f;
     this->SpawnerImportance_NearDistance = 0.00f;
     this->SpawnerImportance_FarDistance = 0.00f;
 }

@@ -6,6 +6,9 @@ UPalUIBaseCampWorkFixedAssignManageModel::UPalUIBaseCampWorkFixedAssignManageMod
 void UPalUIBaseCampWorkFixedAssignManageModel::SortFixedAssignableWorks(EPalUIFixedAssignManageListSortType SortType, const TArray<FPalUIBaseCampWorkFixedAssignInfo>& OriginalArray, TArray<FPalUIBaseCampWorkFixedAssignInfo>& OutArray) {
 }
 
+void UPalUIBaseCampWorkFixedAssignManageModel::SetFilterTargetConcreteModel(UPalMapObjectConcreteModelBase* InTargetModel) {
+}
+
 void UPalUIBaseCampWorkFixedAssignManageModel::RequestUnassignWork(const FGuid& WorkId, const FPalInstanceID& IndividualId) {
 }
 
@@ -25,6 +28,10 @@ void UPalUIBaseCampWorkFixedAssignManageModel::RequestEndReplicateWorkInBaseCamp
 }
 
 void UPalUIBaseCampWorkFixedAssignManageModel::OnUpdateWorkInBaseCamp(UPalBaseCampWorkCollectionReplicationList* ReplicationList) {
+}
+
+bool UPalUIBaseCampWorkFixedAssignManageModel::HasBasePalOperationPermissionByLocalPlayer() const {
+    return false;
 }
 
 UPalIndividualCharacterContainer* UPalUIBaseCampWorkFixedAssignManageModel::GetTargetBaseCampWorkerCharacterContainer() const {

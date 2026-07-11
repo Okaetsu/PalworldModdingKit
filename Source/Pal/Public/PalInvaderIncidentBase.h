@@ -14,9 +14,12 @@
 #include "PalInvaderIncidentBase.generated.h"
 
 class APalAIController;
+class APalCharacter;
+class APalPlayerCharacter;
 class UDataTable;
 class UPalBaseCampModel;
 class UPalIndividualCharacterHandle;
+class UPalInvaderPathFinder;
 class UPalSquad;
 
 UCLASS(Blueprintable)
@@ -29,6 +32,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* InvaderDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* InvaderRewardTable;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<APalAIController> MonsterAIControllerClass;
@@ -45,6 +51,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<APalAIController*> MemberController;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<APalAIController*> OtomoController;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName ChosenInvaderDataRowName;
     
@@ -54,6 +63,9 @@ protected:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGuid GroupGuid;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FGuid BroadcastGroupGuid;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bCanExecute;
@@ -69,6 +81,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsOrganizationGroup;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPalInvaderPathFinder* PathFinder;
     
 public:
     UPalInvaderIncidentBase();
@@ -89,6 +104,9 @@ protected:
     void RemoveGroupCharacter(UPalIndividualCharacterHandle* RemoveIndividualHandle);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void OnWaveTimeup();
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnStartInvade();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -97,10 +115,18 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnEndInvade();
     
+    UFUNCTION(BlueprintCallable)
+    void OnCharacterInitializedForShow(APalCharacter* InCharacter);
+    
 public:
     UFUNCTION(BlueprintCallable)
     bool IsGroupCharacter(UPalIndividualCharacterHandle* IndividualHandle) const;
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void HideCharacterUntilInitialized(UPalIndividualCharacterHandle* IndividualHandle);
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetVisitorNPCReturnTimeMinutes() const;
     
@@ -116,9 +142,6 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    int32 GetInvadeReturnTimeMinutes() const;
-    
-    UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetChosenInvaderGroupName(FText& OutText) const;
     
 protected:
@@ -129,6 +152,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void GetBroadcastParameter(FPalIncidentBroadcastParameter& outParameter);
     
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    TArray<APalPlayerCharacter*> GetAttackerPlayers() const;
+    
+private:
     UFUNCTION(BlueprintCallable)
     int32 GetAliveInvaderNum() const;
     
@@ -139,6 +167,9 @@ public:
 protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     FVector CalcSpawnLocation(const FVector& SpawnCenter, const FRotator& Rot, int32 Index);
+    
+    UFUNCTION(BlueprintCallable)
+    void AddInvaderOtomo(APalAIController* OtomoAIController);
     
     UFUNCTION(BlueprintCallable)
     void AddGroupCharacter(UPalIndividualCharacterHandle* AddIndividualHandle, EPalCharacterLocationType LocationType);

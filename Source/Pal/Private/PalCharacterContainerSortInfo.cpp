@@ -4,6 +4,7 @@ FPalCharacterContainerSortInfo::FPalCharacterContainerSortInfo() {
     this->SortType = EPalCharacterContainerSortType::PaldexNo_Asc;
     this->bPrioritizeMale = false;
     this->bPrioritizeFemael = false;
+    this->bPrioritizeNoneGender = false;
     this->bPrioritizeImportedPal = false;
 }
 

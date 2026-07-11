@@ -7,5 +7,6 @@ FPalLocalSaveData::FPalLocalSaveData() {
     this->Local_DoctorLastSurgiDay = 0;
     this->bUnlockedBlueprintCategoryInBuildMenu = false;
     this->Local_MapObjectPaintPaletteSelectedIndex = 0;
+    this->Local_ShowSkyIslandCloudOnWorldMapUI = false;
 }
 

@@ -2,7 +2,7 @@
 #include "Net/UnrealNetwork.h"
 
 UPalCharacterMovementComponent::UPalCharacterMovementComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
-    this->bDisableCheckHalfHeightForStepup = true;
+    // this->bDisableCheckHalfHeightForStepup = true; // needs engine edits
     this->bEnableServerDualMoveScopedMovementUpdates = true;
     this->bCanWalkOffLedgesWhenCrouching = true;
     this->DyingMaxSpeed = 100.00f;
@@ -24,6 +24,8 @@ UPalCharacterMovementComponent::UPalCharacterMovementComponent(const FObjectInit
     this->SlidingSubValue = 0.00f;
     this->SlidingYawRate = 0.01f;
     this->bIsEnableSkySliding = false;
+    this->DismountSlideSpeed = 600.00f;
+    this->DismountSlideDistance = 200.00f;
     this->ClimbMaxSpeed = 100.00f;
     this->RollingMaxSpeed = 0.00f;
     this->GrapplingMaxSpeed = 0.00f;
@@ -31,10 +33,16 @@ UPalCharacterMovementComponent::UPalCharacterMovementComponent(const FObjectInit
     this->bIsUseLastLandedCache = false;
     this->OverrideFlySpeed = -1.00f;
     this->OverrideFlySprintSpeed = -1.00f;
+    this->FlyingRideDescentSpeedMultiplier = 2.00f;
     this->SearchAgentRadiusFactor = 1.00f;
+    this->NavWalkingRayContinuityCheckMinMoveDistanceAgentRadiusRate = 1.00f;
+    this->NavWalkingRayContinuityResidualCheckDuration = 0.50f;
     this->SwimMaxAcceleration = 2048.00f;
+    this->RampMovementMaxMultiplier = 5.00f;
+    this->bProtectNavWalkingFromLocalGroundReject = false;
     this->bRequestCrouch = false;
     this->bRequestGliding = false;
+    this->bRequestJetpackBoost = false;
     this->bRequestSprint = false;
     this->SlowWalkSpeed_Default = 0.00f;
     this->WalkSpeed_Default = 0.00f;
@@ -51,6 +59,7 @@ UPalCharacterMovementComponent::UPalCharacterMovementComponent(const FObjectInit
     this->bSimulatedJump = false;
     this->LastNetRole = ROLE_None;
     this->CustomMovementMode_ForReplicate = EPalCharacterMovementCustomMode::None;
+    this->JetpackGliderAnimInterpSpeed = 5.00f;
     this->InWaterRate = 0.65f;
     this->DashSwimMaxSpeed = 500.00f;
     this->JumpableInWaterDepth = 30.00f;
@@ -58,6 +67,15 @@ UPalCharacterMovementComponent::UPalCharacterMovementComponent(const FObjectInit
     this->bIsHoverWaterPal = false;
     this->HoverWaterDistance = 0.00f;
     this->SwimJumpVelocityZThreshold = 2.00f;
+    this->bEnableSwimmingVirtualCapsuleBlock = true;
+    this->SwimmingVirtualCapsuleTopHeightFromWaterPlane = 88.00f;
+    this->SwimmingMaxAllowedSubmergenceRate = 1.20f;
+    this->bEnableSwimmingWaterExitStepUpAssist = true;
+    this->SwimmingWaterExitStepUpProbeMaxRadius = 150.00f;
+    this->SwimmingWaterExitStepUpProbeForwardDistance = 120.00f;
+    this->SwimmingWaterExitStepUpMaxDepthOffset = 80.00f;
+    this->StepUpUpSweepCapsuleRadiusShrinkRate = 0.50f;
+    this->StepUpUpSweepShrinkMaxWallAngle = 30.00f;
     this->EnteredWaterFlag = EEnterWaterFlag::None;
     this->WaterPlaneZ = 340282346638528859811704183484516925440.00f;
     this->WaterPlaneZPrev = 340282346638528859811704183484516925440.00f;
@@ -98,6 +116,9 @@ void UPalCharacterMovementComponent::SetSwimSpeedMultiplier(FName flagName, floa
 void UPalCharacterMovementComponent::SetSwimAccelerationMultiplier(FName flagName, float Speed) {
 }
 
+void UPalCharacterMovementComponent::SetStepUpUpSweepShrinkFlag(FName flagName, bool IsEnable) {
+}
+
 void UPalCharacterMovementComponent::SetStepDisableFlag(FName flagName, bool isDisable) {
 }
 
@@ -116,7 +137,16 @@ void UPalCharacterMovementComponent::SetPysicsAccelerationFlag(FName flagName, b
 void UPalCharacterMovementComponent::SetPendingSliding(bool bEnabled) {
 }
 
-void UPalCharacterMovementComponent::SetNetworkSmoothingMode(ENetworkSmoothingMode NewMode, bool bResetMeshLocation) {
+void UPalCharacterMovementComponent::SetOrientToVelocityFlag(FName flagName, bool IsEnable) {
+}
+
+void UPalCharacterMovementComponent::SetOrientToActionRotationFlag(FName flagName, bool IsEnable) {
+}
+
+void UPalCharacterMovementComponent::SetNetworkSmoothingMode(ENetworkSmoothingMode newMode, bool bResetMeshLocation, bool bResetMeshRotation) {
+}
+
+void UPalCharacterMovementComponent::SetNavWalkingRayContinuityCheckFlag(FName flagName, bool IsEnable) {
 }
 
 void UPalCharacterMovementComponent::SetNavWalkDisableFlag(FName flagName, bool isDisable) {
@@ -129,6 +159,9 @@ void UPalCharacterMovementComponent::SetMaxAccelerationMultiplier(FName flagName
 }
 
 void UPalCharacterMovementComponent::SetLeanBackDisableFlag(FName flagName, bool isDisable) {
+}
+
+void UPalCharacterMovementComponent::SetJumpZVelocityMultiplier(FName flagName, float Rate) {
 }
 
 void UPalCharacterMovementComponent::SetJumpDisableFlag(FName flagName, bool isDisable) {
@@ -155,6 +188,9 @@ void UPalCharacterMovementComponent::SetDriveMoveFlag(FName flagName, bool IsEna
 void UPalCharacterMovementComponent::SetDisableTickOptimization(FName flagName, bool isDisable) {
 }
 
+void UPalCharacterMovementComponent::SetDisableOtomoBattleSpeedFlag(FName flagName, bool Disable) {
+}
+
 void UPalCharacterMovementComponent::SetDisableLeftHandAttachFlag(bool isDisable) {
 }
 
@@ -170,6 +206,12 @@ void UPalCharacterMovementComponent::SetCustomMovementMode(EPalCharacterMovement
 void UPalCharacterMovementComponent::SetCrouchDisbleFlag(FName flagName, bool Disable) {
 }
 
+void UPalCharacterMovementComponent::SetComponentTickSuppressFlag(FName flagName, bool bSuppress) {
+}
+
+void UPalCharacterMovementComponent::SetCancelJumpFlag(FName flagName, bool IsEnable) {
+}
+
 void UPalCharacterMovementComponent::SetBlowVelocityDisableFlag(FName flagName, bool isDisable) {
 }
 
@@ -179,7 +221,7 @@ void UPalCharacterMovementComponent::SetAirControlXYMultiplier(FName flagName, f
 void UPalCharacterMovementComponent::SetActionInterrupt_ToServer_Implementation(EPalCharacterMovementCustomMode InCustomMode, bool InInterrupt) {
 }
 
-void UPalCharacterMovementComponent::ResetNetworkSmoothingModeToDefault(bool bResetMeshLocation) {
+void UPalCharacterMovementComponent::ResetNetworkSmoothingModeToDefault(bool bResetMeshLocation, bool bResetMeshRotation) {
 }
 
 void UPalCharacterMovementComponent::ResetLastLandingLocationCache() {
@@ -191,6 +233,9 @@ void UPalCharacterMovementComponent::RequestTemporaryAcceleration() {
 void UPalCharacterMovementComponent::RemoveWalkableFloorAngleOverrides(EPalWalkableFloorAnglePriority Priority) {
 }
 
+void UPalCharacterMovementComponent::OverrideLastLandingLocation(const FVector& FootLocation) {
+}
+
 void UPalCharacterMovementComponent::OnRep_CustomMovementMode_ForReplicate() {
 }
 
@@ -200,7 +245,13 @@ void UPalCharacterMovementComponent::OnExitWater() {
 void UPalCharacterMovementComponent::OnEnterWater() {
 }
 
+void UPalCharacterMovementComponent::OnChangeRiding_ForOtomoBattleSpeed(bool bIsRiding) {
+}
+
 void UPalCharacterMovementComponent::OnChangeCrouch(UPalCharacterMovementComponent* Component, bool IsInCrouch) {
+}
+
+void UPalCharacterMovementComponent::OnChangeBattleMode_ForOtomoBattleSpeed(bool bIsBattleMode) {
 }
 
 void UPalCharacterMovementComponent::OnChangeActiveCharacter(bool bInIsActive) {
@@ -213,6 +264,10 @@ void UPalCharacterMovementComponent::Jump() {
 }
 
 bool UPalCharacterMovementComponent::IsTickOptimizationDisabled() const {
+    return false;
+}
+
+bool UPalCharacterMovementComponent::IsStepUpUpSweepShrinkEnabled() const {
     return false;
 }
 
@@ -240,6 +295,10 @@ bool UPalCharacterMovementComponent::IsRequestSliding() const {
     return false;
 }
 
+bool UPalCharacterMovementComponent::IsRequestJetpackBoost() const {
+    return false;
+}
+
 bool UPalCharacterMovementComponent::IsRequestGliding() const {
     return false;
 }
@@ -249,6 +308,18 @@ bool UPalCharacterMovementComponent::IsPysicsAcceleration() const {
 }
 
 bool UPalCharacterMovementComponent::IsPendingSliding() const {
+    return false;
+}
+
+bool UPalCharacterMovementComponent::IsOrientToVelocity() const {
+    return false;
+}
+
+bool UPalCharacterMovementComponent::IsOrientToActionRotation() const {
+    return false;
+}
+
+bool UPalCharacterMovementComponent::IsNavWalkingRayContinuityCheckEnabled() const {
     return false;
 }
 
@@ -265,6 +336,10 @@ bool UPalCharacterMovementComponent::IsLeanBackDisabled() const {
 }
 
 bool UPalCharacterMovementComponent::IsJumpDisabled() const {
+    return false;
+}
+
+bool UPalCharacterMovementComponent::IsJetpackGliding() const {
     return false;
 }
 
@@ -300,7 +375,15 @@ bool UPalCharacterMovementComponent::IsDashSwimming() const {
     return false;
 }
 
+bool UPalCharacterMovementComponent::IsComponentTickSuppressed() const {
+    return false;
+}
+
 bool UPalCharacterMovementComponent::IsClimbing() const {
+    return false;
+}
+
+bool UPalCharacterMovementComponent::IsCancelJump() const {
     return false;
 }
 
@@ -364,6 +447,10 @@ FVector UPalCharacterMovementComponent::GetLastLandingLocation() const {
     return FVector{};
 }
 
+float UPalCharacterMovementComponent::GetJumpZVelocityMultiplier() const {
+    return 0.0f;
+}
+
 float UPalCharacterMovementComponent::GetInWaterRate() const {
     return 0.0f;
 }
@@ -394,6 +481,10 @@ float UPalCharacterMovementComponent::GetDefaultRunSpeed() {
 
 EPalCharacterMovementCustomMode UPalCharacterMovementComponent::GetCustomMovementMode() const {
     return EPalCharacterMovementCustomMode::None;
+}
+
+FString UPalCharacterMovementComponent::GetComponentTickSuppressDebugText() const {
+    return TEXT("");
 }
 
 float UPalCharacterMovementComponent::GetAirControlXYMultiplier() const {

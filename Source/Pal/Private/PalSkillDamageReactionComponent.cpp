@@ -10,6 +10,7 @@ UPalSkillDamageReactionComponent::UPalSkillDamageReactionComponent(const FObject
     this->EffectSlot = NULL;
     this->CurrentHP = 0.00f;
     this->MaxHP = 0.00f;
+    this->HPInitialized = false;
 }
 
 void UPalSkillDamageReactionComponent::SetMaxHP(const float NewMaxHP) {
@@ -26,6 +27,7 @@ void UPalSkillDamageReactionComponent::GetLifetimeReplicatedProps(TArray<FLifeti
     
     DOREPLIFETIME(UPalSkillDamageReactionComponent, CurrentHP);
     DOREPLIFETIME(UPalSkillDamageReactionComponent, MaxHP);
+    DOREPLIFETIME(UPalSkillDamageReactionComponent, HPInitialized);
 }
 
 

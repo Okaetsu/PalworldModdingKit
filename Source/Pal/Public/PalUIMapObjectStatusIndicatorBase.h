@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "EPalWorkSuitability.h"
+#include "PalUIMapObjectStatusIndicatorWorkSuitabilityDisplayData.h"
 #include "PalUserWidgetWorldHUD.h"
 #include "PalUIMapObjectStatusIndicatorBase.generated.h"
 
@@ -10,7 +10,7 @@ class UPalUIMapObjectStatusIndicatorBase : public UPalUserWidgetWorldHUD {
 public:
     UPalUIMapObjectStatusIndicatorBase();
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    EPalWorkSuitability GetWorkSuitability() const;
+    void GetWorkSuitabilityDisplayData(TArray<FPalUIMapObjectStatusIndicatorWorkSuitabilityDisplayData>& OutDisplayData) const;
     
 };
 

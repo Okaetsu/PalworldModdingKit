@@ -1,11 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EPalIVisitorNPCAction.h"
-#include "PalInvaderDatabaseRow.h"
+#include "PalInvaderDatabaseBaseRow.h"
 #include "PalVisitorNPCDatabaseRow.generated.h"
 
 USTRUCT(BlueprintType)
-struct FPalVisitorNPCDatabaseRow : public FPalInvaderDatabaseRow {
+struct FPalVisitorNPCDatabaseRow : public FPalInvaderDatabaseBaseRow {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

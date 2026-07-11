@@ -40,6 +40,15 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TEnumAsByte<EAIRequestPriority::Type> DefaultPriority;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bRejectUnwalkableNonLinkPath;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float UnwalkablePathRejectZTolerance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float UnwalkablePathMaxValidationDistance;
+    
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnActionDelegate OnStartActionDelegate;
     
@@ -70,6 +79,9 @@ public:
     bool PushChildAction(UPawnAction* action);
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnSightCheckAsyncCompleted(bool bIncludedPlayer, bool bIncludedAliveNPC, bool bIncludedEdibleDeadNPC, const TArray<APalCharacter*>& InSightCharacters);
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OnChildActionFinished(UPawnAction* action, EPawnActionResult::Type WithResult);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -77,6 +89,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsActive() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void HandleSensorSightCheckAsyncCompleted(bool bIncludedPlayer, bool bIncludedAliveNPC, bool bIncludedEdibleDeadNPC, const TArray<APalCharacter*>& InSightCharacters);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetSimpleName() const;

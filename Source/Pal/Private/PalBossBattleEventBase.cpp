@@ -2,12 +2,12 @@
 #include "Net/UnrealNetwork.h"
 
 APalBossBattleEventBase::APalBossBattleEventBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
-    this->bAlwaysRelevant = true;
     this->bReplicates = true;
     const FProperty* p_RemoteRole = GetClass()->FindPropertyByName("RemoteRole");
     (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
     this->BossBattleSequencerInServer = NULL;
     this->bIsCombatStarted = false;
+    this->bIsClearConditionOverride = false;
 }
 
 void APalBossBattleEventBase::Terminate() {
@@ -28,6 +28,10 @@ void APalBossBattleEventBase::OnRep_SpawnCharacters(const TArray<TWeakObjectPtr<
 
 
 bool APalBossBattleEventBase::IsNearLocalPlayer() const {
+    return false;
+}
+
+bool APalBossBattleEventBase::IsBossCleared_Implementation() const {
     return false;
 }
 

@@ -47,6 +47,9 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnUpdateAssignedCharacter(UPalWorkBase* Work);
     
+    UFUNCTION(BlueprintCallable)
+    void OnUnassignedCharacter_ServerInternal(UPalWorkBase* Work, const FPalInstanceID& IndividualId);
+    
 public:
     UFUNCTION(BlueprintCallable)
     void OnRep_UpdateBreedProgress();

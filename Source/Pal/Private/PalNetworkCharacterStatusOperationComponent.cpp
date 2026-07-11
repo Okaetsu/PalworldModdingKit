@@ -3,22 +3,31 @@
 UPalNetworkCharacterStatusOperationComponent::UPalNetworkCharacterStatusOperationComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 }
 
+void UPalNetworkCharacterStatusOperationComponent::RequestReviveCharacterFromDyingByPartnerSkill_ToServer_Implementation(APalCharacter* Character) {
+}
+
+void UPalNetworkCharacterStatusOperationComponent::RequestReviveCharacterFromDyingByPartnerSkill(APalCharacter* Character) {
+}
+
 void UPalNetworkCharacterStatusOperationComponent::RequestReviveCharacterFromDying_ToServer_Implementation(APalCharacter* Character) {
 }
 
 void UPalNetworkCharacterStatusOperationComponent::RequestReviveCharacterFromDying(APalCharacter* Character) {
 }
 
-void UPalNetworkCharacterStatusOperationComponent::RequestPlayerStatusUp_ToServer_Implementation(int32 ToRank) {
+void UPalNetworkCharacterStatusOperationComponent::RequestPlayerStatusUp_ToServer_Implementation(EPalRelicType RelicType, int32 ToRank) {
 }
 
-void UPalNetworkCharacterStatusOperationComponent::RequestPlayerStatusClear_ToServer_Implementation() {
+void UPalNetworkCharacterStatusOperationComponent::RequestPlayerStatusClear_ToServer_Implementation(EPalRelicType RelicType) {
 }
 
-void UPalNetworkCharacterStatusOperationComponent::RequestPlayerRankClear() {
+void UPalNetworkCharacterStatusOperationComponent::RequestPlayerRankUp_ToServer_Implementation(const TArray<FPalPlayerRankupRequestInfo>& RankupInfo) {
 }
 
-void UPalNetworkCharacterStatusOperationComponent::RequestPlayerRankAdd(const int32 ToRank) {
+void UPalNetworkCharacterStatusOperationComponent::RequestPlayerRankClear(EPalRelicType RelicType) {
+}
+
+void UPalNetworkCharacterStatusOperationComponent::RequestPlayerRankAdd(EPalRelicType RelicType, int32 ToRank) {
 }
 
 void UPalNetworkCharacterStatusOperationComponent::RequestOtomoStatusPointClearAll_ToServer_Implementation(const FPalInstanceID& IndividualId) {

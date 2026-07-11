@@ -2,6 +2,7 @@
 
 APalDungeonEnemySpawnerPoint::APalDungeonEnemySpawnerPoint(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->RankType = EPalDungeonEnemySpawnerRankType::Normal;
+    this->OverwriteRayUpOffset = 0.00f;
 }
 
 void APalDungeonEnemySpawnerPoint::OnEnterCharacterToGroup(UPalIndividualCharacterHandle* IndividualHandle) {

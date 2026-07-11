@@ -13,5 +13,10 @@ enum class EPalFoodStatusEffectType : uint8 {
     Regene_Hp,
     MaxSP,
     Exp_Increase,
+    LeanBackInvalid,
+    KnockbackInvalid,
+    ExplosionResist,
+    LeanBackAndKnockbackInvalid,
+    FullStomachKeep,
 };
 

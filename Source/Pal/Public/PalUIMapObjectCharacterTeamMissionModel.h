@@ -73,6 +73,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void RequestSelectAssignedCharacter(const FPalInstanceID& IndividualId);
     
+    UFUNCTION(BlueprintCallable)
+    void RequestChangeExcludeFlag(const FPalInstanceID& IndividualId, bool bNewFlag);
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void OnUpdateReleasedMissionInfo(UPalGuildCharacterTeamMission* OwnerGuildCharacterTeamMission);

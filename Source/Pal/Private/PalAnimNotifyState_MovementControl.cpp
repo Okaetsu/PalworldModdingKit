@@ -8,10 +8,13 @@ UPalAnimNotifyState_MovementControl::UPalAnimNotifyState_MovementControl() {
     this->GravityRate = 1.00f;
     this->FixedGravityZ = 0.00f;
     this->SlideAlpha = 1.00f;
+    this->bIsDisableInput = false;
     this->bIsDisableMovement = false;
     this->bIsDisableJump = false;
     this->bIsDisableCrouch = false;
+    this->bIsDisableStep = false;
     this->bIsDisablePartnerSkill = false;
+    this->bForceUseControllerRotationYaw = false;
 }
 
 

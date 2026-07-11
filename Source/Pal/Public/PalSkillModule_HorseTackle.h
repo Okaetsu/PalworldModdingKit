@@ -9,6 +9,9 @@ class PAL_API UPalSkillModule_HorseTackle : public UPalSkillModule_Tackle {
 public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bCanOtomoMultiTackle;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float LeaveTotalTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -28,6 +31,15 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool OneShotLoopEffect;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bSuppressFinalTackleEndUntilPassingTarget;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    double FinalTacklePassingTargetTimeout;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    double FinalTackleEndDelayAfterPassingTarget;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AllowStepUpDistance;

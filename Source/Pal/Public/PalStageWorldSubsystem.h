@@ -6,22 +6,26 @@
 #include "PalWorldSubsystem.h"
 #include "PalStageWorldSubsystem.generated.h"
 
+class APalFieldEnvironmentDisableVolume;
+class APalPlayerState;
 class UDataLayerAsset;
 class UPalStageModelBase;
-class APalPlayerState;
 
 UCLASS(Blueprintable)
 class PAL_API UPalStageWorldSubsystem : public UPalWorldSubsystem {
     GENERATED_BODY()
 public:
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReturnPlayerStateMulticastDelegate, APalPlayerState*, PlayerState);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSimpleMulticastDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReturnPlayerStateMulticastDelegate, APalPlayerState*, PlayerState);
 
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSimpleMulticastDelegate OnEnteredStageInClient;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSimpleMulticastDelegate OnReturnToFieldFromStageInClient;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FSimpleMulticastDelegate OnReceivedSyncTeleportMoveResultInClient;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FReturnPlayerStateMulticastDelegate OnSetupLocalPlayerDelegate;
@@ -38,5 +42,15 @@ private:
     
 public:
     UPalStageWorldSubsystem();
+
+    UFUNCTION(BlueprintCallable)
+    void OnVolumeExited(APalFieldEnvironmentDisableVolume* Volume);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnVolumeEntered(APalFieldEnvironmentDisableVolume* Volume);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsLocalPlayerInEnvironmentDisableVolume() const;
+    
 };
 

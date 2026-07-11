@@ -13,6 +13,7 @@
 
 class APalCapturedCage;
 class APalDungeonPointMarker;
+class UAkAudioEvent;
 class UPalDungeonInstanceModel;
 
 UCLASS(Blueprintable)
@@ -37,6 +38,12 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<APalCapturedCage> RewardCageClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UAkAudioEvent> TeleportStartSE_Enter;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UAkAudioEvent> TeleportStartSE_Exit;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<APalDungeonPointMarker*> PointMarkersWaitSystemInitializeInServer;

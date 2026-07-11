@@ -7,6 +7,9 @@ UPalNPCTalkSystem::UPalNPCTalkSystem() {
 void UPalNPCTalkSystem::SetVisibleTalkHUD(const FName& FlagKey, bool bIsVisible) {
 }
 
+void UPalNPCTalkSystem::SetTalkWindowVisibility(const FName& FlagKey, bool bIsVisible) {
+}
+
 void UPalNPCTalkSystem::SetDynamicParameters(const FName& ParameterName, UPalNPCTalkDynamicParameter* InParameter) {
 }
 

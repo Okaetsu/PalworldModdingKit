@@ -10,6 +10,7 @@ class UPalItemContainer;
 class UPalMapObjectConcreteModelExtraFunctionBase;
 class UPalMapObjectEnergyModule;
 class UPalMapObjectProductItemModel;
+class UPalUIMapObjectProductItemStatusIndicatorModel;
 class UPalWorkBase;
 
 UCLASS(Blueprintable)
@@ -29,11 +30,14 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool bIsWorkable;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CurrentProductItemId, meta=(AllowPrivateAccess=true))
     FName ProductItemId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float WorkSpeedAdditionalRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UPalUIMapObjectProductItemStatusIndicatorModel> StatusUIModel;
     
 public:
     UPalMapObjectProductItemModel();
@@ -53,6 +57,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnUpdateContainerContent(UPalItemContainer* Container);
     
+protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_CurrentProductItemId();
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnFinishWorkInServer(UPalWorkBase* Work);
     

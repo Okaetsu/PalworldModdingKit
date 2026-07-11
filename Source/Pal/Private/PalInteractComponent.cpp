@@ -22,6 +22,10 @@ bool UPalInteractComponent::IsToggleInteracting() const {
     return false;
 }
 
+bool UPalInteractComponent::IsOnePushInteracting() {
+    return false;
+}
+
 bool UPalInteractComponent::IsInteracting() const {
     return false;
 }

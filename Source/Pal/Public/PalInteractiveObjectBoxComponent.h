@@ -100,6 +100,9 @@ public:
     UFUNCTION(BlueprintCallable)
     UObject* Self() const override PURE_VIRTUAL(Self, return NULL;);
     
+    UFUNCTION(BlueprintCallable)
+    FText GetInteractTargetName() const override PURE_VIRTUAL(GetInteractTargetName, return FText::GetEmpty(););
+    
     UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContextObject"))
     FText GetIndicatorText(const UObject* WorldContextObject, EPalInteractiveObjectIndicatorType IndicatorType) const override PURE_VIRTUAL(GetIndicatorText, return FText::GetEmpty(););
     

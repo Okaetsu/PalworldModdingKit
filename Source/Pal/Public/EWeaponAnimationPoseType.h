@@ -8,5 +8,6 @@ enum class EWeaponAnimationPoseType : uint8 {
     Stand,
     Crouch,
     Riding,
+    JetpackGliding,
 };
 

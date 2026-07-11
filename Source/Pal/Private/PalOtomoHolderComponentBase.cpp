@@ -4,6 +4,12 @@
 UPalOtomoHolderComponentBase::UPalOtomoHolderComponentBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->CollisionChecker = NULL;
     this->OtomoOrder = EPalOtomoPalOrderType::Default;
+    this->DirectOrderTarget = NULL;
+    this->DirectOrderSetCryEmoState = TEXT("Anger");
+    this->DirectOrderCancelCryEmoState = TEXT("Normal");
+    this->DashCryEmoState = TEXT("Normal");
+    this->DashCryCT = 2.00f;
+    this->DashCryInputThreshold = 1.00f;
     this->CharacterContainer = NULL;
     this->bIsDisableDespawnCharacter = false;
     this->bDisableDeadReturnOtomo = false;
@@ -12,6 +18,10 @@ UPalOtomoHolderComponentBase::UPalOtomoHolderComponentBase(const FObjectInitiali
 }
 
 bool UPalOtomoHolderComponentBase::TryRevivePlayerByPartnerSkill() {
+    return false;
+}
+
+bool UPalOtomoHolderComponentBase::TryReviveOtomoByPartnerSkill(const APalCharacter* OtomoCharacter) {
     return false;
 }
 
@@ -44,9 +54,15 @@ bool UPalOtomoHolderComponentBase::TryGetContainer(UPalIndividualCharacterContai
 }
 
 
+void UPalOtomoHolderComponentBase::TryExecuteDirectAttackOrder() {
+}
+
 void UPalOtomoHolderComponentBase::Tmp_EmptySlot(const FPalCharacterSlotId& SlotId) {
 }
 
+
+void UPalOtomoHolderComponentBase::SetTrainerForOtomo(APalCharacter* Character) {
+}
 
 void UPalOtomoHolderComponentBase::SetSelectOtomoID_ToServer_Implementation(int32 ID, int32 Index) {
 }
@@ -68,6 +84,15 @@ void UPalOtomoHolderComponentBase::SetDisableReturnOtomo(bool bDisable) {
 }
 
 void UPalOtomoHolderComponentBase::SetDisableDeadReturnOtomo(bool bDisable) {
+}
+
+void UPalOtomoHolderComponentBase::SetDirectOrderTarget_ToServer_Implementation(APalCharacter* Target) {
+}
+
+void UPalOtomoHolderComponentBase::RequestSetOtomoOrder(EPalOtomoPalOrderType OrderType) {
+}
+
+void UPalOtomoHolderComponentBase::PlayOtomoCry_ToClient_Implementation(const FName& EmoState) {
 }
 
 void UPalOtomoHolderComponentBase::OnUpdateSlot(UPalIndividualCharacterSlot* Slot, UPalIndividualCharacterHandle* LastHandle) {
@@ -94,6 +119,9 @@ void UPalOtomoHolderComponentBase::OnRep_CharacterContainer() {
 void UPalOtomoHolderComponentBase::OnInitializedCharacter(APalCharacter* Character) {
 }
 
+void UPalOtomoHolderComponentBase::OnDirectOrderTargetDestroyed(AActor* DestroyedActor) {
+}
+
 void UPalOtomoHolderComponentBase::OnCreatedCharacterContainer_Implementation() {
 }
 
@@ -101,6 +129,12 @@ void UPalOtomoHolderComponentBase::OnCompletedAllCharacterInitialized(APalCharac
 }
 
 void UPalOtomoHolderComponentBase::OnChangeOtomoActive(APalCharacter* Otomo, bool IsActive) {
+}
+
+void UPalOtomoHolderComponentBase::NotifyOtomoOrderFeedback_ToAll_Implementation(EPalOtomoPalOrderType OrderType) {
+}
+
+void UPalOtomoHolderComponentBase::NotifyDirectOrderTargetFeedback_ToAll_Implementation(APalCharacter* Target) {
 }
 
 void UPalOtomoHolderComponentBase::LostOtomoByID_ToClient_Implementation(FPalInstanceID ID) const {
@@ -202,6 +236,10 @@ UPalIndividualCharacterSlot* UPalOtomoHolderComponentBase::GetEmptySlot() const 
     return NULL;
 }
 
+APalCharacter* UPalOtomoHolderComponentBase::GetDirectOrderTarget() const {
+    return NULL;
+}
+
 void UPalOtomoHolderComponentBase::GetAllIndividualHandle(TArray<UPalIndividualCharacterHandle*>& OutArray) const {
 }
 
@@ -219,6 +257,13 @@ void UPalOtomoHolderComponentBase::DecrementSelectOtomoID() {
 void UPalOtomoHolderComponentBase::CompleteInactiveCurrentOtomo() {
 }
 
+bool UPalOtomoHolderComponentBase::CanRevivePalByPartnerSkill(const APalCharacter* OtomoCharacter) const {
+    return false;
+}
+
+
+void UPalOtomoHolderComponentBase::AddSphereRecoveryLog_ToClient_Implementation(const FPalInstanceID& IndividualId, const FPalStaticItemIdAndNum& ItemAndNum) {
+}
 
 bool UPalOtomoHolderComponentBase::AddOtomoHandleToFreeSlot(UPalIndividualCharacterHandle* Handle) {
     return false;
@@ -232,6 +277,10 @@ void UPalOtomoHolderComponentBase::AddLogOtomoPartnerSkill_ToClient_Implementati
 
 void UPalOtomoHolderComponentBase::AddLogOtomoPartnerSkill_Text_ToClient_Implementation(AActor* Otomo, FName TextId) {
 }
+
+void UPalOtomoHolderComponentBase::AddAlphaEggConversionLog_ToClient_Implementation(const FPalInstanceID& IndividualId) {
+}
+
 
 void UPalOtomoHolderComponentBase::ActivateCurrentOtomoNearThePlayer_ToServer_Implementation() {
 }

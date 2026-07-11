@@ -7,5 +7,6 @@ FPalItemLotteryData::FPalItemLotteryData() {
     this->MaxNum = 0;
     this->NumUnit = 0;
     this->TreasureBoxGrade = EPalMapObjectTreasureGradeType::Grade1;
+    this->BonusExpRate = 0.00f;
 }
 

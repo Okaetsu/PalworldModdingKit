@@ -1,6 +1,5 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
 #include "PalUserWidgetWorldHUD.h"
 #include "PalBossEntryWaitInfoHUD.generated.h"
 
@@ -17,12 +16,12 @@ public:
     APalBossTower* BossTower;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FDateTime TimeLimitDate;
+    float TimeLimitDate;
     
     UPalBossEntryWaitInfoHUD();
 protected:
     UFUNCTION(BlueprintCallable)
-    void UpdateWaitInfo(bool bIsCountDown, FDateTime TimeLimit);
+    void UpdateWaitInfo(bool bIsCountDown, float TimeLimit);
     
 public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)

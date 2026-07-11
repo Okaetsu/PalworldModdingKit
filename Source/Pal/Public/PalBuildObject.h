@@ -4,9 +4,12 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "Engine/EngineTypes.h"
 #include "EPalBuildObjectInstallStrategy.h"
 #include "EPalBuildObjectState.h"
+#include "EPalBuildObjectStatusHUDSlot.h"
 #include "EPalInteractiveObjectIndicatorType.h"
 #include "PalBuildObjectMeshDefaultSetting.h"
 #include "PalDamageInfo.h"
@@ -35,9 +38,13 @@ class PAL_API APalBuildObject : public APalMapObject {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeStateDelegate, EPalBuildObjectState, State);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnBuildCompleteAnimationFinishedDelegate);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeStateDelegate OnChangeState;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnBuildCompleteAnimationFinishedDelegate OnBuildCompleteAnimationFinished;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -113,6 +120,9 @@ protected:
     FGuid WorldHUDId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<EPalBuildObjectStatusHUDSlot, FGuid> AdditionalWorldHUDIdMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGuid buildProgressWorldHUDId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -181,6 +191,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnStartTriggerInteractBuilding(AActor* OtherActor, EPalInteractiveObjectIndicatorType IndicatorType);
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void OnStartSimulation();
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnSetPaintInMapObjectModel(UPalMapObjectModel* Model, UPalMapObjectModelPaint* Paint);
     
@@ -204,6 +219,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnDamage(UPalMapObjectModel* DamagedModel, const FPalDamageInfo& DamageInfo);
     
+protected:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnChangeVisualForDismantle(const bool bDismantle);
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnBeginInteractBuilding(AActor* OtherActor, TScriptInterface<IPalInteractiveObjectComponentInterface> InteractiveObject);
     

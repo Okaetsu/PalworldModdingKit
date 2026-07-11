@@ -6,6 +6,7 @@ UENUM(BlueprintType)
 enum class EPalLogWidgetOverrideClassType : uint8 {
     Invalid,
     StartExpedition,
+    CompleteExpedition,
     FriendshipRankup,
 };
 

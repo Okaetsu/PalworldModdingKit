@@ -18,10 +18,10 @@ void UPalNetworkBaseCampComponent::RequestReplicateBaseCampItemStackInfo_ToServe
 void UPalNetworkBaseCampComponent::RequestMoveWorkerToPalBox_ToServer_Implementation(const FGuid& BaseCampId, const FPalCharacterSlotId& SlotId, const int32 CurrentPage, const FGuid& ByMapObjectInstanceId) {
 }
 
-void UPalNetworkBaseCampComponent::RequestMoveItemToInventory_ToServer_Implementation(const FGuid& BaseCampId, const FPalItemId& ItemId, const int32 Num) {
+void UPalNetworkBaseCampComponent::RequestMoveItemToInventory_ToServer_Implementation(const FGuid& BaseCampId, const FPalItemId& ItemId, const int64 Num) {
 }
 
-void UPalNetworkBaseCampComponent::RequestMoveInventoryItemToBaseCamp_ToServer_Implementation(const TArray<FPalItemSlotId>& InventoryItemSlotIds, const FGuid& BaseCampId) {
+void UPalNetworkBaseCampComponent::RequestMoveInventoryItemToBaseCamp_ToServer_Implementation(const TArray<FPalItemSlotId>& InventoryItemSlotIds, const FGuid& BaseCampId, const bool bQuickStackMode) {
 }
 
 void UPalNetworkBaseCampComponent::RequestMoveCharacterToWorker_ToServer_Implementation(const FGuid& BaseCampId, const FPalCharacterSlotId& SlotId, const FPalContainerId& ToContainerId, const FGuid& ByMapObjectInstanceId) {

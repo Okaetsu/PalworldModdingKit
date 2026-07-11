@@ -4,3 +4,8 @@ UPalCryComponentBase::UPalCryComponentBase(const FObjectInitializer& ObjectIniti
 }
 
 
+
+void UPalCryComponentBase::BroadcastPlayCry_ToAll_Implementation(const FName& EmoState) {
+}
+
+

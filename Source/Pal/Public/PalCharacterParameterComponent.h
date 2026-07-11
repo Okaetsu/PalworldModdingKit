@@ -8,6 +8,7 @@
 #include "EPalAdditionalEffectType.h"
 #include "EPalElementType.h"
 #include "EPalMapBaseCampWorkerOrderType.h"
+#include "EPalStatusHitType.h"
 #include "EPalWorkSuitability.h"
 #include "EPalWorkType.h"
 #include "EPalWorkWorkerWorkingState.h"
@@ -19,6 +20,7 @@
 #include "PalMapObjectAppearanceData.h"
 #include "PalMapObjectAppearanceDataWithId.h"
 #include "PalStatusAccumulate.h"
+#include "PalStatusHit.h"
 #include "PalWorkAssignHandleId.h"
 #include "PalCharacterParameterComponent.generated.h"
 
@@ -41,6 +43,7 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FUpdateParameterDelegate, UPalCharacterParameterComponent*, Parameter);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSPOverheatDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeTrapDelegate, bool, IsExist);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeCapturedProcessing, bool, bIsCapturedProcessing);
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool bIsCooping;
@@ -65,6 +68,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFixedPoint64 StunMaxPoint;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsInfinitySP;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsSPOverheat;
@@ -102,8 +108,20 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector OverrideDefenceTargetLocation;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FVector OtomoLastActiveLocation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FVector PlayerLastPreFTLocation;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_Trainer, meta=(AllowPrivateAccess=true))
     APalCharacter* Trainer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<APalCharacter> NPCSpawnedOtomoTrainer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsOtomoStandbyAI;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APalCharacter* OtomoPal;
@@ -139,15 +157,6 @@ public:
     bool IsEdible;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 HiddenCollisionOverlapCount;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 BurnCollisionOverlapCount;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 LavaCollisionOverlapCount;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     EPalElementType DamageUpElement_ByElementStatus;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -158,6 +167,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 AttackUp;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 AttackDown;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 DefenseUp;
@@ -180,6 +192,15 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     float MaxHPRate_ForTowerBoss;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    float AdditionalEnemyMaxHPRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    float AdditionalEnemyReceiveDamageRate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    float AdditionalEnemyInflictDamageRate;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     float MaxSPBuffRate;
     
@@ -192,6 +213,9 @@ public:
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FHitResult GroundHitResult;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FHitResult ClimbSurfaceHitResult;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -255,8 +279,11 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ItemContainer, meta=(AllowPrivateAccess=true))
     UPalItemContainer* ItemContainer;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_IsCapturedProcessing, meta=(AllowPrivateAccess=true))
     bool IsCapturedProcessing;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool PlayerLastPreFTLocationOverriding;
     
 public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -264,6 +291,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FUpdateWorkAssignIdDelegate OnUpdateWorkAssignIdDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChangeCapturedProcessing OnChangeCapturedProcessingDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FSPOverheatDelegate OnSPOverheatDelegate;
@@ -337,6 +367,11 @@ private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void SetReticleTarget_ToServer(AActor* Actor);
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void SetPlayerLastPreFTLocation(const FVector& Location);
+    
+private:
     UFUNCTION(BlueprintCallable, Server, Unreliable)
     void SetOverrideTargetLocation_ToServer(FVector TargetLocation);
     
@@ -346,6 +381,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetOverrideDefenceTargetLocation(FVector TargetLocation);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetOtomoLastActiveLocation(const FVector& Location);
     
     UFUNCTION(BlueprintCallable)
     void SetMuteki(FName flagName, bool IsEnable);
@@ -431,6 +469,10 @@ protected:
     UFUNCTION(BlueprintCallable)
     void OnRep_ItemContainer();
     
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_IsCapturedProcessing();
+    
 public:
     UFUNCTION(BlueprintCallable)
     void OnRep_IndividualParameter();
@@ -446,14 +488,26 @@ private:
     void OnDamage(const FPalDamageResult DamageResult);
     
 public:
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void Multicast_DecreaseAllActiveSkillCoolDownByRate(float Rate);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool IsStatusHitActive(const FPalStatusHit& StatusHit);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlayersOtomo() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPlayerLastPreFTLocationValid() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPartBroken() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsOverrideDefenceTarget() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsOtomoStandbyAI() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsOtomo() const;
@@ -465,7 +519,10 @@ public:
     bool IsLive() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool IsInHiddenCollision();
+    bool IsInfinitySP() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsInactiveOtomo() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsHyperArmor() const;
@@ -513,6 +570,9 @@ public:
     UPalWorkBase* GetWork() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FPalStatusHit GetStatusHit(EPalStatusHitType StatusHitType) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     FFixedPoint64 GetSP();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -528,10 +588,16 @@ public:
     float GetRadius() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FVector GetPlayerLastPreFTLocation() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     FVector GetOverrideTargetLocation_ConsiderRide();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FVector GetOverrideDefenceTargetLocation() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FVector GetOtomoLastActiveLocation() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalOtomoAttackStopJudgeByBallList* GetOtomoAttackStopJudge();

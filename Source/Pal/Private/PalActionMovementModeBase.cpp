@@ -22,11 +22,22 @@ void UPalActionMovementModeBase::OnMovementModeChanged(UPalCharacterMovementComp
 }
 
 
+void UPalActionMovementModeBase::K2_Async_UpdateVelocity_Implementation(float InDeltaTime) {
+}
 
 
+FVector UPalActionMovementModeBase::K2_Async_GetVelocity_Implementation(FVector BaseVelocity, bool& bUseOriginalCalcVelocity) const {
+    return FVector{};
+}
 
 
+FRotator UPalActionMovementModeBase::K2_Async_GetDesiredRotation_Implementation(FRotator CurrentRotation, bool& bUseActionRotation) const {
+    return FRotator{};
+}
 
+
+void UPalActionMovementModeBase::K2_Async_BeginMovementMode_Implementation() {
+}
 
 bool UPalActionMovementModeBase::IsMovingOnGround_Implementation() const {
     return false;

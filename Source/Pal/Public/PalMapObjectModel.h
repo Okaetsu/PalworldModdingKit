@@ -60,7 +60,13 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FMapObjectModelDelegate OnRepBuildPlayerUIdDelegate_Client;
     
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FMapObjectModelDelegate OnCustomNameChangedDelegate;
+    
 private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bSpawnedMapObjectActor;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FGuid InstanceId;
     
@@ -84,6 +90,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FGuid GroupIdBelongTo;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_CustomName, meta=(AllowPrivateAccess=true))
+    FString CustomName;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     FName BuildObjectId;
@@ -191,6 +200,9 @@ private:
     void OnRep_Effect();
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_CustomName();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_ConcreteModel();
     
     UFUNCTION(BlueprintCallable)
@@ -210,7 +222,13 @@ public:
     FPalMapObjectStatusValue GetHP() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    FString GetCustomName() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalMapObjectConcreteModelBase* GetConcreteModel(const bool bIsForce) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGuid GetBuildPlayerUId_BP() const;
     
 
     // Fix for true pure virtual functions not being implemented

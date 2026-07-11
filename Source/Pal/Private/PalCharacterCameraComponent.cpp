@@ -27,8 +27,10 @@ UPalCharacterCameraComponent::UPalCharacterCameraComponent(const FObjectInitiali
     this->AimFOVInterpTime = 0.01f;
     this->AimFOV = 75.00f;
     this->RotateSpeedRate = 1.00f;
+    this->SafetyNetFoVInterpSpeed = 12.00f;
     this->DynamicSpeedBlurMaterialDynamic = NULL;
     this->DynamicAimBlurMaterialDynamic = NULL;
+    this->CurrentSpringArmModifier = NULL;
 }
 
 void UPalCharacterCameraComponent::StopCameraModifier(TSubclassOf<UPalCameraModifier> ModifierClass) {

@@ -11,6 +11,7 @@ enum class EPalLocationType : uint8 {
     PointBaseCamp,
     PointPlayer,
     PointMapObject,
+    PointLevelObject,
     PointCharacter,
     PointDungeonPortal,
     PointStaticRespawn,
@@ -27,5 +28,10 @@ enum class EPalLocationType : uint8 {
     QuestStatic,
     QuestTrackingActor,
     TreasureMapPoint,
+    PointDimensionWarp,
+    PointWarpAltar,
+    StandaloneBoss,
+    GuildMarker,
+    GuildPin,
 };
 

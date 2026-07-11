@@ -15,7 +15,11 @@ FPalNetworkNPCTalkRequestData UPalFlowNode_NPCTalkBase::MakeNetworkRequestData()
     return FPalNetworkNPCTalkRequestData{};
 }
 
-APalCharacter* UPalFlowNode_NPCTalkBase::GetTalker() const {
+APalCharacter* UPalFlowNode_NPCTalkBase::GetTalkerAsPalCharacter() const {
+    return NULL;
+}
+
+AActor* UPalFlowNode_NPCTalkBase::GetTalker() const {
     return NULL;
 }
 

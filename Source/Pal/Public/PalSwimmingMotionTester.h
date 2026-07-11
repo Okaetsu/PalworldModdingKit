@@ -23,7 +23,7 @@ public:
     bool DisableApply;
     
 protected:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APalCharacter* MotionTestCharacter;
     
 public:

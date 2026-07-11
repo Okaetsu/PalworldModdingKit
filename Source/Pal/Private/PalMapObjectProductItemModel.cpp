@@ -19,6 +19,9 @@ void UPalMapObjectProductItemModel::OnUpdateEnergyModuleState(UPalMapObjectEnerg
 void UPalMapObjectProductItemModel::OnUpdateContainerContent(UPalItemContainer* Container) {
 }
 
+void UPalMapObjectProductItemModel::OnRep_CurrentProductItemId() {
+}
+
 void UPalMapObjectProductItemModel::OnFinishWorkInServer(UPalWorkBase* Work) {
 }
 

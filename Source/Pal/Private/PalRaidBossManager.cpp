@@ -14,6 +14,10 @@ bool UPalRaidBossManager::IsRaidBossOfferItem(FName ItemName) {
     return false;
 }
 
+bool UPalRaidBossManager::IsInProcessRaidBattleInByOwnerBaseCampId(const FGuid& OwnerBaseCampId) const {
+    return false;
+}
+
 int32 UPalRaidBossManager::GetNPCTargetCount_ForForcePlayerTarget() const {
     return 0;
 }
@@ -40,6 +44,12 @@ FPalRaidBossDataRow UPalRaidBossManager::FindRaidBossDataByCharacterID(FName Cha
 
 FPalRaidBossDataRow UPalRaidBossManager::FindRaidBossData(FName ItemName) const {
     return FPalRaidBossDataRow{};
+}
+
+void UPalRaidBossManager::EnsureRaidBossWazaPreloaded_ServerInternal(FName StaticItemId) {
+}
+
+void UPalRaidBossManager::CheckRaidBattleAllowedInGuildOfPlayer(const FGuid& RequestPlayerUId, EPalRaidBattleGuildCheckResult& OutResult) const {
 }
 
 

@@ -45,6 +45,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_MaxHP, meta=(AllowPrivateAccess=true))
     float MaxHP;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    bool HPInitialized;
+    
 public:
     UPalSkillDamageReactionComponent(const FObjectInitializer& ObjectInitializer);
 

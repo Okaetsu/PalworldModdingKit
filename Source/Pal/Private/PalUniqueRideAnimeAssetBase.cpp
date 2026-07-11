@@ -7,8 +7,18 @@ UPalUniqueRideAnimeAssetBase::UPalUniqueRideAnimeAssetBase() {
     this->SocketName_Foot_L = TEXT("RideIK_Foot_L");
     this->DisableLeftHandIK_BallMotion = false;
     this->RidingAnimation = NULL;
+    this->RidingSprintStartAnimation = NULL;
+    this->RidingSprintAnimation = NULL;
     this->RidingAnimation_Ball_Aim = NULL;
     this->RidingAnimation_Ball_Fire = NULL;
+}
+
+UAnimSequence* UPalUniqueRideAnimeAssetBase::GetRidingSprintStartAnimation() {
+    return NULL;
+}
+
+UAnimSequence* UPalUniqueRideAnimeAssetBase::GetRidingSprintAnimation() {
+    return NULL;
 }
 
 UAnimSequence* UPalUniqueRideAnimeAssetBase::GetRideAnimSequence() {

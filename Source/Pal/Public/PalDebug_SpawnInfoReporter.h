@@ -3,6 +3,7 @@
 #include "GameFramework/Actor.h"
 #include "PalDebug_SpawnInfoReporter.generated.h"
 
+class APalMapObjectSpawnerTreasureBox;
 class APalNPCSpawnerBase;
 
 UCLASS(Blueprintable)
@@ -12,6 +13,12 @@ public:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<APalNPCSpawnerBase*> CacheSpawner;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<APalMapObjectSpawnerTreasureBox*> CacheItemSpawner;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    APalNPCSpawnerBase* DetailTargetSpawner;
     
 public:
     APalDebug_SpawnInfoReporter(const FObjectInitializer& ObjectInitializer);

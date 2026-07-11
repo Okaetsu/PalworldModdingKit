@@ -13,6 +13,7 @@ class AActor;
 class APalCharacter;
 class UPalActionBase;
 class UPalActionComponent;
+class UPalAttackFilter;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPalActionComponent : public UActorComponent {
@@ -46,6 +47,15 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UPalActionBase*> TerminateWaitActionList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 EndedActionMovementModeHistoryMaxNum;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FGuid, UPalAttackFilter*> UniqueAttackFilterMap;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FGuid> NewestAttackFilterId;
     
 public:
     UPalActionComponent(const FObjectInitializer& ObjectInitializer);
@@ -108,6 +118,12 @@ public:
     TSubclassOf<AActor> GetActionTool(EPalActionType ActionType, TSubclassOf<AActor> InDefaultClass) const;
     
 private:
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void CancelQueuedWazaActions_ToServer();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void CancelQueuedWazaActions_ToALL();
+    
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void CancelAllAction_ToServer(int32 ID);
     

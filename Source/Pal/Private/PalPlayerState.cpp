@@ -3,6 +3,8 @@
 #include "PalSyncTeleportComponent.h"
 
 APalPlayerState::APalPlayerState(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->KillSEAkEvent = NULL;
+    this->bPlayKillSEOnPalKill = true;
     this->CachedIsPlayerDead = false;
     this->CachedIsPlayerDying = false;
     this->OtomoData = NULL;
@@ -26,6 +28,7 @@ APalPlayerState::APalPlayerState(const FObjectInitializer& ObjectInitializer) : 
     this->TryCreateIndividualHandleTemporarily = NULL;
     this->bIsCompleteLoadInitWorldPartition_InServer = false;
     this->bIsCompleteSyncPlayerFromServer_InClient = false;
+    this->CompleteSyncPlayerFromServerTime_InClient = -1.00f;
     this->bAllowSkipNight = false;
     this->RegisteringMultiPlayerContentType = EPalPlayerMatchingType::None;
     this->ChatCounter = 0;
@@ -36,6 +39,9 @@ void APalPlayerState::WaitWorldPartitionDelegateFromAction(FGuid InGuid, FTimerH
 }
 
 void APalPlayerState::WaitWorldPartitionDelegate(FTimerHandle& OutTimerHandle, APalPlayerState::FOnCompleteLoadWorldPartitionDelegate Delegate) {
+}
+
+void APalPlayerState::SyncPlayerPlatformCache_Implementation(const TArray<FPalCachedPlayerPlatformInfo>& InPlayerPlatformInfos) {
 }
 
 void APalPlayerState::ShowUnlockHardModeUI() {
@@ -117,6 +123,9 @@ void APalPlayerState::ReceiveBuildResult_ToRequestClient_Implementation(const EP
 void APalPlayerState::OverridePsnAccountId_Implementation(const uint64& InPsnAccountId) {
 }
 
+void APalPlayerState::OverridePlayerPlatform_Implementation(EPalPlayerPlatform InPlayerPlatform) {
+}
+
 void APalPlayerState::OnUpdatePlayerInfoInGuildBelongTo(const UPalGroupGuildBase* Guild, const FGuid& InPlayerUId, const FPalGuildPlayerInfo& InPlayerInfo) {
 }
 
@@ -132,7 +141,7 @@ void APalPlayerState::OnRep_GuildBelongTo(UPalGroupGuildBase* OldValue) {
 void APalPlayerState::OnRep_AllowSkipNight() {
 }
 
-void APalPlayerState::OnRelicNumAdded(int32 AddNum) {
+void APalPlayerState::OnRelicNumAddedByType(EPalRelicType Type, int32 AddNum) {
 }
 
 void APalPlayerState::OnNotifiedReturnToFieldFromStage_ToClient_Implementation() {
@@ -207,6 +216,9 @@ void APalPlayerState::NotifyOnCompleteLoadInitWorldPartition_ToServer_Implementa
 void APalPlayerState::NotifyMultiHatchComplete_ToClient_Implementation(const TArray<FPalInstanceID>& HatchedIDs) const {
 }
 
+void APalPlayerState::NotifyKillSE_ToClient_Implementation(bool bIsDirectKill) {
+}
+
 void APalPlayerState::NotifyInvalidPlayer_ToClient_Implementation() {
 }
 
@@ -262,6 +274,10 @@ bool APalPlayerState::IsAllowSkipNight() const {
 
 UPalWorldMapUIData* APalPlayerState::GetWorldMapData() const {
     return NULL;
+}
+
+TArray<FName> APalPlayerState::GetUnlockedAreaBarrierLockIds() const {
+    return TArray<FName>();
 }
 
 UPalPlayerTreasureMapPointData* APalPlayerState::GetTreasureMapPointData() const {
@@ -328,9 +344,6 @@ void APalPlayerState::FixedCharacterName(const FString& CharacterName) {
 }
 
 void APalPlayerState::FixedCharacterMakeData(const FPalPlayerDataCharacterMakeInfo& MakeInfo) {
-}
-
-void APalPlayerState::EnterChat_Receive_Implementation(const FPalChatMessage& ChatMessage) {
 }
 
 bool APalPlayerState::EnterChat(FText Msg, EPalChatCategory Category) {

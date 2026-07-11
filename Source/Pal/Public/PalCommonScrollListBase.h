@@ -13,6 +13,9 @@ public:
     UPalCommonScrollListBase();
 protected:
     UFUNCTION(BlueprintCallable)
+    void MoveItemToTargets(const int32 Num, UPalItemSlot* MoveItemSlot, const TArray<FPalContainerId>& TargetContainerIds);
+    
+    UFUNCTION(BlueprintCallable)
     void MoveItem(const int32 Num, UPalItemSlot* MoveItemSlot, const FPalContainerId& TargetContainerId);
     
 };

@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "Chaos/ChaosEngineInterface.h"
+#include "EPalPassiveSkillEffectType.h"
 #include "PalDataTableRowName_PassiveSkillData.h"
 #include "PalPassivePartnerSkillIdAndParameters.h"
 #include "PalPassivePartnerSkillStatus.h"
@@ -10,6 +11,7 @@
 
 class AActor;
 class APalCharacter;
+class UPalCharacterMovementComponent;
 class UPalCharacterParameterComponent;
 class UPalIndividualCharacterHandle;
 
@@ -34,6 +36,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsWorking;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsBoundToTimeChange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalPassivePartnerSkillIdAndParameters> PassiveSkills;
@@ -68,6 +73,9 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnUpdateBaseCampId(const FGuid& BaseCampId);
     
+    UFUNCTION(BlueprintCallable)
+    void OnStartPassiveSkillEffect(EPalPassiveSkillEffectType EffectType, float Value);
+    
 public:
     UFUNCTION(BlueprintCallable)
     void OnRideInactivated();
@@ -95,13 +103,30 @@ public:
     UFUNCTION(BlueprintCallable)
     void OnInactivatedAsOtomo();
     
+    UFUNCTION(BlueprintCallable)
+    void OnGetOffRide(AActor* RideActor);
+    
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnEndPassiveSkillEffect(EPalPassiveSkillEffectType EffectType);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnChangeSprint(UPalCharacterMovementComponent* Component, bool IsInSprint);
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnChangeOtomoActive(APalCharacter* Otomo, bool IsActive);
+    
     UFUNCTION(BlueprintCallable)
     void OnChangeDisablePassiveSkill(bool isDisable, bool IsAllReset);
     
 public:
     UFUNCTION(BlueprintCallable)
     void OnChangeDayTime();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnChangeDashSwim(UPalCharacterMovementComponent* Component, bool IsInDashSwim);
     
     UFUNCTION(BlueprintCallable)
     void OnChangeBattleMode(bool bIsBattleMode);

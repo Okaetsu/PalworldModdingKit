@@ -2,10 +2,11 @@
 #include "CoreMinimal.h"
 #include "PalAIActionBase.h"
 #include "PalAIActionWorkerInterruptInterface.h"
+#include "PalLaunchRecoveryActionInterface.h"
 #include "PalAIActionBaseCampReturnBack.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew)
-class PAL_API UPalAIActionBaseCampReturnBack : public UPalAIActionBase, public IPalAIActionWorkerInterruptInterface {
+class PAL_API UPalAIActionBaseCampReturnBack : public UPalAIActionBase, public IPalAIActionWorkerInterruptInterface, public IPalLaunchRecoveryActionInterface {
     GENERATED_BODY()
 public:
     UPalAIActionBaseCampReturnBack();

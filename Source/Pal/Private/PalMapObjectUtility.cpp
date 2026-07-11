@@ -4,7 +4,7 @@
 UPalMapObjectUtility::UPalMapObjectUtility() {
 }
 
-bool UPalMapObjectUtility::TryGetItemVisualModelStaticMesh(TSubclassOf<AActor> actorClass, UStaticMesh*& OutStaticMesh, FTransform& OutComponentTransform, FVector& OutCenterOfMass, UMaterialInterface*& OutMaterialInterface) {
+bool UPalMapObjectUtility::TryGetItemVisualModelStaticMesh(TSubclassOf<AActor> actorClass, UStaticMesh*& OutStaticMesh, FTransform& OutComponentTransform, FVector& OutCenterOfMass, TArray<UMaterialInterface*>& OutMaterialInterface) {
     return false;
 }
 

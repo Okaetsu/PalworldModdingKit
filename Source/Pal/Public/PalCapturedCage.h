@@ -46,7 +46,10 @@ protected:
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    bool IsInSpawnedRange;
+    bool bShouldSpawnPal;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bResetRequested;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bDisabledLottery;
@@ -89,7 +92,17 @@ protected:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void OpenDoor_BP(bool bIsAnimSkip);
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+    void OnSuccessOpenDoor_Client(APalPlayerCharacter* Player);
+    
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnSpawnPal(FPalInstanceID ID);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnDespawnPal(FPalInstanceID ID);
+    
     UFUNCTION(BlueprintCallable)
     void OnCreateHandle(FPalInstanceID ID);
     

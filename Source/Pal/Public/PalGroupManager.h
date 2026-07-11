@@ -13,6 +13,7 @@
 #include "PalGroupManager.generated.h"
 
 class AActor;
+class APalOrganizationInfo;
 class UObject;
 class UPalGroupBase;
 class UPalGroupGuildBase;
@@ -22,10 +23,14 @@ UCLASS(Blueprintable)
 class UPalGroupManager : public UPalWorldSubsystem, public IPalGameWorldDataSaveInterface {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnRegisteredGuildDelegate, const FGuid&, GroupId, UPalGroupGuildBase*, Guild);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_ThreeParams(FOnChangeGuildPlayerDelegate, const FGuid&, PlayerUId, UPalGroupGuildBase*, PrevGuild, UPalGroupGuildBase*, AfterGuild);
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeGuildPlayerDelegate OnChangeGuildPlayerDelegate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnRegisteredGuildDelegate OnRegisteredGuildDelegate;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -39,6 +44,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<EPalOrganizationType, FGuid> StaticOrganizationGroupIdMap;
+    
+    UPROPERTY(EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FGuid, TWeakObjectPtr<APalOrganizationInfo>> OrganizationInfoActorMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FGuid, UPalGuildRequestFlowBase*> GuildRequestFlowMap;

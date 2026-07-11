@@ -21,6 +21,9 @@ public:
     APalUIDisplayCharacter(const FObjectInitializer& ObjectInitializer);
 
 protected:
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void OverrideEquipMaterial(UPalSkeletalMeshComponent* TargetSkeletalMesh);
+    
     UFUNCTION(BlueprintCallable)
     void GetHairBaseColor(UPalSkeletalMeshComponent* TargetSkeletalMesh, FLinearColor& OutColor);
     

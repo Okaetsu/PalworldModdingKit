@@ -16,6 +16,7 @@ class UPalMasterDataTableAccess_BuildObjectIconData;
 class UPalMasterDataTableAccess_CharacterTeamMission;
 class UPalMasterDataTableAccess_CharacterTeamMissionChallengeCondition;
 class UPalMasterDataTableAccess_CharacterUpgradeData;
+class UPalMasterDataTableAccess_CrimeMasterData;
 class UPalMasterDataTableAccess_DungeonEnemySpawnerData;
 class UPalMasterDataTableAccess_DungeonItemLotteryData;
 class UPalMasterDataTableAccess_DungeonLevelData;
@@ -30,6 +31,7 @@ class UPalMasterDataTableAccess_FishShadowData;
 class UPalMasterDataTableAccess_FishingSpotLotteryData;
 class UPalMasterDataTableAccess_FishingSpotLotteryNameData;
 class UPalMasterDataTableAccess_ItemLotteryData;
+class UPalMasterDataTableAccess_ItemPickupData;
 class UPalMasterDataTableAccess_ItemProductData;
 class UPalMasterDataTableAccess_ItemRecipe;
 class UPalMasterDataTableAccess_ItemShop;
@@ -43,6 +45,7 @@ class UPalMasterDataTableAccess_NPCEmoteLotteryData;
 class UPalMasterDataTableAccess_OperatingTablePassiveSkillData;
 class UPalMasterDataTableAccess_PalRandomizerData;
 class UPalMasterDataTableAccess_PalShop;
+class UPalMasterDataTableAccess_PartnerSkillParameterData;
 class UPalMasterDataTableAccess_PlayerStatusRankData;
 class UPalMasterDataTableAccess_SpawnerPlacementData;
 class UPalMasterDataTableAccess_UIInputActionData;
@@ -51,7 +54,7 @@ class UPalMasterDataTableAccess_WorldMapAreaData;
 class UPalNoteDataAsset;
 
 UCLASS(Blueprintable)
-class UPalMasterDataTables : public UObject {
+class PAL_API UPalMasterDataTables : public UObject {
     GENERATED_BODY()
 public:
 protected:
@@ -309,6 +312,24 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPalMasterDataTableAccess_OperatingTablePassiveSkillData* Access_OperatingTablePassiveSkillDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* PartnerSkillParameterDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPalMasterDataTableAccess_PartnerSkillParameterData* Access_PartnerSkillParameterDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* ItemPickupDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPalMasterDataTableAccess_ItemPickupData* Access_ItemPickupDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* CrimeDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPalMasterDataTableAccess_CrimeMasterData* Access_CrimeDataTable;
     
 public:
     UPalMasterDataTables();

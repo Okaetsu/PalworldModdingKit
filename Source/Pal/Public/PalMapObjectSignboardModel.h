@@ -66,5 +66,8 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetSignboardText();
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGuid GetLastModifiedPlayerUid_BP() const;
+    
 };
 

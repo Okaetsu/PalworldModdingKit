@@ -10,11 +10,13 @@
 
 class APalBossBattleEventBase;
 class APalCharacter;
+class APalCutsceneActor;
 class APalPlayerCharacter;
 class UAkAudioEvent;
 class UPalAutoSaveDisabler;
 class UPalBossBattleInstanceModel;
 class UPalBossBattleSequenceBase;
+class UPalCutsceneSkipHandler;
 
 UCLASS(Blueprintable)
 class PAL_API UPalBossBattleSequencer : public UObject {
@@ -74,7 +76,19 @@ private:
     APalBossBattleEventBase* BossBattleEvent;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    APalCutsceneActor* EndingCutsceneActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPalAutoSaveDisabler* AutoSaveDisabler;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsKingWhaleCapturePhaseActive;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bHasKingWhaleCaptureCountdownStarted;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    EPalBossBattleSequenceType CurrentSequenceType;
     
 public:
     UPalBossBattleSequencer();
@@ -92,6 +106,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void SetMutekiAllPlayer(bool bIsMuteki);
+    
+    UFUNCTION(BlueprintCallable)
+    void SetEndingCutsceneActor(APalCutsceneActor* InActor);
     
     UFUNCTION(BlueprintCallable)
     void SetBossCharacter(APalCharacter* BossActor);
@@ -112,6 +129,12 @@ public:
     void PlayBGM(UAkAudioEvent* BGMAudioEvent);
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnReadyEnd(bool Success);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnPreEntryEnd(bool Success);
+    
     UFUNCTION(BlueprintCallable)
     void OnPlayerRespawn(APalPlayerCharacter* Player);
     
@@ -138,6 +161,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnCombatEnd(bool Success);
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void NotifyKingWhaleCapturableDownStarted_ServerInternal();
+    
+private:
     UFUNCTION(BlueprintCallable)
     void NoticeClientCombatResult();
     
@@ -178,6 +206,12 @@ public:
     TArray<APalPlayerCharacter*> GetInRoomPlayers();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    APalCutsceneActor* GetEndingCutsceneActor() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalBossBattleSequenceType GetCurrentSequenceType() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalBossType GetBossType();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -200,6 +234,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     APalPlayerCharacter* FindFirstCombatTargetForBossAI();
+    
+    UFUNCTION(BlueprintCallable)
+    UPalCutsceneSkipHandler* CreateAndSetupSkipHandler();
     
 };
 

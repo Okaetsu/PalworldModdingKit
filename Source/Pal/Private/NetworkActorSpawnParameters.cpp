@@ -9,5 +9,6 @@ FNetworkActorSpawnParameters::FNetworkActorSpawnParameters() {
     this->bNeedAdjustToFloor = false;
     this->AdjustUpOffset = 0.00f;
     this->bAdjustShortRayLength = false;
+    this->bStartAsInactivePalCharacter = false;
 }
 

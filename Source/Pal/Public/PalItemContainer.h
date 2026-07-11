@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "FloatContainer.h"
 #include "PalContainerBase.h"
 #include "PalItemContainerBelongInfo.h"
@@ -41,6 +42,12 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalItemContainerBelongInfo BelongInfo;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FGuid OwnerMapObjectInstanceId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsGuildChestContainer;
+    
 public:
     UPalItemContainer();
 
@@ -65,6 +72,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalItemPermission GetPermission() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetLastNotEmptyIndex() const;
+    
+    UFUNCTION(BlueprintPure)
+    int64 GetItemStackCount64(const FName StaticItemId) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetItemStackCount(const FName StaticItemId) const;

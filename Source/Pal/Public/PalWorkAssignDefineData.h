@@ -7,6 +7,7 @@
 #include "EPalTribeID.h"
 #include "EPalWorkSuitability.h"
 #include "EPalWorkType.h"
+#include "PalWorkAssignEntry.h"
 #include "PalWorkAssignDefineData.generated.h"
 
 USTRUCT(BlueprintType)
@@ -54,6 +55,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float AffectFullStomachValue;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUseMultiWorkType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalWorkAssignEntry> WorkEntries;
     
     PAL_API FPalWorkAssignDefineData();
 };

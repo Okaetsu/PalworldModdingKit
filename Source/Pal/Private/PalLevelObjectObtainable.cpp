@@ -1,6 +1,9 @@
 #include "PalLevelObjectObtainable.h"
 
 APalLevelObjectObtainable::APalLevelObjectObtainable(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+    this->ObtainCeremonyActionClass = NULL;
+    this->bObtainItemDuringCeremony = true;
+    this->SpawnedObtainFXComponent = NULL;
     this->bPickedInClient = false;
 }
 
@@ -11,6 +14,10 @@ void APalLevelObjectObtainable::OnTriggerInteract(AActor* Other, EPalInteractive
 }
 
 void APalLevelObjectObtainable::OnCompleteSyncPlayer(APalPlayerState* PlayerState) {
+}
+
+FRotator APalLevelObjectObtainable::GetObtainFXRotation_Implementation() const {
+    return FRotator{};
 }
 
 

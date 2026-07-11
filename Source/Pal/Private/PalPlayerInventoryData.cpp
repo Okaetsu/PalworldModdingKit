@@ -72,7 +72,10 @@ void UPalPlayerInventoryData::RequestForceMarkAllDirty_ToServer_Implementation(c
 void UPalPlayerInventoryData::RequestForceMarkAllDirty(const bool IsOn) {
 }
 
-void UPalPlayerInventoryData::RequestFillSlotToTargetContainerFromInventory_ToServer_Implementation(const FPalContainerId& ToContainerId) {
+void UPalPlayerInventoryData::RequestFillSlotToTargetContainerFromInventory_ToServer_Implementation(const FPalContainerId& ToContainerId, const bool EnableFeedback) {
+}
+
+void UPalPlayerInventoryData::RequestFillSlotToTargetContainerFromInventory_SlotExcepts_ToServer_Implementation(const FPalContainerId& ToContainerId, const TArray<FPalItemSlotId>& ExceptSlotIds, const bool EnableFeedback) {
 }
 
 void UPalPlayerInventoryData::RequestFillSlotToInventoryFromTargetContainer_ToServer_Implementation(const FPalContainerId& FromContainerId) {
@@ -81,7 +84,7 @@ void UPalPlayerInventoryData::RequestFillSlotToInventoryFromTargetContainer_ToSe
 void UPalPlayerInventoryData::RequestChangeLanternSetting(const FPalPlayerDataEquipLanternData& NewLanternSettings) {
 }
 
-void UPalPlayerInventoryData::RequestAddItem(const FName StaticItemId, const int32 Count, bool IsAssignPassive) {
+void UPalPlayerInventoryData::RequestAddItem_ForDebug(const FName StaticItemId, const int32 Count, bool IsAssignPassive) {
 }
 
 void UPalPlayerInventoryData::OnUpdatePassiveSkill(EPalPassiveSkillEffectType EffectType, float Value) {
@@ -134,6 +137,10 @@ bool UPalPlayerInventoryData::IsEquipSlot(UPalItemSlot* CheckSlot) {
     return false;
 }
 
+bool UPalPlayerInventoryData::IsEquipForWeapon(const FName& StaticItemId) const {
+    return false;
+}
+
 bool UPalPlayerInventoryData::IsEquip(EPalPlayerEquipItemSlotType EquipmentSlotType, const FName& StaticItemId) const {
     return false;
 }
@@ -144,6 +151,10 @@ bool UPalPlayerInventoryData::IsAlreadyEquipedAccessory(const FName& AccessoryIt
 
 bool UPalPlayerInventoryData::IsAccessorySlot(UPalItemSlot*& Slot) {
     return false;
+}
+
+int32 UPalPlayerInventoryData::GetUnlockedWeaponSlotNum() const {
+    return 0;
 }
 
 int32 UPalPlayerInventoryData::GetUnlockedFoodEquipSlotNum() const {
@@ -181,6 +192,10 @@ EPalPlayerInventoryType UPalPlayerInventoryData::GetInventoryTypeFromItemTypeA(c
     return EPalPlayerInventoryType::Common;
 }
 
+int64 UPalPlayerInventoryData::CountItemNum64(const FName& StaticItemId) const {
+    return 0;
+}
+
 int32 UPalPlayerInventoryData::CountItemNum(const FName& StaticItemId) const {
     return 0;
 }
@@ -193,7 +208,7 @@ bool UPalPlayerInventoryData::CanCheckPalTalentsByInventoryItem() {
     return false;
 }
 
-EPalItemOperationResult UPalPlayerInventoryData::AddItem_ServerInternal(const FName StaticItemId, const int32 Count, bool IsAssignPassive, const float LogDelay) {
+EPalItemOperationResult UPalPlayerInventoryData::AddItem_ServerInternal(const FName StaticItemId, const int32 Count, bool IsAssignPassive, const float LogDelay, bool bNotifyLog) {
     return EPalItemOperationResult::Success;
 }
 

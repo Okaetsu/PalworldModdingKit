@@ -58,6 +58,10 @@ FName UPalStaticItemDataBase::GetPassiveSkill() const {
 void UPalStaticItemDataBase::GetNameMsgId(FName& OutMsgID) const {
 }
 
+int32 UPalStaticItemDataBase::GetMaxUseableNumToCharacter(const UPalIndividualCharacterParameter* TargetCharacter) const {
+    return 0;
+}
+
 int32 UPalStaticItemDataBase::GetMaxStackCount() const {
     return 0;
 }

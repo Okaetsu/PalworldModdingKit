@@ -14,6 +14,9 @@ void UPalVisualEffectBase::TickVisualEffect_Implementation(float DeltaTime) {
 void UPalVisualEffectBase::TerminatingTickVisualEffect_Implementation(float DeltaTime) {
 }
 
+void UPalVisualEffectBase::RefreshVisualEffect_Implementation() {
+}
+
 void UPalVisualEffectBase::OnEndVisualEffect_Implementation() {
 }
 

@@ -1,0 +1,36 @@
+{
+	"FileVersion": 3,
+	"Version": 15780,
+	"VersionName": "1.9.15780",
+	"FriendlyName": "DiscordPartnerSDK",
+	"Description": "Discord Partner SDK",
+	"Category": "Other",
+	"CreatedBy": "Discord, Inc.",
+	"CreatedByURL": "https://discord.com/developers",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": true,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "DiscordPartnerSDK",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Linux",
+				"LinuxArm64",
+				"Win64",
+				"Mac",
+				"IOS",
+				"TVOS",
+				"Android",
+				"PS5",
+				"XB1",
+				"XSX"
+			]
+		}
+	]
+}

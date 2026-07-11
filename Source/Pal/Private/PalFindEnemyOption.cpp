@@ -7,6 +7,8 @@ FPalFindEnemyOption::FPalFindEnemyOption() {
     this->bTargetPlayer = false;
     this->bFilterByHateList = false;
     this->bLineTrace = false;
+    this->bIgnoreRidePal = false;
     this->TraceType = TraceTypeQuery1;
+    this->MaxRangeCap = 0.00f;
 }
 

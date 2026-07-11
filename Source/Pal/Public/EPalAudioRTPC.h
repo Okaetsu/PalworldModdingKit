@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EPalAudioRTPC : uint8 {
     Field_Time,
     Sliding_Speed,
+    Ride_Speed,
 };
 

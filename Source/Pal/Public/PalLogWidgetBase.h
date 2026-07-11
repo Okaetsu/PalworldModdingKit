@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "EPalLogType.h"
 #include "EPalLogWidgetState.h"
 #include "PalLogAdditionalData.h"
 #include "PalStaticItemIdAndNum.h"
@@ -22,6 +23,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalStaticItemIdAndNum ItemIDAndNum;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalLogType LogType;
     
 public:
     UPalLogWidgetBase();

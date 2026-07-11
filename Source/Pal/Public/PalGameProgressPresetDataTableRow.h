@@ -3,6 +3,7 @@
 #include "Engine/DataTable.h"
 #include "PalDebugItemCreateInfo.h"
 #include "PalDebugOtomoPalInfo.h"
+#include "PalGameProgressPresetCapturedPalInfo.h"
 #include "PalGameProgressPresetDataTableRow.generated.h"
 
 USTRUCT(BlueprintType)
@@ -34,7 +35,7 @@ public:
     TArray<FPalDebugOtomoPalInfo> OtomoPals;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FPalDebugOtomoPalInfo> CapturedPals;
+    TArray<FPalGameProgressPresetCapturedPalInfo> CapturedPals;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalDebugItemCreateInfo> LoadoutItems;

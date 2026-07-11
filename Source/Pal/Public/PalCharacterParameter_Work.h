@@ -21,6 +21,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FFlagContainer NotWorkableFlag;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FGuid LastAssignedWorkId;
+    
 public:
     PAL_API FPalCharacterParameter_Work();
 };

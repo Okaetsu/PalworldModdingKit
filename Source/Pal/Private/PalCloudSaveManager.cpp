@@ -1,17 +1,21 @@
 #include "PalCloudSaveManager.h"
 
 UPalCloudSaveManager::UPalCloudSaveManager() {
-    this->bConfigEnabled = true;
+    this->bConfigEnabled = false;
     this->UploadWorldProcessor = NULL;
     this->DownloadWorldsProcessor = NULL;
     this->DeleteWorldProcessor = NULL;
     this->DumpFileListProcessor = NULL;
+    this->CleanUpProcessor = NULL;
 }
 
 void UPalCloudSaveManager::RequestDumpFileList() {
 }
 
 void UPalCloudSaveManager::RequestDownloadWorlds(bool bForce) {
+}
+
+void UPalCloudSaveManager::RequestCleanUp() {
 }
 
 bool UPalCloudSaveManager::IsRequestedDownloadOnceEver() const {

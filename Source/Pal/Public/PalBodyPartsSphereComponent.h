@@ -2,10 +2,11 @@
 #include "CoreMinimal.h"
 #include "Components/SphereComponent.h"
 #include "EPalBodyPartsType.h"
+#include "PalBodyPartsInterface.h"
 #include "PalBodyPartsSphereComponent.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
-class UPalBodyPartsSphereComponent : public USphereComponent {
+class UPalBodyPartsSphereComponent : public USphereComponent, public IPalBodyPartsInterface {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -30,5 +31,7 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnRep_BroadcastCollisionProfileName();
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

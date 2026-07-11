@@ -30,6 +30,9 @@ EPalPickingGameDifficultyType UPalPickingGameProcessor::GetDifficultyType() {
     return EPalPickingGameDifficultyType::Invalid;
 }
 
+void UPalPickingGameProcessor::AddPickingToolPositionLoop(float AddPosition) {
+}
+
 void UPalPickingGameProcessor::AddPickingToolPosition(float AddPosition) {
 }
 

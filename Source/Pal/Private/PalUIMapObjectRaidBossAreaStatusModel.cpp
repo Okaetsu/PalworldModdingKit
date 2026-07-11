@@ -6,10 +6,23 @@ UPalUIMapObjectRaidBossAreaStatusModel::UPalUIMapObjectRaidBossAreaStatusModel()
 void UPalUIMapObjectRaidBossAreaStatusModel::SetupOnReadyInstanceModel(UPalRaidBossAreaInstanceModel* InstanceModel) {
 }
 
+void UPalUIMapObjectRaidBossAreaStatusModel::SetupForBossBattle(UPalMapObjectBaseCampPoint* OwnerBaseCampPoint) {
+}
+
 void UPalUIMapObjectRaidBossAreaStatusModel::Setup(const FPalStageInstanceId& StageInstanceId) {
 }
 
+void UPalUIMapObjectRaidBossAreaStatusModel::OnReadyPhaseTimeLimitDateChanged(FDateTime NewReadyPhaseTimeLimitDate) {
+}
+
 void UPalUIMapObjectRaidBossAreaStatusModel::OnInstanceModelPhaseChanged(UPalRaidBossAreaInstanceModel* InstanceModel) {
+}
+
+void UPalUIMapObjectRaidBossAreaStatusModel::OnBossBattleStateChanged(EPalBossBattleState NewState) {
+}
+
+bool UPalUIMapObjectRaidBossAreaStatusModel::IsTowerBossBattleMode() const {
+    return false;
 }
 
 bool UPalUIMapObjectRaidBossAreaStatusModel::IsRaidAreaActive() const {
@@ -22,6 +35,14 @@ bool UPalUIMapObjectRaidBossAreaStatusModel::IsExistBoundInstanceModel() const {
 
 bool UPalUIMapObjectRaidBossAreaStatusModel::HasValidPhaseTime() const {
     return false;
+}
+
+FName UPalUIMapObjectRaidBossAreaStatusModel::GetTowerBossPalId() const {
+    return NAME_None;
+}
+
+EPalBossType UPalUIMapObjectRaidBossAreaStatusModel::GetTowerBossBattleBossType() const {
+    return EPalBossType::None;
 }
 
 FName UPalUIMapObjectRaidBossAreaStatusModel::GetRaidBossStaticItemId() const {

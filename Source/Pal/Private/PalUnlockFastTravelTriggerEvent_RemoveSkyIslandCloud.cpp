@@ -1,0 +1,6 @@
+#include "PalUnlockFastTravelTriggerEvent_RemoveSkyIslandCloud.h"
+
+UPalUnlockFastTravelTriggerEvent_RemoveSkyIslandCloud::UPalUnlockFastTravelTriggerEvent_RemoveSkyIslandCloud() {
+}
+
+

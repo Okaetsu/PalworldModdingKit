@@ -1,10 +1,14 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
+#include "EPalBossBattleState.h"
+#include "EPalBossType.h"
 #include "EPalRaidBossAreaPhase.h"
 #include "PalStageInstanceId.h"
 #include "PalUIMapObjectRaidBossAreaStatusModel.generated.h"
 
+class UPalMapObjectBaseCampPoint;
 class UPalRaidBossAreaInstanceModel;
 class UPalUIMapObjectRaidBossAreaStatusModel;
 
@@ -26,13 +30,25 @@ public:
     void SetupOnReadyInstanceModel(UPalRaidBossAreaInstanceModel* InstanceModel);
     
     UFUNCTION(BlueprintCallable)
+    void SetupForBossBattle(UPalMapObjectBaseCampPoint* OwnerBaseCampPoint);
+    
+    UFUNCTION(BlueprintCallable)
     void Setup(const FPalStageInstanceId& StageInstanceId);
     
 private:
     UFUNCTION(BlueprintCallable)
+    void OnReadyPhaseTimeLimitDateChanged(FDateTime NewReadyPhaseTimeLimitDate);
+    
+    UFUNCTION(BlueprintCallable)
     void OnInstanceModelPhaseChanged(UPalRaidBossAreaInstanceModel* InstanceModel);
     
+    UFUNCTION(BlueprintCallable)
+    void OnBossBattleStateChanged(EPalBossBattleState NewState);
+    
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsTowerBossBattleMode() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsRaidAreaActive() const;
     
@@ -41,6 +57,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool HasValidPhaseTime() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FName GetTowerBossPalId() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    EPalBossType GetTowerBossBattleBossType() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FName GetRaidBossStaticItemId() const;

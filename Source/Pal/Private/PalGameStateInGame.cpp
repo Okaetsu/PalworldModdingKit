@@ -60,9 +60,6 @@ void APalGameStateInGame::OnRep_CharacterManagerReplicator() {
 void APalGameStateInGame::OnRep_BaseCampReplicator() {
 }
 
-void APalGameStateInGame::OnOverTrialTime() {
-}
-
 void APalGameStateInGame::OnCompleteSyncAllFromServer_InClient(APalPlayerState* PlayerState) {
 }
 
@@ -78,10 +75,6 @@ float APalGameStateInGame::GetServerFrameTime() const {
     return 0.0f;
 }
 
-int32 APalGameStateInGame::GetRemainTrialTimeSecond() {
-    return 0;
-}
-
 int32 APalGameStateInGame::GetMaxPlayerNum() const {
     return 0;
 }
@@ -90,6 +83,9 @@ void APalGameStateInGame::BroadcastServerNotice_Implementation(const FString& No
 }
 
 void APalGameStateInGame::BroadcastChatMessage_Implementation(const FPalChatMessage& ChatMessage) {
+}
+
+void APalGameStateInGame::ApplyGrid0LoadingRangeFromGraphicsOption(const FPalOptionGraphicsSettings& PrevSettings, const FPalOptionGraphicsSettings& NewSettings) {
 }
 
 void APalGameStateInGame::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

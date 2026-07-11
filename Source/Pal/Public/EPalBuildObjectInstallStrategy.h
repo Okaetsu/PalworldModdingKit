@@ -32,5 +32,7 @@ enum class EPalBuildObjectInstallStrategy : uint8 {
     Floor,
     Wall,
     Undefined,
+    SlopedRoofCornerReverse,
+    GroundOnly,
 };
 

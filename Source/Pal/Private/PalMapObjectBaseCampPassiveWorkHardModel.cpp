@@ -9,6 +9,10 @@ void UPalMapObjectBaseCampPassiveWorkHardModel::RequestUpdateWorkHardType_Server
 void UPalMapObjectBaseCampPassiveWorkHardModel::RequestUpdateWorkHardType(const EPalBaseCampPassiveEffectWorkHardType Type) {
 }
 
+bool UPalMapObjectBaseCampPassiveWorkHardModel::HasBasePalOperationPermissionByLocalPlayer() const {
+    return false;
+}
+
 UPalBaseCampPassiveEffect_WorkHard* UPalMapObjectBaseCampPassiveWorkHardModel::GetPassiveEffectWorkHard() const {
     return NULL;
 }

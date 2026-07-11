@@ -9,6 +9,7 @@
 
 class APalPlayerCharacter;
 class UPalAIActionFunnelSkillBase;
+class UPalActionComponent;
 class UPalFunnelSkillModule;
 
 UCLASS(Blueprintable)
@@ -24,6 +25,9 @@ public:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_OwnerCharacterId, meta=(AllowPrivateAccess=true))
     FPalInstanceID OwnerCharacterId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<APalCharacter> AssistOwnerPal;
     
 public:
     APalFunnelCharacter(const FObjectInitializer& ObjectInitializer);
@@ -57,6 +61,12 @@ private:
 public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnInactive(bool NoEffect);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnFinishEndEffect();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnAssistActionEnded(const UPalActionComponent* ActionComp);
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnActive(bool NoEffect);

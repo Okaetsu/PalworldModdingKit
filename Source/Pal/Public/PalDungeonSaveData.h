@@ -50,6 +50,9 @@ public:
     TMap<FGuid, FPalDungeonRewardSaveData> RewardSaveDataMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FGuid> ReceivedBonusExpPlayerIds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGameDateTime RespawnBossTimeAt;
     
     PAL_API FPalDungeonSaveData();

@@ -6,6 +6,7 @@ UPalPlayerLocalRecordData::UPalPlayerLocalRecordData() {
     this->Local_DoctorSurgiCount = 0;
     this->Local_DoctorLastSurgiDay = 0;
     this->Local_MapObjectPaintPaletteSelectedIndex = 0;
+    this->Local_ShowSkyIslandCloudOnWorldMapUI = true;
 }
 
 void UPalPlayerLocalRecordData::ResetQuickStackExceptList() {

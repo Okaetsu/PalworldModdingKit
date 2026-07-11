@@ -4,6 +4,8 @@
 #include "PalWorkAssign.h"
 #include "PalWorkAssign_LevelObject.generated.h"
 
+class UPalMapObjectModel;
+
 UCLASS(Blueprintable)
 class PAL_API UPalWorkAssign_LevelObject : public UPalWorkAssign {
     GENERATED_BODY()
@@ -17,5 +19,8 @@ public:
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+    UFUNCTION(BlueprintCallable)
+    void OnTargetMapObjectDestroyed(UPalMapObjectModel* DestroyedModel);
+    
 };
 

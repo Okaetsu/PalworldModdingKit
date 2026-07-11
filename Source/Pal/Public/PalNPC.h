@@ -30,6 +30,11 @@ private:
     UFUNCTION(BlueprintCallable)
     void RemoveEnemyFromBattleManager(FPalDeadInfo DeadInfo);
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnPostSpawned();
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnCompletedInitParam(APalCharacter* InCharacter);
     

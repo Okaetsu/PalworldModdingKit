@@ -11,6 +11,9 @@ public:
     UPalEditorEnemyCampCreateCheatExtension();
 
     UFUNCTION(BlueprintCallable, Exec)
+    void RecalcurateBuildObjectConnectDurability();
+    
+    UFUNCTION(BlueprintCallable, Exec)
     void InstallBuildObject(const FName BuildObjectId, const FVector& Location, const float Yaw);
     
     UFUNCTION(BlueprintCallable, Exec)

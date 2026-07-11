@@ -3,5 +3,5 @@
 #include "EPalUISelectNumResult.h"
 #include "PalUISelecteNumComplateDelegateDelegate.generated.h"
 
-UDELEGATE(BlueprintCallable) DECLARE_DYNAMIC_DELEGATE_TwoParams(FPalUISelecteNumComplateDelegate, EPalUISelectNumResult, resultType, int32, selectedNum);
+UDELEGATE() DECLARE_DYNAMIC_DELEGATE_TwoParams(FPalUISelecteNumComplateDelegate, EPalUISelectNumResult, resultType, int64, selectedNum);
 

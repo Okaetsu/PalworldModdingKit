@@ -23,6 +23,12 @@ public:
     void RequestOrderInitialQuest_ToServer();
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestJumpToQuestBlock_ToServer(const FName& QuestId, int32 TargetBlockIndex);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestCompleteQuestTreeForce_ToServer(const FName& QuestId);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestCompleteQuest_ToServer(const FName& QuestId);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)

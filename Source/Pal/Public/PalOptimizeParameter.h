@@ -36,6 +36,12 @@ public:
     float CharacterImportance_FarthestDistance;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DeadBodyDespawn_SightRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DeadBodyDespawn_UpdateIntervalSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalCharacterImportanceType, float> CharacterImportance_TickInterval_Actor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -88,6 +94,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalSpwnerImportanceType, float> SpawnerImportance_TickInterval_NPCSpawner;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalSpwnerImportanceType, float> LevelObjectImportance_TickInterval_LevelObjectActor;
     
     PAL_API FPalOptimizeParameter();
 };

@@ -1,0 +1,6 @@
+#include "PalMapObjectBaseCampPassiveEffectSanityWatchtowerParameterComponent.h"
+
+UPalMapObjectBaseCampPassiveEffectSanityWatchtowerParameterComponent::UPalMapObjectBaseCampPassiveEffectSanityWatchtowerParameterComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+}
+
+

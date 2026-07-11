@@ -6,11 +6,15 @@
 #include "PalLevelObjectUnlockableFastTravelPoint.generated.h"
 
 class AActor;
+class APalCutsceneActor;
 class APalLevelObjectUnlockableFastTravelPoint;
 class APalPlayerState;
 class IPalInteractiveObjectComponentInterface;
 class UPalInteractiveObjectComponentInterface;
 class UAkAudioEvent;
+class UPalCutsceneBindParameter_FasttravelPoint;
+class UPalUnlockFastTravelTriggerEvent;
+class UTexture2D;
 
 UCLASS(Blueprintable)
 class PAL_API APalLevelObjectUnlockableFastTravelPoint : public APalLevelObjectActor, public IPalInteractiveObjectIndicatorInterface {
@@ -34,6 +38,15 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName FastTravelPointID;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UTexture2D> SoftUnlockMapMaskTexture;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<APalCutsceneActor> SoftCutsceneActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<UPalUnlockFastTravelTriggerEvent> SoftTriggerEventObject;
+    
 public:
     APalLevelObjectUnlockableFastTravelPoint(const FObjectInitializer& ObjectInitializer);
 
@@ -43,6 +56,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnTriggerInteract(AActor* Other, EPalInteractiveObjectIndicatorType IndicatorType);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnEndCutscene(UPalCutsceneBindParameter_FasttravelPoint* CutsceneParameter);
     
     UFUNCTION(BlueprintCallable)
     void OnCompleteSyncPlayer(APalPlayerState* PlayerState);

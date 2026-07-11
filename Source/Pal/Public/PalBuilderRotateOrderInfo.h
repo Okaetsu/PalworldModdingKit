@@ -15,6 +15,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 NeighborYCount;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 ReplaceYCount;
+    
     PAL_API FPalBuilderRotateOrderInfo();
 };
 

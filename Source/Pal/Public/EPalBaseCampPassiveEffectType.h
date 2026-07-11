@@ -9,5 +9,7 @@ enum class EPalBaseCampPassiveEffectType : uint8 {
     WorkHard,
     AllWorkSpeed,
     SanityDecreaseSuppressor,
+    SanityDecreaseSuppressor_Watchtower,
+    Clinic,
 };
 

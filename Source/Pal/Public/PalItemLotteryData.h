@@ -32,6 +32,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalMapObjectTreasureGradeType TreasureBoxGrade;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float BonusExpRate;
+    
     PAL_API FPalItemLotteryData();
 };
 

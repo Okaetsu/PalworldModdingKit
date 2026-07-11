@@ -12,6 +12,7 @@ class UPalDungeonWorldSubsystem;
 class UPalFunnelCharacterManager;
 class UPalIncidentSystem;
 class UPalInvaderManager;
+class UPalLaunchRecoverySubsystem;
 class UPalOptionSubsystem;
 class UPalRaidBossAreaWorldSubsystem;
 class UPalStageWorldSubsystem;
@@ -62,10 +63,16 @@ public:
     TSubclassOf<UPalRaidBossAreaWorldSubsystem> RaidBossAreaWorldSubsystemClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UPalLaunchRecoverySubsystem> LaunchRecoverySubsystemClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UPalStaticMeshImposterSubsystem> StaticMeshImposterSubsystemClass;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bRequestCharacterMake;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bShouldCreatePostProcessHeightFog;
     
     APalWorldSettings(const FObjectInitializer& ObjectInitializer);
 

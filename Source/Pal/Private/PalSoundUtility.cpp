@@ -19,6 +19,9 @@ APalSoundDebugModel* UPalSoundUtility::SpawnSoundDebugModel(UAkAudioEvent* Audio
 void UPalSoundUtility::SetSwitchByActor(AActor* Actor, const FString& SwitchGroup, const FString& SwitchState) {
 }
 
+void UPalSoundUtility::SetRTPCValueByActorByEnum(AActor* Actor, EPalAudioRTPC rtpc, float Value, float interpolSec) {
+}
+
 void UPalSoundUtility::SetRTPCValueByActor(AActor* Actor, const FName Name, float Value, float interpolSec) {
 }
 

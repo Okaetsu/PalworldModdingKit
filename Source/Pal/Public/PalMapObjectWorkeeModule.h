@@ -8,6 +8,7 @@
 
 class UPalWorkBase;
 class UPalWorkProgress;
+class UPalWorkProgressMultiType;
 
 UCLASS(Blueprintable)
 class UPalMapObjectWorkeeModule : public UPalMapObjectConcreteModelModuleBase {
@@ -39,6 +40,9 @@ protected:
     void OnRep_CannotApproachByWork();
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UPalWorkProgressMultiType* GetWorkProgressMultiType() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     UPalWorkProgress* GetWorkProgress() const;
     

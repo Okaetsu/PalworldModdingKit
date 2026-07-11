@@ -42,6 +42,9 @@ protected:
     bool IsCheckedInputPassword;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString RestoredPassword;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FString LastSelectedRegionName;
     
 private:
@@ -53,7 +56,16 @@ public:
 
 protected:
     UFUNCTION(BlueprintCallable)
+    void SetIsCheckedInputPassword(bool bNewValue);
+    
+    UFUNCTION(BlueprintCallable)
     void SaveConfigValue();
+    
+    UFUNCTION(BlueprintCallable)
+    void RestorePasswordForServerByGUID(const FString& WorldGUID);
+    
+    UFUNCTION(BlueprintCallable)
+    void RestorePasswordForServer(const FString& ServerAddress, int32 ServerPort);
     
 public:
     UFUNCTION(BlueprintCallable)

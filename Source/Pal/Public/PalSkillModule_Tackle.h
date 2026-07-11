@@ -9,6 +9,7 @@
 #include "Templates/SubclassOf.h"
 #include "PalSkillModule_Tackle.generated.h"
 
+class APalCharacter;
 class APalSkillEffectBase;
 class UAnimMontage;
 class UPalPlayMontageCallbackProxy;
@@ -18,6 +19,12 @@ class PAL_API UPalSkillModule_Tackle : public UPalUniqueSkillModule {
     GENERATED_BODY()
 public:
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float TackleNetUpdateFrequency;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUseAuthorityOnlyMovementMutation;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UAnimMontage* StartAnimMontage;
     
@@ -53,6 +60,12 @@ protected:
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     double TackleHomingDistanceLimit;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool EnableDashSkip;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float DashSkipTime;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsTackleHoming;
@@ -136,6 +149,9 @@ public:
     void ResetTackleTimes();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+    void OnTackleStateChanged(const EPalTackleState NewState);
+    
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnStartTossin();
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
@@ -162,6 +178,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnEndAttack();
     
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent, BlueprintPure)
+    bool IsTackleMontagePlaying() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlayingEndMontage() const;
     
@@ -185,6 +204,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     bool CheckEndCurrentState();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool CanDashSkip(APalCharacter* Character) const;
     
 };
 

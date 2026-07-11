@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "EPalInvaderType.h"
 #include "PalInvaderDatabaseRow.h"
+#include "PalInvaderWaveInfo.h"
 #include "PalIncidentBroadcastParameter.generated.h"
 
 class UPalBaseCampModel;
@@ -22,6 +23,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FGuid GroupGuid;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalInvaderWaveInfo WaveInfo;
     
     PAL_API FPalIncidentBroadcastParameter();
 };

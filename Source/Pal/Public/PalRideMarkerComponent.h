@@ -10,9 +10,11 @@
 
 class APalCharacter;
 class APalUniqueRideWeaponBase;
+class UAnimMontage;
 class UPalActiveSkillSlot;
 class UPalIndividualCharacterParameter;
 class UPalRiderComponent;
+class UPalSoundPlayer;
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class UPalRideMarkerComponent : public UStaticMeshComponent {
@@ -36,6 +38,9 @@ public:
     float bHiddenCharacterWhenLowAngleAim;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDisableRide;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bDisableLookAtByRide;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -46,6 +51,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalDataTableRowName_PalMonsterData UniqueRidePalID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RideNetUpdateFrequency;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FChangeRiding OnChangeRiding;
@@ -59,6 +67,12 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     APalUniqueRideWeaponBase* WeaponActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UPalSoundPlayer> RideMoveSoundPlayer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 RideMovePlayingId;
     
 public:
     UPalRideMarkerComponent(const FObjectInitializer& ObjectInitializer);
@@ -85,6 +99,11 @@ public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void SetRidingFlag(bool bIsEnable);
     
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnEndShootingAnimation(UAnimMontage* Montage);
+    
+public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsRiding() const;
     
@@ -93,6 +112,9 @@ private:
     bool IsNeedLowAngleOpacity() const;
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsDisableRideByMarker() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAdjustRotation() const;
     

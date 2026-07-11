@@ -35,6 +35,12 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     EPalContainerUsageType UsageType;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    int32 DisplayContainerSlotNumDefault;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bAutoSort;
+    
 public:
     UPalMapObjectItemContainerModule();
 
@@ -47,7 +53,7 @@ public:
     bool TryGetContainer(UPalItemContainer*& OutContainer) const;
     
     UFUNCTION(BlueprintCallable)
-    void RequestSortContainer_ServerInternal();
+    void RequestSortContainer_ServerInternal(const int32 RequestPlayerId);
     
     UFUNCTION(BlueprintCallable)
     void RequestSortContainer();
@@ -89,6 +95,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     UPalItemContainer* GetItemContainer_ItemContainerAccessInterface() const override PURE_VIRTUAL(GetItemContainer_ItemContainerAccessInterface, return NULL;);
+    
+    UFUNCTION(BlueprintCallable)
+    int32 GetDisplayContainerSlotNumDefault() override PURE_VIRTUAL(GetDisplayContainerSlotNumDefault, return 0;);
     
     UFUNCTION(BlueprintCallable)
     void CallOrRegisterOnReadyItemContainerEvent(FPalMapObjectItemContainerAccessDelegate Delegate) override PURE_VIRTUAL(CallOrRegisterOnReadyItemContainerEvent,);

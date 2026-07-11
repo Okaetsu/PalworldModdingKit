@@ -6,10 +6,10 @@ UPalUISelectNumParameter::UPalUISelectNumParameter() {
     this->defaultNum = 0;
 }
 
-void UPalUISelectNumParameter::InvokeComplateCallback(EPalUISelectNumResult Result, int32 selectedNum) {
+void UPalUISelectNumParameter::InvokeComplateCallback(EPalUISelectNumResult Result, int64 selectedNum) {
 }
 
-void UPalUISelectNumParameter::InvokeChangedNumCallback(int32 selectedNum) {
+void UPalUISelectNumParameter::InvokeChangedNumCallback(int64 selectedNum) {
 }
 
 

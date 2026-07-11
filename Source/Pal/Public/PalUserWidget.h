@@ -13,6 +13,7 @@ class UAkAudioEvent;
 class UPalHUDDispatchParameterBase;
 class UPalUserWidgetOverlayUI;
 class UUserWidget;
+class UWidgetAnimation;
 
 UCLASS(Abstract, Blueprintable, EditInlineNew)
 class UPalUserWidget : public UPalActivatableWidget {
@@ -22,11 +23,24 @@ public:
     bool bSyncPlayerInventory;
     
 protected:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDelayCollapseUntilAnimationFinished;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> DelayCollapseAnimationNames;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> DelayCollapseIgnoreAnimationNames;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     UPalHUDDispatchParameterBase* Param;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalUIActionBindData> BindedActionHandles;
+    
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UWidgetAnimation*> PendingDelayedCollapseAnimations;
     
 public:
     UPalUserWidget();
@@ -38,6 +52,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
     void RequestInventorySync(bool bOpen) const;
+    
+    UFUNCTION(BlueprintCallable)
+    FPalUIActionBindData RegisterActionBindingPersistent(const FName& ActionName, bool IsDisplayActionBar, TEnumAsByte<EInputEvent> InputType, FOnInputAction Callback);
     
     UFUNCTION(BlueprintCallable)
     FPalUIActionBindData RegisterActionBinding_NotConcume(const FName& ActionName, bool IsDisplayActionBar, TEnumAsByte<EInputEvent> InputType, FOnInputAction Callback);

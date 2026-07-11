@@ -32,6 +32,7 @@ FPalOptionWorldPresetRow::FPalOptionWorldPresetRow() {
     this->DropItemMaxNum_UNKO = 0;
     this->bEnableInvaderEnemy = false;
     this->DropItemMaxNum = 0;
+    this->PhysicsActiveDropItemMaxNum = 0;
     this->bAutoResetGuildNoOnlinePlayers = false;
     this->AutoResetGuildTimeNoOnlinePlayers = 0.00f;
     this->GuildPlayerMaxNum = 0;
@@ -42,5 +43,9 @@ FPalOptionWorldPresetRow::FPalOptionWorldPresetRow() {
     this->bPalLost = false;
     this->bAllowGlobalPalboxExport = false;
     this->bAllowGlobalPalboxImport = false;
+    this->AutoTransferMasterCheckIntervalSeconds = 0.00f;
+    this->AutoTransferMasterThresholdDays = 0;
+    this->GuildRejoinCooldownMinutes = 0;
+    this->MaxGuildsPerFrame = 0;
 }
 

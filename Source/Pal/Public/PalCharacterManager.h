@@ -21,6 +21,7 @@ class UPalCharacterManager : public UPalWorldSubsystem, public IPalGameWorldData
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_DELEGATE_TwoParams(FIndividualPhantomIDCallback, FPalInstanceID, ID, int32, PhantomId);
+    DECLARE_DYNAMIC_DELEGATE_OneParam(FIndividualParameterCallback, UPalIndividualCharacterParameter*, Parameter);
     DECLARE_DYNAMIC_DELEGATE_OneParam(FIndividualIDCallback, FPalInstanceID, ID);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterParameterAddedDelegate, FPalInstanceID, InstanceId);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCharacterHandleDelegate, UPalIndividualCharacterHandle*, CharacterHandle);
@@ -76,6 +77,12 @@ public:
     
     UFUNCTION(BlueprintCallable)
     UPalIndividualCharacterHandle* SpawnNewCharacterWithInitializeParameterCallback(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, EPalCharacterCompleteDelegatePriority InitializeParameterCallbackPriority, FPalOnCharacterCompleteInitializeParameter InitializeParameterCallback, UPalCharacterManager::FIndividualIDCallback spawnCallback);
+    
+    UFUNCTION(BlueprintCallable)
+    UPalIndividualCharacterHandle* SpawnNewCharacterWithInitializeAndIndividualParameterCallback(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, EPalCharacterCompleteDelegatePriority InitializeParameterCallbackPriority, FPalOnCharacterCompleteInitializeParameter InitializeParameterCallback, UPalCharacterManager::FIndividualParameterCallback IndividualParameterCallback, UPalCharacterManager::FIndividualIDCallback spawnCallback);
+    
+    UFUNCTION(BlueprintCallable)
+    UPalIndividualCharacterHandle* SpawnNewCharacterWithIndividualParameterCallback(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, UPalCharacterManager::FIndividualParameterCallback IndividualParameterCallback, UPalCharacterManager::FIndividualIDCallback spawnCallback);
     
     UFUNCTION(BlueprintCallable)
     UPalIndividualCharacterHandle* SpawnNewCharacter(FPalIndividualCharacterSaveParameter InitParameter, FNetworkActorSpawnParameters SpawnParameter, UPalCharacterManager::FIndividualIDCallback spawnCallback);

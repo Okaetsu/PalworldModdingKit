@@ -25,6 +25,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* WorldMapAreaBonusExpTableReferenceNumDataTable;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* ExpDataTable_V1;
+    
 public:
     UPalExpDatabase();
 
@@ -36,6 +39,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetFindAreaBonusExpTableReferenceNum(int32 CompletedAreaNum) const;
+    
+    UFUNCTION(BlueprintPure)
+    int64 GetDropExpBase(int32 Level);
     
     UFUNCTION(BlueprintPure)
     int64 GetDropExp(int32 Level, FName RowName);

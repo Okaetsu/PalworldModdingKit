@@ -54,7 +54,7 @@ public:
     void RequestTogglePrivateLock();
     
     UFUNCTION(BlueprintCallable)
-    void RequestSortStore_ServerInternal();
+    void RequestSortStore_ServerInternal(const int32 RequestPlayerId);
     
     UFUNCTION(BlueprintCallable)
     void RequestSortStore();

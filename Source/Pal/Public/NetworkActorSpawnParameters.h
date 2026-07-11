@@ -49,6 +49,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bAdjustShortRayLength;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bStartAsInactivePalCharacter;
+    
     PAL_API FNetworkActorSpawnParameters();
 };
 

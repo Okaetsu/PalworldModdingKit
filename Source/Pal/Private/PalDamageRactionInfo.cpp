@@ -5,5 +5,6 @@ FPalDamageRactionInfo::FPalDamageRactionInfo() {
     this->IsLeanBackAnime = false;
     this->IsStan = false;
     this->IsLargeDown = false;
+    this->HumanStunType = EPalHumanStunType::None;
 }
 

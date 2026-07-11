@@ -11,10 +11,13 @@ UPalQuestBlock_CountKillEnemy::UPalQuestBlock_CountKillEnemy() {
 void UPalQuestBlock_CountKillEnemy::OnRep_Count() {
 }
 
-void UPalQuestBlock_CountKillEnemy::OnKillCharacter(UPalIndividualCharacterHandle* DeadEnemyHandle) {
+void UPalQuestBlock_CountKillEnemy::OnKillCharacter(const FPalDeadInfo& DeadInfo) {
 }
 
 void UPalQuestBlock_CountKillEnemy::OnCaptureCharacter(UPalIndividualCharacterHandle* CharacterHandle) {
+}
+
+void UPalQuestBlock_CountKillEnemy::AddKillCount(int32 Count) {
 }
 
 void UPalQuestBlock_CountKillEnemy::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {

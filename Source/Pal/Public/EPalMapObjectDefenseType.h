@@ -6,5 +6,6 @@ UENUM(BlueprintType)
 enum class EPalMapObjectDefenseType : uint8 {
     Wait,
     StationaryLauncher,
+    AutoTurret,
 };
 

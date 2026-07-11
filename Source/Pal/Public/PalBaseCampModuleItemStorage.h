@@ -23,10 +23,10 @@ public:
     FMulticastReturnSelfAndUpdatedContainerDelegate OnUpdateAnyItemContainerDelegate;
     
 private:
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ContainerInfos, meta=(AllowPrivateAccess=true))
     TArray<FPalBaseCampItemContainerInfo> ContainerInfos;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_GuildContainerInfo, meta=(AllowPrivateAccess=true))
     FPalBaseCampItemContainerInfo GuildContainerInfo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -43,6 +43,12 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnUpdateItemContainer(UPalItemContainer* ItemContainer);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_GuildContainerInfo();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ContainerInfos();
     
     UFUNCTION(BlueprintCallable)
     void OnReadyItemContainerGuildChest(TScriptInterface<IPalMapObjectItemContainerAccessInterface> ItemContainerAccess);

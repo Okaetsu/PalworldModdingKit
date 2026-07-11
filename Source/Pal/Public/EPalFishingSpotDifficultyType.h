@@ -9,5 +9,7 @@ enum class EPalFishingSpotDifficultyType : uint8 {
     Normal,
     Difficult,
     VeryDifficult,
+    ExtremelyDifficult,
+    IMPOSSIBLE,
 };
 

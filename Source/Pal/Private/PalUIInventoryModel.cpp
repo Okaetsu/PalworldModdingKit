@@ -2,6 +2,7 @@
 
 UPalUIInventoryModel::UPalUIInventoryModel() {
     this->InventoryContainers = NULL;
+    this->bCanLiftSlot = true;
 }
 
 bool UPalUIInventoryModel::TryUseLiftUpItemToPlayer() {

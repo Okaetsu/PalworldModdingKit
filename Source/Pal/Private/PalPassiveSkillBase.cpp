@@ -5,6 +5,7 @@ UPalPassiveSkillBase::UPalPassiveSkillBase() {
     this->bIsRestricted = false;
     this->bRequireWorkerWorkingPassiveSkill = false;
     this->bIsWorking = false;
+    this->bIsBoundToTimeChange = false;
     this->CurrentRank = 0;
 }
 
@@ -47,10 +48,22 @@ void UPalPassiveSkillBase::OnInactivatedAsOtomoHolder() {
 void UPalPassiveSkillBase::OnInactivatedAsOtomo() {
 }
 
+void UPalPassiveSkillBase::OnGetOffRide(AActor* RideActor) {
+}
+
+void UPalPassiveSkillBase::OnChangeSprint(UPalCharacterMovementComponent* Component, bool IsInSprint) {
+}
+
+void UPalPassiveSkillBase::OnChangeOtomoActive(APalCharacter* Otomo, bool IsActive) {
+}
+
 void UPalPassiveSkillBase::OnChangeDisablePassiveSkill(bool isDisable, bool IsAllReset) {
 }
 
 void UPalPassiveSkillBase::OnChangeDayTime() {
+}
+
+void UPalPassiveSkillBase::OnChangeDashSwim(UPalCharacterMovementComponent* Component, bool IsInDashSwim) {
 }
 
 void UPalPassiveSkillBase::OnChangeBattleMode(bool bIsBattleMode) {

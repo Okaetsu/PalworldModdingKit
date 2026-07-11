@@ -15,6 +15,10 @@ void UPalMapObjectDimensionPalStorageModel::OnRep_PrivateLock() {
 void UPalMapObjectDimensionPalStorageModel::LockDimensionLocker_ServerInternal(const int32 PlayerId) {
 }
 
+bool UPalMapObjectDimensionPalStorageModel::IsPrivateLock() const {
+    return false;
+}
+
 bool UPalMapObjectDimensionPalStorageModel::CanOpenDimensionPalStorageMenu_LocalPlayer() const {
     return false;
 }

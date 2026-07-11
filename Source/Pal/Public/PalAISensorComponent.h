@@ -4,6 +4,7 @@
 #include "Components/ActorComponent.h"
 #include "EPalAIResponseType.h"
 #include "FlagContainer.h"
+#include "OnSightCheckAsyncCompletedDelegateDelegate.h"
 #include "PalDeadInfo.h"
 #include "Templates/SubclassOf.h"
 #include "PalAISensorComponent.generated.h"
@@ -18,6 +19,9 @@ class PAL_API UPalAISensorComponent : public UActorComponent {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReceiveSoundDelegate, FVector, EmitLocation);
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnSightCheckAsyncCompletedDelegate OnSightCheckAsyncCompleted;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -86,6 +90,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void ResetResponsedMaxBiologicalGrade();
     
+    UFUNCTION(BlueprintCallable)
+    bool RequestSightCheckAsync(bool bIncludePlayer, bool bIncludeAliveNPC, bool bIncludeEdibleDeadNPC, float RangeRate, bool bIgnoreOtomo);
+    
 private:
     UFUNCTION(BlueprintCallable)
     void ReceiveSound(int32 SoundRadius, FVector EmitLocation, AActor* Emitter);
@@ -97,6 +104,9 @@ public:
     UFUNCTION(BlueprintCallable)
     bool IsInSightKillerAndDeadBody(AActor* Killer, AActor* DeadBody);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetSightDistance();
+    
     UFUNCTION(BlueprintCallable)
     void EnableHearing();
     
@@ -106,6 +116,10 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     void DeadAutoRemoveDelegate(FPalDeadInfo DeadInfo);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    bool CheckCombatableByLevelDiff(AActor* TargetActor);
     
 };
 

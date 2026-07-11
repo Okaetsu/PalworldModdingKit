@@ -7,6 +7,10 @@ bool UPalItemUtility::TryGetItemVisualBlueprintClass(const UObject* WorldContext
     return false;
 }
 
+FName UPalItemUtility::RelicTypeToItemId(const UObject* WorldContextObject, EPalRelicType RelicType) {
+    return NAME_None;
+}
+
 bool UPalItemUtility::IsValid(const FPalItemRecipe& Recipe) {
     return false;
 }
@@ -16,6 +20,14 @@ bool UPalItemUtility::IsStatusPointResetItem(const UPalStaticItemDataBase* ItemD
 }
 
 bool UPalItemUtility::IsRepairableItem(UObject* WorldContextObject, const FPalItemId& TargetItemId) {
+    return false;
+}
+
+bool UPalItemUtility::IsItemEffectiveOnCharacterParameter(const UObject* WorldContextObject, const UPalStaticItemDataBase* ItemData, UPalIndividualCharacterParameter* TargetIndividual) {
+    return false;
+}
+
+bool UPalItemUtility::IsItemEffectiveOnCharacter(const UObject* WorldContextObject, const UPalStaticItemDataBase* ItemData, APalCharacter* TargetCharacter) {
     return false;
 }
 
@@ -39,6 +51,21 @@ void UPalItemUtility::GetProductItemRequiredMaterialInfoMap(const UObject* World
 
 UPalItemSlot* UPalItemUtility::CreateLocalItemSlot(UObject* WorldContextObject, const FName StaticItemId, const int32 Stack) {
     return NULL;
+}
+
+int64 UPalItemUtility::CountLocalPlayerInventoryItemNum64(const UObject* WorldContextObject, const FName& StaticItemId) {
+    return 0;
+}
+
+int64 UPalItemUtility::CountLocalPlayerInsideBaseCampItemNum64(const UObject* WorldContextObject, const FName& StaticItemId) {
+    return 0;
+}
+
+int64 UPalItemUtility::CountLocalPlayerAndInsideBaseCampItemNum64(const UObject* WorldContextObject, const FGuid& PlayerUId, const FName& StaticItemId) {
+    return 0;
+}
+
+void UPalItemUtility::CollectLocalPlayerQuickStackTargetItemInfos(const UObject* WorldContextObject, TArray<FName> StaticItemIds, TArray<FPalStaticItemIdAndNum>& OutItemInfos) {
 }
 
 void UPalItemUtility::CollectLocalPlayerControllableItemInfos_ByTypeB_WithSort(const UObject* WorldContextObject, TArray<EPalItemTypeB> ItemTypes, TArray<FPalStaticItemIdAndNum>& OutItemInfos, const EPalItemInfoCollectType CollectType) {

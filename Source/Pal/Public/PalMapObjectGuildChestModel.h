@@ -53,6 +53,9 @@ public:
     UPalItemContainer* GetItemContainer_ItemContainerAccessInterface() const override PURE_VIRTUAL(GetItemContainer_ItemContainerAccessInterface, return NULL;);
     
     UFUNCTION(BlueprintCallable)
+    int32 GetDisplayContainerSlotNumDefault() override PURE_VIRTUAL(GetDisplayContainerSlotNumDefault, return 0;);
+    
+    UFUNCTION(BlueprintCallable)
     void CallOrRegisterOnReadyItemContainerEvent(FPalMapObjectItemContainerAccessDelegate Delegate) override PURE_VIRTUAL(CallOrRegisterOnReadyItemContainerEvent,);
     
 };

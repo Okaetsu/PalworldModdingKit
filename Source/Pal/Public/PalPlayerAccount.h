@@ -1,9 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
 #include "UObject/NoExportTypes.h"
 #include "EPalPlayerAccountState.h"
+#include "EPalPlayerPlatform.h"
 #include "PalInstanceID.h"
 #include "PalPlayerAccount.generated.h"
 
@@ -72,6 +74,12 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FDateTime GuildLastExitTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FDateTime LastOnlineDateTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    EPalPlayerPlatform PlayerPlatform;
     
 public:
     UPalPlayerAccount();

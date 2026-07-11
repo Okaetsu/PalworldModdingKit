@@ -31,6 +31,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FName, FPalUIPaldexDistributionData> AllRandomizeDistributionList;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FName> InitialLoginGrantItems;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FPalRandomizerSpawnInfoSaveData> RandomizerSpawnerRegionHashList;
     

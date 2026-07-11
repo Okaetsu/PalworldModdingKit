@@ -3,6 +3,9 @@
 #include "UObject/Object.h"
 #include "PalMoneyData.generated.h"
 
+class APalPlayerState;
+class UPalBaseCampModel;
+class UPalBaseCampModuleItemStorage;
 class UPalItemContainer;
 class UPalPlayerInventoryData;
 
@@ -25,9 +28,25 @@ private:
     
 public:
     UPalMoneyData();
+
+    UFUNCTION(BlueprintCallable)
+    void RequestCalcMoney();
+    
 private:
     UFUNCTION(BlueprintCallable)
     void OnUpdateInventorylContainer(UPalItemContainer* Container);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnUpdateBaseCampItemContainer(UPalBaseCampModuleItemStorage* This, UPalItemContainer* UpdatedContainer);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnLocalPlayerGuildChanged(APalPlayerState* PlayerState);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnLeaveBaseCamp();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnEnterBaseCamp(UPalBaseCampModel* Model);
     
 public:
     UFUNCTION(BlueprintPure)

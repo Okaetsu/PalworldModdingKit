@@ -8,6 +8,9 @@ APalUIDisplayCharacter::APalUIDisplayCharacter(const FObjectInitializer& ObjectI
     this->PalSkeletalMeshComponent->SetupAttachment(DefaultSceneRoot);
 }
 
+void APalUIDisplayCharacter::OverrideEquipMaterial_Implementation(UPalSkeletalMeshComponent* TargetSkeletalMesh) {
+}
+
 void APalUIDisplayCharacter::GetHairBaseColor(UPalSkeletalMeshComponent* TargetSkeletalMesh, FLinearColor& OutColor) {
 }
 

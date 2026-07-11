@@ -67,6 +67,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsToggleInteracting() const;
     
+    UFUNCTION(BlueprintCallable)
+    bool IsOnePushInteracting();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsInteracting() const;
     

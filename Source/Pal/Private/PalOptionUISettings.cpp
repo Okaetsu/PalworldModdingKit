@@ -9,5 +9,6 @@ FPalOptionUISettings::FPalOptionUISettings() {
     this->MinFontSize = 0;
     this->bHideUIWhenNotInBattle = false;
     this->bCompletedGlobapPalboxTutotial = false;
+    this->bHideCommonKeyGuide = false;
 }
 

@@ -75,5 +75,8 @@ enum class EPalItemTypeB : uint8 {
     ConsumeTreasureMap,
     Essential_Lamp,
     Essential_PassiveSkillChange,
+    ConsumePalAwakening,
+    ConsumePassiveSkillChange,
+    ConsumeWorldTreeHolyWater,
 };
 

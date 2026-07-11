@@ -9,6 +9,7 @@
 
 class AActor;
 class APalCharacter;
+class UPalCharacterMovementComponent;
 class UPalCharacterParameterComponent;
 class UPalIndividualCharacterHandle;
 class UPalItemContainer;
@@ -34,6 +35,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsWorking;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsBoundToTimeChange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalPassiveSkills> PassiveSkills;
@@ -92,10 +96,22 @@ public:
     
 protected:
     UFUNCTION(BlueprintCallable)
+    void OnGetOffRide(AActor* RideActor);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnChangeSprint(UPalCharacterMovementComponent* Component, bool IsInSprint);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnChangeOtomoActive(APalCharacter* Otomo, bool IsActive);
+    
+    UFUNCTION(BlueprintCallable)
     void OnChangeDisablePassiveSkill(bool isDisable, bool IsAllReset);
     
     UFUNCTION(BlueprintCallable)
     void OnChangeDayTime();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnChangeDashSwim(UPalCharacterMovementComponent* Component, bool IsInDashSwim);
     
     UFUNCTION(BlueprintCallable)
     void OnChangeBattleMode(bool bIsBattleMode);

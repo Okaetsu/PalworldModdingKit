@@ -1,8 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EPalPassivePartnerSkillState.h"
-#include "PalPassivePartnerSkillItemParameter.h"
-#include "PalPassiveRegeneParameter.h"
+#include "PalPassivePartnerSkillInvocationParams.h"
 #include "PalPassivePartnerSkillStatus.generated.h"
 
 USTRUCT(BlueprintType)
@@ -19,10 +18,7 @@ public:
     TArray<FName> Flags;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FPalPassivePartnerSkillItemParameter ItemParam;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FPalPassiveRegeneParameter RegeneParam;
+    FPalPassivePartnerSkillInvocationParams PartnerSkillParams;
     
     PAL_API FPalPassivePartnerSkillStatus();
 };

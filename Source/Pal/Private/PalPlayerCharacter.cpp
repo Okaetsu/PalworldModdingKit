@@ -62,7 +62,7 @@ void APalPlayerCharacter::SetCharacterMakeInfo(FPalPlayerDataCharacterMakeInfo& 
 void APalPlayerCharacter::PlayIdleAnimation(UAnimMontage* Montage) {
 }
 
-void APalPlayerCharacter::PlayEatAnimation() {
+void APalPlayerCharacter::PlayEatAnimation_Implementation() {
 }
 
 void APalPlayerCharacter::OnUpdateLanternEquipSetting(const FPalPlayerDataEquipLanternData& NewLanternSetting) {

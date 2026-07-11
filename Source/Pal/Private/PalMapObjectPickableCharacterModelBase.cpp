@@ -21,6 +21,9 @@ FPalIndividualCharacterSaveParameter UPalMapObjectPickableCharacterModelBase::Ge
     return FPalIndividualCharacterSaveParameter{};
 }
 
+void UPalMapObjectPickableCharacterModelBase::CorrectInvalidCreatedAtRealTimeForOldSave_ServerInternal() {
+}
+
 void UPalMapObjectPickableCharacterModelBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const {
     Super::GetLifetimeReplicatedProps(OutLifetimeProps);
     

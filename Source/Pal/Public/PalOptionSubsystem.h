@@ -13,6 +13,7 @@
 #include "PalOptionOnlineUserSettings.h"
 #include "PalOptionPadSettings.h"
 #include "PalOptionUISettings.h"
+#include "PalOptionVoiceChatSettings.h"
 #include "PalOptionWorldSettinThresholds.h"
 #include "PalOptionWorldSettings.h"
 #include "PalOptionWorldStaticSettings.h"
@@ -22,7 +23,7 @@
 
 class APalPlayerCharacter;
 class UDataTable;
-class UPointLightComponent;
+class UObject;
 
 UCLASS(Blueprintable)
 class PAL_API UPalOptionSubsystem : public UPalWorldSubsystem {
@@ -85,6 +86,9 @@ protected:
     FPalOptionAudioSettings AudioSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalOptionVoiceChatSettings VoiceChatSettings;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalOptionCommonSettings CommonSettings;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -125,14 +129,14 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<APalPlayerCharacter> PalPlayerCharacterClass;
     
-    UPROPERTY(EditAnywhere, Export, meta=(AllowPrivateAccess=true))
-    TArray<TWeakObjectPtr<UPointLightComponent>> PointLights;
-    
 public:
     UPalOptionSubsystem();
 
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool VerifyWorldSettingThresholds(const FPalOptionWorldSettings& CheckWorldSettings) const;
+    
+    UFUNCTION(BlueprintCallable)
+    void SetVoiceChatSettings(const FPalOptionVoiceChatSettings& InVoiceChatSettings);
     
     UFUNCTION(BlueprintCallable)
     void SetupForSteamDeck();
@@ -156,6 +160,9 @@ public:
     void SetKeyboardSettings(const FPalOptionKeyboardSettings& InKeyboardSettings);
     
     UFUNCTION(BlueprintCallable)
+    void SetHasShownFirstLaunchUI(bool bHasShown);
+    
+    UFUNCTION(BlueprintCallable)
     void SetGraphicsSettings(const FPalOptionGraphicsSettings& InGraphicsSettings);
     
     UFUNCTION(BlueprintCallable)
@@ -165,10 +172,16 @@ public:
     void SetAudioSettings(const FPalOptionAudioSettings& InAudioSettings);
     
     UFUNCTION(BlueprintCallable)
+    void RequestTemporaryVolumetricFogForLocalEffect(UObject* Requester);
+    
+    UFUNCTION(BlueprintCallable)
     void RequestSaveLocalSettings();
     
     UFUNCTION(BlueprintCallable)
     void RequestSaveLocalSaveData();
+    
+    UFUNCTION(BlueprintCallable)
+    void ReleaseTemporaryVolumetricFogForLocalEffect(UObject* Requester);
     
 private:
     UFUNCTION(BlueprintCallable)
@@ -183,6 +196,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalOptionWorldSettinThresholds GetWorldSettingThresholds() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FPalOptionVoiceChatSettings GetVoiceChatSettings() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalOptionUISettings GetUISettings() const;
@@ -210,6 +226,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalOptionKeyboardSettings GetKeyboardSettings() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool GetHasShownFirstLaunchUI() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalOptionGraphicsSettings GetGraphicsSettings() const;

@@ -10,6 +10,9 @@ class PAL_API APalLevelObjectActor : public AActor, public IPalLevelObjectInterf
     GENERATED_BODY()
 public:
 private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDisableLevelObjectImportanceByDistance;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, NonPIEDuplicateTransient, meta=(AllowPrivateAccess=true))
     FGuid LevelObjectInstanceId;
     

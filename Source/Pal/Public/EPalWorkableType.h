@@ -23,5 +23,7 @@ enum class EPalWorkableType : uint8 {
     LabResearch,
     Booth,
     FishPond,
+    Progress_MultiType,
+    OnlyJoinInvisible,
 };
 

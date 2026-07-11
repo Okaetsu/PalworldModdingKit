@@ -11,7 +11,7 @@ APalArenaEntrance::APalArenaEntrance(const FObjectInitializer& ObjectInitializer
 void APalArenaEntrance::RequestEnterSpectate(int32 Index) {
 }
 
-void APalArenaEntrance::RequestEnterPvP() {
+void APalArenaEntrance::RequestEnterPvP(const bool RequestNewRoom) {
 }
 
 void APalArenaEntrance::OpenArenaGuide_Implementation() {

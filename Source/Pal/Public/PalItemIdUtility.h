@@ -11,6 +11,9 @@ public:
     UPalItemIdUtility();
 
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static bool EqualEqual_PalItemId(const FPalItemId& A, const FPalItemId& B);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static FPalItemId Debug_CreateItemId(const FName StaticItemId);
     
 };

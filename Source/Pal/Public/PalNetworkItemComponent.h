@@ -10,6 +10,8 @@
 #include "PalNetworkDynamicItemParameter.h"
 #include "PalNetworkItemOperationParameter.h"
 #include "PalNetworkParameter.h"
+#include "PalStaticItemIdAndNum.h"
+#include "PalUICommonItemRewardData.h"
 #include "PalNetworkItemComponent.generated.h"
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -37,6 +39,9 @@ private:
     void RequestSwap_ToServer(const FGuid& RequestID, const FPalItemSlotId& SlotA, const FPalItemSlotId& SlotB);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestReturnBullet_ToServer(const FName& BulletItemId, int32 ReturnNum);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestMoveToContainer_ToServer(const FGuid& RequestID, const FPalContainerId& ToContainerId, const TArray<FPalItemSlotIdAndNum>& Froms);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
@@ -56,6 +61,19 @@ private:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeAllFilterCheck_ToServer(const FPalContainerId& ContainerId);
+    
+public:
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyCommonItemRewardUIData_ToClient(const FPalUICommonItemRewardData& RewardData);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyCommonItemRewardUIData_Delayed_ToClient(const FPalUICommonItemRewardData& RewardData, float DelaySeconds);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyChestQuickStackResult_ToClient(const TArray<FPalStaticItemIdAndNum>& StackItems);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyChestQuickStackFailed_ToClient();
     
 };
 

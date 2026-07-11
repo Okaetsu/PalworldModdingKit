@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Components/ArrowComponent.h"
+#include "PalCompositeWorkFacingInfo.h"
 #include "PalWorkFacingComponent.generated.h"
 
 UCLASS(Blueprintable, EditInlineNew, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -10,6 +11,12 @@ public:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bWorkAtOrigin;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUseCompositeWorkType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalCompositeWorkFacingInfo CompositeWorkInfo;
     
 public:
     UPalWorkFacingComponent(const FObjectInitializer& ObjectInitializer);

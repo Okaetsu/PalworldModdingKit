@@ -38,6 +38,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void TutorialTrigger_Capture(FPalUIPalCaptureInfo CaptureInfo, bool CaptureSuccess);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsTutorialTriggered_Common(EPalTutorialTriggerConditionType TriggerType) const;
+    
 
     // Fix for true pure virtual functions not being implemented
 };

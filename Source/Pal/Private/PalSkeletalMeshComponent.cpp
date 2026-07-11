@@ -38,6 +38,12 @@ void UPalSkeletalMeshComponent::SetRuntimePitch(FName flagName, float Pitch) {
 void UPalSkeletalMeshComponent::SetRuntimeAnimRateScale(FName flagName, float RateScale) {
 }
 
+void UPalSkeletalMeshComponent::SetLoop(const bool bLoop) {
+}
+
+void UPalSkeletalMeshComponent::SetForceRuntimeScaleDefault(FName flagName, bool bIsForce) {
+}
+
 void UPalSkeletalMeshComponent::SetEvaluationRate(float InRate, bool bResetCurrentInterval) {
 }
 
@@ -51,6 +57,13 @@ void UPalSkeletalMeshComponent::SetCharacterMakeInfo(const FPalPlayerDataCharact
 }
 
 void UPalSkeletalMeshComponent::ResetTransformToDefault() {
+}
+
+void UPalSkeletalMeshComponent::ResetRagdollSettingByPreset() {
+}
+
+bool UPalSkeletalMeshComponent::IsRuntimeScaleDefault() const {
+    return false;
 }
 
 bool UPalSkeletalMeshComponent::IsDisableTilt() const {
@@ -67,6 +80,18 @@ EPalSkeletalMeshType UPalSkeletalMeshComponent::GetPalSkeletalMeshType() const {
 
 float UPalSkeletalMeshComponent::GetEvaluationRate() const {
     return 0.0f;
+}
+
+TArray<UMaterialInstanceDynamic*> UPalSkeletalMeshComponent::GetDynamicMaterials() const {
+    return TArray<UMaterialInstanceDynamic*>();
+}
+
+UMaterialInstanceDynamic* UPalSkeletalMeshComponent::GetDynamicMaterialFromSlotName(const FName& InName) const {
+    return NULL;
+}
+
+UMaterialInstanceDynamic* UPalSkeletalMeshComponent::GetDynamicMaterialFromIndex(int32 Index) const {
+    return NULL;
 }
 
 float UPalSkeletalMeshComponent::GetAnimRateScale() {

@@ -7,5 +7,6 @@ enum class EPalCharacterTeamMissionDifficulty : uint8 {
     Easy,
     Normal,
     Hard,
+    VeryHard,
 };
 

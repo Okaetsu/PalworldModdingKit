@@ -6,6 +6,7 @@ FPalOptionKeyboardSettings::FPalOptionKeyboardSettings() {
     this->MouseAimSensitivity = 0.00f;
     this->bIsReverseYaw = false;
     this->bIsReversePitch = false;
+    this->bIsRevertGliderPitch = false;
     this->bEnableAimAssist = false;
     this->bShowChat = false;
     this->bIsToggleInteract = false;

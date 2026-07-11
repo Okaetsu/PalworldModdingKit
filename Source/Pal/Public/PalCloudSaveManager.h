@@ -3,6 +3,7 @@
 #include "UObject/Object.h"
 #include "PalCloudSaveManager.generated.h"
 
+class UPalCloudCleanUpProcessor;
 class UPalCloudDeleteWorldProcessor;
 class UPalCloudDownloadWorldsProcessor;
 class UPalCloudDumpFileListProcessor;
@@ -35,6 +36,9 @@ private:
     UPalCloudDumpFileListProcessor* DumpFileListProcessor;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    UPalCloudCleanUpProcessor* CleanUpProcessor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<UPalCloudProcessorBase*> Processors;
     
 public:
@@ -45,6 +49,9 @@ public:
     
     UFUNCTION(BlueprintCallable)
     void RequestDownloadWorlds(bool bForce);
+    
+    UFUNCTION(BlueprintCallable)
+    void RequestCleanUp();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsRequestedDownloadOnceEver() const;

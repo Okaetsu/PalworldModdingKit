@@ -7,8 +7,10 @@ UPalShooterComponent::UPalShooterComponent(const FObjectInitializer& ObjectIniti
     this->ChangeWeaponInterpTime = 0.10f;
     this->IsUseBlurUpdate = false;
     this->bIgnoreUIDelayForNextWeapon = false;
+    this->bEnableCameraOnlyAimingDuringRolling = true;
     this->bIsShooting = false;
     this->bIsAltShooting = false;
+    this->bIsJetpackShooting = false;
     this->bIsRequestPullTrigger = false;
     this->bIsRequestPullAltTrigger = false;
     this->bIsReloading = false;
@@ -33,8 +35,10 @@ UPalShooterComponent::UPalShooterComponent(const FObjectInitializer& ObjectIniti
     this->CurrentBulletBlurRate = 0.00f;
     this->RapidFireBlur = 0.00f;
     this->CurrentWeaponUseLeftHandIK = false;
+    this->OverridePlayRateTargetMontage = NULL;
     this->WeaponCombo = NULL;
     this->CacheAnimMontage = NULL;
+    this->BulletSelector = NULL;
 }
 
 void UPalShooterComponent::StopWeaponChangeAnimation() {
@@ -56,6 +60,10 @@ void UPalShooterComponent::StopPullTriggerAnime_forBP(bool bForceStop) {
 }
 
 void UPalShooterComponent::StartAim() {
+}
+
+bool UPalShooterComponent::ShouldCameraFollowAim() const {
+    return false;
 }
 
 void UPalShooterComponent::SetUsedRightHand(FName flagName, bool bIsUsed) {
@@ -139,6 +147,9 @@ void UPalShooterComponent::ResetOverrideWeaponType() {
 void UPalShooterComponent::ResetOverrideRotationFlags() {
 }
 
+void UPalShooterComponent::RequestJetpackShooting(bool NewIsShooting) {
+}
+
 void UPalShooterComponent::ReloadWeaponInternal() {
 }
 
@@ -163,16 +174,37 @@ void UPalShooterComponent::ReleaseAltTrigger() {
 void UPalShooterComponent::PullTrigger() {
 }
 
+void UPalShooterComponent::PullCancel_ToALL_Implementation(int32 ID) {
+}
+
 void UPalShooterComponent::PullAltTrigger() {
 }
 
+void UPalShooterComponent::OnWhistleEnd() {
+}
+
+void UPalShooterComponent::OnWhistleBegin() {
+}
+
 void UPalShooterComponent::OnWeaponNotify(EWeaponNotifyType Type) {
+}
+
+void UPalShooterComponent::OnWeaponAnimationNotifyEnd(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload) {
+}
+
+void UPalShooterComponent::OnWeaponAnimationNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointNotifyPayload) {
 }
 
 void UPalShooterComponent::OnStartOwnerAction(const UPalActionBase* action) {
 }
 
 void UPalShooterComponent::OnShootBullet() {
+}
+
+void UPalShooterComponent::OnRollingEnd() {
+}
+
+void UPalShooterComponent::OnRollingBegin() {
 }
 
 void UPalShooterComponent::OnOwnerAnimInitialized() {
@@ -196,7 +228,13 @@ void UPalShooterComponent::OnCrouch(UPalCharacterMovementComponent* Component, b
 void UPalShooterComponent::OnChangeTargetDirection() {
 }
 
+void UPalShooterComponent::OnChangedBullet(const APalWeaponBase* WeaponActor, const FName& BulletItemId) {
+}
+
 void UPalShooterComponent::OnChangeChangeImportance(EPalCharacterImportanceType Next) {
+}
+
+void UPalShooterComponent::NotifyBulletItemId_ToServer_Implementation(const APalWeaponBase* TargetWeapon, const FName& BulletItemId) {
 }
 
 bool UPalShooterComponent::IsShooting() const {
@@ -219,7 +257,23 @@ bool UPalShooterComponent::IsPlayShootingAnimation() const {
     return false;
 }
 
+bool UPalShooterComponent::IsJetpackShooting() const {
+    return false;
+}
+
 bool UPalShooterComponent::IsHiddenAttachWeapon() {
+    return false;
+}
+
+bool UPalShooterComponent::IsForceUseControllerRotationYaw() const {
+    return false;
+}
+
+bool UPalShooterComponent::IsCurrentWeaponMelee() const {
+    return false;
+}
+
+bool UPalShooterComponent::IsCameraOnlyAiming() const {
     return false;
 }
 
@@ -235,11 +289,27 @@ bool UPalShooterComponent::IsAiming() const {
     return false;
 }
 
+UPalWeaponCombo* UPalShooterComponent::GetWeaponCombo() const {
+    return NULL;
+}
+
+UPalWeaponBulletSelector* UPalShooterComponent::GetWeaponBulletSelector() const {
+    return NULL;
+}
+
 UPalShooterAnimeAssetBase* UPalShooterComponent::GetThrowAnimAsset() {
     return NULL;
 }
 
 FVector UPalShooterComponent::GetTargetDirection() const {
+    return FVector{};
+}
+
+FRotator UPalShooterComponent::GetRideCameraRotation() const {
+    return FRotator{};
+}
+
+FVector UPalShooterComponent::GetRideCameraLocation() const {
     return FVector{};
 }
 
@@ -253,6 +323,10 @@ FWeaponAnimationInfo UPalShooterComponent::GetPreviousWeaponAnimationInfo() cons
 
 APalWeaponBase* UPalShooterComponent::GetHasWeapon() const {
     return NULL;
+}
+
+float UPalShooterComponent::GetEffectiveAttackPlayRateWithMontageRate() const {
+    return 0.0f;
 }
 
 FTransform UPalShooterComponent::GetCurrentWeaponTransformLeftHandIK() const {
@@ -304,6 +378,15 @@ void UPalShooterComponent::ChangeIsShooting_ToALL_Implementation(int32 ID, bool 
 }
 
 void UPalShooterComponent::ChangeIsShooting(bool NewIsShooting, bool bCanShootOnRelease) {
+}
+
+void UPalShooterComponent::ChangeIsJetpackShooting_ToServer_Implementation(int32 ID, bool NewIsShooting) {
+}
+
+void UPalShooterComponent::ChangeIsJetpackShooting_ToALL_Implementation(int32 ID, bool NewIsShooting) {
+}
+
+void UPalShooterComponent::ChangeIsJetpackShooting(bool NewIsShooting) {
 }
 
 void UPalShooterComponent::ChangeIsAltShooting_ToServer_Implementation(int32 ID, bool NewIsShooting, bool bCanShootOnRelease) {
@@ -398,7 +481,7 @@ void UPalShooterComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
     
     DOREPLIFETIME(UPalShooterComponent, targetDirection);
     DOREPLIFETIME(UPalShooterComponent, CameraRotation);
-    DOREPLIFETIME(UPalShooterComponent, CameraLocation);
+    DOREPLIFETIME(UPalShooterComponent, RideCameraRotation);
     DOREPLIFETIME(UPalShooterComponent, RandomStream);
     DOREPLIFETIME(UPalShooterComponent, TimedRandomStream);
 }

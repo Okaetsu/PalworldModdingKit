@@ -30,5 +30,7 @@ FPalOptionGraphicsSettings::FPalOptionGraphicsSettings() {
     this->MaxFPS = 0.00f;
     this->ScreenPercentage = 0;
     this->bArachnophobiaMode = false;
+    this->bShowFriendPalAura = false;
+    this->bUseVerticalFOV = false;
 }
 

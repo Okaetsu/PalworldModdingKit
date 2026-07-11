@@ -2,8 +2,12 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "GameFramework/Character.h"
 #include "Engine/EngineTypes.h"
+#include "Engine/EngineTypes.h"
+#include "Engine/NetSerialization.h"
 #include "EPalCharacterCompleteDelegatePriority.h"
 #include "EPalCharacterImportanceType.h"
 #include "EPalWazaID.h"
@@ -11,10 +15,14 @@
 #include "PalDamageRactionInfo.h"
 #include "PalDeadInfo.h"
 #include "PalOnCharacterCompleteInitializeParameterDelegate.h"
+#include "PalStageInstanceId.h"
+#include "PalTalkableObjectInterface.h"
 #include "PalCharacter.generated.h"
 
 class AActor;
 class APalCharacter;
+class APalExplosiveSporePawnBase;
+class APalPlayerState;
 class UAnimMontage;
 class UCurveVector;
 class UNiagaraSystem;
@@ -42,10 +50,13 @@ class USkeletalMeshComponent;
 class USphereComponent;
 
 UCLASS(Blueprintable)
-class APalCharacter : public ACharacter {
+class APalCharacter : public ACharacter, public IPalTalkableObjectInterface {
     GENERATED_BODY()
 public:
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWhistleFinishDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FWhistleDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FRollingDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPalCharacterRagdollDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStillInWorldTriggered_Client);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStillInWorldTriggered);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCompleteSyncPlayerFromServer_InClient);
@@ -116,6 +127,12 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FRollingDelegate OnRollingFinishDelegate;
     
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FWhistleDelegate OnWhistleBeginDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FWhistleFinishDelegate OnWhistleFinishDelegate;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FOnCompleteSyncPlayerFromServer_InClient OnCompleteSyncPlayerFromServer_InClient;
     
@@ -124,6 +141,12 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnStillInWorldTriggered_Client OnStillInWorldTriggered_Client;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalCharacterRagdollDelegate OnStartRagdollDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FPalCharacterRagdollDelegate OnEndRagdollDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeBattleMode OnChangeBattleModeDelegate;
@@ -140,8 +163,17 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnCaptured OnCapturedCharacterParameterChangedDelegate;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftObjectPtr<UNiagaraSystem> AirJumpEffect;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     bool bIsNeutralGroup;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    FVector_NetQuantize10 Rep_LastInputVector;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bUseActorNetCullDistance;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -165,6 +197,9 @@ protected:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsPalActiveActor, meta=(AllowPrivateAccess=true))
     bool bIsPalActiveActor;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_EnableDungeonLightingChannel2, meta=(AllowPrivateAccess=true))
+    bool bEnableDungeonLightingChannel2;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, ReplicatedUsing=OnRep_IsOtomoCollision, meta=(AllowPrivateAccess=true))
     bool bIsOtomoCollision;
@@ -211,6 +246,15 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_bUseBodyPartsCollisionProfileNameBaseCamp, meta=(AllowPrivateAccess=true))
     bool bUseBodyPartsCollisionProfileNameBaseCamp;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_bUseNoCollisionForBaseCampSpecialWorker, meta=(AllowPrivateAccess=true))
+    bool bUseNoCollisionForBaseCampSpecialWorker;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FGuid SwimWetnessStatusInvokerID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FName, float> OpacityValueMap;
+    
 public:
     APalCharacter(const FObjectInitializer& ObjectInitializer);
 
@@ -240,6 +284,9 @@ public:
     void SetOtomoCollisionProfile(bool IsOtomoCollision);
     
     UFUNCTION(BlueprintCallable)
+    void SetLocalHiddenForCutscene(bool bHide);
+    
+    UFUNCTION(BlueprintCallable)
     void SetDisableChangeIntervalByImportance(FName flagName, bool isDisable);
     
     UFUNCTION(BlueprintCallable)
@@ -257,14 +304,29 @@ public:
     UFUNCTION(BlueprintCallable)
     void ResetTickInterval();
     
+    UFUNCTION(BlueprintCallable, Server, Unreliable)
+    void RequestPlayCosmeticMontage_ToServer(UAnimMontage* Montage, float PlayRate);
+    
     UFUNCTION(BlueprintCallable)
     void RequestJump();
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestExplosiveSporeNullify(APalExplosiveSporePawnBase* SporePawn);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestExplosiveSporeHit(APalExplosiveSporePawnBase* SporePawn);
     
     UFUNCTION(BlueprintCallable)
     void RequestExecuteTickNextFrameForAction();
     
     UFUNCTION(BlueprintCallable)
     void ReplaceCurrentReservedMontage_WithPlayRate(UAnimMontage* ReservedMontage, UAnimMontage* NewMontage, float PlayRate);
+    
+    UFUNCTION(BlueprintCallable)
+    void RefreshDungeonLightingChannels();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
+    void PlayCosmeticMontage_ToAll(UAnimMontage* Montage, float PlayRate);
     
     UFUNCTION(BlueprintCallable)
     void Play2Montage_WithPlayRate(UAnimMontage* firstMontage, UAnimMontage* nextMontage, float PlayRate);
@@ -286,6 +348,12 @@ private:
     void OnRep_IsOtomoCollision(bool PrevbIsOtomoCollision);
     
     UFUNCTION(BlueprintCallable)
+    void OnRep_EnableDungeonLightingChannel2();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_bUseNoCollisionForBaseCampSpecialWorker();
+    
+    UFUNCTION(BlueprintCallable)
     void OnRep_bUseBodyPartsCollisionProfileNameBaseCamp();
     
     UFUNCTION(BlueprintCallable)
@@ -293,6 +361,17 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnOverlapBeginByAroundInfo(AActor* OtherActor);
+    
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnMovedToFieldFromStageInClient(APalPlayerState* InPlayerState, const FPalStageInstanceId& InStageInstanceId);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnMovedIntoStageInClient(APalPlayerState* InPlayerState, const FPalStageInstanceId& InStageInstanceId);
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnJump(UPalCharacterMovementComponent* Component);
     
 protected:
     UFUNCTION(BlueprintCallable)
@@ -313,6 +392,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void LocalInitialized();
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Unreliable)
+    void LaunchRecovery_ToAll(FVector_NetQuantize10 LaunchVelocity);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsUseCustomAutoAimTarget() const;
     
@@ -321,6 +403,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPart() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsLocalHiddenForCutscene() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsInitialized() const;
@@ -382,6 +467,12 @@ public:
     void ForceResetJumpState();
     
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void FixSleepingLocation_ToAll(const FTransform& SleepTransform);
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void ClearRagdollForBaseCampResurrect_ToAll();
+    
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void ChangeWantFood_ToAll(bool IsWantFood, bool IsExistFood);
     
 private:
@@ -401,5 +492,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void BindOnCompleteInitializeParameterDelegate(EPalCharacterCompleteDelegatePriority Priority, const FPalOnCharacterCompleteInitializeParameter& Event);
     
+
+    // Fix for true pure virtual functions not being implemented
 };
 

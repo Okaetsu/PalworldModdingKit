@@ -1,6 +1,9 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "PalFoliageTickFrequencyBand.h"
 #include "PalMapObjectStaticData.generated.h"
+
+class APalDecayEffectActor;
 
 USTRUCT(BlueprintType)
 struct FPalMapObjectStaticData {
@@ -38,6 +41,21 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName MapObjectId_Alter_RaidBossArea;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSoftClassPtr<APalDecayEffectActor> DecayEffectActorClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalFoliageTickFrequencyBand> FoliageTickFrequencyBands;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MaxFoliageGridModelTicksPerFrame;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MaxConnectivityCollapseDisposePerFrame;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CollapseDisposeTickInterval;
     
     PAL_API FPalMapObjectStaticData();
 };

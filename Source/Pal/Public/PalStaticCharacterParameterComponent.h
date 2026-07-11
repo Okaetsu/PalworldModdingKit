@@ -3,6 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
+#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "Chaos/ChaosEngineInterface.h"
 #include "EPalAIActionType.h"
@@ -14,6 +15,7 @@
 #include "EPalGeneralAnimSequenceType.h"
 #include "EPalGeneralBlendSpaceType.h"
 #include "EPalGeneralMontageType.h"
+#include "EPalMimicEncountType.h"
 #include "EPalMonsterMovementType.h"
 #include "EPalPettingSizeType.h"
 #include "EPalPhysicsBoneType.h"
@@ -44,7 +46,7 @@ class UPalRagdollPreset;
 class UPalSoundSlot;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
-class UPalStaticCharacterParameterComponent : public UActorComponent {
+class PAL_API UPalStaticCharacterParameterComponent : public UActorComponent {
     GENERATED_BODY()
 public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -55,6 +57,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVector MeshRelativeLocation;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float ApproachArrivalRadius;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<EPalAIActionType, TSubclassOf<UPalAIActionBase>> AIActionMap;
@@ -82,6 +87,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<UAnimMontage*> EmoteList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalActionType AwakeningMontageType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalStaticCharacterInfo_ElectricAction ElectricActionInfo;
@@ -112,6 +120,18 @@ public:
     
     UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalWazaID OverrideCommonWazaID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsMimicablePal;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bEnableRideAimWazaMode;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EPalMimicEncountType MimicEncountType;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float UniqueWazaChoiceRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float CaptureSuccessRate;
@@ -162,6 +182,9 @@ public:
     int32 Mass_Scale;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsSeparatedRagdoll;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float IsGroundCrossRange;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -169,6 +192,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsUncapturable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsDisableSpawnInStage;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool IsBackWalkForwardAnime;
@@ -346,10 +372,16 @@ public:
     void LoadWazaActionClass(EPalWazaID WazaID);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsWorldTreeAuraPal() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsTowerBossPal() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsSwimPal();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsSeparatedRagdoll() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsRarePal() const;
