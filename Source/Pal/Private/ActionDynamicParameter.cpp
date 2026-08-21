@@ -5,7 +5,7 @@ FActionDynamicParameter::FActionDynamicParameter() {
     this->GeneralPurposeIndex = 0;
     this->bIsAdjustTransform = false;
     this->bIsInRaidArea = false;
-    this->NetRandSeed = 0;
+    this->NetRandSeed = 877;
     this->IsReflectedForClient = false;
 }
 

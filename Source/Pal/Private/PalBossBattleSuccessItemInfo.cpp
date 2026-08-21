@@ -1,8 +1,8 @@
 #include "PalBossBattleSuccessItemInfo.h"
 
 FPalBossBattleSuccessItemInfo::FPalBossBattleSuccessItemInfo() {
-    this->Rate = 0.00f;
-    this->Min = 0;
-    this->Max = 0;
+    this->Rate = 100.00f;
+    this->Min = 1;
+    this->Max = 2;
 }
 

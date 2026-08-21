@@ -2,7 +2,7 @@
 
 FPalContainerCreateExtraParameter::FPalContainerCreateExtraParameter() {
     this->bIsWatchAllPlayer = false;
-    this->bIsSyncEnable = false;
+    this->bIsSyncEnable = true;
     this->bIgnoreOnSave = false;
     this->OperationRestrictType = EPalContainerOperationRestrictType::None;
 }

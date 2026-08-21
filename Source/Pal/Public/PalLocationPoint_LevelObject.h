@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "EPalRelicType.h"
 #include "PalLocationPoint.h"
 #include "PalLocationPoint_LevelObject.generated.h"

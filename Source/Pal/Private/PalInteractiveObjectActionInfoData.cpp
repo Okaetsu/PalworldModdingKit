@@ -5,9 +5,9 @@ FPalInteractiveObjectActionInfoData::FPalInteractiveObjectActionInfoData() {
     this->buttonType = EPalInteractiveObjectButtonType::OnePush;
     this->longPushTime = 0.00f;
     this->ActionType = EPalActionType::None;
-    this->bValid = false;
+    this->bValid = true;
     this->bLockRiding = false;
-    this->isInputComsume = false;
-    this->bCanToggle = false;
+    this->isInputComsume = true;
+    this->bCanToggle = true;
 }
 

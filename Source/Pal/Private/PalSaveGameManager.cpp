@@ -15,10 +15,10 @@ UPalSaveGameManager::UPalSaveGameManager() {
     this->IsAppliedPlayerSaveData = false;
     this->bIsForceDisableAutoSave = false;
     this->bIsUseBackupSaveData = true;
-    this->NearSaveBackupNum = 5;
+    this->NearSaveBackupNum = 3;
     this->MinutesSaveBackupNum = 6;
-    this->HourSaveBackupNum = 12;
-    this->DaySaveBackupNum = 7;
+    this->HourSaveBackupNum = 3;
+    this->DaySaveBackupNum = 3;
     this->GDKMaxBackupSlotNum = 3;
     this->GDKBackupFrequency = 3;
 }

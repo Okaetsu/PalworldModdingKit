@@ -5,7 +5,6 @@
 #include "Layout/Margin.h"
 #include "Styling/SlateColor.h"
 #include "Fonts/SlateFontInfo.h"
-#include "Styling/SlateTypes.h"
 #include "Components/Widget.h"
 #include "PalComboBoxString.generated.h"
 

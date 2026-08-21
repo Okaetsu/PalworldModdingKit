@@ -1,6 +1,6 @@
 #include "PalInteractLockSettingData.h"
 
 FPalInteractLockSettingData::FPalInteractLockSettingData() {
-    this->requireNum = 0;
+    this->requireNum = 1;
 }
 

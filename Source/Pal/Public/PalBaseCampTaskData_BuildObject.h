@@ -14,7 +14,7 @@ public:
     FName completeMsgID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FPalDataTableRowName_MapObjectData mapObjectRowName;
+    TArray<FPalDataTableRowName_MapObjectData> mapObjectRowNames;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 requireNum;

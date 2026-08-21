@@ -1,6 +1,6 @@
 #include "PalFishSpawnPointData.h"
 
 FPalFishSpawnPointData::FPalFishSpawnPointData() {
-    this->PointIndex = 0;
+    this->PointIndex = -1;
 }
 

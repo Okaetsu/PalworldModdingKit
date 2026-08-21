@@ -5,7 +5,7 @@ FPalBreedingItemEffectData::FPalBreedingItemEffectData() {
     this->TalentBonusMax = 0;
     this->MutationRateBonusPercent = 0.00f;
     this->CombiRankBonus = 0;
-    this->BreedCount = 0;
+    this->BreedCount = 1;
     this->bInheritAllActiveSkills = false;
     this->PassiveInheritCountOverride = 0;
 }

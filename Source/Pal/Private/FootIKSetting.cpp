@@ -1,8 +1,8 @@
 #include "FootIKSetting.h"
 
 FFootIKSetting::FFootIKSetting() {
-    this->bIsEnableIK = false;
-    this->RayStartOffset = 0.00f;
-    this->RayEndOffset = 0.00f;
+    this->bIsEnableIK = true;
+    this->RayStartOffset = 50.00f;
+    this->RayEndOffset = 30.00f;
 }
 

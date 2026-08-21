@@ -1,9 +1,9 @@
 #include "PalSpawnerOneTribeInfo.h"
 
 FPalSpawnerOneTribeInfo::FPalSpawnerOneTribeInfo() {
-    this->Level = 0;
-    this->Level_Max = 0;
-    this->Num = 0;
-    this->Num_Max = 0;
+    this->Level = 1;
+    this->Level_Max = 1;
+    this->Num = 1;
+    this->Num_Max = 1;
 }
 

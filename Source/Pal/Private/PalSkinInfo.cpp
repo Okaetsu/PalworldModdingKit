@@ -4,6 +4,6 @@ FPalSkinInfo::FPalSkinInfo() {
     this->SkinType = EPalSkinType::None;
     this->bIsHairAccessory = false;
     this->bAutoGetItem = false;
-    this->PlatformItemID_Steam = 0;
+    this->PlatformItemID_Steam = -1;
 }
 

@@ -1,6 +1,6 @@
 #include "PalGuildRolePermissionEntry.h"
 
 FPalGuildRolePermissionEntry::FPalGuildRolePermissionEntry() {
-    this->Role = EPalGuildRole::None;
+    this->Role = EPalGuildRole::Guest;
 }
 

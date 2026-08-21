@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Components/ExponentialHeightFogComponent.h"
 #include "PalExponentialHeightFogData.generated.h"
 

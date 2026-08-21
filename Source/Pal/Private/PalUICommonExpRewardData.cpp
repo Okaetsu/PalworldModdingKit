@@ -1,7 +1,7 @@
 #include "PalUICommonExpRewardData.h"
 
 FPalUICommonExpRewardData::FPalUICommonExpRewardData() {
-    this->RewardType = EPalCommonExpRewardType::Invalid;
+    this->RewardType = EPalCommonExpRewardType::Expedition;
     this->RewardExp = 0;
 }
 

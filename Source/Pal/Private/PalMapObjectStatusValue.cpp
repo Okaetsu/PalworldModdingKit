@@ -1,7 +1,7 @@
 #include "PalMapObjectStatusValue.h"
 
 FPalMapObjectStatusValue::FPalMapObjectStatusValue() {
-    this->CurrentValue = 0;
-    this->MaxValue = 0;
+    this->CurrentValue = -1;
+    this->MaxValue = -1;
 }
 

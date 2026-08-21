@@ -11,6 +11,10 @@ EPalSaveDataRestoreResultType UPalUILocalWorldSelectBase::RestoreFromLatestBacku
     return EPalSaveDataRestoreResultType::Success_AllSave;
 }
 
+bool UPalUILocalWorldSelectBase::OpenWorldSaveDirectory(const FString& DirectoryPath) {
+    return false;
+}
+
 void UPalUILocalWorldSelectBase::GetWorldDisplayInfo(TMap<FString, FPalUILocalWorldDisplayData>& OutDisplayInfo) {
 }
 

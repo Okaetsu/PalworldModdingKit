@@ -5,8 +5,8 @@ FPalPartnerSkillDatabaseRow::FPalPartnerSkillDatabaseRow() {
     this->CoolDownTime = 0.00f;
     this->ExecCost = 0.00f;
     this->IdleCost = 0.00f;
-    this->CanThrowPal = false;
-    this->CanChangeWeapon = false;
+    this->CanThrowPal = true;
+    this->CanChangeWeapon = true;
     this->IsToggleKey = false;
     this->TriggerType = EPalPartnerSkillTriggerType::None;
 }

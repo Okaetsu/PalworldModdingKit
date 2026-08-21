@@ -2,6 +2,6 @@
 
 FPalGuildPlayerInfo::FPalGuildPlayerInfo() {
     this->Status = EPalGuildPlayerStatus::Logout;
-    this->Role = EPalGuildRole::None;
+    this->Role = EPalGuildRole::Guest;
 }
 

@@ -1,6 +1,7 @@
 #include "PalPassivePartnerSkillActiveSkillParameters.h"
 
 FPalPassivePartnerSkillActiveSkillParameters::FPalPassivePartnerSkillActiveSkillParameters() {
+    this->SkillName = TEXT("Unknown");
     this->WazaID = EPalWazaID::None;
     this->bIdlelCostDecreaseEveryFrame = false;
     this->bIsExecSkillContinuation = false;

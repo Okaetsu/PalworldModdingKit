@@ -2,7 +2,7 @@
 #include "Net/UnrealNetwork.h"
 
 UPalCharacterMovementComponent::UPalCharacterMovementComponent(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
-    // this->bDisableCheckHalfHeightForStepup = true; // needs engine edits
+    this->bDisableCheckHalfHeightForStepup = true;
     this->bEnableServerDualMoveScopedMovementUpdates = true;
     this->bCanWalkOffLedgesWhenCrouching = true;
     this->DyingMaxSpeed = 100.00f;

@@ -3,7 +3,7 @@
 FPalRandomIncidentSettings::FPalRandomIncidentSettings() {
     this->MonsterSpawnData = NULL;
     this->NPCSpawnData = NULL;
-    this->ExcludeOtherPal = false;
+    this->ExcludeOtherPal = true;
     this->action = NULL;
     this->ObjectPlacement = NULL;
 }

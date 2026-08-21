@@ -2,7 +2,7 @@
 
 FPalCharacterTeamMissionChallengeConditionMasterData::FPalCharacterTeamMissionChallengeConditionMasterData() {
     this->DefeatBossType = EPalBossType::None;
-    this->DefeatBossDifficulty = EPalBossBattleDifficulty::None;
+    this->DefeatBossDifficulty = EPalBossBattleDifficulty::Normal;
     this->DefeatHardBossNum = 0;
 }
 

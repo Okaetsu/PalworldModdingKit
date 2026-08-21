@@ -1,10 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "Engine/EngineTypes.h"
-#include "Engine/EngineTypes.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/HitResult.h"
 #include "Chaos/ChaosEngineInterface.h"

@@ -1,6 +1,6 @@
 #include "PalBaseCampTaskData_BuildObject.h"
 
 FPalBaseCampTaskData_BuildObject::FPalBaseCampTaskData_BuildObject() {
-    this->requireNum = 0;
+    this->requireNum = 1;
 }
 

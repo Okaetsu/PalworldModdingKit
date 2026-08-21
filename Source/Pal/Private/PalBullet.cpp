@@ -6,6 +6,8 @@ APalBullet::APalBullet(const FObjectInitializer& ObjectInitializer) : Super(Obje
     this->RootComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
     this->CollisionComp = (USphereComponent*)RootComponent;
     this->ProjectileMovement = CreateDefaultSubobject<UPalProjectileMovementComponent>(TEXT("ProjectileComp"));
+    this->ProjectileMovement->bRotationFollowsVelocity = true;
+    this->ProjectileMovement->bShouldBounce = true;
     this->PlayerDamageCameraShake = EPalPlayerDamageCameraShakeCategory::Gun_S;
     this->bIsHitFriend = false;
     this->WeaponDamage = 0;

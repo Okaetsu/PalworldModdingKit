@@ -2,6 +2,6 @@
 
 FPalWorkProgressSuitabilityInfo::FPalWorkProgressSuitabilityInfo() {
     this->RequiredRank = 0;
-    this->ProgressEntryIndex = 0;
+    this->ProgressEntryIndex = -1;
 }
 

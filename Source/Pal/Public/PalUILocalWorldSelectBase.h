@@ -24,6 +24,9 @@ protected:
     UFUNCTION(BlueprintCallable)
     EPalSaveDataRestoreResultType RestoreFromLatestBackup(const FString& WorldSaveDirectoryName, FString& OutBackupName);
     
+    UFUNCTION(BlueprintCallable)
+    bool OpenWorldSaveDirectory(const FString& DirectoryPath);
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     void GetWorldDisplayInfo(TMap<FString, FPalUILocalWorldDisplayData>& OutDisplayInfo);
     

@@ -1,12 +1,12 @@
 #include "PalBossBattleDifficultyParameter.h"
 
 FPalBossBattleDifficultyParameter::FPalBossBattleDifficultyParameter() {
-    this->Level = 0;
+    this->Level = 1;
     this->HardUnlockCondition = EPalBossBattleHardUnlockCondition::DefeatHardUnlockTiggerBoss;
-    this->BattleTimeLimit = 0;
-    this->CapturePhaseTimeLimit = 0;
-    this->bSpawnBossAtStart_InServer = false;
+    this->BattleTimeLimit = 600;
+    this->CapturePhaseTimeLimit = 60;
+    this->bSpawnBossAtStart_InServer = true;
     this->bSpawnPalBox = false;
-    this->ReadyPhaseTimeLimit = 0;
+    this->ReadyPhaseTimeLimit = 180;
 }
 

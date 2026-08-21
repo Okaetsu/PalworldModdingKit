@@ -1,6 +1,7 @@
 #include "PalGameDataBridgeCharacterTextData.h"
 
 FPalGameDataBridgeCharacterTextData::FPalGameDataBridgeCharacterTextData() {
+    this->Type = TEXT("Character");
     this->Level = 0;
     this->Hp = 0;
     this->MaxHP = 0;
@@ -10,6 +11,6 @@ FPalGameDataBridgeCharacterTextData::FPalGameDataBridgeCharacterTextData() {
     this->RotationX = 0.00f;
     this->RotationY = 0.00f;
     this->RotationZ = 0.00f;
-    this->bIsActive = false;
+    this->bIsActive = true;
 }
 

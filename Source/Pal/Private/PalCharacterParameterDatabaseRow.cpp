@@ -5,7 +5,7 @@ FPalCharacterParameterDatabaseRow::FPalCharacterParameterDatabaseRow() {
     this->Tribe = EPalTribeID::None;
     this->ZukanIndex = 0;
     this->Size = EPalSizeType::None;
-    this->Rarity = 0;
+    this->Rarity = 1;
     this->ElementType1 = EPalElementType::None;
     this->ElementType2 = EPalElementType::None;
     this->GenusCategory = EPalGenusCategoryType::None;
@@ -25,7 +25,7 @@ FPalCharacterParameterDatabaseRow::FPalCharacterParameterDatabaseRow() {
     this->EnemyMaxHPRate = 0.00f;
     this->EnemyReceiveDamageRate = 0.00f;
     this->EnemyInflictDamageRate = 0.00f;
-    this->EnemyWazaCoolTimeRate = 0.00f;
+    this->EnemyWazaCoolTimeRate = 1.00f;
     this->CaptureRateCorrect = 0.00f;
     this->ExpRatio = 0.00f;
     this->Price = 0.00f;

@@ -1,11 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Character.h"
-#include "Engine/EngineTypes.h"
 #include "Engine/EngineTypes.h"
 #include "Engine/NetSerialization.h"
 #include "EPalCharacterCompleteDelegatePriority.h"
@@ -416,7 +412,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAllActiveSkillCooldownFinished() const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintPure)
     bool IsActiveSkillCooldownFinished(const EPalWazaID WazaID) const;
     
 protected:

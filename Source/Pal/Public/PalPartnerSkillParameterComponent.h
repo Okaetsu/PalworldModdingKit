@@ -3,7 +3,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "EPalMapObjectTreasureGradeType.h"
-#include "EPalRidingActiveSkillNotWeaponCondition.h"
+#include "EPalPassiveSkillEffectType.h"
 #include "EPalWazaID.h"
 #include "FixedPoint.h"
 #include "FlagContainer.h"
@@ -11,6 +11,7 @@
 #include "PalDataTableRowName_ItemData.h"
 #include "PalInstanceID.h"
 #include "PalPartnerSkillParameterRide.h"
+#include "PalPassivePartnerSkillActiveSkillParameters.h"
 #include "PalPassivePartnerSkillIdAndParameters.h"
 #include "PalResidentSkillNotifyParameter.h"
 #include "Templates/SubclassOf.h"
@@ -23,6 +24,7 @@ class APalFunnelCharacter;
 class UPalCoopSkillModuleBase;
 class UPalItemContainer;
 class UPalPartnerSkillPassiveSkill;
+class UPalPassiveSkillComponent;
 class UPalResidentSkillModuleBase;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
@@ -70,14 +72,18 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeDisableGlider OnChangeDisableGlider;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+private:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TArray<FPalDataTableRowName_ItemData> RestrictionItems;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName SkillName;
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<EPalWazaID> ExtraWazaPowerRateTargetWazaIDs;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    EPalWazaID WazaID;
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FPalPassivePartnerSkillActiveSkillParameters ActiveSkill;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<FPalPassivePartnerSkillIdAndParameters> PassiveSkills;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFixedPoint EffectTime;
@@ -110,15 +116,6 @@ public:
     bool bIsToggleKey;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bIdlelCostDecreaseEveryFrame;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bIsExecSkillContinuation;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bIsOneShotRideAction;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bIsRunning;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -133,9 +130,6 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     UPalResidentSkillModuleBase* ResidentSkillModule;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<FPalPassivePartnerSkillIdAndParameters> PassiveSkills;
-    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FPalPartnerSkillParameterRide RideParameter;
@@ -146,8 +140,14 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<APalAIController> FunnelControllerClass;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalWazaID FunnelAttackWazaID;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<APalFunnelCharacter> FunnelCharacterClass_NoAutoSpawn;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<APalAIController> FunnelControllerClass_NoAutoSpawn;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<UPalResidentSkillModuleBase> ResidentModuleClass;
@@ -155,24 +155,6 @@ protected:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPalPartnerSkillPassiveSkill* PassiveSkill;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName ActiveSkill_MainValue_Overview_EditorOnly;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool IsRidingActiveSkillNotWeapon;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    EPalRidingActiveSkillNotWeaponCondition RidingActiveSkillNotWeaponCondition;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    bool bIsToggleRidingActiveSkillNotWeapon;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<float> ActiveSkill_MainValueByRank;
-    
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    TArray<float> ActiveSkill_OverWriteCoolTimeByRank;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FFlagContainer FunnelDisableFlag;
@@ -185,6 +167,9 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FFlagContainer ResidentSkillDisableFlag;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Export, meta=(AllowPrivateAccess=true))
+    TWeakObjectPtr<UPalPassiveSkillComponent> BoundTrainerPassiveSkillComponent;
     
 public:
     UPalPartnerSkillParameterComponent(const FObjectInitializer& ObjectInitializer);
@@ -224,6 +209,12 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnUpdateCharacterRank(const int32 NowRank, const int32 OldRank);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnTrainerPassiveSkillRemoved(EPalPassiveSkillEffectType EffectType);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnTrainerPassiveSkillChanged(EPalPassiveSkillEffectType EffectType, float Value);
     
 public:
     UFUNCTION(BlueprintCallable)
@@ -277,13 +268,16 @@ public:
     bool IsRunning() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
-    bool IsRestrictedByItems(AActor* Trainer) const;
+    bool IsRestrictedByItems(const AActor* Trainer) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlayerTrigger() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsPlayerReviveTrigger() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPalReviveTrigger() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsOverheat() const;
@@ -309,7 +303,7 @@ public:
     UFUNCTION()
     float GetWazaPowerRate(EPalWazaID Waza) const;
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintPure)
     EPalWazaID GetWazaID() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
@@ -329,6 +323,12 @@ private:
     FFixedPoint GetMainDamage() const;
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TSubclassOf<APalAIController> GetFunnelControllerClassNoAutoSpawn();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    TSubclassOf<APalFunnelCharacter> GetFunnelCharacterClassNoAutoSpawn();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetEffectTimeRatio();
     

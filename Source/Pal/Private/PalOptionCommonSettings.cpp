@@ -1,18 +1,18 @@
 #include "PalOptionCommonSettings.h"
 
 FPalOptionCommonSettings::FPalOptionCommonSettings() {
-    this->PalRideCameraLengthRate = 0.00f;
+    this->PalRideCameraLengthRate = 1.00f;
     this->FOV = 0.00f;
-    this->bEnableMotionBlur = false;
-    this->bEnableCameraShake = false;
+    this->bEnableMotionBlur = true;
+    this->bEnableCameraShake = true;
     this->Brightness = 0.00f;
     this->bDisableAutoPickupItemInOverflowWeight = false;
     this->bDisableGuildJoinRequest = false;
     this->bHideCraftExpLog = false;
-    this->ScreenPercentage = 0;
-    this->MapObjectDrawDistanceType = EPalOptionMapObjectDrawDistanceType::Invalid;
+    this->ScreenPercentage = 75;
+    this->MapObjectDrawDistanceType = EPalOptionMapObjectDrawDistanceType::NoLimit;
     this->bArachnophobiaMode = false;
-    this->bShowFriendPalAura = false;
+    this->bShowFriendPalAura = true;
     this->bUseVerticalFOV = false;
 }
 

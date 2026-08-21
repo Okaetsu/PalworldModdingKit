@@ -14,7 +14,7 @@ FGeneralAnimationParameter::FGeneralAnimationParameter() {
     this->FootIKRootOffset = 0.00f;
     this->MoveSpeedPlusByRotateYaw = 0.00f;
     this->YawSpeed = 0.00f;
-    this->AdditiveAnimationRate = 0.00f;
+    this->AdditiveAnimationRate = 1.00f;
     this->DisableUpperOverrideFlag = false;
     this->bTransportingObject = false;
     this->MovementMode = MOVE_None;

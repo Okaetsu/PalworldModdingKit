@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "CommonInputBaseTypes.h"
+#include "CommonInputTypeEnum.h"
 #include "CommonActionWidget.h"
 #include "Styling/SlateBrush.h"
 #include "PalUIActionBindData.h"

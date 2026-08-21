@@ -31,6 +31,9 @@ FGuid APalHUDInGame::PushWidgetStackableUI(TSubclassOf<UPalUserWidgetStackableUI
     return FGuid{};
 }
 
+void APalHUDInGame::OnKeyConfigChanged() {
+}
+
 void APalHUDInGame::OnApplicationActivationStateChanged(bool bIsFocused) {
 }
 

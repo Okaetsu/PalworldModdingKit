@@ -2,7 +2,6 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
-#include "UObject/NoExportTypes.h"
 #include "EPalBattleBGMType.h"
 #include "EPalElementType.h"
 #include "EPalGenusCategoryType.h"
@@ -165,7 +164,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetUseBossHPGauge(FName RowName);
     
-    UFUNCTION(BlueprintCallable, BlueprintPure)
+    UFUNCTION(BlueprintPure)
     EPalTribeID GetTribe(FName RowName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

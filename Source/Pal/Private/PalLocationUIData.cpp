@@ -2,6 +2,6 @@
 
 FPalLocationUIData::FPalLocationUIData() {
     this->compassIconWidget = NULL;
-    this->displayLength = 0.00f;
+    this->displayLength = 300.00f;
 }
 

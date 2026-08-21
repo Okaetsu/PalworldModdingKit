@@ -1,6 +1,6 @@
 #include "PalRaidBossSuccessAnyOneItemInfo.h"
 
 FPalRaidBossSuccessAnyOneItemInfo::FPalRaidBossSuccessAnyOneItemInfo() {
-    this->Num = 0;
+    this->Num = 1;
 }
 

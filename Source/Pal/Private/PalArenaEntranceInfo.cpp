@@ -1,6 +1,6 @@
 #include "PalArenaEntranceInfo.h"
 
 FPalArenaEntranceInfo::FPalArenaEntranceInfo() {
-    this->bCanEntry = false;
+    this->bCanEntry = true;
 }
 

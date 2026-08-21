@@ -40,6 +40,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetupLiftIcon();
     
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
+    bool IsAnyFadeWidgetActive() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void HideLiftIcon();
     

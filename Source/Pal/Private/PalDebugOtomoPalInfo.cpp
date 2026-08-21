@@ -1,9 +1,9 @@
 #include "PalDebugOtomoPalInfo.h"
 
 FPalDebugOtomoPalInfo::FPalDebugOtomoPalInfo() {
-    this->Level = 0;
-    this->Rank = 0;
-    this->TalentLevel = 0;
+    this->Level = 1;
+    this->Rank = 1;
+    this->TalentLevel = -1;
     this->FriendshipRank = 0;
     this->bIsAwakening = false;
 }

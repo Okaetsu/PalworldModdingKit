@@ -2,6 +2,6 @@
 
 FPalBaseCampWorkerWalkAroundSettingItem::FPalBaseCampWorkerWalkAroundSettingItem() {
     this->State = EPalBaseCampWorkerWalkAroundState::WalkAround;
-    this->OccurWeight = 0;
+    this->OccurWeight = 1;
 }
 

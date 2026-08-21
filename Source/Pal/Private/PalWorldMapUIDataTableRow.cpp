@@ -1,6 +1,6 @@
 #include "PalWorldMapUIDataTableRow.h"
 
 FPalWorldMapUIDataTableRow::FPalWorldMapUIDataTableRow() {
-    this->WorldMapPriority = 0;
+    this->WorldMapPriority = -1;
 }
 

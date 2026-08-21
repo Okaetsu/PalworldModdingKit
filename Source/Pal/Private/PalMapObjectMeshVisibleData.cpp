@@ -1,6 +1,6 @@
 #include "PalMapObjectMeshVisibleData.h"
 
 FPalMapObjectMeshVisibleData::FPalMapObjectMeshVisibleData() {
-    this->VisibleHpPercentageThreshold = 0.00f;
+    this->VisibleHpPercentageThreshold = 100.00f;
 }
 

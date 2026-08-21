@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AkGameplayStatics.h"
+#include "AkGameplayTypes.h"
 #include "UObject/Object.h"
 #include "Chaos/ChaosEngineInterface.h"
 #include "PalDataTableRowName_SoundID.h"

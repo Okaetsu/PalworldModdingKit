@@ -40,6 +40,9 @@ void UPalBossBattleSequencer::SetBossBattlEvent(APalBossBattleEventBase* NewBoss
 void UPalBossBattleSequencer::SetAllPlayerMoveDisable(bool Disable) {
 }
 
+void UPalBossBattleSequencer::ReviveAllOtomoRevivingPlayers_ServerInternal() {
+}
+
 void UPalBossBattleSequencer::RemovePlayerFromInRoomList(APalPlayerCharacter* Player) {
 }
 

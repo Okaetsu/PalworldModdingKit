@@ -368,6 +368,9 @@ public:
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 BuildingNameDisplayCacheTTLSeconds;
     
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bAllowEnemyCampSpawnNearBaseCamp;
+    
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bIsForceEnableRandomizerPalLevelRandom_ForUI;
     

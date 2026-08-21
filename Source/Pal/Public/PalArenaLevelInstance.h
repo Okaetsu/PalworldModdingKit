@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "LevelInstance/LevelInstanceActor.h"
 #include "EPalArenaPlayerIndex.h"
 #include "PalArenaBattleFormation.h"

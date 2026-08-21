@@ -1,6 +1,6 @@
 #include "PalFightSpawnEntry.h"
 
 FPalFightSpawnEntry::FPalFightSpawnEntry() {
-    this->Level = 0;
+    this->Level = 1;
 }
 

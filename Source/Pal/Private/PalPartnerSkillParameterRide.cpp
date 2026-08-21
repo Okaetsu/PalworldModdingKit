@@ -1,7 +1,7 @@
 #include "PalPartnerSkillParameterRide.h"
 
 FPalPartnerSkillParameterRide::FPalPartnerSkillParameterRide() {
-    this->JumpZVelocityScale = 0.00f;
-    this->GravityScale = 0.00f;
+    this->JumpZVelocityScale = 1.00f;
+    this->GravityScale = 1.00f;
 }
 

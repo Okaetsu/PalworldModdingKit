@@ -375,6 +375,10 @@ FFixedPoint64 UPalIndividualCharacterParameter::GetShieldHP() {
     return FFixedPoint64{};
 }
 
+FGuid UPalIndividualCharacterParameter::GetSecurityPoliceTargetPlayerId() const {
+    return FGuid{};
+}
+
 FPalIndividualCharacterSaveParameter UPalIndividualCharacterParameter::GetSaveParameter() const {
     return FPalIndividualCharacterSaveParameter{};
 }

@@ -13,6 +13,9 @@ public:
     
     APalNPCCampSpawnerBase(const FObjectInitializer& ObjectInitializer);
 
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsAllowedEnemyCampSpawnNearBaseCamp() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     FName GetRewardName();
     

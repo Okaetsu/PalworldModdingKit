@@ -10,6 +10,7 @@
 
 class AActor;
 class UPalDynamicItemDataBase;
+class UPalIndividualCharacterParameter;
 class UStaticMesh;
 class UTexture2D;
 

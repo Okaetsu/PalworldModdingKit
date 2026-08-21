@@ -2,7 +2,7 @@
 
 FPalWaitLoadingWorldPartitionParameter::FPalWaitLoadingWorldPartitionParameter() {
     this->CellState = EWorldPartitionRuntimeCellState::Unloaded;
-    this->IntervalTime = 0.00f;
-    this->InFirstDelayTime = 0.00f;
+    this->IntervalTime = 3.00f;
+    this->InFirstDelayTime = -1.00f;
 }
 

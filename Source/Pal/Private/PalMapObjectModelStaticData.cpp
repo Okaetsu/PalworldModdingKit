@@ -1,7 +1,7 @@
 #include "PalMapObjectModelStaticData.h"
 
 FPalMapObjectModelStaticData::FPalMapObjectModelStaticData() {
-    this->DamagableType = EPalMapObjectDamagableType::AllRecieve;
+    this->DamagableType = EPalMapObjectDamagableType::OtherGroup;
     this->BlueprintClass = NULL;
 }
 

@@ -1,9 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "UObject/Object.h"
-#include "UObject/NoExportTypes.h"
 #include "EPalArenaRank.h"
 #include "EPalBaseCampWorkerEventType.h"
 #include "EPalBaseCampWorkerSickType.h"
@@ -667,6 +665,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FFixedPoint64 GetShieldHP();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    FGuid GetSecurityPoliceTargetPlayerId() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FPalIndividualCharacterSaveParameter GetSaveParameter() const;

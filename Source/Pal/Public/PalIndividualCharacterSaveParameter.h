@@ -1,8 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "EPalBaseCampWorkerEventType.h"
 #include "EPalBaseCampWorkerSickType.h"
 #include "EPalGenderType.h"
@@ -19,6 +17,7 @@
 #include "PalGotStatusPoint.h"
 #include "PalIndividualCharacterCacheParameter.h"
 #include "PalWorkSuitabilityInfo.h"
+#include "PalWorkSuitabilityOverflowGrantedInfo.h"
 #include "PalWorkSuitabilityPreferenceInfo.h"
 #include "Templates/SubclassOf.h"
 #include "PalIndividualCharacterSaveParameter.generated.h"
@@ -62,7 +61,7 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     uint8 Rank_CraftSpeed;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     int64 Exp;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -75,9 +74,12 @@ public:
     bool IsRarePal;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsAwakening;
+    
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<EPalWazaID> EquipWaza;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<EPalWazaID> MasteredWaza;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -210,6 +212,12 @@ public:
     FPalFoodRegeneInfo FoodRegeneEffectInfo;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName FoodWithFullStomachKeep;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 Tiemr_FoodWithFullStomachKeep;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalWorkSuitability CurrentWorkSuitability;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -274,6 +282,21 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     bool bDisableSaleInPalLost;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIsExcludedFromTeamMission;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<FPalWorkSuitabilityOverflowGrantedInfo> WorkSuitabilityOverflowGrantedRankList;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FDateTime PartnerSkillLastUsedTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PartnerSkillCoolDownTimeMax;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    uint8 ExpTableMigrationVersion;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalIndividualCharacterCacheParameter Dynamic;

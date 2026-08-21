@@ -5,7 +5,6 @@
 #include "Widgets/Input/IVirtualKeyboardEntry.h"
 #include "Types/SlateEnums.h"
 #include "Styling/SlateTypes.h"
-#include "Styling/SlateTypes.h"
 #include "Components/TextWidgetTypes.h"
 #include "Components/Widget.h"
 #include "PalMultiLineEditableTextBox.generated.h"

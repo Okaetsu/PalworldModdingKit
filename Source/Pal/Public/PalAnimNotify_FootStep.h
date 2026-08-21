@@ -1,8 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Animation/AnimNotifies/AnimNotify.h"
 #include "Engine/HitResult.h"
 #include "Chaos/ChaosEngineInterface.h"
@@ -38,7 +36,7 @@ public:
     bool GetFloorPosition(AActor* Owner, FTransform FootTransform, FHitResult& HitResult) const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure=false)
-    bool CalcFootStepDecalTransform(AActor* Owner, FVector FootBoneLocation, float MaxHeightAboveGround, FVector& OutLocation, FVector& OutNormal) const;
+    static bool CalcFootStepDecalTransform(AActor* Owner, FVector FootBoneLocation, float MaxHeightAboveGround, FVector& OutLocation, FVector& OutNormal);
     
 };
 

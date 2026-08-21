@@ -6,8 +6,8 @@ FPalIndividualCharacterCacheParameter::FPalIndividualCharacterCacheParameter() {
     this->bResurrectingOnBed = false;
     this->InvaderType = EPalInvaderType::None;
     this->bIsInArena = false;
-    this->ArenaDamageRate = 0.00f;
-    this->OverrideLevel = 0;
+    this->ArenaDamageRate = 1.00f;
+    this->OverrideLevel = -1;
     this->GroupType = EPalGroupType::Undefined;
 }
 

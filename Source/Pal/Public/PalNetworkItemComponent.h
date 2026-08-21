@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "PalContainerId.h"
 #include "PalItemSlotId.h"
@@ -52,6 +51,9 @@ private:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestDispose_ToServer(const FGuid& RequestID, const FPalItemSlotIdAndNum& SlotInfo);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestConsumeSphereAndRecover_ToServer(const FName& SphereItemId, int32 ConsumeNum);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeFilter_ToServer(const FPalContainerId& ContainerId, const FName FilterName, const bool bIsOn);

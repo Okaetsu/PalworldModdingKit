@@ -20,7 +20,7 @@ public:
     FName WorkerNum_CompleteMsgID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName BuildObject1;
+    TArray<FName> BuildObject1;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 BuildObjectNum1;
@@ -32,7 +32,7 @@ public:
     FName BuildObject1_CompleteMsgID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName BuildObject2;
+    TArray<FName> BuildObject2;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 BuildObjectNum2;
@@ -44,7 +44,7 @@ public:
     FName BuildObject2_CompleteMsgID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FName BuildObject3;
+    TArray<FName> BuildObject3;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 BuildObjectNum3;

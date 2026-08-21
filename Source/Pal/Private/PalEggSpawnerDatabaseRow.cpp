@@ -1,12 +1,12 @@
 #include "PalEggSpawnerDatabaseRow.h"
 
 FPalEggSpawnerDatabaseRow::FPalEggSpawnerDatabaseRow() {
-    this->RespawnTimeMinutesObtained = 0.00f;
-    this->bRespawnableMulti = false;
+    this->RespawnTimeMinutesObtained = 300.00f;
+    this->bRespawnableMulti = true;
     this->bIsWorldTreePalEgg = false;
     this->WorldTreePalEggProbability = 0;
-    this->ProbabilityRespawn = 0;
-    this->LotteryCoolTimeMinutes = 0.00f;
+    this->ProbabilityRespawn = 100;
+    this->LotteryCoolTimeMinutes = 180.00f;
     this->bAdjustMapObjectToFloor = false;
 }
 

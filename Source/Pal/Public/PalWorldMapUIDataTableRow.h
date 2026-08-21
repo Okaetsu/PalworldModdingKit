@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/DataTable.h"
 #include "PalWorldMapUIRegionData.h"
 #include "PalWorldMapUIDataTableRow.generated.h"

@@ -3,6 +3,6 @@
 FPalVisitorNPCDatabaseRow::FPalVisitorNPCDatabaseRow() {
     this->ActionTimeLimit = EPalIVisitorNPCAction::None;
     this->IsSquad = false;
-    this->FormationRow = 0;
+    this->FormationRow = 2;
 }
 

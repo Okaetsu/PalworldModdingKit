@@ -1,10 +1,10 @@
 #include "PalSlateNavigationSetting.h"
 
 FPalSlateNavigationSetting::FPalSlateNavigationSetting() {
-    this->IsEnableAnalogNavigation = false;
-    this->IsEnableLeftKeyNavigation = false;
-    this->IsEnableRightKeyNavigation = false;
-    this->IsEnableDownKeyNavigation = false;
-    this->IsEnableUpKeyNavigation = false;
+    this->IsEnableAnalogNavigation = true;
+    this->IsEnableLeftKeyNavigation = true;
+    this->IsEnableRightKeyNavigation = true;
+    this->IsEnableDownKeyNavigation = true;
+    this->IsEnableUpKeyNavigation = true;
 }
 

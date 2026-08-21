@@ -1,6 +1,6 @@
 #include "PalFishingSpotLotteryNameDataRow.h"
 
 FPalFishingSpotLotteryNameDataRow::FPalFishingSpotLotteryNameDataRow() {
-    this->RespawnTime = 0.00f;
+    this->RespawnTime = 10.00f;
 }
 

@@ -2,7 +2,7 @@
 
 FPalEggRankInfo::FPalEggRankInfo() {
     this->PalRarity = 0;
-    this->EggScale = 0.00f;
-    this->HatchingSpeedDivisionRate = 0.00f;
+    this->EggScale = 1.00f;
+    this->HatchingSpeedDivisionRate = 1.00f;
 }
 

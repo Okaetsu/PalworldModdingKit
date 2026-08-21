@@ -4,8 +4,6 @@
 #include "Styling/SlateTypes.h"
 #include "Types/SlateEnums.h"
 #include "Layout/Margin.h"
-#include "Styling/SlateTypes.h"
-#include "Styling/SlateTypes.h"
 #include "Components/SlateWrapperTypes.h"
 #include "Components/PanelWidget.h"
 #include "EPalDescendantScrollDestination.h"

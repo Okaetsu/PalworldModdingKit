@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Types/SlateEnums.h"
-#include "Types/SlateEnums.h"
 #include "Layout/Margin.h"
 #include "Components/PanelSlot.h"
 #include "PalScrollBoxSlot.generated.h"

@@ -1,7 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "PalWorkPositionVisualizerSettings.generated.h"
 
 class UStaticMesh;

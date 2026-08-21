@@ -1,6 +1,6 @@
 #include "PalOptionOnlineUserSettings.h"
 
 FPalOptionOnlineUserSettings::FPalOptionOnlineUserSettings() {
-    this->TermsOfUseAgreementNumber = 0;
+    this->TermsOfUseAgreementNumber = -1;
 }
 

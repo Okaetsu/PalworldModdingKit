@@ -2,8 +2,6 @@
 #include "CoreMinimal.h"
 #include "Camera/CameraShakeBase.h"
 #include "LegacyCameraShake.h"
-#include "LegacyCameraShake.h"
-#include "LegacyCameraShake.h"
 #include "PalCameraShakeBase.generated.h"
 
 class UCurveFloat;

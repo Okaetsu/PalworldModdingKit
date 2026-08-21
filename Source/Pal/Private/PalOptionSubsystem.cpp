@@ -61,7 +61,7 @@ void UPalOptionSubsystem::RequestSaveLocalSaveData() {
 void UPalOptionSubsystem::ReleaseTemporaryVolumetricFogForLocalEffect(UObject* Requester) {
 }
 
-void UPalOptionSubsystem::RefreshBanList() {
+void UPalOptionSubsystem::RefreshBanListPeriodic() {
 }
 
 void UPalOptionSubsystem::OnCompletedGetBanlist(const FString& ResponseBody, bool bResponseOK, int32 ResponseCode) {

@@ -1,6 +1,6 @@
 #include "PalMapObjectSpawnerTreasureBoxLotteryParameter.h"
 
 FPalMapObjectSpawnerTreasureBoxLotteryParameter::FPalMapObjectSpawnerTreasureBoxLotteryParameter() {
-    this->Weight = 0;
+    this->Weight = 1;
 }
 

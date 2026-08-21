@@ -10,6 +10,6 @@ FPalBaseCampWorkerEventMasterData::FPalBaseCampWorkerEventMasterData() {
     this->TriggerSkipCount = 0;
     this->logPriority = EPalLogPriority::None;
     this->LogTone = EPalLogContentToneType::Normal;
-    this->Invalid = false;
+    this->Invalid = true;
 }
 

@@ -1,7 +1,7 @@
 #include "PalMapObjectFishPondLotteryTargetData.h"
 
 FPalMapObjectFishPondLotteryTargetData::FPalMapObjectFishPondLotteryTargetData() {
-    this->RequiredMaterialItemNum = 0;
-    this->RequiredWorkAmound = 0.00f;
+    this->RequiredMaterialItemNum = 10;
+    this->RequiredWorkAmound = 100.00f;
 }
 

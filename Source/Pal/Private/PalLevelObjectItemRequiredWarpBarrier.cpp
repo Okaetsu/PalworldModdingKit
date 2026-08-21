@@ -16,7 +16,9 @@ APalLevelObjectItemRequiredWarpBarrier::APalLevelObjectItemRequiredWarpBarrier(c
     this->bSkipConfirmDialog = false;
     this->BlockingCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BlockingCollision"));
     this->TeleportArrow_Forward = CreateDefaultSubobject<UArrowComponent>(TEXT("TeleportArrow_Forward"));
+    this->TeleportArrow_Forward->ArrowSize = 1.50f;
     this->TeleportArrow_Backward = CreateDefaultSubobject<UArrowComponent>(TEXT("TeleportArrow_Backward"));
+    this->TeleportArrow_Backward->ArrowSize = 1.50f;
     this->BarrierEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("BarrierEffect"));
     this->SequenceActor = NULL;
     this->BarrierEffect->SetupAttachment(RootComponent);

@@ -1,7 +1,7 @@
 #include "PalBaseCampWorkerWalkAroundSettings.h"
 
 FPalBaseCampWorkerWalkAroundSettings::FPalBaseCampWorkerWalkAroundSettings() {
-    this->WalkAroundArrivalRange = 0.00f;
-    this->WalkAroundNextDistance = 0.00f;
+    this->WalkAroundArrivalRange = 100.00f;
+    this->WalkAroundNextDistance = 1000.00f;
 }
 

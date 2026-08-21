@@ -1,6 +1,6 @@
 #include "PalCharacterSlotSaveData.h"
 
 FPalCharacterSlotSaveData::FPalCharacterSlotSaveData() {
-    this->SlotIndex = 0;
+    this->SlotIndex = -1;
 }
 

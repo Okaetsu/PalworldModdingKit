@@ -11,6 +11,7 @@ UPalGameLocalSettings::UPalGameLocalSettings() {
     this->DLSSGeneratedFrames = 1;
     this->ReflexMode = EPalReflexMode::On;
     this->GraphicsCommonQuality = 2;
+    this->SelectedWindowMode = 1;
     this->bAppliedSteamDeckSettings = false;
     this->bNotifyGuildMemberJoined = false;
     this->bNotifyGuildMemberLeft = false;

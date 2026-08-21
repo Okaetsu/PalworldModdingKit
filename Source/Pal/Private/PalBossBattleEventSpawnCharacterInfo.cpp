@@ -1,7 +1,7 @@
 #include "PalBossBattleEventSpawnCharacterInfo.h"
 
 FPalBossBattleEventSpawnCharacterInfo::FPalBossBattleEventSpawnCharacterInfo() {
-    this->Level = 0;
+    this->Level = 1;
     this->AIControllerClass = NULL;
 }
 

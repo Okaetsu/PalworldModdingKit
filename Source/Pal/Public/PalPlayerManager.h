@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "PalDeadInfo.h"
 #include "PalGamePlayerDataSaveInterface.h"
 #include "PalInstanceID.h"
 #include "PalPlayerClassStructSet.h"
@@ -36,6 +37,9 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     void OnCreatedIndividualHandleByAppliedSaveData_ServerInternal(FPalInstanceID IndividualId);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnCharacterDeadForPredatorRecord_ServerInternal(const FPalDeadInfo& DeadInfo);
     
 
     // Fix for true pure virtual functions not being implemented

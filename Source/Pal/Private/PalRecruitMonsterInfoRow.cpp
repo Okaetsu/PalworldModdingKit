@@ -2,7 +2,7 @@
 
 FPalRecruitMonsterInfoRow::FPalRecruitMonsterInfoRow() {
     this->Weight = 0.00f;
-    this->LevelMin = 0;
-    this->LevelMax = 0;
+    this->LevelMin = 1;
+    this->LevelMax = 1;
 }
 

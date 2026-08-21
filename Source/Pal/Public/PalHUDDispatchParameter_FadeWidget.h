@@ -39,6 +39,9 @@ public:
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FFadeWidgetDelegate OnEndFadeOut;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UPalHUDDispatchParameter_FadeWidget*> OtherFadeParameterHolder;
+    
     UPalHUDDispatchParameter_FadeWidget();
 
     UFUNCTION(BlueprintCallable)

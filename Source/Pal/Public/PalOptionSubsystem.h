@@ -185,7 +185,7 @@ public:
     
 private:
     UFUNCTION(BlueprintCallable)
-    void RefreshBanList();
+    void RefreshBanListPeriodic();
     
     UFUNCTION(BlueprintCallable)
     void OnCompletedGetBanlist(const FString& ResponseBody, bool bResponseOK, int32 ResponseCode);

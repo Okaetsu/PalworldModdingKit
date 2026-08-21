@@ -1,6 +1,6 @@
 #include "PalMapObjectSpawnerSimpleLotteryParameter.h"
 
 FPalMapObjectSpawnerSimpleLotteryParameter::FPalMapObjectSpawnerSimpleLotteryParameter() {
-    this->Weight = 0;
+    this->Weight = 1;
 }
 

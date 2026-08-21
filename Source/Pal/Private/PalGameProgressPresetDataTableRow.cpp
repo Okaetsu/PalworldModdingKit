@@ -1,7 +1,7 @@
 #include "PalGameProgressPresetDataTableRow.h"
 
 FPalGameProgressPresetDataTableRow::FPalGameProgressPresetDataTableRow() {
-    this->Level = 0;
+    this->Level = 1;
     this->HPLevel = 0;
     this->SPLevel = 0;
     this->AttackLevel = 0;

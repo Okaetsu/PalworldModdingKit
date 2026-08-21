@@ -1,6 +1,6 @@
 #include "PalCharacterSlotId.h"
 
 FPalCharacterSlotId::FPalCharacterSlotId() {
-    this->SlotIndex = 0;
+    this->SlotIndex = -1;
 }
 

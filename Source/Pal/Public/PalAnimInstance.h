@@ -1,8 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Animation/AnimInstance.h"
 #include "Animation/AnimNotifies/AnimNotify.h"
 #include "FlagContainer.h"
@@ -22,10 +20,10 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnMontageNotifyEnd, UAnimMontage*, Montage, FName, NotifyName);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnMontageNotifyBegin, UAnimMontage*, Montage, FName, NotifyName);
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnMontageNotifyBegin OnMontageNotifyBeginDelegate;
     
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnMontageNotifyEnd OnMontageNotifyEndDelegate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -103,7 +101,7 @@ public:
     void ReplaceCurrentReservedMontage(FReserveMontage Montage);
     
 private:
-    UFUNCTION(BlueprintCallable)
+    UFUNCTION()
     void OnMontageEndedCallback(UAnimMontage* Montage, bool bInterrupted);
     
 public:

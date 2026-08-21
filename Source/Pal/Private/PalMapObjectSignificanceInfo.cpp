@@ -2,8 +2,8 @@
 
 FPalMapObjectSignificanceInfo::FPalMapObjectSignificanceInfo() {
     this->DistanceInRangeFromPlayer = 0.00f;
-    this->TickInterval = 0.00f;
-    this->bBuildObjectVisible = false;
+    this->TickInterval = -1.00f;
+    this->bBuildObjectVisible = true;
     this->bInvalidTickForSkeletalMeshComponent = false;
 }
 

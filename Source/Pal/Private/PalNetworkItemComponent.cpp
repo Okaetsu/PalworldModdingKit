@@ -21,6 +21,9 @@ void UPalNetworkItemComponent::RequestDrop_ToServer_Implementation(const TArray<
 void UPalNetworkItemComponent::RequestDispose_ToServer_Implementation(const FGuid& RequestID, const FPalItemSlotIdAndNum& SlotInfo) {
 }
 
+void UPalNetworkItemComponent::RequestConsumeSphereAndRecover_ToServer_Implementation(const FName& SphereItemId, int32 ConsumeNum) {
+}
+
 void UPalNetworkItemComponent::RequestChangeFilter_ToServer_Implementation(const FPalContainerId& ContainerId, const FName FilterName, const bool bIsOn) {
 }
 

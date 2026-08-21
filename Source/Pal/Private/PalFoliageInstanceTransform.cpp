@@ -1,6 +1,6 @@
 #include "PalFoliageInstanceTransform.h"
 
 FPalFoliageInstanceTransform::FPalFoliageInstanceTransform() {
-    this->ScaleX = 0.00f;
+    this->ScaleX = 1.00f;
 }
 

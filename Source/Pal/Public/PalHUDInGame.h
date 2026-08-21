@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "CommonInputModeTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "GameFramework/HUD.h"
 #include "GameplayTagContainer.h"
@@ -126,6 +127,9 @@ public:
     FGuid PushWidgetStackableUI(TSubclassOf<UPalUserWidgetStackableUI> WidgetClass, UPalHUDDispatchParameterBase* Parameter);
     
 private:
+    UFUNCTION(BlueprintCallable)
+    void OnKeyConfigChanged();
+    
     UFUNCTION(BlueprintCallable)
     void OnApplicationActivationStateChanged(bool bIsFocused);
     

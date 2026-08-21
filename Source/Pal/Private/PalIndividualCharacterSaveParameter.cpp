@@ -3,8 +3,8 @@
 FPalIndividualCharacterSaveParameter::FPalIndividualCharacterSaveParameter() {
     this->Gender = EPalGenderType::None;
     this->CharacterClass = NULL;
-    this->Level = 0;
-    this->Rank = 0;
+    this->Level = 1;
+    this->Rank = 1;
     this->RankUpExp = 0;
     this->Rank_HP = 0;
     this->Rank_Attack = 0;
@@ -17,7 +17,7 @@ FPalIndividualCharacterSaveParameter::FPalIndividualCharacterSaveParameter() {
     this->Talent_Melee = 0;
     this->Talent_Shot = 0;
     this->Talent_Defense = 0;
-    this->FullStomach = 0.00f;
+    this->FullStomach = 100.00f;
     this->PhysicalHealth = EPalStatusPhysicalHealthType::Healthful;
     this->WorkerSick = EPalBaseCampWorkerSickType::None;
     this->DyingTimer = 0;
@@ -26,11 +26,11 @@ FPalIndividualCharacterSaveParameter::FPalIndividualCharacterSaveParameter() {
     this->CraftSpeed = 0;
     this->bApplyShieldDamage = false;
     this->HungerType = EPalStatusHungerType::Default;
-    this->SanityValue = 0.00f;
+    this->SanityValue = 100.00f;
     this->BaseCampWorkerEventType = EPalBaseCampWorkerEventType::None;
     this->BaseCampWorkerEventProgressTime = 0.00f;
-    this->MaxFullStomach = 0.00f;
-    this->FullStomachDecreaseRate_Tribe = 0.00f;
+    this->MaxFullStomach = 100.00f;
+    this->FullStomachDecreaseRate_Tribe = 1.00f;
     this->UnusedStatusPoint = 0;
     this->Tiemr_FoodWithStatusEffect = 0;
     this->Tiemr_FoodWithFullStomachKeep = 0;
@@ -48,7 +48,7 @@ FPalIndividualCharacterSaveParameter::FPalIndividualCharacterSaveParameter() {
     this->FriendshipBasecampSec = 0;
     this->bFavoriteChangedByFriendship = false;
     this->ArenaRankPoint = 0;
-    this->bDisableSaleInPalLost = false;
+    this->bDisableSaleInPalLost = true;
     this->bIsExcludedFromTeamMission = false;
     this->PartnerSkillCoolDownTimeMax = 0.00f;
     this->ExpTableMigrationVersion = 0;

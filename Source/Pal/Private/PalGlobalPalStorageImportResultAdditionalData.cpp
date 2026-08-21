@@ -1,7 +1,7 @@
 #include "PalGlobalPalStorageImportResultAdditionalData.h"
 
 FPalGlobalPalStorageImportResultAdditionalData::FPalGlobalPalStorageImportResultAdditionalData() {
-    this->OverwriteTargetSlotIndex = 0;
-    this->ImportedSlotIndex = 0;
+    this->OverwriteTargetSlotIndex = -1;
+    this->ImportedSlotIndex = -1;
 }
 

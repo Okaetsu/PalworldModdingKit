@@ -2,6 +2,6 @@
 
 FPalStaticCharacterInfo_WaterEffect::FPalStaticCharacterInfo_WaterEffect() {
     this->Effect = NULL;
-    this->Scale = 0.00f;
+    this->Scale = 1.00f;
 }
 

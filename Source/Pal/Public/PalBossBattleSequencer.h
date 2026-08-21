@@ -120,6 +120,9 @@ public:
     void SetAllPlayerMoveDisable(bool Disable);
     
     UFUNCTION(BlueprintCallable)
+    void ReviveAllOtomoRevivingPlayers_ServerInternal();
+    
+    UFUNCTION(BlueprintCallable)
     void RemovePlayerFromInRoomList(APalPlayerCharacter* Player);
     
     UFUNCTION(BlueprintCallable)

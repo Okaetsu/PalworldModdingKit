@@ -6,7 +6,11 @@ APalDimensionalDistortionSpawner::APalDimensionalDistortionSpawner(const FObject
     this->RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootSceneComponent"));
     this->RootSceneComponent = (USceneComponent*)RootComponent;
     this->DetectionRangeSphere = CreateDefaultSubobject<USphereComponent>(TEXT("DetectionRangeSphere"));
+    this->DetectionRangeSphere->bVisibleInReflectionCaptures = false;
+    this->DetectionRangeSphere->bVisibleInRayTracing = false;
     this->WanderingRangeSphere = CreateDefaultSubobject<USphereComponent>(TEXT("WanderingRangeSphere"));
+    this->WanderingRangeSphere->bVisibleInReflectionCaptures = false;
+    this->WanderingRangeSphere->bVisibleInRayTracing = false;
     this->PawnClass = NULL;
     this->MaxSpawnCount = 1;
     this->SpawnInterval = 10.00f;

@@ -2,10 +2,6 @@
 #include "CoreMinimal.h"
 #include "CommonPlayerController.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Engine/HitResult.h"
 #include "ActionDynamicParameter.h"
 #include "DelegateTickFunction.h"
@@ -590,6 +586,9 @@ public:
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeRole_ToServer(const FGuid& TargetPlayerUId, EPalGuildRole NewRole);
+    
+    UFUNCTION(BlueprintCallable, Reliable, Server)
+    void RequestChangeNowEquipBallItemID_ToServer(FName NextBallID);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeGuildName_ToServer(const FString& NewGuildName);

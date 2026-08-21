@@ -1,8 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AkGameplayStatics.h"
+#include "AkGameplayTypes.h"
 #include "UObject/Object.h"
-#include "UObject/NoExportTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "Chaos/ChaosEngineInterface.h"
 #include "EPalAkComponentTickPolicy.h"

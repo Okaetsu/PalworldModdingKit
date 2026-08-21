@@ -1,7 +1,7 @@
 #include "PalWorkAssignInfo.h"
 
 FPalWorkAssignInfo::FPalWorkAssignInfo() {
-    this->LocationIndex = 0;
+    this->LocationIndex = -1;
     this->WorkAssign = NULL;
 }
 

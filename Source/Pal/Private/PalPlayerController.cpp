@@ -305,6 +305,9 @@ void APalPlayerController::RequestCloseDimensionStorage_ToServer_Implementation(
 void APalPlayerController::RequestChangeRole_ToServer_Implementation(const FGuid& TargetPlayerUId, EPalGuildRole NewRole) {
 }
 
+void APalPlayerController::RequestChangeNowEquipBallItemID_ToServer_Implementation(FName NextBallID) {
+}
+
 void APalPlayerController::RequestChangeGuildName_ToServer_Implementation(const FString& NewGuildName) {
 }
 

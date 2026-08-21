@@ -1,6 +1,6 @@
 #include "PalQuestBlockerCondition.h"
 
 FPalQuestBlockerCondition::FPalQuestBlockerCondition() {
-    this->BlockIndex = 0;
+    this->BlockIndex = -1;
 }
 

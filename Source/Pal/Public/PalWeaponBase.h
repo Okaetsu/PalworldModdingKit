@@ -1,8 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "GameFramework/Actor.h"
 #include "EPalAdditionalEffectType.h"
 #include "EPalDamageAnimationReactionType.h"
@@ -563,6 +561,9 @@ public:
     FName GetAltFireActionName() const;
     
 protected:
+    UFUNCTION(BlueprintCallable)
+    int32 DecrementCurrentSelectPalSphereWithRecovery(int32 RequestConsumeNum, FName& UsedItemID);
+    
     UFUNCTION(BlueprintCallable)
     int32 DecrementCurrentSelectPalSphere(int32 RequestConsumeNum, FName& UsedItemID);
     

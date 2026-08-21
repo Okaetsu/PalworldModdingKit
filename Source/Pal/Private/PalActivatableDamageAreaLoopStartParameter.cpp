@@ -1,8 +1,8 @@
 #include "PalActivatableDamageAreaLoopStartParameter.h"
 
 FPalActivatableDamageAreaLoopStartParameter::FPalActivatableDamageAreaLoopStartParameter() {
-    this->LoopInterval = 0.00f;
-    this->LoopCount = 0;
-    this->ActiveInterval = 0.00f;
+    this->LoopInterval = 1.00f;
+    this->LoopCount = 1;
+    this->ActiveInterval = 1.00f;
 }
 

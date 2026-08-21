@@ -1,7 +1,7 @@
 #include "PalMapObjectPoolSpawnState.h"
 
 FPalMapObjectPoolSpawnState::FPalMapObjectPoolSpawnState() {
-    this->bSpawnedInWorld = false;
+    this->bSpawnedInWorld = true;
     this->Revision = 0;
 }
 

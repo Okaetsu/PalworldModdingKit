@@ -1,8 +1,8 @@
 #include "PalCapturedCageInfoDatabaseRow.h"
 
 FPalCapturedCageInfoDatabaseRow::FPalCapturedCageInfoDatabaseRow() {
-    this->Weight = 0.00f;
-    this->MinLevel = 0;
-    this->MaxLevel = 0;
+    this->Weight = 1.00f;
+    this->MinLevel = 1;
+    this->MaxLevel = 1;
 }
 

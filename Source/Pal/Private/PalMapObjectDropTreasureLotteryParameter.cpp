@@ -1,7 +1,7 @@
 #include "PalMapObjectDropTreasureLotteryParameter.h"
 
 FPalMapObjectDropTreasureLotteryParameter::FPalMapObjectDropTreasureLotteryParameter() {
-    this->Weight = 0;
-    this->Num = 0;
+    this->Weight = 1;
+    this->Num = 1;
 }
 

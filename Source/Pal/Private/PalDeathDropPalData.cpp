@@ -1,11 +1,11 @@
 #include "PalDeathDropPalData.h"
 
 FPalDeathDropPalData::FPalDeathDropPalData() {
-    this->Level = 0;
-    this->Talent_HP = 0;
-    this->Talent_Shot = 0;
-    this->Talent_Defense = 0;
-    this->bRandomPassiveSkillIfEmpty = false;
+    this->Level = 1;
+    this->Talent_HP = -1;
+    this->Talent_Shot = -1;
+    this->Talent_Defense = -1;
+    this->bRandomPassiveSkillIfEmpty = true;
     this->FriendshipPoint = 0;
 }
 

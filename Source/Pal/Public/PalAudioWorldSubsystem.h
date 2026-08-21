@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
-#include "AkGameplayStatics.h"
+#include "AkGameplayTypes.h"
 #include "UObject/NoExportTypes.h"
 #include "EPalAudioRTPC.h"
 #include "EPalAudioState.h"

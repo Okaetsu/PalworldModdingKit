@@ -1,8 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
-#include "UObject/NoExportTypes.h"
 #include "Components/ActorComponent.h"
 #include "FlagContainer.h"
 #include "PalUVEyeComponent.generated.h"

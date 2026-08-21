@@ -1,17 +1,17 @@
 #include "PalOptionAudioSettings.h"
 
 FPalOptionAudioSettings::FPalOptionAudioSettings() {
-    this->Master = 0.00f;
-    this->BGM = 0.00f;
-    this->SE = 0.00f;
-    this->PalVoice = 0.00f;
-    this->PlayerVoice = 0.00f;
-    this->NPCVoice = 0.00f;
-    this->Ambient = 0.00f;
-    this->UI = 0.00f;
-    this->bEnableRarePalEffectSound = false;
-    this->bEnablePalEffectSound = false;
-    this->bEnableCraneGameSound = false;
-    this->bEnableBaseCampPalWorkingSound = false;
+    this->Master = 0.50f;
+    this->BGM = 1.00f;
+    this->SE = 1.00f;
+    this->PalVoice = 1.00f;
+    this->PlayerVoice = 1.00f;
+    this->NPCVoice = 1.00f;
+    this->Ambient = 1.00f;
+    this->UI = 1.00f;
+    this->bEnableRarePalEffectSound = true;
+    this->bEnablePalEffectSound = true;
+    this->bEnableCraneGameSound = true;
+    this->bEnableBaseCampPalWorkingSound = true;
 }
 

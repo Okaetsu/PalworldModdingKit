@@ -331,6 +331,10 @@ FName APalWeaponBase::GetAltFireActionName() const {
     return NAME_None;
 }
 
+int32 APalWeaponBase::DecrementCurrentSelectPalSphereWithRecovery(int32 RequestConsumeNum, FName& UsedItemID) {
+    return 0;
+}
+
 int32 APalWeaponBase::DecrementCurrentSelectPalSphere(int32 RequestConsumeNum, FName& UsedItemID) {
     return 0;
 }

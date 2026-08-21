@@ -1,7 +1,7 @@
 #include "PalUIGuildLabResearchInfo.h"
 
 FPalUIGuildLabResearchInfo::FPalUIGuildLabResearchInfo() {
-    this->RequiredWorkSuitabilityRank = 0;
+    this->RequiredWorkSuitabilityRank = 1;
     this->bCompleted = false;
 }
 

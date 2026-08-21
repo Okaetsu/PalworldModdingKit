@@ -127,7 +127,7 @@ UPalGameInstance::UPalGameInstance() {
     this->ShopManagerSubsystemClass = UPalShopManager::StaticClass();
     this->ObjectPoolClass = NULL;
     this->FishingSystemClass = NULL;
-    this->revisionNum = 100427;
+    this->revisionNum = 101283;
     this->bUseAsyncMovement = true;
     this->MemoryWarningThresholdMB = 0;
     this->bShowEarlyAccessDialogOnGDK = false;

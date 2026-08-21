@@ -1,15 +1,15 @@
 #include "PalFoliagePresetData.h"
 
 FPalFoliagePresetData::FPalFoliagePresetData() {
-    this->Hp = 0;
-    this->bNotDropItemIfDamagedOverMaxHp = false;
+    this->Hp = 1000;
+    this->bNotDropItemIfDamagedOverMaxHp = true;
     this->DropItemNum = 0;
-    this->DropEXP = 0;
-    this->DestroyFXType = EPalMapObjectDestroyFXType::None;
+    this->DropEXP = 5;
+    this->DestroyFXType = EPalMapObjectDestroyFXType::Normal;
     this->DestroyFXLocationRateByStaticMesh = 0.00f;
-    this->DistanceFromPlayerNotRespawn = 0.00f;
-    this->RespawnIntervalRealMinutes = 0;
-    this->RetryRespawnIntervalRealMinutes = 0;
+    this->DistanceFromPlayerNotRespawn = 500.00f;
+    this->RespawnIntervalRealMinutes = 10;
+    this->RetryRespawnIntervalRealMinutes = 1;
     this->AutoDecayProximityDistance = 0.00f;
 }
 

@@ -2,6 +2,6 @@
 
 FPalHateInfo::FPalHateInfo() {
     this->HateValue = 0.00f;
-    this->bEnabled = false;
+    this->bEnabled = true;
 }
 

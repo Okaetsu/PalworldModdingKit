@@ -1,6 +1,6 @@
 #include "PalItemSlotId.h"
 
 FPalItemSlotId::FPalItemSlotId() {
-    this->SlotIndex = 0;
+    this->SlotIndex = -1;
 }
 

@@ -1,6 +1,6 @@
 #include "PalMapObjectFishPondCaughtCharacterInfo.h"
 
 FPalMapObjectFishPondCaughtCharacterInfo::FPalMapObjectFishPondCaughtCharacterInfo() {
-    this->CharacterLevel = 0;
+    this->CharacterLevel = 1;
 }
 

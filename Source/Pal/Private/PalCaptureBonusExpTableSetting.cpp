@@ -1,7 +1,7 @@
 #include "PalCaptureBonusExpTableSetting.h"
 
 FPalCaptureBonusExpTableSetting::FPalCaptureBonusExpTableSetting() {
-    this->TableReferenceNum = 0;
-    this->TableIndexCount = 0;
+    this->TableReferenceNum = 1;
+    this->TableIndexCount = 1;
 }
 

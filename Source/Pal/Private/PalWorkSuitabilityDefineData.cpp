@@ -1,6 +1,7 @@
 #include "PalWorkSuitabilityDefineData.h"
 
 FPalWorkSuitabilityDefineData::FPalWorkSuitabilityDefineData() {
-    this->bIsChangeWorkAnimPlayRate = false;
+    this->bIsChangeWorkAnimPlayRate = true;
+    this->CraftSpeeds.AddDefaulted(11);
 }
 
