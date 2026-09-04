@@ -20,16 +20,7 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"PlatformAllowList": [
-				"Linux",
-				"LinuxArm64",
-				"Win64",
-				"Mac",
-				"IOS",
-				"TVOS",
-				"Android",
-				"PS5",
-				"XB1",
-				"XSX"
+				"Win64"
 			]
 		}
 	]
