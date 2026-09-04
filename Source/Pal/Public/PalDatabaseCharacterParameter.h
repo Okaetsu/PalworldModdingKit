@@ -164,7 +164,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool GetUseBossHPGauge(FName RowName);
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalTribeID GetTribe(FName RowName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

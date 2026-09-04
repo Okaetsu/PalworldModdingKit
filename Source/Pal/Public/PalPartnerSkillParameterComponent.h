@@ -140,7 +140,7 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TSubclassOf<APalAIController> FunnelControllerClass;
     
-    UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalWazaID FunnelAttackWazaID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -303,7 +303,7 @@ public:
     UFUNCTION()
     float GetWazaPowerRate(EPalWazaID Waza) const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     EPalWazaID GetWazaID() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

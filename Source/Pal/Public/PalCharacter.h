@@ -412,7 +412,7 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAllActiveSkillCooldownFinished() const;
     
-    UFUNCTION(BlueprintPure)
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsActiveSkillCooldownFinished(const EPalWazaID WazaID) const;
     
 protected:
