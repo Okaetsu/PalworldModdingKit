@@ -19,6 +19,7 @@
 #include "EPalStatusID.h"
 #include "EPalSupportedPlatformType.h"
 #include "EPalUIRewardDisplayType.h"
+#include "EPalWazaID.h"
 #include "EPalWeaponType.h"
 #include "EPalWorkAssignableCheckResult.h"
 #include "EPalWorkSuitability.h"
@@ -143,6 +144,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float WazaReselectTimeoutSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TMap<EPalWazaID, int32> WazaSelectPowerOverrideMap;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float PlayerHPRateFromRespawn;
@@ -1276,6 +1280,12 @@ public:
     int32 InvadeStartPoint_BaseCampRadius_Max_cm;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float InvaderTargetBaseCampRangeMargin;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float InvaderOutOfRangePlayerHateKeepThreshold;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float InvaderPathWaterContinuousDistanceThreshold;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -1714,6 +1724,15 @@ public:
     float FoliageExtentsXY;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WorldTreeWoodDecayLogNotifyDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WorldTreeOreDecayLogNotifyDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float WorldTreeDecayLogNotifyDelaySeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     int32 FoliageChunkSeparateScale;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -2082,6 +2101,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FString> SkippedAchievementIdsOnPS5;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<float> FishingDifficultyRateSteps;
+    
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UDataTable* SoundSourceDataTable;
@@ -2120,6 +2142,12 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetMiningDamageRate(int32 MiningRank);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetFishingDifficultyStepIndexByRate(const float Rate) const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    float GetFishingDifficultyRateByStepIndex(const int32 StepIndex) const;
     
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, BlueprintPure)
     float GetEnemyMarkScale(const FVector& targetPosition, const FVector& selfPosition);

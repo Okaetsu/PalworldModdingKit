@@ -11,6 +11,7 @@
 #include "PalFishingCatchBattleParameter.h"
 #include "PalFishingCutsceneCharacterInfo.h"
 #include "PalFishingCutsceneInfo.h"
+#include "PalFishingRecommendInfo.h"
 #include "PalGrantCharacterRequestData.h"
 #include "PalStaticItemIdAndNum.h"
 #include "PalFishingComponent.generated.h"
@@ -30,13 +31,17 @@ public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnStartAimDelegate, const TArray<FPalStaticItemIdAndNum>&, BaitItemInfoList, int32, SelectedIndex);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPickFishDelegate, FVector, FloatLocation);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLoadedCutsceneInfoDelegate, const FPalFishingCutsceneInfo&, CutsceneInfo);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFishingPalAdviceDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFirstFishingDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFinishedShowCutsceneDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFailedFightDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFailedCatchBattleDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndFishingDelegate);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndAimDelegate);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeTargetSpotRecommendDelegate, const FPalFishingRecommendInfo&, RecommendInfo);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeTargetSpotDelegate, EPalFishingSpotDifficultyType, DifficultyType);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeSpotAimingDelegate, bool, bIsSpotAiming);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeHitInputAcceptDelegate, bool, IsAccept);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeBaitDelegate, int32, SelectIndex);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnCancelFishingDelegate);
     
@@ -77,10 +82,22 @@ public:
     FOnPickFishDelegate OnPickFishDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChangeHitInputAcceptDelegate OnChangeHitInputAcceptDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeBaitDelegate OnChangeBaitDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeTargetSpotDelegate OnChangeTargetSpotDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChangeTargetSpotRecommendDelegate OnChangeTargetSpotRecommendDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChangeSpotAimingDelegate OnChangeSpotAimingDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnFishingPalAdviceDelegate OnFishingPalAdviceDelegate;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnFirstFishingDelegate OnFirstFishingDelegate;
@@ -142,6 +159,15 @@ private:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FPalGrantCharacterRequestData GrantCharacterData;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsPalSkillAdviceTarget;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsHitInputAccepting;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    bool bIsSpotAiming;
     
 public:
     UPalFishingComponent(const FObjectInitializer& ObjectInitializer);
@@ -220,6 +246,11 @@ private:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void NotifyEndFishing_ToALL();
     
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsPalSkillAdviceTarget() const;
+    
+private:
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsFishingButtonPressed() const;
     

@@ -6,6 +6,7 @@
 #include "EPalAudioState.h"
 #include "EPalAudioStateGroup.h"
 #include "EPalAudioTrigger.h"
+#include "FlagContainer.h"
 #include "PalSoundOptions.h"
 #include "PalWorldSubsystem.h"
 #include "PalAudioWorldSubsystem.generated.h"
@@ -32,6 +33,9 @@ protected:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     UPalSoundPlayer* SoundPlayer;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    FFlagContainer DisableBattleBGMFlagContainer;
     
 public:
     UPalAudioWorldSubsystem();
@@ -73,6 +77,9 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
     void SetDsiableBattleBGM(bool bIsDisable);
     
+    UFUNCTION(BlueprintCallable)
+    void SetDisableBattleBGMFlag(FName flagName, bool bIsDisable);
+    
 protected:
     UFUNCTION(BlueprintCallable)
     void PostTriggerByString(const FString& Trigger);
@@ -110,6 +117,10 @@ protected:
 private:
     UFUNCTION(BlueprintCallable)
     void OnAkPostEventCallback(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo);
+    
+public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsBattleBGMDisabled() const;
     
 protected:
     UFUNCTION(BlueprintCallable)

@@ -14,5 +14,6 @@ FUITransientData::FUITransientData() {
     this->bDiscardRestoreBuildObjectList = false;
     this->bIsTipsVisible = false;
     this->bShowGameClearDialog = false;
+    this->MapZoomStep = 0;
 }
 

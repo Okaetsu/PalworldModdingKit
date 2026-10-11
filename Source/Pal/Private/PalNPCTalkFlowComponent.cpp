@@ -14,7 +14,8 @@ void UPalNPCTalkFlowComponent::RequestEndTalkFlow(bool bIsCancel) {
 void UPalNPCTalkFlowComponent::OnFinishTalkFlow() {
 }
 
-void UPalNPCTalkFlowComponent::LaunchTalkIncident(AActor* Other) {
+bool UPalNPCTalkFlowComponent::LaunchTalkIncident(AActor* Other) {
+    return false;
 }
 
 FGuid UPalNPCTalkFlowComponent::GetToken() const {

@@ -23,6 +23,12 @@ class PAL_API UPalPlayerAccount : public UObject {
 public:
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FGuid, FGuid> PlayerBuildingGroupIdByInstanceId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TMap<FGuid, int32> PlayerBuildingCountByGroupId;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FGuid PlayerUId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

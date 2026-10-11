@@ -9,6 +9,7 @@
 #include "PalDiscordClientUpdateUserUIDelegateDelegate.h"
 #include "PalDiscordInputDeviceInfo.h"
 #include "PalDiscordJoinWithPasswordDelegateDelegate.h"
+#include "PalOptionVoiceChatSettings.h"
 #include "PalDiscordClient.generated.h"
 
 class APalGameStateInGame;
@@ -101,6 +102,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnEndedCall();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnChangeVoiceChatSettings(const FPalOptionVoiceChatSettings& PrevSettings, const FPalOptionVoiceChatSettings& NewSettings);
     
 public:
     UFUNCTION(BlueprintCallable)

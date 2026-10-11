@@ -6,6 +6,7 @@ UPalProjectileMovementComponent::UPalProjectileMovementComponent(const FObjectIn
     this->bIgnoreHomingAngleLimitUntilEnteringAngleReached = false;
     this->bEnablePredictHoming = false;
     this->HomingPredictStrength = 0.00f;
+    this->SphereHomingRelicEffectCurve = NULL;
     this->bEnteringAngleReached = false;
     this->HomingLocationSet = false;
 }

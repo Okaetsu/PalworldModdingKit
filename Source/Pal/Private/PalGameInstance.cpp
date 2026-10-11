@@ -127,7 +127,7 @@ UPalGameInstance::UPalGameInstance() {
     this->ShopManagerSubsystemClass = UPalShopManager::StaticClass();
     this->ObjectPoolClass = NULL;
     this->FishingSystemClass = NULL;
-    this->revisionNum = 101283;
+    this->revisionNum = 102999;
     this->bUseAsyncMovement = true;
     this->MemoryWarningThresholdMB = 0;
     this->bShowEarlyAccessDialogOnGDK = false;
@@ -148,6 +148,9 @@ void UPalGameInstance::SetNewWorldName(const FString& WorldName) {
 }
 
 void UPalGameInstance::SetIsNewGame() {
+}
+
+void UPalGameInstance::SetAlreadyShowSaveWarningDialog() {
 }
 
 void UPalGameInstance::SetAlreadyShowModDetectionDialog() {
@@ -193,6 +196,10 @@ bool UPalGameInstance::IsNewGame() const {
 }
 
 bool UPalGameInstance::IsLoggedin() {
+    return false;
+}
+
+bool UPalGameInstance::IsAlreadyShowSaveWarningDialog() const {
     return false;
 }
 

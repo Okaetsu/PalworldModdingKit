@@ -27,9 +27,6 @@ void UPalNetworkPlayerComponent::RequestUpdatePlayerSettingsForServer_ToServer_I
 void UPalNetworkPlayerComponent::RequestUnlockTechnology_ToServer_Implementation(const FName& UnlockTechnologyName) {
 }
 
-void UPalNetworkPlayerComponent::RequestUnlockFastTravelPoint_ToServer_Implementation(const FName UnlockFlagKey) {
-}
-
 void UPalNetworkPlayerComponent::RequestTriggerTutorial_ToClient_Implementation(EPalTutorialTriggerConditionType TriggerConditionType) {
 }
 

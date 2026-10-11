@@ -1,6 +1,7 @@
 #include "PalMapObject.h"
 #include "Net/UnrealNetwork.h"
 #include "PalMapObjectDamageReactionComponent.h"
+#include "PalMapObjectVisualEffectComponent.h"
 
 APalMapObject::APalMapObject(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
     this->bReplicates = true;
@@ -8,7 +9,7 @@ APalMapObject::APalMapObject(const FObjectInitializer& ObjectInitializer) : Supe
     (*p_RemoteRole->ContainerPtrToValuePtr<TEnumAsByte<ENetRole>>(this)) = ROLE_SimulatedProxy;
     this->ConcreteModelClass = NULL;
     this->DamageReaction = CreateDefaultSubobject<UPalMapObjectDamageReactionComponent>(TEXT("DamageReaction"));
-    this->VisualEffect = NULL;
+    this->VisualEffect = CreateDefaultSubobject<UPalMapObjectVisualEffectComponent>(TEXT("VisualEffect"));
     this->bSpawnableIfOverlapped = false;
     this->bNotSpawnableIfOverlapMapObject = false;
     this->bLevelSpawnObject = false;

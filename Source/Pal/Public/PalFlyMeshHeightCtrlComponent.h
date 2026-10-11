@@ -5,6 +5,7 @@
 #include "EPalCharacterMovementCustomMode.h"
 #include "EPalFlyHeightType.h"
 #include "FixedPoint64.h"
+#include "PalDamageRactionInfo.h"
 #include "PalDeadInfo.h"
 #include "PalFlyMeshHeightCtrlComponent.generated.h"
 
@@ -101,6 +102,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnDead(FPalDeadInfo Info);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnDamage(FPalDamageRactionInfo ReactionInfo);
     
     UFUNCTION(BlueprintCallable)
     void OnChangeBattleMode(bool bIsBattleMode);

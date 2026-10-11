@@ -2,6 +2,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "EPalBuildObjectTypeA.h"
+#include "EPalLocationType.h"
 #include "PalCharacterContainerSortInfo.h"
 #include "PalUIPaldexFilterInfo.h"
 #include "UITransientData.generated.h"
@@ -75,6 +76,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     bool bShowGameClearDialog;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TSet<EPalLocationType> MapFilter;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    int32 MapZoomStep;
     
     PAL_API FUITransientData();
 };

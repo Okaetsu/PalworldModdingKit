@@ -10,6 +10,8 @@ APalLevelObject_LockGimmickPalFight::APalLevelObject_LockGimmickPalFight(const F
     this->GameStartServerTime = 0.00f;
     this->TimeLimitSeconds = 60.00f;
     this->TimeoutTeleportDelaySeconds = 2.00f;
+    this->CaptureWaitRecheckSeconds = 0.50f;
+    this->MaxCaptureHoldSeconds = 12.00f;
     this->RemainingEnemyCount = 0;
     this->TotalEnemyCount = 0;
     this->SplineComponent = CreateDefaultSubobject<USplineComponent>(TEXT("SplineComponent"));
@@ -53,9 +55,6 @@ void APalLevelObject_LockGimmickPalFight::OnPalCaptured(APalCharacter* SelfChara
 void APalLevelObject_LockGimmickPalFight::OnLightOrbArrived() {
 }
 
-
-void APalLevelObject_LockGimmickPalFight::OnCreatedIndividualParameter(UPalIndividualCharacterParameter* IndividualParameter) {
-}
 
 void APalLevelObject_LockGimmickPalFight::Multicast_NotifyUI_Implementation(APalPlayerCharacter* Player, EPalFightUINotify Notify) {
 }

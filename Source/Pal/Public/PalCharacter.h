@@ -300,6 +300,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void ResetTickInterval();
     
+    UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
+    void ResetFacialOnRevive_ToAll();
+    
     UFUNCTION(BlueprintCallable, Server, Unreliable)
     void RequestPlayCosmeticMontage_ToServer(UAnimMontage* Montage, float PlayRate);
     
@@ -481,6 +484,9 @@ private:
 public:
     UFUNCTION(BlueprintCallable)
     void ChangeBattleModeFlag(bool IsBattle);
+    
+    UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable)
+    bool CancelDeathActionOnRevive();
     
     UFUNCTION(BlueprintCallable)
     void BroadcastOnCompleteInitializeParameter();

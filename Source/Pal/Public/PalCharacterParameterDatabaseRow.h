@@ -286,6 +286,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FName FirstDefeatRewardItemID;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool IsUncapturable;
+    
     PAL_API FPalCharacterParameterDatabaseRow();
 };
 

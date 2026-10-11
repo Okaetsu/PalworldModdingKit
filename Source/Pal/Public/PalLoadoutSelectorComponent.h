@@ -43,7 +43,7 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     int32 currentItemSlotIndex;
     
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_NowEquipBallItemID, meta=(AllowPrivateAccess=true))
     FName NowEquipBallItemID;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
@@ -106,11 +106,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void ReserveSummonWeapon(APalWeaponBase* InWeapon);
     
-private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeNowEquipBallItemID_ToServer(FName NextBallID);
     
-public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ReleaseSummonWeapon_ToServer(UPalDynamicWeaponItemDataBase* InDynamicItem);
     
@@ -126,6 +124,9 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     void OnRep_PrimaryTargetInventoryType();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnRep_NowEquipBallItemID();
     
     UFUNCTION(BlueprintCallable)
     void OnRep_CurrentItemSlotIndex();

@@ -6,7 +6,6 @@ UPalMapObjectConvertItemModel::UPalMapObjectConvertItemModel() {
     this->RemainProductNum = 0;
     this->bIsWorkable = false;
     this->WorkSpeedAdditionalRate = 1.00f;
-    this->CurrentRecipeRequestPlayerId = 0;
     this->TargetRankMax = 0;
     this->IsPickUpInteractable = true;
     this->bCanTransportOutProduct = false;

@@ -103,6 +103,9 @@ void APalCharacter::RPCDummy_Implementation() {
 void APalCharacter::ResetTickInterval() {
 }
 
+void APalCharacter::ResetFacialOnRevive_ToAll_Implementation() {
+}
+
 void APalCharacter::RequestPlayCosmeticMontage_ToServer_Implementation(UAnimMontage* Montage, float PlayRate) {
 }
 
@@ -285,6 +288,10 @@ void APalCharacter::ChangeBattleModeFlag_ToAll_Implementation(bool IsBattle) {
 }
 
 void APalCharacter::ChangeBattleModeFlag(bool IsBattle) {
+}
+
+bool APalCharacter::CancelDeathActionOnRevive() {
+    return false;
 }
 
 void APalCharacter::BroadcastOnCompleteInitializeParameter() {

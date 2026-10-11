@@ -8,6 +8,7 @@ APalNPCSpawnerBase::APalNPCSpawnerBase(const FObjectInitializer& ObjectInitializ
     this->Ignore_DistanceLocationReset = false;
     this->Ignore_FarCheck = false;
     this->bDoSpawnedTick = true;
+    this->RequestedAdditionalCellWaitTimeoutSeconds = 60.00f;
     this->SpawnRadiusType = EPalSpawnRadiusType::S;
     this->bUseDirectionalSpawnCheck = true;
     this->MinMoveSpeedForDirectionalSpawn = 200.00f;

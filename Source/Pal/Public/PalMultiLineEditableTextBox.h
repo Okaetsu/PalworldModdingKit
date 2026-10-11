@@ -37,6 +37,9 @@ public:
     UPROPERTY(AdvancedDisplay, EditAnywhere, meta=(AllowPrivateAccess=true))
     FVirtualKeyboardOptions VirtualKeyboardOptions;
     
+    UPROPERTY(AdvancedDisplay, EditAnywhere, meta=(AllowPrivateAccess=true))
+    EVirtualKeyboardTrigger VirtualKeyboardTrigger;
+    
     UPROPERTY(AdvancedDisplay, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EVirtualKeyboardDismissAction VirtualKeyboardDismissAction;
     

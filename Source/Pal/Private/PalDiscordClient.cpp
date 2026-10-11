@@ -42,6 +42,9 @@ void UPalDiscordClient::OnJoin(const FString& joinSecret) {
 void UPalDiscordClient::OnEndedCall() {
 }
 
+void UPalDiscordClient::OnChangeVoiceChatSettings(const FPalOptionVoiceChatSettings& PrevSettings, const FPalOptionVoiceChatSettings& NewSettings) {
+}
+
 void UPalDiscordClient::Mute(const UDiscordRelationshipHandle* Friend) {
 }
 

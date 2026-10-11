@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "EPalInteractiveObjectIndicatorType.h"
+#include "PalInteractableLevelObjectInterface.h"
 #include "PalInteractiveObjectIndicatorInterface.h"
 #include "PalLevelObjectActor.h"
 #include "PalLevelObjectUnlockableFastTravelPoint.generated.h"
@@ -17,7 +18,7 @@ class UPalUnlockFastTravelTriggerEvent;
 class UTexture2D;
 
 UCLASS(Blueprintable)
-class PAL_API APalLevelObjectUnlockableFastTravelPoint : public APalLevelObjectActor, public IPalInteractiveObjectIndicatorInterface {
+class PAL_API APalLevelObjectUnlockableFastTravelPoint : public APalLevelObjectActor, public IPalInteractableLevelObjectInterface, public IPalInteractiveObjectIndicatorInterface {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FReturnSelfDelegate, APalLevelObjectUnlockableFastTravelPoint*, Self);

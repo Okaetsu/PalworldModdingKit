@@ -57,7 +57,7 @@ protected:
     
 public:
     UFUNCTION(BlueprintCallable)
-    void LaunchTalkIncident(AActor* Other);
+    bool LaunchTalkIncident(AActor* Other);
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FGuid GetToken() const;

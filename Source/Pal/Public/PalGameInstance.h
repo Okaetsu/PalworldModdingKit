@@ -439,6 +439,9 @@ public:
     void SetIsNewGame();
     
     UFUNCTION(BlueprintCallable)
+    void SetAlreadyShowSaveWarningDialog();
+    
+    UFUNCTION(BlueprintCallable)
     void SetAlreadyShowModDetectionDialog();
     
     UFUNCTION(BlueprintCallable)
@@ -487,6 +490,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsLoggedin();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsAlreadyShowSaveWarningDialog() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsAlreadyShowModDetectionDialog() const;

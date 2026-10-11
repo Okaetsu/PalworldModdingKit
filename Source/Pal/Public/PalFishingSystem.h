@@ -4,6 +4,7 @@
 #include "EPalFishShadowSizeType.h"
 #include "EPalFishingPlayerMotionType.h"
 #include "EPalFishingResultType.h"
+#include "EPalPassiveSkillEffectType.h"
 #include "EPalSizeType.h"
 #include "PalDataTableRowName_PassiveSkillData.h"
 #include "PalFishShadowRareInfo.h"
@@ -78,6 +79,31 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float QueryInterval;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RodRequiredDisplayDistance;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RodRequiredWorldHUDDisplayRange;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UDataTable* DifficultyUIDataTable;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FishingDifficultyRateMin;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FishingDifficultyRateMax;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CatchBattleDifficultyMinValue;
+    
+public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float PalSkillAdviceTime;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TArray<EPalPassiveSkillEffectType> PalSkillAdviceCheckEffectTypes;
     
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))

@@ -68,9 +68,6 @@ public:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestUnlockTechnology_ToServer(const FName& UnlockTechnologyName);
     
-    UFUNCTION(BlueprintCallable, Reliable, Server)
-    void RequestUnlockFastTravelPoint_ToServer(const FName UnlockFlagKey);
-    
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void RequestTriggerTutorial_ToClient(EPalTutorialTriggerConditionType TriggerConditionType);
     

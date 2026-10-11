@@ -4,6 +4,7 @@ UPalMultiLineEditableTextBox::UPalMultiLineEditableTextBox() {
     this->AutoWrapText = true;
     this->bIsReadOnly = false;
     this->AllowContextMenu = true;
+    this->VirtualKeyboardTrigger = EVirtualKeyboardTrigger::OnFocusByPointer;
     this->VirtualKeyboardDismissAction = EVirtualKeyboardDismissAction::TextChangeOnDismiss;
 }
 

@@ -6,6 +6,7 @@ UPalQuestBlock_CountKillEnemy::UPalQuestBlock_CountKillEnemy() {
     this->CurrentCount = 0;
     this->bCountCapture = false;
     this->CountOnCapture = 0;
+    this->RequiredRange = -1.00f;
 }
 
 void UPalQuestBlock_CountKillEnemy::OnRep_Count() {

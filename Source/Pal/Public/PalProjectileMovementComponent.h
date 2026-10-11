@@ -5,6 +5,7 @@
 #include "PalProjectileMovementComponent.generated.h"
 
 class AActor;
+class UCurveFloat;
 
 UCLASS(Blueprintable, ClassGroup=Custom, meta=(BlueprintSpawnableComponent))
 class PAL_API UPalProjectileMovementComponent : public UProjectileMovementComponent {
@@ -25,6 +26,9 @@ protected:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float HomingPredictStrength;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    UCurveFloat* SphereHomingRelicEffectCurve;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     FVector HomingRandomOffset;

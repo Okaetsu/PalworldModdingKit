@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include "Engine/EngineTypes.h"
 #include "GameDateTime.h"
 #include "PalChatMessage.h"
 #include "PalGameState.h"
@@ -25,6 +26,7 @@ class APalGameStateInGame : public APalGameState {
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRecievedServerNoticeDelegate, const FString&, NoticeMessage);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnRecievedChatMessageDelegate, const FPalChatMessage&, Message);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEndTrial);
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, meta=(AllowPrivateAccess=true))
     FDateTime RealProgressDateTime_ForRep;
@@ -150,6 +152,12 @@ private:
     FString SaveConfigCategoryName;
     
 public:
+    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FEndTrial FEndTrialDelegate;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FTimerHandle TrialTimerHandle;
+    
     APalGameStateInGame(const FObjectInitializer& ObjectInitializer);
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -182,10 +190,18 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnRep_BaseCampReplicator();
     
+public:
+    UFUNCTION(BlueprintCallable)
+    void OnOverTrialTime();
+    
+private:
     UFUNCTION(BlueprintCallable)
     void OnCompleteSyncAllFromServer_InClient(APalPlayerState* PlayerState);
     
 public:
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool HasTrialEnded() const;
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     FString GetWorldSaveDirectoryName() const;
     
@@ -194,6 +210,9 @@ public:
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     float GetServerFrameTime() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    int32 GetRemainTrialTimeSecond();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
     int32 GetMaxPlayerNum() const;

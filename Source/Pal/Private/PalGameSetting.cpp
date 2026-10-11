@@ -349,6 +349,8 @@ UPalGameSetting::UPalGameSetting() {
     this->InvadeReturnTime_Minutes = 10;
     this->InvadeStartPoint_BaseCampRadius_Min_cm = 10000;
     this->InvadeStartPoint_BaseCampRadius_Max_cm = 50000;
+    this->InvaderTargetBaseCampRangeMargin = 5000.00f;
+    this->InvaderOutOfRangePlayerHateKeepThreshold = 10.00f;
     this->InvaderPathWaterContinuousDistanceThreshold = 3000.00f;
     this->InvaderPathWaterTotalDistanceThreshold = 5000.00f;
     this->VisitorNPCProbability = 0.50f;
@@ -478,6 +480,9 @@ UPalGameSetting::UPalGameSetting() {
     this->MapObjectOutlineByReticleTargetting = 2;
     this->MapObjectOutlineByInteractable = 3;
     this->FoliageExtentsXY = 50.00f;
+    this->WorldTreeWoodDecayLogNotifyDistance = 700.00f;
+    this->WorldTreeOreDecayLogNotifyDistance = 700.00f;
+    this->WorldTreeDecayLogNotifyDelaySeconds = 1.00f;
     this->FoliageChunkSeparateScale = 1;
     this->MapObjectHPDisplayDistance = 1000.00f;
     this->OilrigCannonHPDisplayDistance = 2000.00f;
@@ -609,6 +614,14 @@ void UPalGameSetting::GetMiningRankDefineData(int32 MiningRank, FPalMiningRankDe
 }
 
 float UPalGameSetting::GetMiningDamageRate(int32 MiningRank) {
+    return 0.0f;
+}
+
+int32 UPalGameSetting::GetFishingDifficultyStepIndexByRate(const float Rate) const {
+    return 0;
+}
+
+float UPalGameSetting::GetFishingDifficultyRateByStepIndex(const int32 StepIndex) const {
     return 0.0f;
 }
 

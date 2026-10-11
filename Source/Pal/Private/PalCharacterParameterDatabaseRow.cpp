@@ -77,5 +77,6 @@ FPalCharacterParameterDatabaseRow::FPalCharacterParameterDatabaseRow() {
     this->WorkSuitability_Cool = 0;
     this->WorkSuitability_Transport = 0;
     this->WorkSuitability_MonsterFarm = 0;
+    this->IsUncapturable = false;
 }
 

@@ -929,6 +929,9 @@ public:
     UFUNCTION(BlueprintCallable)
     void ClearEquipWaza();
     
+    UFUNCTION(BlueprintCallable)
+    void CleanupOnRevive();
+    
     UFUNCTION(BlueprintCallable, BlueprintPure)
     bool CanTargetFromAI() const;
     

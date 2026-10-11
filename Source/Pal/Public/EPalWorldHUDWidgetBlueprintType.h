@@ -35,5 +35,6 @@ enum class EPalWorldHUDWidgetBlueprintType : uint8 {
     GenerateEnergyWithOverHeat,
     RelicRecycler,
     Clinic,
+    FishingRodRequired,
 };
 

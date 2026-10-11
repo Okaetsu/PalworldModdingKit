@@ -3,6 +3,7 @@
 UPalUserWidgetStackableUI::UPalUserWidgetStackableUI() {
     this->OpenAkEvent = NULL;
     this->CloseAkEvent = NULL;
+    this->bIgnoreOnPreGarbageCollect = false;
 }
 
 void UPalUserWidgetStackableUI::OnPreClose_Implementation() {

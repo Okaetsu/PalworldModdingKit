@@ -12,6 +12,9 @@ UPalFishingComponent::UPalFishingComponent(const FObjectInitializer& ObjectIniti
     this->IsRequestedUseBaitFlag = false;
     this->IsRequestedCatchBattleFlag = false;
     this->FishingRodState = EPalFishingRodState::None;
+    this->bIsPalSkillAdviceTarget = false;
+    this->bIsHitInputAccepting = false;
+    this->bIsSpotAiming = false;
 }
 
 void UPalFishingComponent::SetCurrentFishingRodModule(UPalFishingRodModule* InFishingRodModule) {
@@ -81,6 +84,10 @@ void UPalFishingComponent::NotifyFailedCatchBattle_ToALL_Implementation() {
 }
 
 void UPalFishingComponent::NotifyEndFishing_ToALL_Implementation() {
+}
+
+bool UPalFishingComponent::IsPalSkillAdviceTarget() const {
+    return false;
 }
 
 bool UPalFishingComponent::IsFishingButtonPressed() const {

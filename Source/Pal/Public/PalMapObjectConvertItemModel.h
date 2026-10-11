@@ -1,5 +1,6 @@
 #pragma once
 #include "CoreMinimal.h"
+#include "UObject/NoExportTypes.h"
 #include "EPalItemTypeA.h"
 #include "EPalItemTypeB.h"
 #include "EPalMapObjectConvertItemModelRequestResult.h"
@@ -63,7 +64,7 @@ private:
     float WorkSpeedAdditionalRate;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
-    int32 CurrentRecipeRequestPlayerId;
+    FGuid CurrentRecipeRequestPlayerUId;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Replicated, Transient, meta=(AllowPrivateAccess=true))
     TArray<EPalItemTypeA> TargetTypesA;

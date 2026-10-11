@@ -5,6 +5,7 @@
 #include "PalArenaSequenceInBattle.generated.h"
 
 class UPalArenaOutAreaChecker;
+class UPalIndividualCharacterParameter;
 
 UCLASS(Blueprintable)
 class UPalArenaSequenceInBattle : public UPalArenaSequenceBase {
@@ -26,6 +27,10 @@ protected:
     
     UFUNCTION(BlueprintCallable)
     void ResetPalHate();
+    
+private:
+    UFUNCTION(BlueprintCallable)
+    void OnRevivedInBattle_ServerInternal(UPalIndividualCharacterParameter* IndividualParameter);
     
 public:
     UFUNCTION(BlueprintCallable)

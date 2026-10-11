@@ -600,11 +600,11 @@ private:
     void ChangeWeapon(APalWeaponBase* Weapon, bool bSkipLocalControlCheck);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void ChangeIsShooting_ToServer(int32 ID, bool NewIsShooting, bool bCanShootOnRelease);
+    void ChangeIsShooting_ToServer(int32 ID, bool NewIsShooting, bool bCanShootOnRelease, bool bRequestedThrowObject);
     
 public:
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
-    void ChangeIsShooting_ToALL(int32 ID, bool NewIsShooting, bool bCanShootOnRelease);
+    void ChangeIsShooting_ToALL(int32 ID, bool NewIsShooting, bool bCanShootOnRelease, bool bRequestedThrowObject);
     
 private:
     UFUNCTION(BlueprintCallable)

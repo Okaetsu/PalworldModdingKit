@@ -21,6 +21,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalUIPaldexSortType SortType;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FString FilterWord;
+    
     PAL_API FPalUIPaldexFilterInfo();
 };
 

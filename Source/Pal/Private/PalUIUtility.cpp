@@ -300,6 +300,10 @@ void UPalUIUtility::GetFormatedFirstActivatedInfoText(const UObject* WorldContex
 void UPalUIUtility::GetFilteredUIDisplayBuildObjectList(const UObject* WorldContextObject, const TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& InMap, TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& OutMap) {
 }
 
+FText UPalUIUtility::GetFailedToLoadWorldDataText(const UObject* WorldContextObject) {
+    return FText::GetEmpty();
+}
+
 void UPalUIUtility::GetDisplayNickName(const UObject* WorldContextObject, const FName CharacterID, const FName UniqueNPCID, FString& OutNickName) {
 }
 

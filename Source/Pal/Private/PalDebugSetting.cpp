@@ -200,6 +200,7 @@ UPalDebugSetting::UPalDebugSetting() {
     this->bShowMapObjectDebugDistanceInfinity = false;
     this->bShowMapObjectStatus = false;
     this->bShowMapObjectFoliageStatus = false;
+    this->bDrawDebugMapObjectFoliageAutoDecayCapsule = false;
     this->ShowMapObjectStatusRange = 1000.00f;
     this->bDisablePalFoliageComponentBeginPlay = false;
     this->bShowMapObjectSpawnerStatus = false;

@@ -93,7 +93,7 @@ void APalPlayerController::ShooterComponent_PullCancel_ToServer_Implementation(U
 void APalPlayerController::ShooterComponent_NotifyBulletItemId_ToServer_Implementation(UPalShooterComponent* Shooter, const APalWeaponBase* TargetWeapon, const FName& BulletItemId) {
 }
 
-void APalPlayerController::ShooterComponent_ChangeIsShooting_ToServer_Implementation(UPalShooterComponent* Shooter, int32 ID, bool IsShooting, bool bCanShootOnRelease) {
+void APalPlayerController::ShooterComponent_ChangeIsShooting_ToServer_Implementation(UPalShooterComponent* Shooter, int32 ID, bool IsShooting, bool bCanShootOnRelease, bool bRequestedThrowObject) {
 }
 
 void APalPlayerController::ShooterComponent_ChangeIsJetpackShooting_ToServer_Implementation(UPalShooterComponent* Shooter, int32 ID, bool IsShooting) {
@@ -521,6 +521,9 @@ void APalPlayerController::NotifyFailedStartRaidByOverConcurrentStageLimitation_
 }
 
 void APalPlayerController::NotifyConfirmRequestGuild_ToServer_Implementation(const FGuid& FlowUniqueId, const bool bResponse) {
+}
+
+void APalPlayerController::NotifyActivateLifeDrainPowerAttackUp_ToClient_Implementation(const FPalInstanceID& PalInstanceID) {
 }
 
 void APalPlayerController::LostOtomoByInstacneID_ToServer_Implementation(const FPalInstanceID& InstanceId) {

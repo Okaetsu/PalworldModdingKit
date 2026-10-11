@@ -30,6 +30,7 @@ class PAL_API UPalOptionSubsystem : public UPalWorldSubsystem {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnChangeWorldSettingsDelegate, const FPalOptionWorldSettings&, PrevSettings, const FPalOptionWorldSettings&, NewSettings);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnChangeVoiceChatDelegate, const FPalOptionVoiceChatSettings&, PrevSettings, const FPalOptionVoiceChatSettings&, NewSettings);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnChangeUISettingDelegate, const FPalOptionUISettings&, PrevSettings, const FPalOptionUISettings&, NewSettings);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnChangeScreenRatioDelegate, float, newRatio);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnChangePadDelegate, const FPalOptionPadSettings&, PrevSettings, const FPalOptionPadSettings&, NewSettings);
@@ -65,6 +66,9 @@ public:
     
     UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnChangeCommonSettingsDelegate OnChangeCommonSettingDelegate;
+    
+    UPROPERTY(BlueprintAssignable, BlueprintCallable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FOnChangeVoiceChatDelegate OnChangeVoiceChatDelegate;
     
 protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

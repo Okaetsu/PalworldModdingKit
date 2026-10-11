@@ -50,6 +50,9 @@ void UPalFlyMeshHeightCtrlComponent::OnInitializedCharacter(APalCharacter* Owner
 void UPalFlyMeshHeightCtrlComponent::OnDead(FPalDeadInfo Info) {
 }
 
+void UPalFlyMeshHeightCtrlComponent::OnDamage(FPalDamageRactionInfo ReactionInfo) {
+}
+
 void UPalFlyMeshHeightCtrlComponent::OnChangeBattleMode(bool bIsBattleMode) {
 }
 

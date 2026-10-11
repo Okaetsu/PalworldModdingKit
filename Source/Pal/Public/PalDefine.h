@@ -107,6 +107,12 @@ public:
     static FName TextId_UICommon_LOG_ElementalTreasureChestFailure_Electricity();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    static FName TextId_UICommon_LOG_Decay_WorldTreeWood();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
+    static FName TextId_UICommon_LOG_Decay_WorldTreeOre();
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     static FName TextId_UICommon_LOG_ConsumeItem();
     
     UFUNCTION(BlueprintCallable, BlueprintPure)

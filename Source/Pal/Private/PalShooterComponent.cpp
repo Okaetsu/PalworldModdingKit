@@ -371,10 +371,10 @@ void UPalShooterComponent::EndAim(bool bAllEndAim) {
 void UPalShooterComponent::ChangeWeapon(APalWeaponBase* Weapon, bool bSkipLocalControlCheck) {
 }
 
-void UPalShooterComponent::ChangeIsShooting_ToServer_Implementation(int32 ID, bool NewIsShooting, bool bCanShootOnRelease) {
+void UPalShooterComponent::ChangeIsShooting_ToServer_Implementation(int32 ID, bool NewIsShooting, bool bCanShootOnRelease, bool bRequestedThrowObject) {
 }
 
-void UPalShooterComponent::ChangeIsShooting_ToALL_Implementation(int32 ID, bool NewIsShooting, bool bCanShootOnRelease) {
+void UPalShooterComponent::ChangeIsShooting_ToALL_Implementation(int32 ID, bool NewIsShooting, bool bCanShootOnRelease, bool bRequestedThrowObject) {
 }
 
 void UPalShooterComponent::ChangeIsShooting(bool NewIsShooting, bool bCanShootOnRelease) {

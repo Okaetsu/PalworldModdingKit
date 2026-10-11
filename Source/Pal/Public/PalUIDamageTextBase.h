@@ -6,17 +6,10 @@
 #include "PalUserWidget.h"
 #include "PalUIDamageTextBase.generated.h"
 
-class UPalUIDamageTextBase;
-
 UCLASS(Blueprintable, EditInlineNew)
 class PAL_API UPalUIDamageTextBase : public UPalUserWidget {
     GENERATED_BODY()
 public:
-    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FRequestCloseDelegate, UPalUIDamageTextBase*, SelfWidget);
-    
-    UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
-    FRequestCloseDelegate OnRequestCloseDelegate;
-    
 private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float DisplayTime;

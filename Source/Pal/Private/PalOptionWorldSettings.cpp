@@ -83,6 +83,7 @@ FPalOptionWorldSettings::FPalOptionWorldSettings() {
     this->SupplyDropSpan = 180;
     this->EnablePredatorBossPal = true;
     this->MaxBuildingLimitNum = 0;
+    this->MaxBuildingLimitNumPerPlayer = 0;
     this->ServerReplicatePawnCullDistance = 15000.00f;
     this->bAllowGlobalPalboxExport = true;
     this->bAllowGlobalPalboxImport = false;
@@ -91,6 +92,7 @@ FPalOptionWorldSettings::FPalOptionWorldSettings() {
     this->PlayerDataPalStorageUpdateCheckTickInterval = 1.00f;
     this->ItemCorruptionMultiplier = 1.00f;
     this->MonsterFarmActionSpeedRate = 1.00f;
+    this->FishingDifficultyRate = 1.00f;
     this->GuildRejoinCooldownMinutes = 0;
     this->AutoTransferMasterCheckIntervalSeconds = 3600.00f;
     this->AutoTransferMasterThresholdDays = 14;

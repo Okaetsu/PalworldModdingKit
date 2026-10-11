@@ -16,6 +16,7 @@
 #include "Templates/SubclassOf.h"
 #include "PalHUDInGame.generated.h"
 
+class APalGameStateInGame;
 class UAkAudioEvent;
 class UPalHUDDispatchParameterBase;
 class UPalSoundPlayer;
@@ -103,6 +104,21 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TMap<FGameplayTag, FFlagContainer> LayerHideFlagMap;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UPalUserWidget> TrialTimerWidgetClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    TSubclassOf<UUserWidget> TrialEndSplashWidgetClass;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UPalUserWidget* TrialTimerWidget;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Instanced, Transient, meta=(AllowPrivateAccess=true))
+    UUserWidget* TrialEndSplashWidget;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    APalGameStateInGame* BoundTrialGameState;
+    
 public:
     APalHUDInGame(const FObjectInitializer& ObjectInitializer);
 
@@ -129,6 +145,9 @@ public:
 private:
     UFUNCTION(BlueprintCallable)
     void OnKeyConfigChanged();
+    
+    UFUNCTION(BlueprintCallable)
+    void OnEndTrialGame();
     
     UFUNCTION(BlueprintCallable)
     void OnApplicationActivationStateChanged(bool bIsFocused);

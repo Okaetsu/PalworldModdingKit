@@ -675,6 +675,9 @@ public:
     bool bShowMapObjectFoliageStatus;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bDrawDebugMapObjectFoliageAutoDecayCapsule;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ShowMapObjectStatusRange;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))

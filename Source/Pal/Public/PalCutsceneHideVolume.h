@@ -4,6 +4,7 @@
 #include "Engine/HitResult.h"
 #include "PalCutsceneHideVolume.generated.h"
 
+class APalGliderObject;
 class APalWeaponBase;
 class UPrimitiveComponent;
 class USphereComponent;
@@ -34,6 +35,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     void OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+    
+    UFUNCTION(BlueprintCallable)
+    void OnGliderSpawned(APalGliderObject* NewGlider);
     
 public:
     UFUNCTION(BlueprintCallable)

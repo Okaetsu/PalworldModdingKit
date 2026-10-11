@@ -84,6 +84,7 @@ enum class EPalLogType : uint8 {
     PartnerSkillExecute_GiveElement_Leaf,
     PartnerSkillExecute_GiveElement_Dragon,
     PartnerSkillExecute_AdditionalEffect_Poiso,
+    PartnerSkillExecute_LifeDrainPower_AttackUp,
     PartnerSkillExecute_SearchDungeonGoal_Failed,
     ObtainNote,
     OutdoorBedNortice,

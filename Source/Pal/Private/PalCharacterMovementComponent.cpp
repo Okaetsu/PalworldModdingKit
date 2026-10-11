@@ -267,6 +267,10 @@ bool UPalCharacterMovementComponent::IsTickOptimizationDisabled() const {
     return false;
 }
 
+bool UPalCharacterMovementComponent::IsSubmergedBeyondFloatingDepth() const {
+    return false;
+}
+
 bool UPalCharacterMovementComponent::IsStepUpUpSweepShrinkEnabled() const {
     return false;
 }

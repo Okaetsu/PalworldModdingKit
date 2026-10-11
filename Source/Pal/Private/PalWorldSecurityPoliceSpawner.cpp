@@ -21,6 +21,7 @@ UPalWorldSecurityPoliceSpawner::UPalWorldSecurityPoliceSpawner() {
     this->DiscoveryTimeToMaxFar = 10.00f;
     this->DiscoveryDecayPerSec = 0.20f;
     this->DiscoveryCrouchMultiplier = 0.50f;
+    this->PoliceSightLostGraceTime = 1.00f;
     this->CombatHeliSpawnHeight = 4000.00f;
     this->CombatHeliSpawnRadius = 6000.00f;
     this->CombatHeliSpawnMinRadius = 3000.00f;

@@ -27,6 +27,7 @@ FPalOptionWorldPresetRow::FPalOptionWorldPresetRow() {
     this->CollectionObjectHpRate = 1.00f;
     this->CollectionObjectRespawnSpeedRate = 1.00f;
     this->EnemyDropItemRate = 1.00f;
+    this->FishingDifficultyRate = 1.00f;
     this->DeathPenalty = EPalOptionWorldDeathPenalty::Item;
     this->bActiveUNKO = false;
     this->DropItemMaxNum_UNKO = 0;

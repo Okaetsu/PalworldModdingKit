@@ -356,7 +356,7 @@ public:
     void ShooterComponent_NotifyBulletItemId_ToServer(UPalShooterComponent* Shooter, const APalWeaponBase* TargetWeapon, const FName& BulletItemId);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
-    void ShooterComponent_ChangeIsShooting_ToServer(UPalShooterComponent* Shooter, int32 ID, bool IsShooting, bool bCanShootOnRelease);
+    void ShooterComponent_ChangeIsShooting_ToServer(UPalShooterComponent* Shooter, int32 ID, bool IsShooting, bool bCanShootOnRelease, bool bRequestedThrowObject);
     
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void ShooterComponent_ChangeIsJetpackShooting_ToServer(UPalShooterComponent* Shooter, int32 ID, bool IsShooting);
@@ -871,6 +871,9 @@ public:
 private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void NotifyConfirmRequestGuild_ToServer(const FGuid& FlowUniqueId, const bool bResponse);
+    
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifyActivateLifeDrainPowerAttackUp_ToClient(const FPalInstanceID& PalInstanceID);
     
 public:
     UFUNCTION(BlueprintCallable, Reliable, Server)

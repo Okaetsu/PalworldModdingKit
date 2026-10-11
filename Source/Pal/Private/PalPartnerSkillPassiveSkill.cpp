@@ -30,6 +30,9 @@ void UPalPartnerSkillPassiveSkill::OnUpdateBaseCampId(const FGuid& BaseCampId) {
 void UPalPartnerSkillPassiveSkill::OnStartPassiveSkillEffect(EPalPassiveSkillEffectType EffectType, float Value) {
 }
 
+void UPalPartnerSkillPassiveSkill::OnSetPassiveSkillEffectWithOwner(EPalPassiveSkillEffectType EffectType, const UObject* EffectOwner) {
+}
+
 void UPalPartnerSkillPassiveSkill::OnRideInactivated() {
 }
 
@@ -113,6 +116,9 @@ APalCharacter* UPalPartnerSkillPassiveSkill::GetOwner() const {
 
 int32 UPalPartnerSkillPassiveSkill::GetOtomoRank() const {
     return 0;
+}
+
+void UPalPartnerSkillPassiveSkill::ApplyPendingLifeDrainGranterReset() {
 }
 
 void UPalPartnerSkillPassiveSkill::AllResetPassiveSkill() {

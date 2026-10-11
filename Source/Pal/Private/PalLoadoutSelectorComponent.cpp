@@ -58,6 +58,9 @@ void UPalLoadoutSelectorComponent::OnUpdateInventorySlot(UPalItemSlot* itemSlot)
 void UPalLoadoutSelectorComponent::OnRep_PrimaryTargetInventoryType() {
 }
 
+void UPalLoadoutSelectorComponent::OnRep_NowEquipBallItemID() {
+}
+
 void UPalLoadoutSelectorComponent::OnRep_CurrentItemSlotIndex() {
 }
 

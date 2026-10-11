@@ -64,6 +64,8 @@ enum class EPalMapObjectOperationResult : uint8 {
     FailedNoGuildPermission,
     FailedServerValidationFloating,
     FailedNoBlueprintItem,
+    FailedMissingPlayerBuildingPendingReservation,
+    FailedExceedMaxBuildingNumPerPlayer,
     Success,
 };
 

@@ -25,6 +25,7 @@ class UPalGliderComponent : public UActorComponent {
     GENERATED_BODY()
 public:
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnStartGliding);
+    DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGliderSpawnedDelegate, APalGliderObject*, NewGlider);
     DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEndGliding);
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

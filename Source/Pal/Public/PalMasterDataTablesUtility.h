@@ -322,5 +322,8 @@ public:
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static UPalAchivementRewardDataAsset* GetAchivementRewardDataAsset(const UObject* WorldContextObject);
     
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static bool ExistLocalizedText(const UObject* WorldContextObject, EPalLocalizeTextCategory TextCategory, FName TextId);
+    
 };
 

@@ -33,6 +33,9 @@ void UPalNetworkItemComponent::RequestChangeAllFilterUncheck_ToServer_Implementa
 void UPalNetworkItemComponent::RequestChangeAllFilterCheck_ToServer_Implementation(const FPalContainerId& ContainerId) {
 }
 
+void UPalNetworkItemComponent::NotifySphereConsumeAndRecoverCompleted_ToClient_Implementation() {
+}
+
 void UPalNetworkItemComponent::NotifyCommonItemRewardUIData_ToClient_Implementation(const FPalUICommonItemRewardData& RewardData) {
 }
 

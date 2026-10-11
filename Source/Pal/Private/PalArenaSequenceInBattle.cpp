@@ -13,6 +13,9 @@ void UPalArenaSequenceInBattle::SetDisableRide(bool bDisable) {
 void UPalArenaSequenceInBattle::ResetPalHate() {
 }
 
+void UPalArenaSequenceInBattle::OnRevivedInBattle_ServerInternal(UPalIndividualCharacterParameter* IndividualParameter) {
+}
+
 void UPalArenaSequenceInBattle::OnEndSequence_Implementation() {
 }
 

@@ -18,7 +18,6 @@ class APalCharacter;
 class APalLockGimmickLightOrb;
 class APalPlayerCharacter;
 class UPalIndividualCharacterHandle;
-class UPalIndividualCharacterParameter;
 class UPalLockGimmickPalFightWidget;
 class UPrimitiveComponent;
 class USceneComponent;
@@ -43,6 +42,12 @@ public:
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     float TimeoutTeleportDelaySeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float CaptureWaitRecheckSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float MaxCaptureHoldSeconds;
     
     UPROPERTY(BlueprintAssignable, BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     FOnPalFightGameStateChanged OnGameStateChangedDelegate;
@@ -142,9 +147,6 @@ protected:
     void OnGameStateChanged(EPalFightGameState NewState, EPalFightGameState OldState);
     
 private:
-    UFUNCTION(BlueprintCallable)
-    void OnCreatedIndividualParameter(UPalIndividualCharacterParameter* IndividualParameter);
-    
     UFUNCTION(BlueprintCallable, NetMulticast, Reliable)
     void Multicast_NotifyUI(APalPlayerCharacter* Player, EPalFightUINotify Notify);
     

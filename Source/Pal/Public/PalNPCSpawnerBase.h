@@ -45,6 +45,9 @@ protected:
     bool bDoSpawnedTick;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RequestedAdditionalCellWaitTimeoutSeconds;
+    
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalSpawnRadiusType SpawnRadiusType;
     
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))

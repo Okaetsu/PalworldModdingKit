@@ -35,6 +35,9 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     EPalLogType LogType;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    FName DuplicateDisplaySuppressKey;
+    
     PAL_API FPalLogAdditionalData();
 };
 

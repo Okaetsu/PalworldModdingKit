@@ -10,6 +10,9 @@ APalHUDInGame::APalHUDInGame(const FObjectInitializer& ObjectInitializer) : Supe
     this->LiftSlotModel = NULL;
     this->HoverWidget = NULL;
     this->SoundPlayer = NULL;
+    this->TrialTimerWidget = NULL;
+    this->TrialEndSplashWidget = NULL;
+    this->BoundTrialGameState = NULL;
 }
 
 void APalHUDInGame::TickWorldHUDs() {
@@ -32,6 +35,9 @@ FGuid APalHUDInGame::PushWidgetStackableUI(TSubclassOf<UPalUserWidgetStackableUI
 }
 
 void APalHUDInGame::OnKeyConfigChanged() {
+}
+
+void APalHUDInGame::OnEndTrialGame() {
 }
 
 void APalHUDInGame::OnApplicationActivationStateChanged(bool bIsFocused) {

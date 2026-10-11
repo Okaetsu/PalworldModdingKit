@@ -36,6 +36,10 @@ void UPalAudioWorldSubsystem::SetRTPCValueByEnum(EPalAudioRTPC RTPC, float Value
 void UPalAudioWorldSubsystem::SetOutputBusVolume(float Volume) {
 }
 
+
+void UPalAudioWorldSubsystem::SetDisableBattleBGMFlag(FName flagName, bool bIsDisable) {
+}
+
 void UPalAudioWorldSubsystem::PostTriggerByString(const FString& Trigger) {
 }
 
@@ -55,6 +59,10 @@ int32 UPalAudioWorldSubsystem::PlaySound(UAkAudioEvent* AudioEvent, const FPalSo
 
 
 void UPalAudioWorldSubsystem::OnAkPostEventCallback(EAkCallbackType CallbackType, UAkCallbackInfo* CallbackInfo) {
+}
+
+bool UPalAudioWorldSubsystem::IsBattleBGMDisabled() const {
+    return false;
 }
 
 void UPalAudioWorldSubsystem::InitializeSystem(AActor* AkOwnerActor) {

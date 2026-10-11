@@ -12,6 +12,9 @@ void UPalUIPalBoxBase::TryMoveToBoxForWorker(UPalIndividualCharacterSlot* MoveSl
 void UPalUIPalBoxBase::TryMoveToBoxForOtomo(UPalIndividualCharacterSlot* MoveSlot) {
 }
 
+void UPalUIPalBoxBase::TryMoveToBoxForCommonContainer(UPalIndividualCharacterSlot* MoveSlot) {
+}
+
 void UPalUIPalBoxBase::TryMoveToBaseCamp(UPalIndividualCharacterSlot* MoveSlot) {
 }
 

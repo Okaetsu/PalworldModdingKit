@@ -714,6 +714,9 @@ void UPalIndividualCharacterParameter::DecreaseShieldHPByDamage(int32 Damage) {
 void UPalIndividualCharacterParameter::ClearEquipWaza() {
 }
 
+void UPalIndividualCharacterParameter::CleanupOnRevive() {
+}
+
 bool UPalIndividualCharacterParameter::CanTargetFromAI() const {
     return false;
 }

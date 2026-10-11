@@ -308,6 +308,9 @@ public:
     static void GetFilteredUIDisplayBuildObjectList(const UObject* WorldContextObject, const TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& InMap, TMap<EPalBuildObjectTypeForUIDisplay, FPalBuildObjectDataSetTypeUIDisplay>& OutMap);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
+    static FText GetFailedToLoadWorldDataText(const UObject* WorldContextObject);
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))
     static void GetDisplayNickName(const UObject* WorldContextObject, const FName CharacterID, const FName UniqueNPCID, FString& OutNickName);
     
     UFUNCTION(BlueprintCallable, BlueprintPure, meta=(WorldContext="WorldContextObject"))

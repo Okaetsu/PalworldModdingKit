@@ -8,6 +8,13 @@ UPalFishingSystem::UPalFishingSystem() {
     this->EnableTickRadius = 4000.00f;
     this->DisableTickAddRadius = 400.00f;
     this->QueryInterval = 0.10f;
+    this->RodRequiredDisplayDistance = 3000.00f;
+    this->RodRequiredWorldHUDDisplayRange = 5000.00f;
+    this->DifficultyUIDataTable = NULL;
+    this->FishingDifficultyRateMin = 0.10f;
+    this->FishingDifficultyRateMax = 1.00f;
+    this->CatchBattleDifficultyMinValue = 15.00f;
+    this->PalSkillAdviceTime = 30.00f;
 }
 
 

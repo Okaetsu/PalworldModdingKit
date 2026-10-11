@@ -64,6 +64,9 @@ private:
     UFUNCTION(BlueprintCallable, Reliable, Server)
     void RequestChangeAllFilterCheck_ToServer(const FPalContainerId& ContainerId);
     
+    UFUNCTION(BlueprintCallable, Client, Reliable)
+    void NotifySphereConsumeAndRecoverCompleted_ToClient();
+    
 public:
     UFUNCTION(BlueprintCallable, Client, Reliable)
     void NotifyCommonItemRewardUIData_ToClient(const FPalUICommonItemRewardData& RewardData);

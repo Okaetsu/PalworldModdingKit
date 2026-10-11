@@ -6,12 +6,15 @@ APalCutsceneActor::APalCutsceneActor(const FObjectInitializer& ObjectInitializer
     this->bCanSkip = true;
     this->bMuteSE = true;
     this->bMuteAllAudio = false;
+    this->bSuppressGameplayBGM = false;
+    this->bSuppressGameplayBGMOnFinish = false;
     this->bFadeOutAndHoldOnFinish = false;
     this->FinishFadeOutTime = 1.00f;
     this->bRestoreSkyCreatorOnFinish = false;
     this->bHoldMuteOnFinish = false;
     this->CustomUIClass = NULL;
     this->bHideNearbyCharacters = false;
+    this->bHideNearbyMapObjects = false;
     this->HideActorRadius = 10000.00f;
     this->bHideAllBuildObjects = false;
     this->PrestreamTextureDurationSeconds = 0.00f;

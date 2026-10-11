@@ -25,6 +25,9 @@ public:
     void TryMoveToBoxForOtomo(UPalIndividualCharacterSlot* MoveSlot);
     
     UFUNCTION(BlueprintCallable)
+    void TryMoveToBoxForCommonContainer(UPalIndividualCharacterSlot* MoveSlot);
+    
+    UFUNCTION(BlueprintCallable)
     void TryMoveToBaseCamp(UPalIndividualCharacterSlot* MoveSlot);
     
     UFUNCTION(BlueprintCallable)

@@ -131,6 +131,14 @@ FName UPalDefine::TextId_UICommon_LOG_ElementalTreasureChestFailure_Electricity(
     return NAME_None;
 }
 
+FName UPalDefine::TextId_UICommon_LOG_Decay_WorldTreeWood() {
+    return NAME_None;
+}
+
+FName UPalDefine::TextId_UICommon_LOG_Decay_WorldTreeOre() {
+    return NAME_None;
+}
+
 FName UPalDefine::TextId_UICommon_LOG_ConsumeItem() {
     return NAME_None;
 }

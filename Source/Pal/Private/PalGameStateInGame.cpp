@@ -60,7 +60,14 @@ void APalGameStateInGame::OnRep_CharacterManagerReplicator() {
 void APalGameStateInGame::OnRep_BaseCampReplicator() {
 }
 
+void APalGameStateInGame::OnOverTrialTime() {
+}
+
 void APalGameStateInGame::OnCompleteSyncAllFromServer_InClient(APalPlayerState* PlayerState) {
+}
+
+bool APalGameStateInGame::HasTrialEnded() const {
+    return false;
 }
 
 FString APalGameStateInGame::GetWorldSaveDirectoryName() const {
@@ -73,6 +80,10 @@ FString APalGameStateInGame::GetWorldName() const {
 
 float APalGameStateInGame::GetServerFrameTime() const {
     return 0.0f;
+}
+
+int32 APalGameStateInGame::GetRemainTrialTimeSecond() {
+    return 0;
 }
 
 int32 APalGameStateInGame::GetMaxPlayerNum() const {

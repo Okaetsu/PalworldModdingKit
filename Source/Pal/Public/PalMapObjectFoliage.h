@@ -29,6 +29,9 @@ private:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
     TMap<FPalCellCoord, UPalFoliageGridModel*> GridModelMap;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, meta=(AllowPrivateAccess=true))
+    TArray<UPalFoliageGridModel*> PreallocatedGridModels;
+    
 public:
     UPalMapObjectFoliage();
 };

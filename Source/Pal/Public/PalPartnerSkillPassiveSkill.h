@@ -76,6 +76,9 @@ private:
     UFUNCTION(BlueprintCallable)
     void OnStartPassiveSkillEffect(EPalPassiveSkillEffectType EffectType, float Value);
     
+    UFUNCTION(BlueprintCallable)
+    void OnSetPassiveSkillEffectWithOwner(EPalPassiveSkillEffectType EffectType, const UObject* EffectOwner);
+    
 public:
     UFUNCTION(BlueprintCallable)
     void OnRideInactivated();
@@ -170,6 +173,9 @@ private:
     
     UFUNCTION(BlueprintCallable)
     int32 GetOtomoRank() const;
+    
+    UFUNCTION(BlueprintCallable)
+    void ApplyPendingLifeDrainGranterReset();
     
     UFUNCTION(BlueprintCallable)
     void AllResetPassiveSkill();

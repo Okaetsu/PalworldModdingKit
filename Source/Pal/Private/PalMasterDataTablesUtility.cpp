@@ -355,4 +355,8 @@ UPalAchivementRewardDataAsset* UPalMasterDataTablesUtility::GetAchivementRewardD
     return NULL;
 }
 
+bool UPalMasterDataTablesUtility::ExistLocalizedText(const UObject* WorldContextObject, EPalLocalizeTextCategory TextCategory, FName TextId) {
+    return false;
+}
+
 

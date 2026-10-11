@@ -17,6 +17,9 @@ protected:
     UAkAudioEvent* CloseAkEvent;
     
 public:
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    bool bIgnoreOnPreGarbageCollect;
+    
     UPalUserWidgetStackableUI();
 protected:
     UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

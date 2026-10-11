@@ -11,6 +11,10 @@ UPalWorkProgress::UPalWorkProgress() {
     this->ProgressTimeSinceLastTick = 0.00f;
     this->TickProcessMinInterval = 0.00f;
     this->bInProgress = false;
+    this->ReplicatedWorkAmountBySec = -1.00f;
+}
+
+void UPalWorkProgress::OnRep_ReplicatedWorkAmountBySec() {
 }
 
 void UPalWorkProgress::OnRep_InProgress() {
@@ -51,6 +55,7 @@ void UPalWorkProgress::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
     DOREPLIFETIME(UPalWorkProgress, WorkingPlayerUIds);
     DOREPLIFETIME(UPalWorkProgress, AutoWorkSelfAmountBySec);
     DOREPLIFETIME(UPalWorkProgress, bInProgress);
+    DOREPLIFETIME(UPalWorkProgress, ReplicatedWorkAmountBySec);
 }
 
 

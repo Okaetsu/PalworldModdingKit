@@ -276,6 +276,9 @@ public:
     int32 MaxBuildingLimitNum;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    int32 MaxBuildingLimitNumPerPlayer;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     float ServerReplicatePawnCullDistance;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
@@ -298,6 +301,9 @@ public:
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     float MonsterFarmActionSpeedRate;
+    
+    UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float FishingDifficultyRate;
     
     UPROPERTY(BlueprintReadWrite, Config, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FName> DenyTechnologyList;

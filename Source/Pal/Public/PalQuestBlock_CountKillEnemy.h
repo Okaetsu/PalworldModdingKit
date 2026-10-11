@@ -35,6 +35,9 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
     TArray<FPalDataTableRowName_NPCUniqueData> CountUniqueNPCId;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(AllowPrivateAccess=true))
+    float RequiredRange;
+    
 public:
     UPalQuestBlock_CountKillEnemy();
 

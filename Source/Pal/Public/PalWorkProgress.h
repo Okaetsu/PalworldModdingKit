@@ -53,12 +53,18 @@ protected:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_InProgress, meta=(AllowPrivateAccess=true))
     bool bInProgress;
     
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Transient, ReplicatedUsing=OnRep_ReplicatedWorkAmountBySec, meta=(AllowPrivateAccess=true))
+    float ReplicatedWorkAmountBySec;
+    
 public:
     UPalWorkProgress();
 
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
+    UFUNCTION(BlueprintCallable)
+    void OnRep_ReplicatedWorkAmountBySec();
+    
     UFUNCTION(BlueprintCallable)
     void OnRep_InProgress();
     

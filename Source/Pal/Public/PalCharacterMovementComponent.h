@@ -644,6 +644,9 @@ public:
     bool IsTickOptimizationDisabled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
+    bool IsSubmergedBeyondFloatingDepth() const;
+    
+    UFUNCTION(BlueprintCallable, BlueprintPure)
     bool IsStepUpUpSweepShrinkEnabled() const;
     
     UFUNCTION(BlueprintCallable, BlueprintPure)
